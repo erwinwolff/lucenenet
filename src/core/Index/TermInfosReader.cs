@@ -63,7 +63,7 @@ namespace Lucene.Net.Index
 
             if (indexDivisor < 1 && indexDivisor != -1)
             {
-                throw new System.ArgumentException("indexDivisor must be -1 (don't load terms index) or greater than 0: got " + indexDivisor);
+                throw new ArgumentException("indexDivisor must be -1 (don't load terms index) or greater than 0: got " + indexDivisor);
             }
 
             try

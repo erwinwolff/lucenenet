@@ -162,7 +162,7 @@ namespace Lucene.Net.Search.Spans
             this.exclude = exclude;
 
             if (!include.Field.Equals(exclude.Field))
-                throw new System.ArgumentException("Clauses must have same field.");
+                throw new ArgumentException("Clauses must have same field.");
         }
 
         /// <summary>Return the SpanQuery whose matches are filtered. </summary>

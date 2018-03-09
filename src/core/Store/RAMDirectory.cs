@@ -153,7 +153,7 @@ namespace Lucene.Net.Store
                     // In 3.0 we will change this to throw
                     // InterruptedException instead
                     ThreadClass.Current().Interrupt();
-                    throw new System.SystemException(ie.Message, ie);
+                    throw new SystemException(ie.Message, ie);
                 }
                 ts2 = DateTime.UtcNow.Ticks / TimeSpan.TicksPerMillisecond;
             }

@@ -512,15 +512,15 @@ namespace Lucene.Net.Index
                     {
                         if (reader.deletedDocs.Count() != info.GetDelCount())
                         {
-                            throw new System.SystemException("delete count mismatch: info=" + info.GetDelCount() + " vs deletedDocs.count()=" + reader.deletedDocs.Count());
+                            throw new SystemException("delete count mismatch: info=" + info.GetDelCount() + " vs deletedDocs.count()=" + reader.deletedDocs.Count());
                         }
                         if (reader.deletedDocs.Count() > reader.MaxDoc)
                         {
-                            throw new System.SystemException("too many deleted docs: MaxDoc=" + reader.MaxDoc + " vs deletedDocs.count()=" + reader.deletedDocs.Count());
+                            throw new SystemException("too many deleted docs: MaxDoc=" + reader.MaxDoc + " vs deletedDocs.count()=" + reader.deletedDocs.Count());
                         }
                         if (info.docCount - numDocs != info.GetDelCount())
                         {
-                            throw new System.SystemException("delete count mismatch: info=" + info.GetDelCount() + " vs reader=" + (info.docCount - numDocs));
+                            throw new SystemException("delete count mismatch: info=" + info.GetDelCount() + " vs reader=" + (info.docCount - numDocs));
                         }
                         segInfoStat.numDeleted = info.docCount - numDocs;
                         Msg("OK [" + (segInfoStat.numDeleted) + " deleted docs]");
@@ -529,12 +529,12 @@ namespace Lucene.Net.Index
                     {
                         if (info.GetDelCount() != 0)
                         {
-                            throw new System.SystemException("delete count mismatch: info=" + info.GetDelCount() + " vs reader=" + (info.docCount - numDocs));
+                            throw new SystemException("delete count mismatch: info=" + info.GetDelCount() + " vs reader=" + (info.docCount - numDocs));
                         }
                         Msg("OK");
                     }
                     if (reader.MaxDoc != info.docCount)
-                        throw new System.SystemException("SegmentReader.MaxDoc " + reader.MaxDoc + " != SegmentInfos.docCount " + info.docCount);
+                        throw new SystemException("SegmentReader.MaxDoc " + reader.MaxDoc + " != SegmentInfos.docCount " + info.docCount);
 
                     // Test getFieldNames()
                     if (infoStream != null)
@@ -573,7 +573,7 @@ namespace Lucene.Net.Index
                     }
                     else if (segInfoStat.termVectorStatus.error != null)
                     {
-                        throw new System.SystemException("Term Vector test failed");
+                        throw new SystemException("Term Vector test failed");
                     }
 
                     Msg("");
@@ -685,17 +685,17 @@ namespace Lucene.Net.Index
                         int freq = termPositions.Freq;
                         if (doc <= lastDoc)
                         {
-                            throw new System.SystemException("term " + term + ": doc " + doc + " <= lastDoc " + lastDoc);
+                            throw new SystemException("term " + term + ": doc " + doc + " <= lastDoc " + lastDoc);
                         }
                         if (doc >= maxDoc)
                         {
-                            throw new System.SystemException("term " + term + ": doc " + doc + " >= maxDoc " + maxDoc);
+                            throw new SystemException("term " + term + ": doc " + doc + " >= maxDoc " + maxDoc);
                         }
 
                         lastDoc = doc;
                         if (freq <= 0)
                         {
-                            throw new System.SystemException("term " + term + ": doc " + doc + ": freq " + freq + " is out of bounds");
+                            throw new SystemException("term " + term + ": doc " + doc + ": freq " + freq + " is out of bounds");
                         }
 
                         int lastPos = -1;
@@ -705,11 +705,11 @@ namespace Lucene.Net.Index
                             int pos = termPositions.NextPosition();
                             if (pos < -1)
                             {
-                                throw new System.SystemException("term " + term + ": doc " + doc + ": pos " + pos + " is out of bounds");
+                                throw new SystemException("term " + term + ": doc " + doc + ": pos " + pos + " is out of bounds");
                             }
                             if (pos < lastPos)
                             {
-                                throw new System.SystemException("term " + term + ": doc " + doc + ": pos " + pos + " < lastPos " + lastPos);
+                                throw new SystemException("term " + term + ": doc " + doc + ": pos " + pos + " < lastPos " + lastPos);
                             }
                             lastPos = pos;
                         }
@@ -733,7 +733,7 @@ namespace Lucene.Net.Index
 
                     if (freq0 + delCount != docFreq)
                     {
-                        throw new System.SystemException("term " + term + " docFreq=" + docFreq + " != num docs seen " + freq0 + " + num docs deleted " + delCount);
+                        throw new SystemException("term " + term + " docFreq=" + docFreq + " != num docs seen " + freq0 + " + num docs deleted " + delCount);
                     }
                 }
 
@@ -778,7 +778,7 @@ namespace Lucene.Net.Index
                 // Validate docCount
                 if (status.docCount != reader.NumDocs())
                 {
-                    throw new System.SystemException("docCount=" + status.docCount + " but saw " + status.docCount + " undeleted docs");
+                    throw new SystemException("docCount=" + status.docCount + " but saw " + status.docCount + " undeleted docs");
                 }
 
                 Msg(string.Format(format, "OK [{0:d} total field count; avg {1:f} fields per doc]", new object[] { status.totFields, (((float)status.totFields) / status.docCount) }));
@@ -853,7 +853,7 @@ namespace Lucene.Net.Index
         public virtual void FixIndex(Status result)
         {
             if (result.partial)
-                throw new System.ArgumentException("can only fix an index that was fully checked (this status checked a subset of segments)");
+                throw new ArgumentException("can only fix an index that was fully checked (this status checked a subset of segments)");
             result.newSegments.Commit(result.dir);
         }
 

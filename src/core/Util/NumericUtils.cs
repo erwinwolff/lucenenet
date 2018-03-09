@@ -111,7 +111,7 @@ namespace Lucene.Net.Util
         public static int LongToPrefixCoded(long val, int shift, char[] buffer)
         {
             if (shift > 63 || shift < 0)
-                throw new System.ArgumentException("Illegal shift value, must be 0..63");
+                throw new ArgumentException("Illegal shift value, must be 0..63");
             int nChars = (63 - shift) / 7 + 1, len = nChars + 1;
             buffer[0] = (char)(SHIFT_START_LONG + shift);
             ulong sortableBits = BitConverter.ToUInt64(BitConverter.GetBytes(val), 0) ^ 0x8000000000000000L;
@@ -166,7 +166,7 @@ namespace Lucene.Net.Util
         public static int IntToPrefixCoded(int val, int shift, char[] buffer)
         {
             if (shift > 31 || shift < 0)
-                throw new System.ArgumentException("Illegal shift value, must be 0..31");
+                throw new ArgumentException("Illegal shift value, must be 0..31");
             int nChars = (31 - shift) / 7 + 1, len = nChars + 1;
             buffer[0] = (char)(SHIFT_START_INT + shift);
             int sortableBits = val ^ unchecked((int)0x80000000);
@@ -372,7 +372,7 @@ namespace Lucene.Net.Util
         private static void SplitRange(object builder, int valSize, int precisionStep, long minBound, long maxBound)
         {
             if (precisionStep < 1)
-                throw new System.ArgumentException("precisionStep must be >=1");
+                throw new ArgumentException("precisionStep must be >=1");
             if (minBound > maxBound)
                 return;
             for (int shift = 0; ; shift += precisionStep)
@@ -427,7 +427,7 @@ namespace Lucene.Net.Util
 
                 default:
                     // Should not happen!
-                    throw new System.ArgumentException("valSize must be 32 or 64.");
+                    throw new ArgumentException("valSize must be 32 or 64.");
             }
         }
 

@@ -78,7 +78,7 @@ namespace Lucene.Net.Search.Function
             this.subQuery = subQuery;
             this.valSrcQueries = valSrcQueries != null ? valSrcQueries : new ValueSourceQuery[0];
             if (subQuery == null)
-                throw new System.ArgumentException("<subquery> must not be null!");
+                throw new ArgumentException("<subquery> must not be null!");
         }
 
         /*(non-Javadoc) <see cref="Lucene.Net.Search.Query.rewrite(Lucene.Net.Index.IndexReader) */

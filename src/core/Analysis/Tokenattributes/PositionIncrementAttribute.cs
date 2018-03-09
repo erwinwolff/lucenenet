@@ -58,7 +58,7 @@ namespace Lucene.Net.Analysis.Tokenattributes
             set
             {
                 if (value < 0)
-                    throw new System.ArgumentException("Increment must be zero or greater: " + value);
+                    throw new ArgumentException("Increment must be zero or greater: " + value);
                 this.positionIncrement = value;
             }
             get { return positionIncrement; }

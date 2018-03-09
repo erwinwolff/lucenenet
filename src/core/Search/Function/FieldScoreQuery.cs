@@ -133,7 +133,7 @@ namespace Lucene.Net.Search.Function
             {
                 return new FloatFieldSource(field);
             }
-            throw new System.ArgumentException(type + " is not a known Field Score Query Type!");
+            throw new ArgumentException(type + " is not a known Field Score Query Type!");
         }
     }
 }

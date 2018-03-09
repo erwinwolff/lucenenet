@@ -241,7 +241,7 @@ namespace Lucene.Net.QueryParsers
         public static Query Parse(Version matchVersion, string[] queries, string[] fields, Analyzer analyzer)
         {
             if (queries.Length != fields.Length)
-                throw new System.ArgumentException("queries.length != fields.length");
+                throw new ArgumentException("queries.length != fields.length");
             BooleanQuery bQuery = new BooleanQuery();
             for (int i = 0; i < fields.Length; i++)
             {
@@ -295,7 +295,7 @@ namespace Lucene.Net.QueryParsers
         public static Query Parse(Version matchVersion, string query, string[] fields, Occur[] flags, Analyzer analyzer)
         {
             if (fields.Length != flags.Length)
-                throw new System.ArgumentException("fields.length != flags.length");
+                throw new ArgumentException("fields.length != flags.length");
             BooleanQuery bQuery = new BooleanQuery();
             for (int i = 0; i < fields.Length; i++)
             {
@@ -349,7 +349,7 @@ namespace Lucene.Net.QueryParsers
         public static Query Parse(Version matchVersion, string[] queries, string[] fields, Occur[] flags, Analyzer analyzer)
         {
             if (!(queries.Length == fields.Length && queries.Length == flags.Length))
-                throw new System.ArgumentException("queries, fields, and flags array have have different length");
+                throw new ArgumentException("queries, fields, and flags array have have different length");
             BooleanQuery bQuery = new BooleanQuery();
             for (int i = 0; i < fields.Length; i++)
             {

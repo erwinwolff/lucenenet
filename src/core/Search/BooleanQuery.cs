@@ -70,7 +70,7 @@ namespace Lucene.Net.Search
         /// is expanded to many terms during search.
         /// </summary>
         [Serializable]
-        public class TooManyClauses : System.SystemException
+        public class TooManyClauses : SystemException
         {
             public override string Message
             {

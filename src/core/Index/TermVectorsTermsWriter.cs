@@ -15,6 +15,7 @@
  * limitations under the License.
  */
 
+using System;
 using System.Collections.Generic;
 using ArrayUtil = Lucene.Net.Util.ArrayUtil;
 using IndexOutput = Lucene.Net.Store.IndexOutput;
@@ -110,7 +111,7 @@ namespace Lucene.Net.Index
                     System.Diagnostics.Debug.Assert(state.docStoreSegmentName != null);
                     string fileName = state.docStoreSegmentName + "." + IndexFileNames.VECTORS_INDEX_EXTENSION;
                     if (4 + ((long)state.numDocsInStore) * 16 != state.directory.FileLength(fileName))
-                        throw new System.SystemException("after flush: tvx size mismatch: " + state.numDocsInStore + " docs vs " + state.directory.FileLength(fileName) + " length in bytes of " + fileName + " file exists?=" + state.directory.FileExists(fileName));
+                        throw new SystemException("after flush: tvx size mismatch: " + state.numDocsInStore + " docs vs " + state.directory.FileLength(fileName) + " length in bytes of " + fileName + " file exists?=" + state.directory.FileExists(fileName));
 
                     state.flushedFiles.Add(state.docStoreSegmentName + "." + IndexFileNames.VECTORS_INDEX_EXTENSION);
                     state.flushedFiles.Add(state.docStoreSegmentName + "." + IndexFileNames.VECTORS_FIELDS_EXTENSION);

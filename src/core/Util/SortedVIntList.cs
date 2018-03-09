@@ -217,7 +217,7 @@ namespace Lucene.Net.Util
                 int diff = nextInt - lastInt;
                 if (diff < 0)
                 {
-                    throw new System.ArgumentException("Input not sorted or first element negative.");
+                    throw new ArgumentException("Input not sorted or first element negative.");
                 }
 
                 if ((Enclosing_Instance.lastBytePos + Enclosing_Instance.MAX_BYTES_PER_INT) > Enclosing_Instance.bytes.Length)

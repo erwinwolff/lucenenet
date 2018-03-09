@@ -15,6 +15,7 @@
  * limitations under the License.
  */
 
+using System;
 using System.Collections.Generic;
 using Directory = Lucene.Net.Store.Directory;
 using Document = Lucene.Net.Documents.Document;
@@ -433,7 +434,7 @@ namespace Lucene.Net.Index
                     // throw an exception to prevent the corruption from
                     // entering the index.  See LUCENE-1282 for
                     // details.
-                    throw new System.SystemException("mergeFields produced an invalid result: docCount is " + docCount + " but fdx file size is " + fdxFileLength + " file=" + fileName + " file exists?=" + directory.FileExists(fileName) + "; now aborting this merge to prevent index corruption");
+                    throw new SystemException("mergeFields produced an invalid result: docCount is " + docCount + " but fdx file size is " + fdxFileLength + " file=" + fileName + " file exists?=" + directory.FileExists(fileName) + "; now aborting this merge to prevent index corruption");
             }
             // If we are skipping the doc stores, that means there
             // are no deletions in any of these segments, so we
@@ -584,7 +585,7 @@ namespace Lucene.Net.Index
                 // throw an exception to prevent the corruption from
                 // entering the index.  See LUCENE-1282 for
                 // details.
-                throw new System.SystemException("mergeVectors produced an invalid result: mergedDocs is " + mergedDocs + " but tvx size is " + tvxSize + " file=" + fileName + " file exists?=" + directory.FileExists(fileName) + "; now aborting this merge to prevent index corruption");
+                throw new SystemException("mergeVectors produced an invalid result: mergedDocs is " + mergedDocs + " but tvx size is " + tvxSize + " file=" + fileName + " file exists?=" + directory.FileExists(fileName) + "; now aborting this merge to prevent index corruption");
         }
 
         private void CopyVectorsWithDeletions(TermVectorsWriter termVectorsWriter, TermVectorsReader matchingVectorsReader, IndexReader reader)

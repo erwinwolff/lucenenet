@@ -487,12 +487,12 @@ namespace Lucene.Net.Index
 
             if (!openReadOnly)
             {
-                throw new System.ArgumentException("a reader obtained from IndexWriter.getReader() can only be reopened with openReadOnly=true (got false)");
+                throw new ArgumentException("a reader obtained from IndexWriter.getReader() can only be reopened with openReadOnly=true (got false)");
             }
 
             if (commit != null)
             {
-                throw new System.ArgumentException("a reader obtained from IndexWriter.getReader() cannot currently accept a commit");
+                throw new ArgumentException("a reader obtained from IndexWriter.getReader() cannot currently accept a commit");
             }
 
             // TODO: right now we *always* make a new reader; in

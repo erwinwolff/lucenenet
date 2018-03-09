@@ -96,7 +96,7 @@ namespace Lucene.Net.Search
             {
                 if ((object)terms[i].Field != (object)field)
                 {
-                    throw new System.ArgumentException("All phrase terms must be in the same field (" + field + "): " + terms[i]);
+                    throw new ArgumentException("All phrase terms must be in the same field (" + field + "): " + terms[i]);
                 }
             }
 

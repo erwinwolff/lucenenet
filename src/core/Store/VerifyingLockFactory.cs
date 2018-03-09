@@ -15,6 +15,7 @@
  * limitations under the License.
  */
 
+using System;
 using System.IO;
 
 namespace Lucene.Net.Store
@@ -80,11 +81,11 @@ namespace Lucene.Net.Store
                     out_Renamed.Close();
                     s.Close();
                     if (result != 0)
-                        throw new System.SystemException("lock was double acquired");
+                        throw new SystemException("lock was double acquired");
                 }
                 catch (System.Exception e)
                 {
-                    throw new System.SystemException(e.Message, e);
+                    throw new SystemException(e.Message, e);
                 }
             }
 

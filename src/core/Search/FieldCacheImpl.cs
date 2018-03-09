@@ -170,7 +170,7 @@ namespace Lucene.Net.Search
         /// array.
         /// </summary>
         [Serializable]
-        internal sealed class StopFillCacheException : System.SystemException
+        internal sealed class StopFillCacheException : SystemException
         {
         }
 

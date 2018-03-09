@@ -277,7 +277,7 @@ namespace Lucene.Net.Support
             if (array.Length == 0)
                 throw (new System.NullReferenceException());
             if (fromindex > toindex)
-                throw (new System.ArgumentException());
+                throw (new ArgumentException());
             if ((fromindex < 0) || ((Array)array).Length < toindex)
                 throw (new System.IndexOutOfRangeException());
             for (int index = (fromindex > 0) ? fromindex-- : fromindex; index < toindex; index++)

@@ -239,7 +239,7 @@ namespace Lucene.Net.Support
 
                 // not supporting fractional or scientific notations
                 if (n < 0)
-                    throw new System.ArgumentException("Invalid or unsupported character in number: " + s[i]);
+                    throw new ArgumentException("Invalid or unsupported character in number: " + s[i]);
 
                 number += (n * factor);
                 factor *= 36;

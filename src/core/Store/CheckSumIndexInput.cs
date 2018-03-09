@@ -16,6 +16,7 @@
  */
 
 using Lucene.Net.Support;
+using System;
 
 namespace Lucene.Net.Store
 {
@@ -76,7 +77,7 @@ namespace Lucene.Net.Store
 
         public override void Seek(long pos)
         {
-            throw new System.SystemException("not allowed");
+            throw new SystemException("not allowed");
         }
 
         public override long Length()

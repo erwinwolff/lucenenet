@@ -193,7 +193,7 @@ namespace Lucene.Net.Analysis.Tokenattributes
         {
             InitTermBuffer();
             if (length > termBuffer.Length)
-                throw new System.ArgumentException("length " + length + " exceeds the size of the termBuffer (" + termBuffer.Length + ")");
+                throw new ArgumentException("length " + length + " exceeds the size of the termBuffer (" + termBuffer.Length + ")");
             termLength = length;
         }
 

@@ -139,7 +139,7 @@ namespace Lucene.Net.Index
             }
             catch (System.Exception ex)
             {
-                throw new System.SystemException(ex.Message, ex);
+                throw new SystemException(ex.Message, ex);
             }
         }
 

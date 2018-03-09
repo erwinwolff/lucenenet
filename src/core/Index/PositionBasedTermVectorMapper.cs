@@ -88,7 +88,7 @@ namespace Lucene.Net.Index
         {
             if (storePositions == false)
             {
-                throw new System.SystemException("You must store positions in order to use this Mapper");
+                throw new SystemException("You must store positions in order to use this Mapper");
             }
             if (storeOffsets == true)
             {

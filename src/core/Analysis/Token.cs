@@ -269,7 +269,7 @@ namespace Lucene.Net.Analysis
             set
             {
                 if (value < 0)
-                    throw new System.ArgumentException("Increment must be zero or greater: " + value);
+                    throw new ArgumentException("Increment must be zero or greater: " + value);
                 this.positionIncrement = value;
             }
             get { return positionIncrement; }
@@ -434,7 +434,7 @@ namespace Lucene.Net.Analysis
         {
             InitTermBuffer();
             if (length > termBuffer.Length)
-                throw new System.ArgumentException("length " + length + " exceeds the size of the termBuffer (" + termBuffer.Length + ")");
+                throw new ArgumentException("length " + length + " exceeds the size of the termBuffer (" + termBuffer.Length + ")");
             termLength = length;
         }
 

@@ -64,7 +64,7 @@ namespace Lucene.Net.Search.Spans
                 }
                 else if (!clause.Field.Equals(internalField))
                 {
-                    throw new System.ArgumentException("Clauses must have same field.");
+                    throw new ArgumentException("Clauses must have same field.");
                 }
                 this.clauses.Add(clause);
             }

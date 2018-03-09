@@ -17,6 +17,7 @@
 
 using Lucene.Net.Analysis.Tokenattributes;
 using Lucene.Net.Documents;
+using System;
 using System.IO;
 using TokenStream = Lucene.Net.Analysis.TokenStream;
 
@@ -123,7 +124,7 @@ namespace Lucene.Net.Index
                             {
                                 string stringValue = field.StringValue;
                                 if (stringValue == null)
-                                    throw new System.ArgumentException("field must have either TokenStream, String or Reader value");
+                                    throw new ArgumentException("field must have either TokenStream, String or Reader value");
                                 perThread.stringReader.Init(stringValue);
                                 reader = perThread.stringReader;
                             }

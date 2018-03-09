@@ -104,9 +104,9 @@ namespace Lucene.Net.Index
 
             if (reader.MaxDoc != maxDoc)
                 // check compatibility
-                throw new System.ArgumentException("All readers must have same maxDoc: " + maxDoc + "!=" + reader.MaxDoc);
+                throw new ArgumentException("All readers must have same maxDoc: " + maxDoc + "!=" + reader.MaxDoc);
             if (reader.NumDocs() != numDocs)
-                throw new System.ArgumentException("All readers must have same numDocs: " + numDocs + "!=" + reader.NumDocs());
+                throw new ArgumentException("All readers must have same numDocs: " + numDocs + "!=" + reader.NumDocs());
 
             ICollection<string> fields = reader.GetFieldNames(IndexReader.FieldOption.ALL);
             readerToFields[reader] = fields;
@@ -137,7 +137,7 @@ namespace Lucene.Net.Index
             }
             catch (System.Exception ex)
             {
-                throw new System.SystemException(ex.Message, ex);
+                throw new SystemException(ex.Message, ex);
             }
         }
 

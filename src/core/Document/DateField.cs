@@ -103,12 +103,12 @@ namespace Lucene.Net.Documents
         public static string TimeToString(long time)
         {
             if (time < 0)
-                throw new System.SystemException("time '" + time + "' is too early, must be >= 0");
+                throw new SystemException("time '" + time + "' is too early, must be >= 0");
 
             string s = Number.ToString(time, Character.MAX_RADIX);
 
             if (s.Length > DATE_LEN)
-                throw new System.SystemException("time '" + time + "' is too late, length of string " + "representation must be <= " + DATE_LEN);
+                throw new SystemException("time '" + time + "' is too late, length of string " + "representation must be <= " + DATE_LEN);
 
             // Pad with leading zeros
             if (s.Length < DATE_LEN)

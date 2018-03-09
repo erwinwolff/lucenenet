@@ -90,7 +90,7 @@ namespace Lucene.Net.Store
                     lockedID = 0;
                 }
                 else
-                    throw new System.SystemException("unrecognized command " + command);
+                    throw new SystemException("unrecognized command " + command);
 
                 System.Console.Out.Write(".");
 

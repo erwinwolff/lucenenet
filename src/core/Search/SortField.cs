@@ -186,7 +186,7 @@ namespace Lucene.Net.Search
                 InitFieldType(field, DOUBLE);
             else
             {
-                throw new System.ArgumentException("Parser instance does not subclass existing numeric parser from FieldCache (got " + parser + ")");
+                throw new ArgumentException("Parser instance does not subclass existing numeric parser from FieldCache (got " + parser + ")");
             }
 
             this.reverse = reverse;
@@ -253,7 +253,7 @@ namespace Lucene.Net.Search
             if (field == null)
             {
                 if (type != SCORE && type != DOC)
-                    throw new System.ArgumentException("field can only be null when type is SCORE or DOC");
+                    throw new ArgumentException("field can only be null when type is SCORE or DOC");
             }
             else
             {
@@ -494,7 +494,7 @@ namespace Lucene.Net.Search
                     return new FieldComparator.StringValComparator(numHits, field);
 
                 default:
-                    throw new System.SystemException("Illegal sort type: " + type);
+                    throw new SystemException("Illegal sort type: " + type);
             }
         }
     }

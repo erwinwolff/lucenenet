@@ -97,7 +97,7 @@ namespace Lucene.Net.Store
         private void CheckBufferSize(int bufferSize)
         {
             if (bufferSize <= 0)
-                throw new System.ArgumentException("bufferSize must be greater than 0 (got " + bufferSize + ")");
+                throw new ArgumentException("bufferSize must be greater than 0 (got " + bufferSize + ")");
         }
 
         public override void ReadBytes(byte[] b, int offset, int len)

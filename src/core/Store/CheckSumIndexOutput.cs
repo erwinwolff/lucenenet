@@ -16,6 +16,7 @@
  */
 
 using Lucene.Net.Support;
+using System;
 using CRC32 = Lucene.Net.Support.CRC32;
 
 namespace Lucene.Net.Store
@@ -77,7 +78,7 @@ namespace Lucene.Net.Store
 
         public override void Seek(long pos)
         {
-            throw new System.SystemException("not allowed");
+            throw new SystemException("not allowed");
         }
 
         /// <summary> Starts but does not complete the commit of this file (=

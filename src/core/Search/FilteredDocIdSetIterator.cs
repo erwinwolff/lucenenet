@@ -15,6 +15,8 @@
  * limitations under the License.
  */
 
+using System;
+
 namespace Lucene.Net.Search
 {
     /// <summary> Abstract decorator class of a DocIdSetIterator
@@ -34,7 +36,7 @@ namespace Lucene.Net.Search
         {
             if (innerIter == null)
             {
-                throw new System.ArgumentException("null iterator");
+                throw new ArgumentException("null iterator");
             }
             internalInnerIter = innerIter;
             doc = -1;

@@ -120,7 +120,7 @@ namespace Lucene.Net.Documents
                 return date.ToString(MILLISECOND_FORMAT, System.Globalization.CultureInfo.InvariantCulture);
             }
 
-            throw new System.ArgumentException("unknown resolution " + resolution);
+            throw new ArgumentException("unknown resolution " + resolution);
         }
 
         /// <summary> Converts a string produced by <c>timeToString</c> or
@@ -294,7 +294,7 @@ namespace Lucene.Net.Documents
             }
             else
             {
-                throw new System.ArgumentException("unknown resolution " + resolution);
+                throw new ArgumentException("unknown resolution " + resolution);
             }
             return dt.Ticks;
         }

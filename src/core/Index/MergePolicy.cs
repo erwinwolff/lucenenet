@@ -202,7 +202,7 @@ namespace Lucene.Net.Index
         /// executing a merge.
         /// </summary>
         [Serializable]
-        public class MergeException : System.SystemException
+        public class MergeException : SystemException
         {
             private readonly Directory dir;
 

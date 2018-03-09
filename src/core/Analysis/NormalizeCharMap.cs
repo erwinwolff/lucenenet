@@ -16,6 +16,7 @@
  */
 
 using Lucene.Net.Support;
+using System;
 using System.Collections.Generic;
 
 namespace Lucene.Net.Analysis
@@ -59,7 +60,7 @@ namespace Lucene.Net.Analysis
             }
             if (currMap.normStr != null)
             {
-                throw new System.SystemException("MappingCharFilter: there is already a mapping for " + singleMatch);
+                throw new SystemException("MappingCharFilter: there is already a mapping for " + singleMatch);
             }
             currMap.normStr = replacement;
             currMap.diff = singleMatch.Length - replacement.Length;

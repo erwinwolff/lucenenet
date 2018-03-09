@@ -901,7 +901,7 @@ namespace Lucene.Net.Index
                 if (mergePolicy is LogMergePolicy)
                     return (LogMergePolicy)mergePolicy;
 
-                throw new System.ArgumentException(
+                throw new ArgumentException(
                     "this method can only be called when the merge policy is the default LogMergePolicy");
             }
         }
@@ -1283,7 +1283,7 @@ namespace Lucene.Net.Index
                         // readers are open against the future commit
                         // points.
                         if (commit.Directory != directory)
-                            throw new System.ArgumentException("IndexCommit's directory doesn't match my directory");
+                            throw new ArgumentException("IndexCommit's directory doesn't match my directory");
                         SegmentInfos oldInfos = new SegmentInfos();
                         oldInfos.Read(directory, commit.SegmentsFileName);
                         segmentInfos.Replace(oldInfos);
@@ -1627,12 +1627,12 @@ namespace Lucene.Net.Index
         {
             if (mb > 2048.0)
             {
-                throw new System.ArgumentException("ramBufferSize " + mb + " is too large; should be comfortably less than 2048");
+                throw new ArgumentException("ramBufferSize " + mb + " is too large; should be comfortably less than 2048");
             }
             if (mb != DISABLE_AUTO_FLUSH && mb <= 0.0)
-                throw new System.ArgumentException("ramBufferSize should be > 0.0 MB when enabled");
+                throw new ArgumentException("ramBufferSize should be > 0.0 MB when enabled");
             if (mb == DISABLE_AUTO_FLUSH && GetMaxBufferedDocs() == DISABLE_AUTO_FLUSH)
-                throw new System.ArgumentException("at least one of ramBufferSize and maxBufferedDocs must be enabled");
+                throw new ArgumentException("at least one of ramBufferSize and maxBufferedDocs must be enabled");
             docWriter.SetRAMBufferSizeMB(mb);
             if (infoStream != null)
                 Message("setRAMBufferSizeMB " + mb);
@@ -1661,7 +1661,7 @@ namespace Lucene.Net.Index
         {
             EnsureOpen();
             if (maxBufferedDeleteTerms != DISABLE_AUTO_FLUSH && maxBufferedDeleteTerms < 1)
-                throw new System.ArgumentException("maxBufferedDeleteTerms must at least be 1 when enabled");
+                throw new ArgumentException("maxBufferedDeleteTerms must at least be 1 when enabled");
             docWriter.MaxBufferedDeleteTerms = maxBufferedDeleteTerms;
             if (infoStream != null)
                 Message("setMaxBufferedDeleteTerms " + maxBufferedDeleteTerms);
@@ -2721,7 +2721,7 @@ namespace Lucene.Net.Index
             EnsureOpen();
 
             if (maxNumSegments < 1)
-                throw new System.ArgumentException("maxNumSegments must be >= 1; got " + maxNumSegments);
+                throw new ArgumentException("maxNumSegments must be >= 1; got " + maxNumSegments);
 
             if (infoStream != null)
                 Message("optimize: index now " + SegString());
@@ -2762,7 +2762,7 @@ namespace Lucene.Net.Index
                     {
                         if (hitOOM)
                         {
-                            throw new System.SystemException("this writer hit an OutOfMemoryError; cannot complete optimize");
+                            throw new SystemException("this writer hit an OutOfMemoryError; cannot complete optimize");
                         }
 
                         if (mergeExceptions.Count > 0)
@@ -2868,7 +2868,7 @@ namespace Lucene.Net.Index
                     {
                         if (hitOOM)
                         {
-                            throw new System.SystemException("this writer hit an OutOfMemoryError; cannot complete expungeDeletes");
+                            throw new SystemException("this writer hit an OutOfMemoryError; cannot complete expungeDeletes");
                         }
 
                         // Check each merge that MergePolicy asked us to
@@ -3516,10 +3516,10 @@ namespace Lucene.Net.Index
             {
                 if (dups.Contains(dirs[i]))
                 {
-                    throw new System.ArgumentException("Directory " + dirs[i] + " appears more than once");
+                    throw new ArgumentException("Directory " + dirs[i] + " appears more than once");
                 }
                 if (dirs[i] == directory)
-                    throw new System.ArgumentException("Cannot add directory to itself");
+                    throw new ArgumentException("Cannot add directory to itself");
                 dups.Add(dirs[i]);
             }
         }
@@ -3604,7 +3604,7 @@ namespace Lucene.Net.Index
                             if (directory == dirs[i])
                             {
                                 // cannot add this index: segments may be deleted in merge before added
-                                throw new System.ArgumentException("Cannot add this index to itself");
+                                throw new ArgumentException("Cannot add this index to itself");
                             }
 
                             SegmentInfos sis = new SegmentInfos(); // read infos from dir
@@ -4008,11 +4008,11 @@ namespace Lucene.Net.Index
         {
             if (hitOOM)
             {
-                throw new System.SystemException("this writer hit an OutOfMemoryError; cannot commit");
+                throw new SystemException("this writer hit an OutOfMemoryError; cannot commit");
             }
 
             if (pendingCommit != null)
-                throw new System.SystemException("prepareCommit was already called with no corresponding call to commit");
+                throw new SystemException("prepareCommit was already called with no corresponding call to commit");
 
             if (infoStream != null)
                 Message("prepareCommit: flush");
@@ -4206,7 +4206,7 @@ namespace Lucene.Net.Index
             {
                 if (hitOOM)
                 {
-                    throw new System.SystemException("this writer hit an OutOfMemoryError; cannot flush");
+                    throw new SystemException("this writer hit an OutOfMemoryError; cannot flush");
                 }
 
                 EnsureOpen(false);
@@ -4527,7 +4527,7 @@ namespace Lucene.Net.Index
 
                 if (hitOOM)
                 {
-                    throw new System.SystemException("this writer hit an OutOfMemoryError; cannot complete merge");
+                    throw new SystemException("this writer hit an OutOfMemoryError; cannot complete merge");
                 }
 
                 if (infoStream != null)
@@ -4610,7 +4610,7 @@ namespace Lucene.Net.Index
                 if (merge.isExternal)
                     throw t;
             }
-            else if (t is IOException || t is System.SystemException || t is System.ApplicationException)
+            else if (t is IOException || t is SystemException || t is System.ApplicationException)
             {
                 throw t;
             }
@@ -4618,7 +4618,7 @@ namespace Lucene.Net.Index
             {
                 // Should not get here
                 System.Diagnostics.Debug.Fail("Exception is not expected type!");
-                throw new System.SystemException(null, t);
+                throw new SystemException(null, t);
             }
         }
 
@@ -4793,7 +4793,7 @@ namespace Lucene.Net.Index
 
                 if (hitOOM)
                 {
-                    throw new System.SystemException("this writer hit an OutOfMemoryError; cannot merge");
+                    throw new SystemException("this writer hit an OutOfMemoryError; cannot merge");
                 }
 
                 if (merge.info != null)
@@ -5497,7 +5497,7 @@ namespace Lucene.Net.Index
 
             if (hitOOM)
             {
-                throw new System.SystemException("this writer hit an OutOfMemoryError; cannot commit");
+                throw new SystemException("this writer hit an OutOfMemoryError; cannot commit");
             }
 
             try

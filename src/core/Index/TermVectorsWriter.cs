@@ -125,7 +125,7 @@ namespace Lucene.Net.Index
                         {
                             int[] positions = tpVector.GetTermPositions(j);
                             if (positions == null)
-                                throw new System.SystemException("Trying to write positions that are null!");
+                                throw new SystemException("Trying to write positions that are null!");
                             System.Diagnostics.Debug.Assert(positions.Length == termFreq);
 
                             // use delta encoding for positions
@@ -141,7 +141,7 @@ namespace Lucene.Net.Index
                         {
                             TermVectorOffsetInfo[] offsets = tpVector.GetOffsets(j);
                             if (offsets == null)
-                                throw new System.SystemException("Trying to write offsets that are null!");
+                                throw new SystemException("Trying to write offsets that are null!");
                             System.Diagnostics.Debug.Assert(offsets.Length == termFreq);
 
                             // use delta encoding for offsets

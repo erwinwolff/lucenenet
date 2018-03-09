@@ -174,7 +174,7 @@ namespace Lucene.Net.Documents
         {
             if (internalIsBinary)
             {
-                throw new System.ArgumentException("cannot set a String value on a binary field");
+                throw new ArgumentException("cannot set a String value on a binary field");
             }
             fieldsData = value;
         }
@@ -184,11 +184,11 @@ namespace Lucene.Net.Documents
         {
             if (internalIsBinary)
             {
-                throw new System.ArgumentException("cannot set a Reader value on a binary field");
+                throw new ArgumentException("cannot set a Reader value on a binary field");
             }
             if (internalIsStored)
             {
-                throw new System.ArgumentException("cannot set a Reader value on a stored field");
+                throw new ArgumentException("cannot set a Reader value on a stored field");
             }
             fieldsData = value;
         }
@@ -198,7 +198,7 @@ namespace Lucene.Net.Documents
         {
             if (!internalIsBinary)
             {
-                throw new System.ArgumentException("cannot set a byte[] value on a non-binary field");
+                throw new ArgumentException("cannot set a byte[] value on a non-binary field");
             }
             fieldsData = value;
             internalBinaryLength = value.Length;
@@ -210,7 +210,7 @@ namespace Lucene.Net.Documents
         {
             if (!internalIsBinary)
             {
-                throw new System.ArgumentException("cannot set a byte[] value on a non-binary field");
+                throw new ArgumentException("cannot set a byte[] value on a non-binary field");
             }
             fieldsData = value;
             internalBinaryLength = length;
@@ -305,11 +305,11 @@ namespace Lucene.Net.Documents
             if (value == null)
                 throw new System.NullReferenceException("value cannot be null");
             if (name.Length == 0 && value.Length == 0)
-                throw new System.ArgumentException("name and value cannot both be empty");
+                throw new ArgumentException("name and value cannot both be empty");
             if (index == Index.NO && store == Store.NO)
-                throw new System.ArgumentException("it doesn't make sense to have a field that " + "is neither indexed nor stored");
+                throw new ArgumentException("it doesn't make sense to have a field that " + "is neither indexed nor stored");
             if (index == Index.NO && termVector != TermVector.NO)
-                throw new System.ArgumentException("cannot store term vector information " + "for a field that is not indexed");
+                throw new ArgumentException("cannot store term vector information " + "for a field that is not indexed");
 
             if (internName)
                 // field names are optionally interned
@@ -465,15 +465,15 @@ namespace Lucene.Net.Documents
         public Field(string name, byte[] value_Renamed, int offset, int length, Store store)
         {
             if (name == null)
-                throw new System.ArgumentException("name cannot be null");
+                throw new ArgumentException("name cannot be null");
             if (value_Renamed == null)
-                throw new System.ArgumentException("value cannot be null");
+                throw new ArgumentException("value cannot be null");
 
             this.internalName = StringHelper.Intern(name); // field names are interned
             fieldsData = value_Renamed;
 
             if (store == Store.NO)
-                throw new System.ArgumentException("binary values can't be unstored");
+                throw new ArgumentException("binary values can't be unstored");
 
             internalIsStored = store.IsStored();
             internalIsIndexed = false;

@@ -17,6 +17,7 @@
 
 using Lucene.Net.Analysis.Tokenattributes;
 using Lucene.Net.Search;
+using System;
 using System.Text;
 using AttributeSource = Lucene.Net.Util.AttributeSource;
 using NumericField = Lucene.Net.Documents.NumericField;
@@ -114,7 +115,7 @@ namespace Lucene.Net.Analysis
             InitBlock();
             this.precisionStep = precisionStep;
             if (precisionStep < 1)
-                throw new System.ArgumentException("precisionStep must be >=1");
+                throw new ArgumentException("precisionStep must be >=1");
         }
 
         /// <summary> Expert: Creates a token stream for numeric values with the specified
@@ -127,7 +128,7 @@ namespace Lucene.Net.Analysis
             InitBlock();
             this.precisionStep = precisionStep;
             if (precisionStep < 1)
-                throw new System.ArgumentException("precisionStep must be >=1");
+                throw new ArgumentException("precisionStep must be >=1");
         }
 
         /// <summary> Expert: Creates a token stream for numeric values with the specified
@@ -141,7 +142,7 @@ namespace Lucene.Net.Analysis
             InitBlock();
             this.precisionStep = precisionStep;
             if (precisionStep < 1)
-                throw new System.ArgumentException("precisionStep must be >=1");
+                throw new ArgumentException("precisionStep must be >=1");
         }
 
         /// <summary> Initializes the token stream with the supplied <c>long</c> value.</summary>
@@ -204,7 +205,7 @@ namespace Lucene.Net.Analysis
         public override void Reset()
         {
             if (valSize == 0)
-                throw new System.SystemException("call set???Value() before usage");
+                throw new SystemException("call set???Value() before usage");
             shift = 0;
         }
 
@@ -217,7 +218,7 @@ namespace Lucene.Net.Analysis
         public override bool IncrementToken()
         {
             if (valSize == 0)
-                throw new System.SystemException("call set???Value() before usage");
+                throw new SystemException("call set???Value() before usage");
             if (shift >= valSize)
                 return false;
 
@@ -237,7 +238,7 @@ namespace Lucene.Net.Analysis
 
                 default:
                     // should not happen
-                    throw new System.ArgumentException("valSize must be 32 or 64");
+                    throw new ArgumentException("valSize must be 32 or 64");
             }
 
             typeAtt.Type = (shift == 0) ? TOKEN_TYPE_FULL_PREC : TOKEN_TYPE_LOWER_PREC;

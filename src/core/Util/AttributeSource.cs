@@ -62,11 +62,11 @@ namespace Lucene.Net.Util
                     }
                     catch (System.UnauthorizedAccessException)
                     {
-                        throw new System.ArgumentException("Could not instantiate implementing class for " + typeof(TAttImpl).FullName);
+                        throw new ArgumentException("Could not instantiate implementing class for " + typeof(TAttImpl).FullName);
                     }
                     //catch (System.Exception e)
                     //{
-                    //    throw new System.ArgumentException("Could not instantiate implementing class for " + typeof(TAttImpl).FullName);
+                    //    throw new ArgumentException("Could not instantiate implementing class for " + typeof(TAttImpl).FullName);
                     //}
                 }
 
@@ -86,7 +86,7 @@ namespace Lucene.Net.Util
                             }
                             catch (TypeLoadException) // was System.Exception
                             {
-                                throw new System.ArgumentException("Could not find implementing class for " + attClass.FullName);
+                                throw new ArgumentException("Could not find implementing class for " + attClass.FullName);
                             }
                         }
                         return clazz;
@@ -114,7 +114,7 @@ namespace Lucene.Net.Util
         {
             if (input == null)
             {
-                throw new System.ArgumentException("input AttributeSource must not be null");
+                throw new ArgumentException("input AttributeSource must not be null");
             }
             this.attributes = input.attributes;
             this.attributeImpls = input.attributeImpls;
@@ -291,7 +291,7 @@ namespace Lucene.Net.Util
             var attClass = typeof(T);
             if (!this.attributes.ContainsKey(attClass))
             {
-                throw new System.ArgumentException("This AttributeSource does not have the attribute '" + attClass.FullName + "'.");
+                throw new ArgumentException("This AttributeSource does not have the attribute '" + attClass.FullName + "'.");
             }
             else
             {
@@ -389,7 +389,7 @@ namespace Lucene.Net.Util
             {
                 if (!attributeImpls.ContainsKey(state.attribute.GetType()))
                 {
-                    throw new System.ArgumentException("State contains an AttributeImpl that is not in this AttributeSource");
+                    throw new ArgumentException("State contains an AttributeImpl that is not in this AttributeSource");
                 }
                 state.attribute.CopyTo(attributeImpls[state.attribute.GetType()].Value);
                 state = state.next;

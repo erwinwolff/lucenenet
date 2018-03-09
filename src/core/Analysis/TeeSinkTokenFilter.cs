@@ -107,7 +107,7 @@ namespace Lucene.Net.Analysis
             // check that sink has correct factory
             if (!this.Factory.Equals(sink.Factory))
             {
-                throw new System.ArgumentException("The supplied sink is not compatible to this tee");
+                throw new ArgumentException("The supplied sink is not compatible to this tee");
             }
             // add eventually missing attribute impls to the existing sink
             foreach (var impl in this.CloneAttributes().GetAttributeImplsIterator())
@@ -209,7 +209,7 @@ namespace Lucene.Net.Analysis
             {
                 if (it != null)
                 {
-                    throw new System.SystemException("The tee must be consumed before sinks are consumed.");
+                    throw new SystemException("The tee must be consumed before sinks are consumed.");
                 }
                 cachedStates.AddLast(state);
             }

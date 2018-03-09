@@ -716,7 +716,7 @@ namespace Lucene.Net.Util
             }
             catch (System.Exception e)
             {
-                throw new System.SystemException(e.Message, e);
+                throw new SystemException(e.Message, e);
             }
         }
 

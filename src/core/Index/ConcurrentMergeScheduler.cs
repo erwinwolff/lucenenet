@@ -16,6 +16,7 @@
  */
 
 using Lucene.Net.Support;
+using System;
 using System.Collections.Generic;
 using Directory = Lucene.Net.Store.Directory;
 
@@ -66,7 +67,7 @@ namespace Lucene.Net.Index
             set
             {
                 if (value < 1)
-                    throw new System.ArgumentException("count should be at least 1");
+                    throw new ArgumentException("count should be at least 1");
                 _maxThreadCount = value;
             }
             get { return _maxThreadCount; }
@@ -93,7 +94,7 @@ namespace Lucene.Net.Index
             lock (this)
             {
                 if (pri > (int)System.Threading.ThreadPriority.Highest || pri < (int)System.Threading.ThreadPriority.Lowest)
-                    throw new System.ArgumentException("priority must be in range " + (int)System.Threading.ThreadPriority.Lowest + " .. " + (int)System.Threading.ThreadPriority.Highest + " inclusive");
+                    throw new ArgumentException("priority must be in range " + (int)System.Threading.ThreadPriority.Lowest + " .. " + (int)System.Threading.ThreadPriority.Highest + " inclusive");
                 mergeThreadPriority = pri;
 
                 int numThreads = MergeThreadCount();
@@ -431,7 +432,7 @@ namespace Lucene.Net.Index
         {
             if (allInstances == null)
             {
-                throw new System.SystemException("setTestMode() was not called; often this is because your test case's setUp method fails to call super.setUp in LuceneTestCase");
+                throw new SystemException("setTestMode() was not called; often this is because your test case's setUp method fails to call super.setUp in LuceneTestCase");
             }
             lock (allInstances)
             {

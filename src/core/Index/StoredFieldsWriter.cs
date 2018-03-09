@@ -15,6 +15,7 @@
  * limitations under the License.
  */
 
+using System;
 using ArrayUtil = Lucene.Net.Util.ArrayUtil;
 using RAMOutputStream = Lucene.Net.Store.RAMOutputStream;
 
@@ -111,7 +112,7 @@ namespace Lucene.Net.Index
                     string fileName = state.docStoreSegmentName + "." + IndexFileNames.FIELDS_INDEX_EXTENSION;
 
                     if (4 + ((long)state.numDocsInStore) * 8 != state.directory.FileLength(fileName))
-                        throw new System.SystemException("after flush: fdx size mismatch: " + state.numDocsInStore + " docs vs " + state.directory.FileLength(fileName) + " length in bytes of " + fileName + " file exists?=" + state.directory.FileExists(fileName));
+                        throw new SystemException("after flush: fdx size mismatch: " + state.numDocsInStore + " docs vs " + state.directory.FileLength(fileName) + " length in bytes of " + fileName + " file exists?=" + state.directory.FileExists(fileName));
                 }
             }
         }

@@ -75,7 +75,7 @@ namespace Lucene.Net.Store
             failureReason = null;
             bool locked = Obtain();
             if (lockWaitTimeout < 0 && lockWaitTimeout != LOCK_OBTAIN_WAIT_FOREVER)
-                throw new System.ArgumentException("lockWaitTimeout should be LOCK_OBTAIN_WAIT_FOREVER or a non-negative number (got " + lockWaitTimeout + ")");
+                throw new ArgumentException("lockWaitTimeout should be LOCK_OBTAIN_WAIT_FOREVER or a non-negative number (got " + lockWaitTimeout + ")");
 
             long maxSleepCount = lockWaitTimeout / LOCK_POLL_INTERVAL;
             long sleepCount = 0;

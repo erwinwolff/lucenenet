@@ -15,6 +15,7 @@
  * limitations under the License.
  */
 
+using System;
 using System.IO;
 
 namespace Lucene.Net.Store
@@ -41,7 +42,7 @@ namespace Lucene.Net.Store
             protected internal set
             {
                 if (this.internalLockDir != null)
-                    throw new System.SystemException("You can set the lock directory for this factory only once.");
+                    throw new SystemException("You can set the lock directory for this factory only once.");
                 this.internalLockDir = value;
             }
         }

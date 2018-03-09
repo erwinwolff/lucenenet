@@ -71,11 +71,11 @@ namespace Lucene.Net.Search
             this.Term = term;
 
             if (minimumSimilarity >= 1.0f)
-                throw new System.ArgumentException("minimumSimilarity >= 1");
+                throw new ArgumentException("minimumSimilarity >= 1");
             else if (minimumSimilarity < 0.0f)
-                throw new System.ArgumentException("minimumSimilarity < 0");
+                throw new ArgumentException("minimumSimilarity < 0");
             if (prefixLength < 0)
-                throw new System.ArgumentException("prefixLength < 0");
+                throw new ArgumentException("prefixLength < 0");
 
             if (term.Text.Length > 1.0f / (1.0f - minimumSimilarity))
             {

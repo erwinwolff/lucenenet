@@ -50,7 +50,7 @@ namespace Lucene.Net.Search
             this.filter = filter;
             if (deletesMode == CachingWrapperFilter.DeletesMode.DYNAMIC)
             {
-                throw new System.ArgumentException("DeletesMode.DYNAMIC is not supported");
+                throw new ArgumentException("DeletesMode.DYNAMIC is not supported");
             }
             this.cache = new AnonymousFilterCache(deletesMode);
         }
@@ -63,7 +63,7 @@ namespace Lucene.Net.Search
 
             protected override SpanFilterResult MergeDeletes(IndexReader reader, SpanFilterResult docIdSet)
             {
-                throw new System.ArgumentException("DeletesMode.DYNAMIC is not supported");
+                throw new ArgumentException("DeletesMode.DYNAMIC is not supported");
             }
         }
 

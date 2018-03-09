@@ -160,7 +160,7 @@ namespace Lucene.Net.Search
         {
             System.Diagnostics.Debug.Assert((valSize == 32 || valSize == 64));
             if (precisionStep < 1)
-                throw new System.ArgumentException("precisionStep must be >=1");
+                throw new ArgumentException("precisionStep must be >=1");
             this.field = StringHelper.Intern(field);
             this.precisionStep = precisionStep;
             this.valSize = valSize;
@@ -185,7 +185,7 @@ namespace Lucene.Net.Search
 
                 default:
                     // should never happen
-                    throw new System.ArgumentException("valSize must be 32 or 64");
+                    throw new ArgumentException("valSize must be 32 or 64");
             }
 
             // shortcut if upper bound == lower bound
@@ -481,7 +481,7 @@ namespace Lucene.Net.Search
 
                     default:
                         // should never happen
-                        throw new System.ArgumentException("valSize must be 32 or 64");
+                        throw new ArgumentException("valSize must be 32 or 64");
                 }
 
                 // seek to first term

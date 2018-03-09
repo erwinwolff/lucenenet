@@ -16,6 +16,7 @@
  */
 
 using Lucene.Net.Util;
+using System;
 
 namespace Lucene.Net.Search
 {
@@ -60,7 +61,7 @@ namespace Lucene.Net.Search
             {
                 if (fields.Length == 0)
                 {
-                    throw new System.ArgumentException("Sort must contain at least one field");
+                    throw new ArgumentException("Sort must contain at least one field");
                 }
 
                 SortField field = fields[0];
@@ -164,7 +165,7 @@ namespace Lucene.Net.Search
         {
             if (fields.Length == 0)
             {
-                throw new System.ArgumentException("Sort must contain at least one field");
+                throw new ArgumentException("Sort must contain at least one field");
             }
 
             if (fields.Length == 1)

@@ -16,6 +16,7 @@
  */
 
 using Lucene.Net.Util;
+using System;
 using Entry = Lucene.Net.Search.FieldValueHitQueue.Entry;
 using IndexReader = Lucene.Net.Index.IndexReader;
 
@@ -1009,7 +1010,7 @@ namespace Lucene.Net.Search
         {
             if (sort.fields.Length == 0)
             {
-                throw new System.ArgumentException("Sort must contain at least one field");
+                throw new ArgumentException("Sort must contain at least one field");
             }
 
             FieldValueHitQueue queue = FieldValueHitQueue.Create(sort.fields, numHits);

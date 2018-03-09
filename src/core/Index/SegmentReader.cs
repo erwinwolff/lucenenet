@@ -689,7 +689,7 @@ namespace Lucene.Net.Index
                     catch (System.Exception cnse)
                     {
                         // Cannot happen
-                        throw new System.SystemException("unexpected CloneNotSupportedException", cnse);
+                        throw new SystemException("unexpected CloneNotSupportedException", cnse);
                     }
                     clone.refCount = 1;
 
@@ -874,7 +874,7 @@ namespace Lucene.Net.Index
                 }
                 catch (System.Exception ex)
                 {
-                    throw new System.SystemException(ex.Message, ex);
+                    throw new SystemException(ex.Message, ex);
                 }
             }
         }
@@ -1654,13 +1654,13 @@ namespace Lucene.Net.Index
                 IndexReader[] subReaders = reader.GetSequentialSubReaders();
                 if (subReaders.Length != 1)
                 {
-                    throw new System.ArgumentException(reader + " has " + subReaders.Length + " segments instead of exactly one");
+                    throw new ArgumentException(reader + " has " + subReaders.Length + " segments instead of exactly one");
                 }
 
                 return (SegmentReader)subReaders[0];
             }
 
-            throw new System.ArgumentException(reader + " is not a SegmentReader or a single-segment DirectoryReader");
+            throw new ArgumentException(reader + " is not a SegmentReader or a single-segment DirectoryReader");
         }
 
         public override int TermInfosIndexDivisor

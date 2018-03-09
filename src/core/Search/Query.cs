@@ -222,7 +222,7 @@ namespace Lucene.Net.Search
             }
             catch (System.Exception e)
             {
-                throw new System.SystemException("Clone not supported: " + e.Message);
+                throw new SystemException("Clone not supported: " + e.Message);
             }
         }
 

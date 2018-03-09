@@ -78,7 +78,7 @@ namespace Lucene.Net.Util
             {
                 // this should never happen, because we're just accessing fields
                 // from 'this'
-                throw new System.SystemException(e.Message, e);
+                throw new SystemException(e.Message, e);
             }
 
             return buffer.ToString();
@@ -123,7 +123,7 @@ namespace Lucene.Net.Util
             }
             catch (System.Exception e)
             {
-                throw new System.SystemException(e.Message, e); // shouldn't happen
+                throw new SystemException(e.Message, e); // shouldn't happen
             }
             return clone;
         }

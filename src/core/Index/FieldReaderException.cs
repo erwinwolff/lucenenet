@@ -24,7 +24,7 @@ namespace Lucene.Net.Index
     ///
     /// </summary>
     [Serializable]
-    public class FieldReaderException : System.SystemException
+    public class FieldReaderException : SystemException
     {
         /// <summary> Constructs a new runtime exception with <c>null</c> as its
         /// detail message.  The cause is not initialized, and may subsequently be

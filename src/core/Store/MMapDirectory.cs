@@ -158,7 +158,7 @@ namespace Lucene.Net.Store
             set
             {
                 if (value && !UNMAP_SUPPORTED)
-                    throw new System.ArgumentException("Unmap hack not supported on this platform!");
+                    throw new ArgumentException("Unmap hack not supported on this platform!");
                 this.useUnmapHack = value;
             }
         }
@@ -202,7 +202,7 @@ namespace Lucene.Net.Store
             set
             {
                 if (value <= 0)
-                    throw new System.ArgumentException("Maximum chunk size for mmap must be >0");
+                    throw new ArgumentException("Maximum chunk size for mmap must be >0");
                 this.maxBBuf = value;
             }
         }
@@ -356,11 +356,11 @@ namespace Lucene.Net.Store
                 this.maxBufSize = maxBufSize;
 
                 if (maxBufSize <= 0)
-                    throw new System.ArgumentException("Non positive maxBufSize: " + maxBufSize);
+                    throw new ArgumentException("Non positive maxBufSize: " + maxBufSize);
 
                 if ((length / maxBufSize) > int.MaxValue)
                 {
-                    throw new System.ArgumentException("RandomAccessFile too big for maximum buffer size: " + raf.ToString());
+                    throw new ArgumentException("RandomAccessFile too big for maximum buffer size: " + raf.ToString());
                 }
 
                 int nrBuffers = (int)(length / maxBufSize);
@@ -457,7 +457,7 @@ namespace Lucene.Net.Store
                 }
                 catch (IOException ioe)
                 {
-                    System.SystemException newException = new System.SystemException(ioe.Message, ioe);
+                    SystemException newException = new SystemException(ioe.Message, ioe);
                     throw newException;
                 }
                 return clone;

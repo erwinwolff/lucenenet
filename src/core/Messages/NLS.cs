@@ -195,7 +195,7 @@ namespace Lucene.Net.Messages
                 field.SetValue(null, field.Name);
                 ValidateMessage<T>(field.Name);
             }
-            catch (System.ArgumentException)
+            catch (ArgumentException)
             {
                 // should not happen
             }

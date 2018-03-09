@@ -178,7 +178,7 @@ namespace Lucene.Net.Search
         {
             if (nDocs <= 0)
             {
-                throw new System.ArgumentException("nDocs must be > 0");
+                throw new ArgumentException("nDocs must be > 0");
             }
             nDocs = Math.Min(nDocs, reader.MaxDoc);
 

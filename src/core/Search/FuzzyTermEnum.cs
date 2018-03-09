@@ -105,11 +105,11 @@ namespace Lucene.Net.Search
         public FuzzyTermEnum(IndexReader reader, Term term, float minSimilarity, int prefixLength) : base()
         {
             if (minSimilarity >= 1.0f)
-                throw new System.ArgumentException("minimumSimilarity cannot be greater than or equal to 1");
+                throw new ArgumentException("minimumSimilarity cannot be greater than or equal to 1");
             else if (minSimilarity < 0.0f)
-                throw new System.ArgumentException("minimumSimilarity cannot be less than 0");
+                throw new ArgumentException("minimumSimilarity cannot be less than 0");
             if (prefixLength < 0)
-                throw new System.ArgumentException("prefixLength cannot be less than 0");
+                throw new ArgumentException("prefixLength cannot be less than 0");
 
             this.minimumSimilarity = minSimilarity;
             this.scale_factor = 1.0f / (1.0f - minimumSimilarity);

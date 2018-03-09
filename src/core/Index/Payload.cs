@@ -76,7 +76,7 @@ namespace Lucene.Net.Index
         {
             if (offset < 0 || offset + length > data.Length)
             {
-                throw new System.ArgumentException();
+                throw new ArgumentException();
             }
             this.data = data;
             this.internalOffset = offset;
@@ -182,7 +182,7 @@ namespace Lucene.Net.Index
             }
             catch (System.Exception e)
             {
-                throw new System.SystemException(e.Message, e); // shouldn't happen
+                throw new SystemException(e.Message, e); // shouldn't happen
             }
         }
 

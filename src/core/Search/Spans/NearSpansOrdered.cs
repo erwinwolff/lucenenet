@@ -109,7 +109,7 @@ namespace Lucene.Net.Search.Spans
             InitBlock();
             if (spanNearQuery.GetClauses().Length < 2)
             {
-                throw new System.ArgumentException("Less than 2 clauses: " + spanNearQuery);
+                throw new ArgumentException("Less than 2 clauses: " + spanNearQuery);
             }
             this.collectPayloads = collectPayloads;
             allowedSlop = spanNearQuery.Slop;

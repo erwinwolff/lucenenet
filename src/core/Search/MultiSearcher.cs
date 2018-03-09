@@ -106,7 +106,7 @@ namespace Lucene.Net.Search
                 }
                 catch (KeyNotFoundException) // C# equiv. of java code.
                 {
-                    throw new System.ArgumentException("df for term " + term.Text + " not available");
+                    throw new ArgumentException("df for term " + term.Text + " not available");
                 }
                 return df;
             }

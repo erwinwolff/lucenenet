@@ -110,7 +110,7 @@ namespace Lucene.Net.Store
             }
             catch (System.Exception e)
             {
-                throw new System.SystemException(e.ToString(), e);
+                throw new SystemException(e.ToString(), e);
             }
         }
 
@@ -442,7 +442,7 @@ namespace Lucene.Net.Store
             }
             catch (IOException e)
             {
-                throw new System.SystemException(e.ToString(), e);
+                throw new SystemException(e.ToString(), e);
             }
 
             byte[] digest;
@@ -516,7 +516,7 @@ namespace Lucene.Net.Store
                 // LUCENE-1566
                 if (value <= 0)
                 {
-                    throw new System.ArgumentException("chunkSize must be positive");
+                    throw new ArgumentException("chunkSize must be positive");
                 }
                 if (!Constants.JRE_IS_64BIT)
                 {

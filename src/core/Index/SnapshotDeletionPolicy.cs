@@ -15,6 +15,7 @@
  * limitations under the License.
  */
 
+using System;
 using System.Collections.Generic;
 using Directory = Lucene.Net.Store.Directory;
 
@@ -84,13 +85,13 @@ namespace Lucene.Net.Index
             {
                 if (lastCommit == null)
                 {
-                    throw new System.SystemException("no index commits to snapshot !");
+                    throw new SystemException("no index commits to snapshot !");
                 }
 
                 if (snapshot == null)
                     snapshot = lastCommit.SegmentsFileName;
                 else
-                    throw new System.SystemException("snapshot is already set; please call release() first");
+                    throw new SystemException("snapshot is already set; please call release() first");
                 return lastCommit;
             }
         }
@@ -103,7 +104,7 @@ namespace Lucene.Net.Index
                 if (snapshot != null)
                     snapshot = null;
                 else
-                    throw new System.SystemException("snapshot was not set; please call snapshot() first");
+                    throw new SystemException("snapshot was not set; please call snapshot() first");
             }
         }
 

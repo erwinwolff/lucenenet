@@ -234,7 +234,7 @@ namespace Lucene.Net.Index
             }
             else
             {
-                throw new System.ArgumentException("fileName \"" + fileName + "\" is not a segments file");
+                throw new ArgumentException("fileName \"" + fileName + "\" is not a segments file");
             }
         }
 
@@ -861,7 +861,7 @@ namespace Lucene.Net.Index
         internal void PrepareCommit(Directory dir)
         {
             if (pendingSegnOutput != null)
-                throw new System.SystemException("prepareCommit was already called");
+                throw new SystemException("prepareCommit was already called");
             Write(dir);
         }
 
@@ -893,7 +893,7 @@ namespace Lucene.Net.Index
         internal void FinishCommit(Directory dir)
         {
             if (pendingSegnOutput == null)
-                throw new System.SystemException("prepareCommit was not called");
+                throw new SystemException("prepareCommit was not called");
             bool success = false;
             try
             {

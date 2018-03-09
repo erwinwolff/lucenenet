@@ -15,6 +15,7 @@
  * limitations under the License.
  */
 
+using System;
 using System.Collections.Generic;
 
 namespace Lucene.Net.Search
@@ -204,7 +205,7 @@ namespace Lucene.Net.Search
         {
             if (minNrShouldMatch < 0)
             {
-                throw new System.ArgumentException("Minimum number of optional scorers should not be negative");
+                throw new ArgumentException("Minimum number of optional scorers should not be negative");
             }
             coordinator = new Coordinator(this);
             this.minNrShouldMatch = minNrShouldMatch;

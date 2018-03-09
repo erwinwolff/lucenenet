@@ -188,7 +188,7 @@ namespace Lucene.Net.Index
             // SegmentMerger calls canReadRawDocs() first and should
             // not call us if that returns false.
             if (format < FORMAT_VERSION2)
-                throw new System.SystemException("cannot read raw docs with older term vector formats");
+                throw new SystemException("cannot read raw docs with older term vector formats");
 
             SeekTvx(startDocID);
 
