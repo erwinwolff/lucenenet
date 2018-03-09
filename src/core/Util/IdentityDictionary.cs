@@ -19,11 +19,7 @@
  *
 */
 
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
 
 namespace Lucene.Net.Util
 {
@@ -31,7 +27,7 @@ namespace Lucene.Net.Util
     /// A class that mimics Java's IdentityHashMap in that it determines
     /// object equality solely on ReferenceEquals rather than (possibly overloaded)
     /// object.Equals().
-    /// 
+    ///
     /// NOTE: Java's documentation on IdentityHashMap says that it also uses
     ///       ReferenceEquals on it's Values as well.  This class does not follow this behavior
     /// </summary>
@@ -48,7 +44,7 @@ namespace Lucene.Net.Util
         public IdentityDictionary() : this(16)
         { }
 
-        class IdentityComparer : IEqualityComparer<TKey>
+        private class IdentityComparer : IEqualityComparer<TKey>
         {
             public bool Equals(TKey x, TKey y)
             {

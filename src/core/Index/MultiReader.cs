@@ -1,13 +1,13 @@
-/* 
+/*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,32 +15,31 @@
  * limitations under the License.
  */
 
+using Lucene.Net.Support;
 using System;
 using System.Linq;
-using Lucene.Net.Support;
+using DefaultSimilarity = Lucene.Net.Search.DefaultSimilarity;
 using Document = Lucene.Net.Documents.Document;
 using FieldSelector = Lucene.Net.Documents.FieldSelector;
 using MultiTermDocs = Lucene.Net.Index.DirectoryReader.MultiTermDocs;
 using MultiTermEnum = Lucene.Net.Index.DirectoryReader.MultiTermEnum;
 using MultiTermPositions = Lucene.Net.Index.DirectoryReader.MultiTermPositions;
-using DefaultSimilarity = Lucene.Net.Search.DefaultSimilarity;
 
 namespace Lucene.Net.Index
 {
-    
-    /// <summary>An IndexReader which reads multiple indexes, appending 
+    /// <summary>An IndexReader which reads multiple indexes, appending
     /// their content.
     /// </summary>
-    public class MultiReader:IndexReader, System.ICloneable
+    public class MultiReader : IndexReader, System.ICloneable
     {
         protected internal IndexReader[] subReaders;
         private int[] starts; // 1st docno for each segment
         private bool[] decrefOnClose; // remember which subreaders to decRef on close
-        private System.Collections.Generic.IDictionary<string, byte[]> normsCache = new HashMap<string,byte[]>();
+        private System.Collections.Generic.IDictionary<string, byte[]> normsCache = new HashMap<string, byte[]>();
         private int maxDoc = 0;
-        private int numDocs = - 1;
+        private int numDocs = -1;
         private bool hasDeletions = false;
-        
+
         /// <summary> <p/>Construct a MultiReader aggregating the named set of (sub)readers.
         /// Directory locking for delete, undeleteAll, and setNorm operations is
         /// left to the subreaders. <p/>
@@ -53,7 +52,7 @@ namespace Lucene.Net.Index
         {
             Initialize(subReaders, true);
         }
-        
+
         /// <summary> <p/>Construct a MultiReader aggregating the named set of (sub)readers.
         /// Directory locking for delete, undeleteAll, and setNorm operations is
         /// left to the subreaders. <p/>
@@ -68,8 +67,8 @@ namespace Lucene.Net.Index
         {
             Initialize(subReaders, closeSubReaders);
         }
-        
-        private void  Initialize(IndexReader[] subReaders, bool closeSubReaders)
+
+        private void Initialize(IndexReader[] subReaders, bool closeSubReaders)
         {
             // Deep copy
             this.subReaders = subReaders.ToArray();
@@ -79,7 +78,7 @@ namespace Lucene.Net.Index
             {
                 starts[i] = maxDoc;
                 maxDoc += subReaders[i].MaxDoc; // compute maxDocs
-                
+
                 if (!closeSubReaders)
                 {
                     subReaders[i].IncRef();
@@ -89,20 +88,20 @@ namespace Lucene.Net.Index
                 {
                     decrefOnClose[i] = false;
                 }
-                
+
                 if (subReaders[i].HasDeletions)
                     hasDeletions = true;
             }
             starts[subReaders.Length] = maxDoc;
         }
-        
+
         /// <summary> Tries to reopen the subreaders.
         /// <br/>
-        /// If one or more subreaders could be re-opened (i. e. subReader.reopen() 
-        /// returned a new instance != subReader), then a new MultiReader instance 
+        /// If one or more subreaders could be re-opened (i. e. subReader.reopen()
+        /// returned a new instance != subReader), then a new MultiReader instance
         /// is returned, otherwise this instance is returned.
         /// <p/>
-        /// A re-opened instance might share one or more subreaders with the old 
+        /// A re-opened instance might share one or more subreaders with the old
         /// instance. Index modification operations result in undefined behavior
         /// when performed before the old instance is closed.
         /// (see <see cref="IndexReader.Reopen()" />).
@@ -110,7 +109,7 @@ namespace Lucene.Net.Index
         /// If subreaders are shared, then the reference count of those
         /// readers is increased to ensure that the subreaders remain open
         /// until the last referring reader is closed.
-        /// 
+        ///
         /// </summary>
         /// <throws>  CorruptIndexException if the index is corrupt </throws>
         /// <throws>  IOException if there is a low-level IO error  </throws>
@@ -121,7 +120,7 @@ namespace Lucene.Net.Index
                 return DoReopen(false);
             }
         }
-        
+
         /// <summary> Clones the subreaders.
         /// (see <see cref="IndexReader.Clone()" />).
         /// <br/>
@@ -141,7 +140,7 @@ namespace Lucene.Net.Index
                 throw new System.SystemException(ex.Message, ex);
             }
         }
-        
+
         /// <summary> If clone is true then we clone each of the subreaders</summary>
         /// <param name="doClone">
         /// </param>
@@ -153,17 +152,17 @@ namespace Lucene.Net.Index
         protected internal virtual IndexReader DoReopen(bool doClone)
         {
             EnsureOpen();
-            
+
             bool reopened = false;
             IndexReader[] newSubReaders = new IndexReader[subReaders.Length];
-            
+
             bool success = false;
             try
             {
                 for (int i = 0; i < subReaders.Length; i++)
                 {
                     if (doClone)
-                        newSubReaders[i] = (IndexReader) subReaders[i].Clone();
+                        newSubReaders[i] = (IndexReader)subReaders[i].Clone();
                     else
                         newSubReaders[i] = subReaders[i].Reopen();
                     // if at least one of the subreaders was updated we remember that
@@ -195,7 +194,7 @@ namespace Lucene.Net.Index
                     }
                 }
             }
-            
+
             if (reopened)
             {
                 bool[] newDecrefOnClose = new bool[subReaders.Length];
@@ -216,30 +215,29 @@ namespace Lucene.Net.Index
                 return this;
             }
         }
-        
+
         public override ITermFreqVector[] GetTermFreqVectors(int n)
         {
             EnsureOpen();
             int i = ReaderIndex(n); // find segment num
             return subReaders[i].GetTermFreqVectors(n - starts[i]); // dispatch to segment
         }
-        
-        public override ITermFreqVector GetTermFreqVector(int n, System.String field)
+
+        public override ITermFreqVector GetTermFreqVector(int n, string field)
         {
             EnsureOpen();
             int i = ReaderIndex(n); // find segment num
             return subReaders[i].GetTermFreqVector(n - starts[i], field);
         }
-        
-        
-        public override void  GetTermFreqVector(int docNumber, System.String field, TermVectorMapper mapper)
+
+        public override void GetTermFreqVector(int docNumber, string field, TermVectorMapper mapper)
         {
             EnsureOpen();
             int i = ReaderIndex(docNumber); // find segment num
             subReaders[i].GetTermFreqVector(docNumber - starts[i], field, mapper);
         }
-        
-        public override void  GetTermFreqVector(int docNumber, TermVectorMapper mapper)
+
+        public override void GetTermFreqVector(int docNumber, TermVectorMapper mapper)
         {
             EnsureOpen();
             int i = ReaderIndex(docNumber); // find segment num
@@ -256,7 +254,7 @@ namespace Lucene.Net.Index
             // Don't call ensureOpen() here (it could affect performance)
             // NOTE: multiple threads may wind up init'ing
             // numDocs... but that's harmless
-            if (numDocs == - 1)
+            if (numDocs == -1)
             {
                 // check cache
                 int n = 0; // cache miss--recompute
@@ -283,7 +281,7 @@ namespace Lucene.Net.Index
             int i = ReaderIndex(n); // find segment num
             return subReaders[i].Document(n - starts[i], fieldSelector); // dispatch to segment reader
         }
-        
+
         public override bool IsDeleted(int n)
         {
             // Don't call ensureOpen() here (it could affect performance)
@@ -300,30 +298,30 @@ namespace Lucene.Net.Index
             }
         }
 
-        protected internal override void  DoDelete(int n)
+        protected internal override void DoDelete(int n)
         {
-            numDocs = - 1; // invalidate cache
+            numDocs = -1; // invalidate cache
             int i = ReaderIndex(n); // find segment num
             subReaders[i].DeleteDocument(n - starts[i]); // dispatch to segment reader
             hasDeletions = true;
         }
-        
-        protected internal override void  DoUndeleteAll()
+
+        protected internal override void DoUndeleteAll()
         {
             for (int i = 0; i < subReaders.Length; i++)
                 subReaders[i].UndeleteAll();
-            
+
             hasDeletions = false;
-            numDocs = - 1; // invalidate cache
+            numDocs = -1; // invalidate cache
         }
-        
+
         private int ReaderIndex(int n)
         {
             // find reader for doc n:
             return DirectoryReader.ReaderIndex(n, this.starts, this.subReaders.Length);
         }
-        
-        public override bool HasNorms(System.String field)
+
+        public override bool HasNorms(string field)
         {
             EnsureOpen();
             for (int i = 0; i < subReaders.Length; i++)
@@ -333,8 +331,8 @@ namespace Lucene.Net.Index
             }
             return false;
         }
-        
-        public override byte[] Norms(System.String field)
+
+        public override byte[] Norms(string field)
         {
             lock (this)
             {
@@ -344,7 +342,7 @@ namespace Lucene.Net.Index
                     return bytes; // cache hit
                 if (!HasNorms(field))
                     return null;
-                
+
                 bytes = new byte[MaxDoc];
                 for (int i = 0; i < subReaders.Length; i++)
                     subReaders[i].Norms(field, bytes, starts[i]);
@@ -352,22 +350,22 @@ namespace Lucene.Net.Index
                 return bytes;
             }
         }
-        
-        public override void  Norms(System.String field, byte[] result, int offset)
+
+        public override void Norms(string field, byte[] result, int offset)
         {
             lock (this)
             {
                 EnsureOpen();
                 byte[] bytes = normsCache[field];
                 for (int i = 0; i < subReaders.Length; i++)
-                // read from segments
+                    // read from segments
                     subReaders[i].Norms(field, result, offset + starts[i]);
-                
+
                 if (bytes == null && !HasNorms(field))
                 {
                     for (int i = offset; i < result.Length; i++)
                     {
-                        result[i] = (byte) DefaultSimilarity.EncodeNorm(1.0f);
+                        result[i] = (byte)DefaultSimilarity.EncodeNorm(1.0f);
                     }
                 }
                 else if (bytes != null)
@@ -385,8 +383,8 @@ namespace Lucene.Net.Index
                 }
             }
         }
-        
-        protected internal override void  DoSetNorm(int n, System.String field, byte value_Renamed)
+
+        protected internal override void DoSetNorm(int n, string field, byte value_Renamed)
         {
             lock (normsCache)
             {
@@ -395,19 +393,19 @@ namespace Lucene.Net.Index
             int i = ReaderIndex(n); // find segment num
             subReaders[i].SetNorm(n - starts[i], field, value_Renamed); // dispatch
         }
-        
+
         public override TermEnum Terms()
         {
             EnsureOpen();
             return new MultiTermEnum(this, subReaders, starts, null);
         }
-        
+
         public override TermEnum Terms(Term term)
         {
             EnsureOpen();
             return new MultiTermEnum(this, subReaders, starts, term);
         }
-        
+
         public override int DocFreq(Term t)
         {
             EnsureOpen();
@@ -416,13 +414,13 @@ namespace Lucene.Net.Index
                 total += subReaders[i].DocFreq(t);
             return total;
         }
-        
+
         public override TermDocs TermDocs()
         {
             EnsureOpen();
             return new MultiTermDocs(this, subReaders, starts);
         }
-        
+
         public override TermPositions TermPositions()
         {
             EnsureOpen();
@@ -434,8 +432,8 @@ namespace Lucene.Net.Index
             for (int i = 0; i < subReaders.Length; i++)
                 subReaders[i].Commit(commitUserData);
         }
-        
-        protected internal override void  DoClose()
+
+        protected internal override void DoClose()
         {
             lock (this)
             {

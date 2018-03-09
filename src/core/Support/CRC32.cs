@@ -33,7 +33,7 @@ namespace Lucene.Net.Support
             for (UInt32 n = 0; n < 256; n++)
             {
                 UInt32 c = n;
-                for (int k = 8; --k >= 0; )
+                for (int k = 8; --k >= 0;)
                 {
                     if ((c & 1) != 0)
                         c = 0xedb88320 ^ (c >> 1);

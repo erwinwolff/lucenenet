@@ -33,8 +33,8 @@ namespace Lucene.Net.Support
     /// the Hashmap supports both null keys and values, where the C# Dictionary
     /// only supports null values not keys.  Also, <c>V Get(TKey)</c>
     /// method in Java returns null if the key doesn't exist, instead of throwing
-    /// an exception.  This implementation doesn't throw an exception when a key 
-    /// doesn't exist, it will return null.  This class is slower than using a 
+    /// an exception.  This implementation doesn't throw an exception when a key
+    /// doesn't exist, it will return null.  This class is slower than using a
     /// <see cref="Dictionary{TKey, TValue}"/>, because of extra checks that have to be
     /// done on each access, to check for null.
     /// </para>
@@ -60,8 +60,10 @@ namespace Lucene.Net.Support
 
         // Indicates if a null key has been assigned, used for iteration
         private bool _hasNullValue;
+
         // stores the value for the null key
         private TValue _nullValue;
+
         // Indicates the type of key is a non-nullable valuetype
         private bool _isValueType;
 
@@ -72,13 +74,11 @@ namespace Lucene.Net.Support
         public HashMap(IEqualityComparer<TKey> comparer)
             : this(0, comparer)
         {
-            
         }
 
         public HashMap(int initialCapacity)
             : this(initialCapacity, EqualityComparer<TKey>.Default)
         {
-            
         }
 
         public HashMap(int initialCapacity, IEqualityComparer<TKey> comparer)
@@ -129,7 +129,7 @@ namespace Lucene.Net.Support
             return GetEnumerator();
         }
 
-        #endregion
+        #endregion Implementation of IEnumerable
 
         #region Implementation of ICollection<KeyValuePair<TKey,TValue>>
 
@@ -157,8 +157,8 @@ namespace Lucene.Net.Support
 
         void ICollection<KeyValuePair<TKey, TValue>>.CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex)
         {
-            ((ICollection<KeyValuePair<TKey, TValue>>) _dict).CopyTo(array, arrayIndex);
-            if(!_isValueType && _hasNullValue)
+            ((ICollection<KeyValuePair<TKey, TValue>>)_dict).CopyTo(array, arrayIndex);
+            if (!_isValueType && _hasNullValue)
             {
                 array[array.Length - 1] = new KeyValuePair<TKey, TValue>(default(TKey), _nullValue);
             }
@@ -189,7 +189,7 @@ namespace Lucene.Net.Support
             get { return false; }
         }
 
-        #endregion
+        #endregion Implementation of ICollection<KeyValuePair<TKey,TValue>>
 
         #region Implementation of IDictionary<TKey,TValue>
 
@@ -296,7 +296,7 @@ namespace Lucene.Net.Support
             }
         }
 
-        #endregion
+        #endregion Implementation of IDictionary<TKey,TValue>
 
         #region NullValueCollection
 
@@ -304,7 +304,7 @@ namespace Lucene.Net.Support
         /// Wraps a dictionary and adds the value
         /// represented by the null key
         /// </summary>
-        class NullValueCollection : ICollection<TValue>
+        private class NullValueCollection : ICollection<TValue>
         {
             private readonly TValue _nullValue;
             private readonly Dictionary<TKey, TValue> _internalDict;
@@ -332,7 +332,7 @@ namespace Lucene.Net.Support
                 return GetEnumerator();
             }
 
-            #endregion
+            #endregion Implementation of IEnumerable
 
             #region Implementation of ICollection<TValue>
 
@@ -372,19 +372,21 @@ namespace Lucene.Net.Support
             {
                 throw new NotSupportedException("Collection is read only!");
             }
-            #endregion
 
-            #endregion
+            #endregion Explicit Interface Methods
+
+            #endregion Implementation of ICollection<TValue>
         }
 
-        #endregion
+        #endregion NullValueCollection
 
         #region NullKeyCollection
+
         /// <summary>
         /// Wraps a dictionary's collection, adding in a
         /// null key.
         /// </summary>
-        class NullKeyCollection : ICollection<TKey>
+        private class NullKeyCollection : ICollection<TKey>
         {
             private readonly Dictionary<TKey, TValue> _internalDict;
 
@@ -423,6 +425,7 @@ namespace Lucene.Net.Support
             }
 
             #region Explicit Interface Definitions
+
             bool ICollection<TKey>.Contains(TKey item)
             {
                 throw new NotSupportedException();
@@ -442,8 +445,10 @@ namespace Lucene.Net.Support
             {
                 throw new NotSupportedException();
             }
-            #endregion
+
+            #endregion Explicit Interface Definitions
         }
-        #endregion
+
+        #endregion NullKeyCollection
     }
 }

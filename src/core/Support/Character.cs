@@ -51,7 +51,7 @@ namespace Lucene.Net.Support
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="digit"></param>
         /// <param name="radix"></param>

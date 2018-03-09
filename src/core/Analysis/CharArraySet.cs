@@ -1,13 +1,13 @@
-/* 
+/*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,8 +17,8 @@
 
 using System;
 using System.Collections;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Lucene.Net.Analysis
 {
@@ -39,17 +39,17 @@ namespace Lucene.Net.Analysis
     /// The <see cref="GetEnumerator"/> method returns an <see cref="string"/> IEnumerable.
     /// For type safety also {@link #stringIterator()} is provided.
     /// </summary>
-    // TODO: java uses wildcards, .net doesn't have this, easiest way is to 
+    // TODO: java uses wildcards, .net doesn't have this, easiest way is to
     //       make the entire class generic.  Ultimately, though, since this
     //       works with strings, I can't think of a reason not to just declare
     //       this as an ISet<string>.
     public class CharArraySet : ISet<string>
     {
-        bool _ReadOnly = false;
-        const int INIT_SIZE = 8;
-        char[][] _Entries;
-        int _Count;
-        bool _IgnoreCase;
+        private bool _ReadOnly = false;
+        private const int INIT_SIZE = 8;
+        private char[][] _Entries;
+        private int _Count;
+        private bool _IgnoreCase;
         public static CharArraySet EMPTY_SET = UnmodifiableSet(new CharArraySet(0, false));
 
         private void Init(int startSize, bool ignoreCase)
@@ -62,7 +62,7 @@ namespace Lucene.Net.Analysis
         }
 
         /// <summary>Create set with enough capacity to hold startSize
-        /// terms 
+        /// terms
         /// </summary>
         public CharArraySet(int startSize, bool ignoreCase)
         {
@@ -84,7 +84,7 @@ namespace Lucene.Net.Analysis
 
         private void AddItems<T>(IEnumerable<T> items)
         {
-            foreach(var item in items)
+            foreach (var item in items)
             {
                 Add(item.ToString());
             }
@@ -99,7 +99,7 @@ namespace Lucene.Net.Analysis
         }
 
         /// <summary>true if the <c>len</c> chars of <c>text</c> starting at <c>off</c>
-        /// are in the set 
+        /// are in the set
         /// </summary>
         public virtual bool Contains(char[] text, int off, int len)
         {
@@ -110,7 +110,6 @@ namespace Lucene.Net.Analysis
         {
             return _Entries[GetSlot(text)] != null;
         }
-
 
         private int GetSlot(char[] text, int off, int len)
         {
@@ -300,8 +299,8 @@ namespace Lucene.Net.Analysis
 
         public bool Contains(object item)
         {
-        	var text = item as char[];
-        	return text != null ? Contains(text, 0, text.Length) : Contains(item.ToString());
+            var text = item as char[];
+            return text != null ? Contains(text, 0, text.Length) : Contains(item.ToString());
         }
 
         public bool Add(object item)
@@ -323,14 +322,14 @@ namespace Lucene.Net.Analysis
         /// <throws>ArgumentNullException of the given set is <c>null</c></throws>
         public static CharArraySet UnmodifiableSet(CharArraySet set)
         {
-            if(set == null)
+            if (set == null)
                 throw new ArgumentNullException("Given set is null");
             if (set == EMPTY_SET)
                 return EMPTY_SET;
             if (set._ReadOnly)
                 return set;
 
-            var newSet = new CharArraySet(set._Entries, set._IgnoreCase, set.Count) {IsReadOnly = true};
+            var newSet = new CharArraySet(set._Entries, set._IgnoreCase, set.Count) { IsReadOnly = true };
             return newSet;
         }
 
@@ -382,6 +381,7 @@ namespace Lucene.Net.Analysis
         }
 
         #region Unneeded methods
+
         public void RemoveAll(ICollection<string> c)
         {
             throw new NotSupportedException();
@@ -446,7 +446,8 @@ namespace Lucene.Net.Analysis
         {
             throw new NotSupportedException();
         }
-        #endregion
+
+        #endregion Unneeded methods
 
         /// <summary>
         /// The IEnumerator&lt;String&gt; for this set.  Strings are constructed on the fly,
@@ -454,9 +455,9 @@ namespace Lucene.Net.Analysis
         /// </summary>
         public class CharArraySetEnumerator : IEnumerator<string>
         {
-        	readonly CharArraySet _Creator;
-            int pos = -1;
-            char[] cur;
+            private readonly CharArraySet _Creator;
+            private int pos = -1;
+            private char[] cur;
 
             protected internal CharArraySetEnumerator(CharArraySet creator)
             {
@@ -513,5 +514,4 @@ namespace Lucene.Net.Analysis
             return GetEnumerator();
         }
     }
-
 }

@@ -21,7 +21,7 @@ package org.apache.lucene.analysis.standard;
 
 WARNING: if you change StandardTokenizerImpl.jflex and need to regenerate
       the tokenizer, only use Java 1.4 !!!
-      This grammar currently uses constructs (eg :digit:, :letter:) whose 
+      This grammar currently uses constructs (eg :digit:, :letter:) whose
       meaning can vary according to the JRE used to run jflex.  See
       https://issues.apache.org/jira/browse/LUCENE-1126 for details.
       For current backwards compatibility it is needed to support

@@ -21,7 +21,7 @@ namespace Lucene.Net.Index
 {
     /// <summary>
     /// Base class for enumerating all but deleted docs.
-    /// 
+    ///
     /// <p/>NOTE: this class is meant only to be used internally
     /// by Lucene; it's only public so it can be shared across
     /// packages.  This means the API is freely subject to

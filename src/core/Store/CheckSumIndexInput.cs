@@ -1,13 +1,13 @@
-/* 
+/*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,47 +15,45 @@
  * limitations under the License.
  */
 
-using System;
 using Lucene.Net.Support;
 
 namespace Lucene.Net.Store
 {
-	
-	/// <summary>Writes bytes through to a primary IndexOutput, computing
-	/// checksum as it goes. Note that you cannot use seek(). 
-	/// </summary>
-	public class ChecksumIndexInput : IndexInput
-	{
-		internal IndexInput main;
-		internal IChecksum digest;
+    /// <summary>Writes bytes through to a primary IndexOutput, computing
+    /// checksum as it goes. Note that you cannot use seek().
+    /// </summary>
+    public class ChecksumIndexInput : IndexInput
+    {
+        internal IndexInput main;
+        internal IChecksum digest;
 
-	    private bool isDisposed;
-		
-		public ChecksumIndexInput(IndexInput main)
-		{
-			this.main = main;
+        private bool isDisposed;
+
+        public ChecksumIndexInput(IndexInput main)
+        {
+            this.main = main;
             digest = new CRC32();
-		}
-		
-		public override byte ReadByte()
-		{
-			byte b = main.ReadByte();
-			digest.Update(b);
-			return b;
-		}
-		
-		public override void  ReadBytes(byte[] b, int offset, int len)
-		{
-			main.ReadBytes(b, offset, len);
-			digest.Update(b, offset, len);
-		}
+        }
 
-	    public virtual long Checksum
-	    {
-	        get { return digest.Value; }
-	    }
+        public override byte ReadByte()
+        {
+            byte b = main.ReadByte();
+            digest.Update(b);
+            return b;
+        }
 
-	    protected override void Dispose(bool disposing)
+        public override void ReadBytes(byte[] b, int offset, int len)
+        {
+            main.ReadBytes(b, offset, len);
+            digest.Update(b, offset, len);
+        }
+
+        public virtual long Checksum
+        {
+            get { return digest.Value; }
+        }
+
+        protected override void Dispose(bool disposing)
         {
             if (isDisposed) return;
 
@@ -71,19 +69,19 @@ namespace Lucene.Net.Store
             isDisposed = true;
         }
 
-	    public override long FilePointer
-	    {
-	        get { return main.FilePointer; }
-	    }
+        public override long FilePointer
+        {
+            get { return main.FilePointer; }
+        }
 
-	    public override void  Seek(long pos)
-		{
-			throw new System.SystemException("not allowed");
-		}
-		
-		public override long Length()
-		{
-			return main.Length();
-		}
-	}
+        public override void Seek(long pos)
+        {
+            throw new System.SystemException("not allowed");
+        }
+
+        public override long Length()
+        {
+            return main.Length();
+        }
+    }
 }

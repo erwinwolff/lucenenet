@@ -1,13 +1,13 @@
-/* 
+/*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,7 +15,6 @@
  * limitations under the License.
  */
 
-using System;
 using System.Collections.Generic;
 
 namespace Lucene.Net.Util.Cache
@@ -89,10 +88,10 @@ namespace Lucene.Net.Util.Cache
         }
 
         /// <summary>
-        /// Container to hold the key and value to aid in removal from 
+        /// Container to hold the key and value to aid in removal from
         /// the <see cref="lookup"/> dictionary when an item is removed from cache.
         /// </summary>
-        class ListValueEntry<K, V> where K : TKey 
+        private class ListValueEntry<K, V> where K : TKey
                                    where V : TValue
         {
             internal V ItemValue;
@@ -106,61 +105,59 @@ namespace Lucene.Net.Util.Cache
         }
     }
 
+    #region NOT_USED_FROM_JLCA_PORT
 
-#region NOT_USED_FROM_JLCA_PORT
-/*
-  
- //
- // This is the oringal port as it was generated via JLCA.
- // This code is not used.  It's here for referance only.
- //
-  
+    /*
 
-	/// <summary> Simple LRU cache implementation that uses a LinkedHashMap.
-	/// This cache is not synchronized, use <see cref="Cache.SynchronizedCache(Cache)" />
-	/// if needed.
-	/// 
-	/// </summary>
-	public class SimpleLRUCache:SimpleMapCache
-	{
-		private class AnonymousClassLinkedHashMap : LinkedHashMap
-		{
-			public AnonymousClassLinkedHashMap(SimpleLRUCache enclosingInstance)
-			{
-				InitBlock(enclosingInstance);
-			}
-			private void  InitBlock(SimpleLRUCache enclosingInstance)
-			{
-				this.enclosingInstance = enclosingInstance;
-			}
-			private SimpleLRUCache enclosingInstance;
-			public SimpleLRUCache Enclosing_Instance
-			{
-				get
-				{
-					return enclosingInstance;
-				}
-				
-			}
-			protected internal virtual bool RemoveEldestEntry(System.Collections.DictionaryEntry eldest)
-			{
-				return size() > Enclosing_Instance.cacheSize;
-			}
-		}
-		private const float LOADFACTOR = 0.75f;
-		
-		private int cacheSize;
-		
-		/// <summary> Creates a last-recently-used cache with the specified size. </summary>
-		public SimpleLRUCache(int cacheSize):base(null)
-		{
-			this.cacheSize = cacheSize;
-			int capacity = (int) System.Math.Ceiling(cacheSize / LOADFACTOR) + 1;
-			
-			base.map = new AnonymousClassLinkedHashMap(this, capacity, LOADFACTOR, true);
-		}
-	}
-*/
-#endregion
+     //
+     // This is the oringal port as it was generated via JLCA.
+     // This code is not used.  It's here for referance only.
+     //
 
+        /// <summary> Simple LRU cache implementation that uses a LinkedHashMap.
+        /// This cache is not synchronized, use <see cref="Cache.SynchronizedCache(Cache)" />
+        /// if needed.
+        ///
+        /// </summary>
+        public class SimpleLRUCache:SimpleMapCache
+        {
+            private class AnonymousClassLinkedHashMap : LinkedHashMap
+            {
+                public AnonymousClassLinkedHashMap(SimpleLRUCache enclosingInstance)
+                {
+                    InitBlock(enclosingInstance);
+                }
+                private void  InitBlock(SimpleLRUCache enclosingInstance)
+                {
+                    this.enclosingInstance = enclosingInstance;
+                }
+                private SimpleLRUCache enclosingInstance;
+                public SimpleLRUCache Enclosing_Instance
+                {
+                    get
+                    {
+                        return enclosingInstance;
+                    }
+                }
+                protected internal virtual bool RemoveEldestEntry(System.Collections.DictionaryEntry eldest)
+                {
+                    return size() > Enclosing_Instance.cacheSize;
+                }
+            }
+            private const float LOADFACTOR = 0.75f;
+
+            private int cacheSize;
+
+            /// <summary> Creates a last-recently-used cache with the specified size. </summary>
+            public SimpleLRUCache(int cacheSize):base(null)
+            {
+                this.cacheSize = cacheSize;
+                int capacity = (int) System.Math.Ceiling(cacheSize / LOADFACTOR) + 1;
+
+                base.map = new AnonymousClassLinkedHashMap(this, capacity, LOADFACTOR, true);
+            }
+        }
+    */
+
+    #endregion NOT_USED_FROM_JLCA_PORT
 }

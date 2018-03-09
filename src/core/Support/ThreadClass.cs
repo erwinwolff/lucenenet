@@ -34,7 +34,6 @@ namespace Lucene.Net.Support
         /// </summary>
         private System.Threading.Thread threadField;
 
-
         /// <summary>
         /// Initializes a new instance of the ThreadClass class
         /// </summary>
@@ -47,7 +46,7 @@ namespace Lucene.Net.Support
         /// Initializes a new instance of the Thread class.
         /// </summary>
         /// <param name="Name">The name of the thread</param>
-        public ThreadClass(System.String Name)
+        public ThreadClass(string Name)
         {
             threadField = new System.Threading.Thread(new System.Threading.ThreadStart(Run));
             this.Name = Name;
@@ -67,7 +66,7 @@ namespace Lucene.Net.Support
         /// </summary>
         /// <param name="Start">A ThreadStart delegate that references the methods to be invoked when this thread begins executing</param>
         /// <param name="Name">The name of the thread</param>
-        public ThreadClass(System.Threading.ThreadStart Start, System.String Name)
+        public ThreadClass(System.Threading.ThreadStart Start, string Name)
         {
             threadField = new System.Threading.Thread(Start);
             this.Name = Name;
@@ -114,7 +113,7 @@ namespace Lucene.Net.Support
         /// <summary>
         /// Gets or sets the name of the thread
         /// </summary>
-        public System.String Name
+        public string Name
         {
             get
             {
@@ -155,7 +154,6 @@ namespace Lucene.Net.Support
                     threadField.Priority = value;
                 }
                 catch { }
-
             }
         }
 
@@ -221,8 +219,8 @@ namespace Lucene.Net.Support
         }
 
         /// <summary>
-        /// Raises a ThreadAbortException in the thread on which it is invoked, 
-        /// to begin the process of terminating the thread. Calling this method 
+        /// Raises a ThreadAbortException in the thread on which it is invoked,
+        /// to begin the process of terminating the thread. Calling this method
         /// usually terminates the thread
         /// </summary>
         public void Abort()
@@ -231,9 +229,9 @@ namespace Lucene.Net.Support
         }
 
         /// <summary>
-        /// Raises a ThreadAbortException in the thread on which it is invoked, 
+        /// Raises a ThreadAbortException in the thread on which it is invoked,
         /// to begin the process of terminating the thread while also providing
-        /// exception information about the thread termination. 
+        /// exception information about the thread termination.
         /// Calling this method usually terminates the thread.
         /// </summary>
         /// <param name="stateInfo">An object that contains application-specific information, such as state, which can be used by the thread being aborted</param>
@@ -254,13 +252,13 @@ namespace Lucene.Net.Support
         /// Obtain a String that represents the current object
         /// </summary>
         /// <returns>A String that represents the current object</returns>
-        public override System.String ToString()
+        public override string ToString()
         {
             return "Thread[" + Name + "," + Priority.ToString() + "]";
         }
 
         [ThreadStatic]
-        static ThreadClass This = null;
+        private static ThreadClass This = null;
 
         // named as the Java version
         public static ThreadClass CurrentThread()

@@ -47,7 +47,7 @@ namespace Lucene.Net.Support
             else
                 return null;
         }
-        
+
         // TODO: This filesupport thing is silly.  Same goes with _TestUtil's RMDir.
         //       If we're removing a directory
         public static System.IO.FileInfo[] GetFiles(System.IO.DirectoryInfo path)
@@ -61,7 +61,7 @@ namespace Lucene.Net.Support
         /// <param name="fullName">The full path name to the directory.</param>
         /// <param name="indexFileNameFilter"></param>
         /// <returns>An array containing the files.</returns>
-        public static System.String[] GetLuceneIndexFiles(System.String fullName,
+        public static string[] GetLuceneIndexFiles(string fullName,
                                                           Index.IndexFileNameFilter indexFileNameFilter)
         {
             System.IO.DirectoryInfo dInfo = new System.IO.DirectoryInfo(fullName);
@@ -73,7 +73,7 @@ namespace Lucene.Net.Support
                     list.Add(fInfo.Name);
                 }
             }
-            System.String[] retFiles = new System.String[list.Count];
+            string[] retFiles = new string[list.Count];
             list.CopyTo(retFiles);
             return retFiles;
         }

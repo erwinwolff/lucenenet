@@ -25,66 +25,66 @@ using System.Configuration;
 namespace Lucene.Net.Support
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public class AppSettings
     {
-        static System.Collections.Specialized.ListDictionary settings = new System.Collections.Specialized.ListDictionary();
+        private static System.Collections.Specialized.ListDictionary settings = new System.Collections.Specialized.ListDictionary();
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="key"></param>
         /// <param name="defValue"></param>
-        public static void Set(System.String key, int defValue)
+        public static void Set(string key, int defValue)
         {
             settings[key] = defValue;
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="key"></param>
         /// <param name="defValue"></param>
-        public static void Set(System.String key, long defValue)
+        public static void Set(string key, long defValue)
         {
             settings[key] = defValue;
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="key"></param>
         /// <param name="defValue"></param>
-        public static void Set(System.String key, System.String defValue)
+        public static void Set(string key, string defValue)
         {
             settings[key] = defValue;
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="key"></param>
         /// <param name="defValue"></param>
-        public static void Set(System.String key, bool defValue)
+        public static void Set(string key, bool defValue)
         {
             settings[key] = defValue;
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="key"></param>
         /// <param name="defValue"></param>
         /// <returns></returns>
-        public static int Get(System.String key, int defValue)
+        public static int Get(string key, int defValue)
         {
             if (settings[key] != null)
             {
                 return (int)settings[key];
             }
 
-            System.String theValue = ConfigurationManager.AppSettings.Get(key);
+            string theValue = ConfigurationManager.AppSettings.Get(key);
             if (theValue == null)
             {
                 return defValue;
@@ -95,19 +95,19 @@ namespace Lucene.Net.Support
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="key"></param>
         /// <param name="defValue"></param>
         /// <returns></returns>
-        public static long Get(System.String key, long defValue)
+        public static long Get(string key, long defValue)
         {
             if (settings[key] != null)
             {
                 return (long)settings[key];
             }
 
-            System.String theValue = ConfigurationManager.AppSettings.Get(key);
+            string theValue = ConfigurationManager.AppSettings.Get(key);
             if (theValue == null)
             {
                 return defValue;
@@ -118,19 +118,19 @@ namespace Lucene.Net.Support
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="key"></param>
         /// <param name="defValue"></param>
         /// <returns></returns>
-        public static System.String Get(System.String key, System.String defValue)
+        public static string Get(string key, string defValue)
         {
             if (settings[key] != null)
             {
-                return (System.String)settings[key];
+                return (string)settings[key];
             }
 
-            System.String theValue = ConfigurationManager.AppSettings.Get(key);
+            string theValue = ConfigurationManager.AppSettings.Get(key);
             if (theValue == null)
             {
                 return defValue;
@@ -139,14 +139,14 @@ namespace Lucene.Net.Support
             return theValue;
         }
 
-        public static bool Get(System.String key, bool defValue)
+        public static bool Get(string key, bool defValue)
         {
             if (settings[key] != null)
             {
                 return (bool)settings[key];
             }
 
-            System.String theValue = ConfigurationManager.AppSettings.Get(key);
+            string theValue = ConfigurationManager.AppSettings.Get(key);
             if (theValue == null)
             {
                 return defValue;

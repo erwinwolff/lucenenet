@@ -1,13 +1,13 @@
-/* 
+/*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,13 +15,12 @@
  * limitations under the License.
  */
 
-using System;
 using Lucene.Net.Support;
 using Lucene.Net.Util;
+using System;
 
 namespace Lucene.Net.Analysis
 {
-
     /// <summary>
     /// * Base utility class for implementing a <see cref="CharFilter" />.
     /// * You subclass this, and then record mappings by calling
@@ -30,7 +29,6 @@ namespace Lucene.Net.Analysis
     /// </summary>
     public abstract class BaseCharFilter : CharFilter
     {
-
         private int[] offsets;
         private int[] diffs;
         private int size = 0;
@@ -40,6 +38,7 @@ namespace Lucene.Net.Analysis
         }
 
         /* Retrieve the corrected offset. */
+
         //@Override
         protected internal override int Correct(int currentOff)
         {
@@ -68,7 +67,7 @@ namespace Lucene.Net.Analysis
 
             if (currentOff < offsets[mid])
                 return mid == 0 ? currentOff : currentOff + diffs[mid - 1];
-        	return currentOff + diffs[mid];
+            return currentOff + diffs[mid];
         }
 
         protected int LastCumulativeDiff

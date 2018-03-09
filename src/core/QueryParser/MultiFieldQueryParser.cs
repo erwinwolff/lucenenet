@@ -1,13 +1,13 @@
-/* 
+/*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,9 +15,9 @@
  * limitations under the License.
  */
 
+using Lucene.Net.Search;
 using System;
 using System.Collections.Generic;
-using Lucene.Net.Search;
 using Analyzer = Lucene.Net.Analysis.Analyzer;
 using BooleanClause = Lucene.Net.Search.BooleanClause;
 using BooleanQuery = Lucene.Net.Search.BooleanQuery;
@@ -28,9 +28,8 @@ using Version = Lucene.Net.Util.Version;
 
 namespace Lucene.Net.QueryParsers
 {
-
     /// <summary> A QueryParser which constructs queries to search multiple fields.
-    /// 
+    ///
     /// </summary>
     /// <version>  $Revision: 829231 $
     /// </version>
@@ -41,33 +40,33 @@ namespace Lucene.Net.QueryParsers
 
         /// <summary> Creates a MultiFieldQueryParser. Allows passing of a map with term to
         /// Boost, and the boost to apply to each term.
-        /// 
+        ///
         /// <p/>
         /// It will, when parse(String query) is called, construct a query like this
         /// (assuming the query consists of two terms and you specify the two fields
         /// <c>title</c> and <c>body</c>):
         /// <p/>
-        /// 
+        ///
         /// <code>
         /// (title:term1 body:term1) (title:term2 body:term2)
         /// </code>
-        /// 
+        ///
         /// <p/>
         /// When setDefaultOperator(AND_OPERATOR) is set, the result will be:
         /// <p/>
-        /// 
+        ///
         /// <code>
         /// +(title:term1 body:term1) +(title:term2 body:term2)
         /// </code>
-        /// 
+        ///
         /// <p/>
         /// When you pass a boost (title=>5 body=>10) you can get
         /// <p/>
-        /// 
+        ///
         /// <code>
         /// +(title:term1^5.0 body:term1^10.0) +(title:term2^5.0 body:term2^10.0)
         /// </code>
-        /// 
+        ///
         /// <p/>
         /// In other words, all the query's terms must appear, but it doesn't matter
         /// in what fields they appear.
@@ -80,31 +79,31 @@ namespace Lucene.Net.QueryParsers
         }
 
         /// <summary> Creates a MultiFieldQueryParser.
-        /// 
+        ///
         /// <p/>
         /// It will, when parse(String query) is called, construct a query like this
         /// (assuming the query consists of two terms and you specify the two fields
         /// <c>title</c> and <c>body</c>):
         /// <p/>
-        /// 
+        ///
         /// <code>
         /// (title:term1 body:term1) (title:term2 body:term2)
         /// </code>
-        /// 
+        ///
         /// <p/>
         /// When setDefaultOperator(AND_OPERATOR) is set, the result will be:
         /// <p/>
-        /// 
+        ///
         /// <code>
         /// +(title:term1 body:term1) +(title:term2 body:term2)
         /// </code>
-        /// 
+        ///
         /// <p/>
         /// In other words, all the query's terms must appear, but it doesn't matter
         /// in what fields they appear.
         /// <p/>
         /// </summary>
-        public MultiFieldQueryParser(Version matchVersion, System.String[] fields, Analyzer analyzer)
+        public MultiFieldQueryParser(Version matchVersion, string[] fields, Analyzer analyzer)
             : base(matchVersion, null, analyzer)
         {
             this.fields = fields;
@@ -153,14 +152,12 @@ namespace Lucene.Net.QueryParsers
             }
         }
 
-
-        protected internal override Query GetFieldQuery(System.String field, System.String queryText)
+        protected internal override Query GetFieldQuery(string field, string queryText)
         {
             return GetFieldQuery(field, queryText, 0);
         }
 
-
-        protected internal override Query GetFuzzyQuery(System.String field, System.String termStr, float minSimilarity)
+        protected internal override Query GetFuzzyQuery(string field, string termStr, float minSimilarity)
         {
             if (field == null)
             {
@@ -174,7 +171,7 @@ namespace Lucene.Net.QueryParsers
             return base.GetFuzzyQuery(field, termStr, minSimilarity);
         }
 
-        protected internal override Query GetPrefixQuery(System.String field, System.String termStr)
+        protected internal override Query GetPrefixQuery(string field, string termStr)
         {
             if (field == null)
             {
@@ -188,7 +185,7 @@ namespace Lucene.Net.QueryParsers
             return base.GetPrefixQuery(field, termStr);
         }
 
-        protected internal override Query GetWildcardQuery(System.String field, System.String termStr)
+        protected internal override Query GetWildcardQuery(string field, string termStr)
         {
             if (field == null)
             {
@@ -202,8 +199,7 @@ namespace Lucene.Net.QueryParsers
             return base.GetWildcardQuery(field, termStr);
         }
 
-
-        protected internal override Query GetRangeQuery(System.String field, System.String part1, System.String part2, bool inclusive)
+        protected internal override Query GetRangeQuery(string field, string part1, string part2, bool inclusive)
         {
             if (field == null)
             {
@@ -220,11 +216,11 @@ namespace Lucene.Net.QueryParsers
         /// <summary> Parses a query which searches on the fields specified.
         /// <p/>
         /// If x fields are specified, this effectively constructs:
-        /// 
+        ///
         /// <code>
         /// (field1:query1) (field2:query2) (field3:query3)...(fieldx:queryx)
         /// </code>
-        /// 
+        ///
         /// </summary>
         /// <param name="matchVersion">Lucene version to match; this is passed through to
         /// QueryParser.
@@ -242,7 +238,7 @@ namespace Lucene.Net.QueryParsers
         /// <summary>             if the length of the queries array differs from the length of
         /// the fields array
         /// </summary>
-        public static Query Parse(Version matchVersion, System.String[] queries, System.String[] fields, Analyzer analyzer)
+        public static Query Parse(Version matchVersion, string[] queries, string[] fields, Analyzer analyzer)
         {
             if (queries.Length != fields.Length)
                 throw new System.ArgumentException("queries.length != fields.length");
@@ -272,11 +268,11 @@ namespace Lucene.Net.QueryParsers
         /// </code>
         /// <p/>
         /// The code above would construct a query:
-        /// 
+        ///
         /// <code>
         /// (filename:query) +(contents:query) -(description:query)
         /// </code>
-        /// 
+        ///
         /// </summary>
         /// <param name="matchVersion">Lucene version to match; this is passed through to
         /// QueryParser.
@@ -296,7 +292,7 @@ namespace Lucene.Net.QueryParsers
         /// <summary>             if the length of the fields array differs from the length of
         /// the flags array
         /// </summary>
-        public static Query Parse(Version matchVersion, System.String query, System.String[] fields, Occur[] flags, Analyzer analyzer)
+        public static Query Parse(Version matchVersion, string query, string[] fields, Occur[] flags, Analyzer analyzer)
         {
             if (fields.Length != flags.Length)
                 throw new System.ArgumentException("fields.length != flags.length");
@@ -327,11 +323,11 @@ namespace Lucene.Net.QueryParsers
         /// </code>
         /// <p/>
         /// The code above would construct a query:
-        /// 
+        ///
         /// <code>
         /// (filename:query1) +(contents:query2) -(description:query3)
         /// </code>
-        /// 
+        ///
         /// </summary>
         /// <param name="matchVersion">Lucene version to match; this is passed through to
         /// QueryParser.
@@ -350,7 +346,7 @@ namespace Lucene.Net.QueryParsers
         /// <throws>  IllegalArgumentException </throws>
         /// <summary>             if the length of the queries, fields, and flags array differ
         /// </summary>
-        public static Query Parse(Version matchVersion, System.String[] queries, System.String[] fields, Occur[] flags, Analyzer analyzer)
+        public static Query Parse(Version matchVersion, string[] queries, string[] fields, Occur[] flags, Analyzer analyzer)
         {
             if (!(queries.Length == fields.Length && queries.Length == flags.Length))
                 throw new System.ArgumentException("queries, fields, and flags array have have different length");

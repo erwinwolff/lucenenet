@@ -1,13 +1,13 @@
-/* 
+/*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,23 +16,20 @@
  */
 
 using System;
-
-using System.Runtime.InteropServices;
 using IndexReader = Lucene.Net.Index.IndexReader;
 
 namespace Lucene.Net.Search
 {
-	
-	/// <summary> Wraps another SpanFilter's result and caches it.  The purpose is to allow
-	/// filters to simply filter, and then wrap with this class to add caching.
-	/// </summary>
-	[Serializable]
-	public class CachingSpanFilter:SpanFilter
-	{
-		private SpanFilter filter;
-		
-		/// <summary> A transient Filter cache (internal because of test)</summary>
-		[NonSerialized]
+    /// <summary> Wraps another SpanFilter's result and caches it.  The purpose is to allow
+    /// filters to simply filter, and then wrap with this class to add caching.
+    /// </summary>
+    [Serializable]
+    public class CachingSpanFilter : SpanFilter
+    {
+        private SpanFilter filter;
+
+        /// <summary> A transient Filter cache (internal because of test)</summary>
+        [NonSerialized]
         internal CachingWrapperFilter.FilterCache<SpanFilterResult> cache;
 
         /// <summary>
@@ -41,10 +38,9 @@ namespace Lucene.Net.Search
         /// <param name="filter">Filter to cache results of
 		/// </param>
         /// </summary>
-        public CachingSpanFilter(SpanFilter filter): this(filter, CachingWrapperFilter.DeletesMode.RECACHE)
-		{
-			
-		}
+        public CachingSpanFilter(SpanFilter filter) : this(filter, CachingWrapperFilter.DeletesMode.RECACHE)
+        {
+        }
 
         /// <summary>New deletions always result in a cache miss, specify the <paramref name="deletesMode"/></summary>
         /// <param name="filter">Filter to cache results of</param>
@@ -59,7 +55,7 @@ namespace Lucene.Net.Search
             this.cache = new AnonymousFilterCache(deletesMode);
         }
 
-        class AnonymousFilterCache : CachingWrapperFilter.FilterCache<SpanFilterResult>
+        private class AnonymousFilterCache : CachingWrapperFilter.FilterCache<SpanFilterResult>
         {
             public AnonymousFilterCache(CachingWrapperFilter.DeletesMode deletesMode) : base(deletesMode)
             {
@@ -70,23 +66,24 @@ namespace Lucene.Net.Search
                 throw new System.ArgumentException("DeletesMode.DYNAMIC is not supported");
             }
         }
-		
-		public override DocIdSet GetDocIdSet(IndexReader reader)
-		{
-			SpanFilterResult result = GetCachedResult(reader);
-			return result != null?result.DocIdSet:null;
-		}
+
+        public override DocIdSet GetDocIdSet(IndexReader reader)
+        {
+            SpanFilterResult result = GetCachedResult(reader);
+            return result != null ? result.DocIdSet : null;
+        }
 
         // for testing
         public int hitCount, missCount;
 
-		private SpanFilterResult GetCachedResult(IndexReader reader)
-		{
+        private SpanFilterResult GetCachedResult(IndexReader reader)
+        {
             object coreKey = reader.FieldCacheKey;
             object delCoreKey = reader.HasDeletions ? reader.DeletesCacheKey : coreKey;
 
             SpanFilterResult result = cache.Get(reader, coreKey, delCoreKey);
-            if (result != null) {
+            if (result != null)
+            {
                 hitCount++;
                 return result;
             }
@@ -96,29 +93,28 @@ namespace Lucene.Net.Search
 
             cache.Put(coreKey, delCoreKey, result);
             return result;
-		}
-		
-		
-		public override SpanFilterResult BitSpans(IndexReader reader)
-		{
-			return GetCachedResult(reader);
-		}
-		
-		public override System.String ToString()
-		{
-			return "CachingSpanFilter(" + filter + ")";
-		}
-		
-		public  override bool Equals(System.Object o)
-		{
-			if (!(o is CachingSpanFilter))
-				return false;
-			return this.filter.Equals(((CachingSpanFilter) o).filter);
-		}
-		
-		public override int GetHashCode()
-		{
-			return filter.GetHashCode() ^ 0x1117BF25;
-		}
-	}
+        }
+
+        public override SpanFilterResult BitSpans(IndexReader reader)
+        {
+            return GetCachedResult(reader);
+        }
+
+        public override string ToString()
+        {
+            return "CachingSpanFilter(" + filter + ")";
+        }
+
+        public override bool Equals(System.Object o)
+        {
+            if (!(o is CachingSpanFilter))
+                return false;
+            return this.filter.Equals(((CachingSpanFilter)o).filter);
+        }
+
+        public override int GetHashCode()
+        {
+            return filter.GetHashCode() ^ 0x1117BF25;
+        }
+    }
 }

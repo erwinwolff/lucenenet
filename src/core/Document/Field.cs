@@ -1,13 +1,13 @@
-/* 
+/*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,22 +17,21 @@
 
 using System;
 using System.IO;
-using TokenStream = Lucene.Net.Analysis.TokenStream;
 using IndexWriter = Lucene.Net.Index.IndexWriter;
 using StringHelper = Lucene.Net.Util.StringHelper;
+using TokenStream = Lucene.Net.Analysis.TokenStream;
 
 namespace Lucene.Net.Documents
 {
-    
     /// <summary>A field is a section of a Document.  Each field has two parts, a name and a
     /// value.  Values may be free text, provided as a String or as a Reader, or they
     /// may be atomic keywords, which are not further processed.  Such keywords may
     /// be used to represent dates, urls, etc.  Fields are optionally stored in the
     /// index, so that they may be returned with hits on the document.
     /// </summary>
-    
+
     [Serializable]
-    public sealed class Field:AbstractField, IFieldable
+    public sealed class Field : AbstractField, IFieldable
     {
         /// <summary>Specifies whether and how a field should be stored. </summary>
         public enum Store
@@ -47,29 +46,29 @@ namespace Lucene.Net.Documents
             /// <summary>Do not store the field value in the index. </summary>
             NO
         }
-        
+
         /// <summary>Specifies whether and how a field should be indexed. </summary>
 
         public enum Index
         {
             /// <summary>Do not index the field value. This field can thus not be searched,
             /// but one can still access its contents provided it is
-            /// <see cref="Field.Store">stored</see>. 
+            /// <see cref="Field.Store">stored</see>.
             /// </summary>
             NO,
-            
+
             /// <summary>Index the tokens produced by running the field's
             /// value through an Analyzer.  This is useful for
-            /// common text. 
+            /// common text.
             /// </summary>
             ANALYZED,
-            
+
             /// <summary>Index the field's value without using an Analyzer, so it can be searched.
             /// As no analyzer is used the value will be stored as a single term. This is
             /// useful for unique Ids like product numbers.
             /// </summary>
             NOT_ANALYZED,
-            
+
             /// <summary>Expert: Index the field's value without an Analyzer,
             /// and also disable the storing of norms.  Note that you
             /// can also separately enable/disable norms by setting
@@ -83,46 +82,46 @@ namespace Lucene.Net.Documents
             /// have no effect.  In other words, for this to have the
             /// above described effect on a field, all instances of
             /// that field must be indexed with NOT_ANALYZED_NO_NORMS
-            /// from the beginning. 
+            /// from the beginning.
             /// </summary>
             NOT_ANALYZED_NO_NORMS,
-            
+
             /// <summary>Expert: Index the tokens produced by running the
             /// field's value through an Analyzer, and also
             /// separately disable the storing of norms.  See
             /// <see cref="NOT_ANALYZED_NO_NORMS" /> for what norms are
-            /// and why you may want to disable them. 
+            /// and why you may want to disable them.
             /// </summary>
             ANALYZED_NO_NORMS,
         }
-        
+
         /// <summary>Specifies whether and how a field should have term vectors. </summary>
         public enum TermVector
         {
             /// <summary>Do not store term vectors. </summary>
             NO,
-            
+
             /// <summary>Store the term vectors of each document. A term vector is a list
-            /// of the document's terms and their number of occurrences in that document. 
+            /// of the document's terms and their number of occurrences in that document.
             /// </summary>
             YES,
-            
+
             /// <summary> Store the term vector + token position information
-            /// 
+            ///
             /// </summary>
             /// <seealso cref="YES">
             /// </seealso>
             WITH_POSITIONS,
-            
+
             /// <summary> Store the term vector + Token offset information
-            /// 
+            ///
             /// </summary>
             /// <seealso cref="YES">
             /// </seealso>
             WITH_OFFSETS,
-            
+
             /// <summary> Store the term vector + Token position and offset information
-            /// 
+            ///
             /// </summary>
             /// <seealso cref="YES">
             /// </seealso>
@@ -133,33 +132,31 @@ namespace Lucene.Net.Documents
             WITH_POSITIONS_OFFSETS,
         }
 
-
         /// <summary>The value of the field as a String, or null.  If null, the Reader value or
         /// binary value is used.  Exactly one of stringValue(),
-        /// readerValue(), and getBinaryValue() must be set. 
+        /// readerValue(), and getBinaryValue() must be set.
         /// </summary>
         public override string StringValue
         {
-            get { return fieldsData is System.String ? (System.String) fieldsData : null; }
+            get { return fieldsData is string ? (string)fieldsData : null; }
         }
 
         /// <summary>The value of the field as a Reader, or null.  If null, the String value or
         /// binary value is used.  Exactly one of stringValue(),
-        /// readerValue(), and getBinaryValue() must be set. 
+        /// readerValue(), and getBinaryValue() must be set.
         /// </summary>
         public override TextReader ReaderValue
         {
-            get { return fieldsData is System.IO.TextReader ? (System.IO.TextReader) fieldsData : null; }
+            get { return fieldsData is System.IO.TextReader ? (System.IO.TextReader)fieldsData : null; }
         }
 
         /// <summary>The TokesStream for this field to be used when indexing, or null.  If null, the Reader value
-        /// or String value is analyzed to produce the indexed tokens. 
+        /// or String value is analyzed to produce the indexed tokens.
         /// </summary>
         public override TokenStream TokenStreamValue
         {
             get { return tokenStream; }
         }
-
 
         /// <summary><p/>Expert: change the value of this field.  This can
         /// be used during indexing to re-use a single Field
@@ -167,13 +164,13 @@ namespace Lucene.Net.Documents
         /// of new'ing and reclaiming Field instances.  Typically
         /// a single <see cref="Document" /> instance is re-used as
         /// well.  This helps most on small documents.<p/>
-        /// 
+        ///
         /// <p/>Each Field instance should only be used once
         /// within a single <see cref="Document" /> instance.  See <a
         /// href="http://wiki.apache.org/lucene-java/ImproveIndexingSpeed">ImproveIndexingSpeed</a>
-        /// for details.<p/> 
+        /// for details.<p/>
         /// </summary>
-        public void  SetValue(System.String value)
+        public void SetValue(string value)
         {
             if (internalIsBinary)
             {
@@ -181,9 +178,9 @@ namespace Lucene.Net.Documents
             }
             fieldsData = value;
         }
-        
+
         /// <summary>Expert: change the value of this field.  See <a href="#setValue(java.lang.String)">setValue(String)</a>. </summary>
-        public void  SetValue(System.IO.TextReader value)
+        public void SetValue(System.IO.TextReader value)
         {
             if (internalIsBinary)
             {
@@ -195,9 +192,9 @@ namespace Lucene.Net.Documents
             }
             fieldsData = value;
         }
-        
+
         /// <summary>Expert: change the value of this field.  See <a href="#setValue(java.lang.String)">setValue(String)</a>. </summary>
-        public void  SetValue(byte[] value)
+        public void SetValue(byte[] value)
         {
             if (!internalIsBinary)
             {
@@ -207,9 +204,9 @@ namespace Lucene.Net.Documents
             internalBinaryLength = value.Length;
             internalbinaryOffset = 0;
         }
-        
+
         /// <summary>Expert: change the value of this field.  See <a href="#setValue(java.lang.String)">setValue(String)</a>. </summary>
-        public void  SetValue(byte[] value, int offset, int length)
+        public void SetValue(byte[] value, int offset, int length)
         {
             if (!internalIsBinary)
             {
@@ -219,20 +216,20 @@ namespace Lucene.Net.Documents
             internalBinaryLength = length;
             internalbinaryOffset = offset;
         }
-        
+
         /// <summary>Expert: sets the token stream to be used for indexing and causes isIndexed() and isTokenized() to return true.
-        /// May be combined with stored values from stringValue() or GetBinaryValue() 
+        /// May be combined with stored values from stringValue() or GetBinaryValue()
         /// </summary>
-        public void  SetTokenStream(TokenStream tokenStream)
+        public void SetTokenStream(TokenStream tokenStream)
         {
             this.internalIsIndexed = true;
             this.internalIsTokenized = true;
             this.tokenStream = tokenStream;
         }
-        
+
         /// <summary> Create a field by specifying its name, value and how it will
         /// be saved in the index. Term vectors will not be stored in the index.
-        /// 
+        ///
         /// </summary>
         /// <param name="name">The name of the field
         /// </param>
@@ -241,18 +238,18 @@ namespace Lucene.Net.Documents
         /// <param name="store">Whether <c>value</c> should be stored in the index
         /// </param>
         /// <param name="index">Whether the field should be indexed, and if so, if it should
-        /// be tokenized before indexing 
+        /// be tokenized before indexing
         /// </param>
         /// <throws>  NullPointerException if name or value is <c>null</c> </throws>
         /// <throws>  IllegalArgumentException if the field is neither stored nor indexed  </throws>
-        public Field(System.String name, System.String value, Store store, Index index)
+        public Field(string name, string value, Store store, Index index)
             : this(name, value, store, index, TermVector.NO)
         {
         }
-        
+
         /// <summary> Create a field by specifying its name, value and how it will
         /// be saved in the index.
-        /// 
+        ///
         /// </summary>
         /// <param name="name">The name of the field
         /// </param>
@@ -261,25 +258,25 @@ namespace Lucene.Net.Documents
         /// <param name="store">Whether <c>value</c> should be stored in the index
         /// </param>
         /// <param name="index">Whether the field should be indexed, and if so, if it should
-        /// be tokenized before indexing 
+        /// be tokenized before indexing
         /// </param>
         /// <param name="termVector">Whether term vector should be stored
         /// </param>
         /// <throws>  NullPointerException if name or value is <c>null</c> </throws>
         /// <throws>  IllegalArgumentException in any of the following situations: </throws>
-        /// <summary> <list> 
-        /// <item>the field is neither stored nor indexed</item> 
+        /// <summary> <list>
+        /// <item>the field is neither stored nor indexed</item>
         /// <item>the field is not indexed but termVector is <c>TermVector.YES</c></item>
-        /// </list> 
+        /// </list>
         /// </summary>
-        public Field(System.String name, System.String value, Store store, Index index, TermVector termVector)
+        public Field(string name, string value, Store store, Index index, TermVector termVector)
             : this(name, true, value, store, index, termVector)
         {
         }
-        
+
         /// <summary> Create a field by specifying its name, value and how it will
         /// be saved in the index.
-        /// 
+        ///
         /// </summary>
         /// <param name="name">The name of the field
         /// </param>
@@ -290,18 +287,18 @@ namespace Lucene.Net.Documents
         /// <param name="store">Whether <c>value</c> should be stored in the index
         /// </param>
         /// <param name="index">Whether the field should be indexed, and if so, if it should
-        /// be tokenized before indexing 
+        /// be tokenized before indexing
         /// </param>
         /// <param name="termVector">Whether term vector should be stored
         /// </param>
         /// <throws>  NullPointerException if name or value is <c>null</c> </throws>
         /// <throws>  IllegalArgumentException in any of the following situations: </throws>
-        /// <summary> <list> 
-        /// <item>the field is neither stored nor indexed</item> 
+        /// <summary> <list>
+        /// <item>the field is neither stored nor indexed</item>
         /// <item>the field is not indexed but termVector is <c>TermVector.YES</c></item>
-        /// </list> 
+        /// </list>
         /// </summary>
-        public Field(System.String name, bool internName, System.String value, Store store, Index index, TermVector termVector)
+        public Field(string name, bool internName, string value, Store store, Index index, TermVector termVector)
         {
             if (name == null)
                 throw new System.NullReferenceException("name cannot be null");
@@ -313,13 +310,13 @@ namespace Lucene.Net.Documents
                 throw new System.ArgumentException("it doesn't make sense to have a field that " + "is neither indexed nor stored");
             if (index == Index.NO && termVector != TermVector.NO)
                 throw new System.ArgumentException("cannot store term vector information " + "for a field that is not indexed");
-            
+
             if (internName)
-            // field names are optionally interned
+                // field names are optionally interned
                 name = StringHelper.Intern(name);
-            
+
             this.internalName = name;
-            
+
             this.fieldsData = value;
 
             this.internalIsStored = store.IsStored();
@@ -332,32 +329,32 @@ namespace Lucene.Net.Documents
             {
                 this.internalOmitTermFreqAndPositions = false;
             }
-            
+
             this.internalIsBinary = false;
-            
+
             SetStoreTermVector(termVector);
         }
-        
+
         /// <summary> Create a tokenized and indexed field that is not stored. Term vectors will
         /// not be stored.  The Reader is read only when the Document is added to the index,
         /// i.e. you may not close the Reader until <see cref="IndexWriter.AddDocument(Document)" />
         /// has been called.
-        /// 
+        ///
         /// </summary>
         /// <param name="name">The name of the field
         /// </param>
         /// <param name="reader">The reader with the content
         /// </param>
         /// <throws>  NullPointerException if name or reader is <c>null</c> </throws>
-        public Field(System.String name, System.IO.TextReader reader):this(name, reader, TermVector.NO)
+        public Field(string name, System.IO.TextReader reader) : this(name, reader, TermVector.NO)
         {
         }
-        
-        /// <summary> Create a tokenized and indexed field that is not stored, optionally with 
+
+        /// <summary> Create a tokenized and indexed field that is not stored, optionally with
         /// storing term vectors.  The Reader is read only when the Document is added to the index,
         /// i.e. you may not close the Reader until <see cref="IndexWriter.AddDocument(Document)" />
         /// has been called.
-        /// 
+        ///
         /// </summary>
         /// <param name="name">The name of the field
         /// </param>
@@ -366,48 +363,48 @@ namespace Lucene.Net.Documents
         /// <param name="termVector">Whether term vector should be stored
         /// </param>
         /// <throws>  NullPointerException if name or reader is <c>null</c> </throws>
-        public Field(System.String name, System.IO.TextReader reader, TermVector termVector)
+        public Field(string name, System.IO.TextReader reader, TermVector termVector)
         {
             if (name == null)
                 throw new System.NullReferenceException("name cannot be null");
             if (reader == null)
                 throw new System.NullReferenceException("reader cannot be null");
-            
+
             this.internalName = StringHelper.Intern(name); // field names are interned
             this.fieldsData = reader;
-            
+
             this.internalIsStored = false;
-            
+
             this.internalIsIndexed = true;
             this.internalIsTokenized = true;
-            
+
             this.internalIsBinary = false;
-            
+
             SetStoreTermVector(termVector);
         }
-        
+
         /// <summary> Create a tokenized and indexed field that is not stored. Term vectors will
         /// not be stored. This is useful for pre-analyzed fields.
         /// The TokenStream is read only when the Document is added to the index,
         /// i.e. you may not close the TokenStream until <see cref="IndexWriter.AddDocument(Document)" />
         /// has been called.
-        /// 
+        ///
         /// </summary>
         /// <param name="name">The name of the field
         /// </param>
         /// <param name="tokenStream">The TokenStream with the content
         /// </param>
         /// <throws>  NullPointerException if name or tokenStream is <c>null</c> </throws>
-        public Field(System.String name, TokenStream tokenStream):this(name, tokenStream, TermVector.NO)
+        public Field(string name, TokenStream tokenStream) : this(name, tokenStream, TermVector.NO)
         {
         }
-        
-        /// <summary> Create a tokenized and indexed field that is not stored, optionally with 
+
+        /// <summary> Create a tokenized and indexed field that is not stored, optionally with
         /// storing term vectors.  This is useful for pre-analyzed fields.
         /// The TokenStream is read only when the Document is added to the index,
         /// i.e. you may not close the TokenStream until <see cref="IndexWriter.AddDocument(Document)" />
         /// has been called.
-        /// 
+        ///
         /// </summary>
         /// <param name="name">The name of the field
         /// </param>
@@ -416,30 +413,29 @@ namespace Lucene.Net.Documents
         /// <param name="termVector">Whether term vector should be stored
         /// </param>
         /// <throws>  NullPointerException if name or tokenStream is <c>null</c> </throws>
-        public Field(System.String name, TokenStream tokenStream, TermVector termVector)
+        public Field(string name, TokenStream tokenStream, TermVector termVector)
         {
             if (name == null)
                 throw new System.NullReferenceException("name cannot be null");
             if (tokenStream == null)
                 throw new System.NullReferenceException("tokenStream cannot be null");
-            
+
             this.internalName = StringHelper.Intern(name); // field names are interned
             this.fieldsData = null;
             this.tokenStream = tokenStream;
-            
+
             this.internalIsStored = false;
-            
+
             this.internalIsIndexed = true;
             this.internalIsTokenized = true;
-            
+
             this.internalIsBinary = false;
-            
+
             SetStoreTermVector(termVector);
         }
-        
-        
+
         /// <summary> Create a stored field with binary value. Optionally the value may be compressed.
-        /// 
+        ///
         /// </summary>
         /// <param name="name">The name of the field
         /// </param>
@@ -448,12 +444,12 @@ namespace Lucene.Net.Documents
         /// <param name="store">How <c>value</c> should be stored (compressed or not)
         /// </param>
         /// <throws>  IllegalArgumentException if store is <c>Store.NO</c>  </throws>
-        public Field(System.String name, byte[] value_Renamed, Store store):this(name, value_Renamed, 0, value_Renamed.Length, store)
+        public Field(string name, byte[] value_Renamed, Store store) : this(name, value_Renamed, 0, value_Renamed.Length, store)
         {
         }
-        
+
         /// <summary> Create a stored field with binary value. Optionally the value may be compressed.
-        /// 
+        ///
         /// </summary>
         /// <param name="name">The name of the field
         /// </param>
@@ -466,17 +462,16 @@ namespace Lucene.Net.Documents
         /// <param name="store">How <c>value</c> should be stored (compressed or not)
         /// </param>
         /// <throws>  IllegalArgumentException if store is <c>Store.NO</c>  </throws>
-        public Field(System.String name, byte[] value_Renamed, int offset, int length, Store store)
+        public Field(string name, byte[] value_Renamed, int offset, int length, Store store)
         {
-            
             if (name == null)
                 throw new System.ArgumentException("name cannot be null");
             if (value_Renamed == null)
                 throw new System.ArgumentException("value cannot be null");
-            
+
             this.internalName = StringHelper.Intern(name); // field names are interned
             fieldsData = value_Renamed;
-            
+
             if (store == Store.NO)
                 throw new System.ArgumentException("binary values can't be unstored");
 
@@ -485,11 +480,11 @@ namespace Lucene.Net.Documents
             internalIsTokenized = false;
             internalOmitTermFreqAndPositions = false;
             internalOmitNorms = true;
-            
+
             internalIsBinary = true;
             internalBinaryLength = length;
             internalbinaryOffset = offset;
-            
+
             SetStoreTermVector(TermVector.NO);
         }
     }
@@ -498,12 +493,14 @@ namespace Lucene.Net.Documents
     {
         public static bool IsStored(this Field.Store store)
         {
-            switch(store)
+            switch (store)
             {
                 case Field.Store.YES:
                     return true;
+
                 case Field.Store.NO:
                     return false;
+
                 default:
                     throw new ArgumentOutOfRangeException("store", "Invalid value for Field.Store");
             }
@@ -511,15 +508,17 @@ namespace Lucene.Net.Documents
 
         public static bool IsIndexed(this Field.Index index)
         {
-            switch(index)
+            switch (index)
             {
                 case Field.Index.NO:
                     return false;
+
                 case Field.Index.ANALYZED:
                 case Field.Index.NOT_ANALYZED:
                 case Field.Index.NOT_ANALYZED_NO_NORMS:
                 case Field.Index.ANALYZED_NO_NORMS:
                     return true;
+
                 default:
                     throw new ArgumentOutOfRangeException("index", "Invalid value for Field.Index");
             }
@@ -533,9 +532,11 @@ namespace Lucene.Net.Documents
                 case Field.Index.NOT_ANALYZED:
                 case Field.Index.NOT_ANALYZED_NO_NORMS:
                     return false;
+
                 case Field.Index.ANALYZED:
                 case Field.Index.ANALYZED_NO_NORMS:
                     return true;
+
                 default:
                     throw new ArgumentOutOfRangeException("index", "Invalid value for Field.Index");
             }
@@ -548,10 +549,12 @@ namespace Lucene.Net.Documents
                 case Field.Index.ANALYZED:
                 case Field.Index.NOT_ANALYZED:
                     return false;
+
                 case Field.Index.NO:
                 case Field.Index.NOT_ANALYZED_NO_NORMS:
                 case Field.Index.ANALYZED_NO_NORMS:
                     return true;
+
                 default:
                     throw new ArgumentOutOfRangeException("index", "Invalid value for Field.Index");
             }
@@ -559,15 +562,17 @@ namespace Lucene.Net.Documents
 
         public static bool IsStored(this Field.TermVector tv)
         {
-            switch(tv)
+            switch (tv)
             {
                 case Field.TermVector.NO:
                     return false;
+
                 case Field.TermVector.YES:
                 case Field.TermVector.WITH_OFFSETS:
                 case Field.TermVector.WITH_POSITIONS:
                 case Field.TermVector.WITH_POSITIONS_OFFSETS:
                     return true;
+
                 default:
                     throw new ArgumentOutOfRangeException("tv", "Invalid value for Field.TermVector");
             }
@@ -581,9 +586,11 @@ namespace Lucene.Net.Documents
                 case Field.TermVector.YES:
                 case Field.TermVector.WITH_OFFSETS:
                     return false;
+
                 case Field.TermVector.WITH_POSITIONS:
                 case Field.TermVector.WITH_POSITIONS_OFFSETS:
                     return true;
+
                 default:
                     throw new ArgumentOutOfRangeException("tv", "Invalid value for Field.TermVector");
             }
@@ -597,9 +604,11 @@ namespace Lucene.Net.Documents
                 case Field.TermVector.YES:
                 case Field.TermVector.WITH_POSITIONS:
                     return false;
+
                 case Field.TermVector.WITH_OFFSETS:
                 case Field.TermVector.WITH_POSITIONS_OFFSETS:
                     return true;
+
                 default:
                     throw new ArgumentOutOfRangeException("tv", "Invalid value for Field.TermVector");
             }
@@ -612,7 +621,6 @@ namespace Lucene.Net.Documents
 
         public static Field.Index ToIndex(bool indexed, bool analyzed, bool omitNorms)
         {
-
             // If it is not indexed nothing else matters
             if (!indexed)
             {

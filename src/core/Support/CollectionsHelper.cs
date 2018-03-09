@@ -25,7 +25,7 @@ using System.Collections;
 namespace Lucene.Net.Support
 {
     /// <summary>
-    /// Support class used to handle Hashtable addition, which does a check 
+    /// Support class used to handle Hashtable addition, which does a check
     /// first to make sure the added item is unique in the hash.
     /// </summary>
     public class CollectionsHelper
@@ -37,7 +37,7 @@ namespace Lucene.Net.Support
 
         public static void AddIfNotContains(System.Collections.Hashtable hashtable, System.Object item)
         {
-            // Added lock around check.  Even though the collection should already have 
+            // Added lock around check.  Even though the collection should already have
             // a synchronized wrapper around it, it doesn't prevent this test from having
             // race conditions.  Two threads can (and have in TestIndexReaderReopen) call
             // hashtable.Contains(item) == false at the same time, then both try to add to
@@ -138,8 +138,7 @@ namespace Lucene.Net.Support
             return false;
         }
 
-
-        public static System.String CollectionToString(System.Collections.Generic.IDictionary<string, string> c)
+        public static string CollectionToString(System.Collections.Generic.IDictionary<string, string> c)
         {
             Hashtable t = new Hashtable();
             foreach (string key in c.Keys)
@@ -154,13 +153,12 @@ namespace Lucene.Net.Support
         /// </summary>
         /// <param name="c">The collection to convert to string.</param>
         /// <returns>A string representation of the specified collection.</returns>
-        public static System.String CollectionToString(System.Collections.ICollection c)
+        public static string CollectionToString(System.Collections.ICollection c)
         {
             System.Text.StringBuilder s = new System.Text.StringBuilder();
 
             if (c != null)
             {
-
                 System.Collections.ArrayList l = new System.Collections.ArrayList(c);
 
                 bool isDictionary = (c is System.Collections.BitArray || c is System.Collections.Hashtable || c is System.Collections.IDictionary || c is System.Collections.Specialized.NameValueCollection || (l.Count > 0 && l[0] is System.Collections.DictionaryEntry));
@@ -182,7 +180,6 @@ namespace Lucene.Net.Support
                             s.Append(((System.Collections.Specialized.NameValueCollection)c).GetValues(index)[0]);
                         else
                             s.Append(((System.Collections.DictionaryEntry)l[index]).Value);
-
                     }
                     if (index < l.Count - 1)
                         s.Append(", ");
@@ -215,7 +212,7 @@ namespace Lucene.Net.Support
         /// <param name="l1">First string array list to compare</param>
         /// <param name="l2">Second string array list to compare</param>
         /// <returns>true if the strings are equal in both arrays, false otherwise</returns>
-        public static bool CompareStringArrays(System.String[] l1, System.String[] l2)
+        public static bool CompareStringArrays(string[] l1, string[] l2)
         {
             if (l1.Length != l2.Length)
                 return false;
@@ -284,7 +281,6 @@ namespace Lucene.Net.Support
                 array.SetValue(Temp_Object, index);
         }
 
-
         /// <summary>
         /// Fills the array with an specific value.
         /// </summary>
@@ -300,13 +296,13 @@ namespace Lucene.Net.Support
         /// </summary>
         /// <param name="array1">The array to be compared.</param>
         /// <param name="array2">The array to be compared with.</param>
-        /// <returns>Returns true if the two specified arrays of Objects are equal 
-        /// to one another. The two arrays are considered equal if both arrays 
-        /// contain the same number of elements, and all corresponding pairs of 
-        /// elements in the two arrays are equal. Two objects e1 and e2 are 
-        /// considered equal if (e1==null ? e2==null : e1.equals(e2)). In other 
-        /// words, the two arrays are equal if they contain the same elements in 
-        /// the same order. Also, two array references are considered equal if 
+        /// <returns>Returns true if the two specified arrays of Objects are equal
+        /// to one another. The two arrays are considered equal if both arrays
+        /// contain the same number of elements, and all corresponding pairs of
+        /// elements in the two arrays are equal. Two objects e1 and e2 are
+        /// considered equal if (e1==null ? e2==null : e1.equals(e2)). In other
+        /// words, the two arrays are equal if they contain the same elements in
+        /// the same order. Also, two array references are considered equal if
         /// both are null.</returns>
         public static bool Equals(System.Array array1, System.Array array2)
         {

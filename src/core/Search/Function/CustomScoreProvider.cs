@@ -15,10 +15,6 @@
  * limitations under the License.
  */
 
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 using Lucene.Net.Index;
 
 namespace Lucene.Net.Search.Function
@@ -32,13 +28,12 @@ namespace Lucene.Net.Search.Function
     /// is no longer suitable, as the supplied <c>doc</c> ID is per-segment
     /// and without knowledge of the IndexReader you cannot access the
     /// document or <see cref="FieldCache" />.</para>
-    /// 
+    ///
     /// @lucene.experimental
     /// @since 2.9.2
     /// </summary>
     public class CustomScoreProvider
     {
-
         protected IndexReader reader;
 
         /// <summary>
@@ -50,17 +45,17 @@ namespace Lucene.Net.Search.Function
         }
 
         /// <summary>
-        /// * Compute a custom score by the subQuery score and a number of 
+        /// * Compute a custom score by the subQuery score and a number of
         /// ValueSourceQuery scores.
-        /// <p/> 
-        /// Subclasses can override this method to modify the custom score.  
         /// <p/>
-        /// If your custom scoring is different than the default herein you 
+        /// Subclasses can override this method to modify the custom score.
+        /// <p/>
+        /// If your custom scoring is different than the default herein you
         /// should override at least one of the two customScore() methods.
-        /// If the number of ValueSourceQueries is always &lt; 2 it is 
-        /// sufficient to override the other 
+        /// If the number of ValueSourceQueries is always &lt; 2 it is
+        /// sufficient to override the other
         /// <see cref="CustomScore(int, float, float)">CustomScore()</see>
-        /// method, which is simpler. 
+        /// method, which is simpler.
         /// <p/>
         /// The default computation herein is a multiplication of given scores:
         /// <pre>
@@ -88,16 +83,16 @@ namespace Lucene.Net.Search.Function
             }
             return score;
         }
-                
+
         /// <summary>
         /// Compute a custom score by the subQuery score and the ValueSourceQuery score.
-        /// <p/> 
+        /// <p/>
         /// Subclasses can override this method to modify the custom score.
         /// <p/>
-        /// If your custom scoring is different than the default herein you 
+        /// If your custom scoring is different than the default herein you
         /// should override at least one of the two customScore() methods.
-        /// If the number of ValueSourceQueries is always &lt; 2 it is 
-        /// sufficient to override this customScore() method, which is simpler. 
+        /// If the number of ValueSourceQueries is always &lt; 2 it is
+        /// sufficient to override this customScore() method, which is simpler.
         /// <p/>
         /// The default computation herein is a multiplication of the two scores:
         /// <pre>
@@ -115,7 +110,7 @@ namespace Lucene.Net.Search.Function
 
         /// <summary>
         /// Explain the custom score.
-        /// Whenever overriding <see cref="CustomScore(int, float, float[])" />, 
+        /// Whenever overriding <see cref="CustomScore(int, float, float[])" />,
         /// this method should also be overridden to provide the correct explanation
         /// for the part of the custom scoring.
         /// </summary>
@@ -146,13 +141,13 @@ namespace Lucene.Net.Search.Function
             }
             return exp;
         }
-                
+
         /// <summary>
         /// Explain the custom score.
-        /// Whenever overriding <see cref="CustomScore(int, float, float)" />, 
+        /// Whenever overriding <see cref="CustomScore(int, float, float)" />,
         /// this method should also be overridden to provide the correct explanation
         /// for the part of the custom scoring.
-        /// 
+        ///
         /// </summary>
         /// <param name="doc">doc being explained</param>
         /// <param name="subQueryExpl">explanation for the sub-query part</param>
@@ -170,6 +165,5 @@ namespace Lucene.Net.Search.Function
             exp.AddDetail(valSrcExpl);
             return exp;
         }
-
     }
 }

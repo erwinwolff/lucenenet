@@ -33,20 +33,20 @@ namespace Lucene.Net.Support
         /// Min radix value.
         /// </summary>
         public const int MIN_RADIX = 2;
+
         /// <summary>
         /// Max radix value.
         /// </summary>
         public const int MAX_RADIX = 36;
 
-        private const System.String digits = "0123456789abcdefghijklmnopqrstuvwxyz";
-
+        private const string digits = "0123456789abcdefghijklmnopqrstuvwxyz";
 
         /// <summary>
-        /// Converts a number to System.String.
+        /// Converts a number to string.
         /// </summary>
         /// <param name="number"></param>
         /// <returns></returns>
-        public static System.String ToString(long number)
+        public static string ToString(long number)
         {
             System.Text.StringBuilder s = new System.Text.StringBuilder();
 
@@ -73,13 +73,12 @@ namespace Lucene.Net.Support
             return s.ToString();
         }
 
-
         /// <summary>
-        /// Converts a number to System.String.
+        /// Converts a number to string.
         /// </summary>
         /// <param name="f"></param>
         /// <returns></returns>
-        public static System.String ToString(float f)
+        public static string ToString(float f)
         {
             if (((float)(int)f) == f)
             {
@@ -92,12 +91,12 @@ namespace Lucene.Net.Support
         }
 
         /// <summary>
-        /// Converts a number to System.String in the specified radix.
+        /// Converts a number to string in the specified radix.
         /// </summary>
         /// <param name="i">A number to be converted.</param>
         /// <param name="radix">A radix.</param>
-        /// <returns>A System.String representation of the number in the specified redix.</returns>
-        public static System.String ToString(long i, int radix)
+        /// <returns>A string representation of the number in the specified redix.</returns>
+        public static string ToString(long i, int radix)
         {
             if (radix < MIN_RADIX || radix > MAX_RADIX)
                 radix = 10;
@@ -123,16 +122,16 @@ namespace Lucene.Net.Support
                 buf[--charPos] = '-';
             }
 
-            return new System.String(buf, charPos, (65 - charPos));
+            return new string(buf, charPos, (65 - charPos));
         }
 
         /// <summary>
         /// Parses a number in the specified radix.
         /// </summary>
-        /// <param name="s">An input System.String.</param>
+        /// <param name="s">An input string.</param>
         /// <param name="radix">A radix.</param>
         /// <returns>The parsed number in the specified radix.</returns>
-        public static long Parse(System.String s, int radix)
+        public static long Parse(string s, int radix)
         {
             if (s == null)
             {
@@ -179,7 +178,6 @@ namespace Lucene.Net.Support
             return (int)(((uint)number) >> bits);
         }
 
-
         /// <summary>
         /// Performs an unsigned bitwise right shift with the specified number
         /// </summary>
@@ -191,10 +189,9 @@ namespace Lucene.Net.Support
             return (long)(((ulong)number) >> bits);
         }
 
-
         /// <summary>
-        /// Returns the index of the first bit that is set to true that occurs 
-        /// on or after the specified starting index. If no such bit exists 
+        /// Returns the index of the first bit that is set to true that occurs
+        /// on or after the specified starting index. If no such bit exists
         /// then -1 is returned.
         /// </summary>
         /// <param name="bits">The BitArray object.</param>
@@ -213,11 +210,11 @@ namespace Lucene.Net.Support
         }
 
         /// <summary>
-        /// Converts a System.String number to long.
+        /// Converts a string number to long.
         /// </summary>
         /// <param name="s"></param>
         /// <returns></returns>
-        public static long ToInt64(System.String s)
+        public static long ToInt64(string s)
         {
             long number = 0;
             long factor;

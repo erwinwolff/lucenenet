@@ -1,13 +1,13 @@
-/* 
+/*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,17 +17,15 @@
 
 using System;
 
-using System.Runtime.InteropServices;
-
 namespace Lucene.Net.Documents
 {
-	/// <summary>Provides information about what should be done with this Field</summary>
+    /// <summary>Provides information about what should be done with this Field</summary>
     public enum FieldSelectorResult
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
-        INVALID, // TODO: This is kinda a kludgy workaround for the fact enums can't be null 
+        INVALID, // TODO: This is kinda a kludgy workaround for the fact enums can't be null
 
         /// <summary> Load this <see cref="Field" /> every time the <see cref="Document" /> is loaded, reading in the data as it is encountered.
         /// <see cref="Document.GetField(String)" /> and <see cref="Document.GetFieldable(String)" /> should not return null.
@@ -65,7 +63,7 @@ namespace Lucene.Net.Documents
         /// </summary>
         SIZE,
 
-        /// <summary>Expert: Like <see cref="SIZE" /> but immediately break from the field loading loop, i.e., stop loading further fields, after the size is loaded </summary>         
+        /// <summary>Expert: Like <see cref="SIZE" /> but immediately break from the field loading loop, i.e., stop loading further fields, after the size is loaded </summary>
         SIZE_AND_BREAK
     }
 }

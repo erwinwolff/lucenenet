@@ -1,27 +1,4 @@
-﻿/* 
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
- * 
- * http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-
-#if NET35
+﻿#if NET35
 
 namespace Lucene.Net.Support.Compatibility
 {
@@ -36,7 +13,7 @@ namespace Lucene.Net.Support.Compatibility
     public class ConcurrentDictionary<TKey, TValue> : IDictionary<TKey, TValue>
     {
         private readonly object _lockObj = new object();
-        private readonly Dictionary<TKey, TValue> _dictInst; 
+        private readonly Dictionary<TKey, TValue> _dictInst;
 
         public ConcurrentDictionary()
             : this(16)
@@ -60,7 +37,7 @@ namespace Lucene.Net.Support.Compatibility
             }
         }
 
-        #region Concurrent Dictionary Special Methods
+#region Concurrent Dictionary Special Methods
 
         public TValue AddOrUpdate(TKey key, Func<TKey, TValue> addValueFactory, Func<TKey, TValue, TValue> updateValueFactory)
         {
@@ -166,9 +143,9 @@ namespace Lucene.Net.Support.Compatibility
             }
         }
 
-        #endregion
+#endregion Concurrent Dictionary Special Methods
 
-        #region IDictionary Methods
+#region IDictionary Methods
 
         // .NET4 ConcurrentDictionary returns an enumerator that can enumerate even
         // if the collection is modified.  We can't do that, so create a copy (expensive)
@@ -200,7 +177,7 @@ namespace Lucene.Net.Support.Compatibility
                 _dictInst.Clear();
             }
         }
-        
+
         public int Count
         {
             get
@@ -248,9 +225,9 @@ namespace Lucene.Net.Support.Compatibility
             get { return _dictInst.Values.ToArray(); }
         }
 
-        #endregion
+#endregion IDictionary Methods
 
-        #region Explicit Interface Definitions
+#region Explicit Interface Definitions
 
         bool ICollection<KeyValuePair<TKey, TValue>>.IsReadOnly
         {
@@ -305,7 +282,7 @@ namespace Lucene.Net.Support.Compatibility
             }
         }
 
-        #endregion
+#endregion Explicit Interface Definitions
     }
 }
 

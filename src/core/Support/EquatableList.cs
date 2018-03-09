@@ -35,8 +35,8 @@ namespace Lucene.Net.Support
                                     IEquatable<System.Collections.Generic.IEnumerable<T>>,
                                     ICloneable
     {
-        /// <summary>Initializes a new instance of the 
-        /// <see cref="EquatableList{T}"/> class that is empty and has the 
+        /// <summary>Initializes a new instance of the
+        /// <see cref="EquatableList{T}"/> class that is empty and has the
         /// default initial capacity.</summary>
         public EquatableList() : base() { }
 
@@ -46,7 +46,7 @@ namespace Lucene.Net.Support
         /// <param name="collection">The collection whose elements are copied to the new list.</param>
         public EquatableList(System.Collections.Generic.IEnumerable<T> collection) : base(collection) { }
 
-        /// <summary>Initializes a new instance of the <see cref="EquatableList{T}"/> 
+        /// <summary>Initializes a new instance of the <see cref="EquatableList{T}"/>
         /// class that is empty and has the specified initial capacity.</summary>
         /// <param name="capacity">The number of elements that the new list can initially store.</param>
         public EquatableList(int capacity) : base(capacity) { }
@@ -204,18 +204,20 @@ namespace Lucene.Net.Support
         }
 
         #region IEquatable<IEnumerable<T>> Members
+
         /// <summary>Compares this sequence to another <see cref="System.Collections.Generic.IEnumerable{T}"/>
         /// implementation, returning true if they are equal, false otherwise.</summary>
         /// <param name="other">The other <see cref="System.Collections.Generic.IEnumerable{T}"/> implementation
         /// to compare against.</param>
-        /// <returns>True if the sequence in <paramref name="other"/> 
+        /// <returns>True if the sequence in <paramref name="other"/>
         /// is the same as this one.</returns>
         public bool Equals(System.Collections.Generic.IEnumerable<T> other)
         {
             // Compare to the other sequence.  If 0, then equal.
             return Equals(this, other);
         }
-        #endregion
+
+        #endregion IEquatable<IEnumerable<T>> Members
 
         /// <summary>Compares this object for equality against other.</summary>
         /// <param name="obj">The other object to compare this object against.</param>
@@ -238,6 +240,7 @@ namespace Lucene.Net.Support
 #if __MonoCS__
         public static int GetHashCode<T>(System.Collections.Generic.IEnumerable<T> source)
 #else
+
         /// <summary>Gets the hash code for the list.</summary>
         /// <param name="source">The <see cref="System.Collections.Generic.IEnumerable{T}"/>
         /// implementation which will have all the contents hashed.</param>
@@ -334,6 +337,6 @@ namespace Lucene.Net.Support
             return new EquatableList<T>(this);
         }
 
-        #endregion
+        #endregion ICloneable Members
     }
 }

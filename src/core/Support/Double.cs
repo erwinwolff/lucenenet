@@ -25,11 +25,11 @@ using System.Globalization;
 namespace Lucene.Net.Support
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public class Double
     {
-        public static System.Double Parse(System.String s)
+        public static System.Double Parse(string s)
         {
             try
             {

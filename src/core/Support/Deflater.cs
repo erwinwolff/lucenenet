@@ -25,17 +25,21 @@ namespace Lucene.Net.Support
 {
     public class Deflater
     {
-        delegate void SetLevelDelegate(int level);
-        delegate void SetInputDelegate(byte[] input, int offset, int count);
-        delegate void FinishDelegate();
-        delegate bool GetIsFinishedDelegate();
-        delegate int DeflateDelegate(byte[] output);
+        private delegate void SetLevelDelegate(int level);
 
-        SetLevelDelegate setLevelMethod;
-        SetInputDelegate setInputMethod;
-        FinishDelegate finishMethod;
-        GetIsFinishedDelegate getIsFinishedMethod;
-        DeflateDelegate deflateMethod;
+        private delegate void SetInputDelegate(byte[] input, int offset, int count);
+
+        private delegate void FinishDelegate();
+
+        private delegate bool GetIsFinishedDelegate();
+
+        private delegate int DeflateDelegate(byte[] output);
+
+        private SetLevelDelegate setLevelMethod;
+        private SetInputDelegate setInputMethod;
+        private FinishDelegate finishMethod;
+        private GetIsFinishedDelegate getIsFinishedMethod;
+        private DeflateDelegate deflateMethod;
 
         public const int BEST_COMPRESSION = 9;
 

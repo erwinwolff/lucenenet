@@ -25,18 +25,18 @@ using System.Globalization;
 namespace Lucene.Net.Support
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public class Single
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="s"></param>
         /// <param name="style"></param>
         /// <param name="provider"></param>
         /// <returns></returns>
-        public static System.Single Parse(System.String s, System.Globalization.NumberStyles style, System.IFormatProvider provider)
+        public static System.Single Parse(string s, System.Globalization.NumberStyles style, System.IFormatProvider provider)
         {
             if (s.EndsWith("f") || s.EndsWith("F"))
                 return System.Single.Parse(s.Substring(0, s.Length - 1), style, provider);
@@ -45,12 +45,12 @@ namespace Lucene.Net.Support
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="s"></param>
         /// <param name="provider"></param>
         /// <returns></returns>
-        public static System.Single Parse(System.String s, System.IFormatProvider provider)
+        public static System.Single Parse(string s, System.IFormatProvider provider)
         {
             if (s.EndsWith("f") || s.EndsWith("F"))
                 return System.Single.Parse(s.Substring(0, s.Length - 1), provider);
@@ -59,12 +59,12 @@ namespace Lucene.Net.Support
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="s"></param>
         /// <param name="style"></param>
         /// <returns></returns>
-        public static System.Single Parse(System.String s, System.Globalization.NumberStyles style)
+        public static System.Single Parse(string s, System.Globalization.NumberStyles style)
         {
             if (s.EndsWith("f") || s.EndsWith("F"))
                 return System.Single.Parse(s.Substring(0, s.Length - 1), style);
@@ -73,11 +73,11 @@ namespace Lucene.Net.Support
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="s"></param>
         /// <returns></returns>
-        public static System.Single Parse(System.String s)
+        public static System.Single Parse(string s)
         {
             if (s.EndsWith("f") || s.EndsWith("F"))
                 return System.Single.Parse(s.Substring(0, s.Length - 1).Replace(".", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator));
@@ -85,7 +85,7 @@ namespace Lucene.Net.Support
                 return System.Single.Parse(s.Replace(".", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator));
         }
 
-        public static bool TryParse(System.String s, out float f)
+        public static bool TryParse(string s, out float f)
         {
             bool ok = false;
 
@@ -98,7 +98,7 @@ namespace Lucene.Net.Support
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="f"></param>
         /// <returns></returns>
@@ -108,7 +108,7 @@ namespace Lucene.Net.Support
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="f"></param>
         /// <param name="format"></param>

@@ -15,3 +15,7 @@ build/artifacts
 build/bin
 _ReSharper*
 *.orig
+*.lock
+*.ide
+*.ide-shm
+*.ide-wal

@@ -1,13 +1,13 @@
-/* 
+/*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,25 +15,21 @@
  * limitations under the License.
  */
 
-using System;
-
 namespace Lucene.Net.Index
 {
-	
-	/// <summary>Abstract API that consumes terms, doc, freq, prox and
-	/// payloads postings.  Concrete implementations of this
-	/// actually do "something" with the postings (write it into
-	/// the index in a specific format).
-	/// 
-	/// NOTE: this API is experimental and will likely change
-	/// </summary>
-	abstract class FormatPostingsFieldsConsumer
-	{
-		
-		/// <summary>Add a new field </summary>
-		internal abstract FormatPostingsTermsConsumer AddField(FieldInfo field);
-		
-		/// <summary>Called when we are done adding everything. </summary>
-		internal abstract void  Finish();
-	}
+    /// <summary>Abstract API that consumes terms, doc, freq, prox and
+    /// payloads postings.  Concrete implementations of this
+    /// actually do "something" with the postings (write it into
+    /// the index in a specific format).
+    ///
+    /// NOTE: this API is experimental and will likely change
+    /// </summary>
+    internal abstract class FormatPostingsFieldsConsumer
+    {
+        /// <summary>Add a new field </summary>
+        internal abstract FormatPostingsTermsConsumer AddField(FieldInfo field);
+
+        /// <summary>Called when we are done adding everything. </summary>
+        internal abstract void Finish();
+    }
 }

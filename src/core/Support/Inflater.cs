@@ -25,13 +25,15 @@ namespace Lucene.Net.Support
 {
     public class Inflater
     {
-        delegate void SetInputDelegate(byte[] buffer);
-        delegate bool GetIsFinishedDelegate();
-        delegate int InflateDelegate(byte[] buffer);
+        private delegate void SetInputDelegate(byte[] buffer);
 
-        SetInputDelegate setInputMethod;
-        GetIsFinishedDelegate getIsFinishedMethod;
-        InflateDelegate inflateMethod;
+        private delegate bool GetIsFinishedDelegate();
+
+        private delegate int InflateDelegate(byte[] buffer);
+
+        private SetInputDelegate setInputMethod;
+        private GetIsFinishedDelegate getIsFinishedMethod;
+        private InflateDelegate inflateMethod;
 
         internal Inflater(object inflaterInstance)
         {
