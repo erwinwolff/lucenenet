@@ -20,6 +20,7 @@
 
 using Lucene.Net.Support;
 using System;
+using System.Text;
 
 namespace Lucene.Net.QueryParsers
 {
@@ -51,7 +52,7 @@ namespace Lucene.Net.QueryParsers
                 {
                     return base.Message;
                 }
-                System.Text.StringBuilder expected = new System.Text.StringBuilder();
+                StringBuilder expected = new StringBuilder();
                 int maxSize = 0;
                 for (int i = 0; i < expectedTokenSequences.Length; i++)
                 {
@@ -179,7 +180,7 @@ namespace Lucene.Net.QueryParsers
         /// </summary>
         protected internal virtual string Add_escapes(string str)
         {
-            System.Text.StringBuilder retval = new System.Text.StringBuilder();
+            StringBuilder retval = new StringBuilder();
             char ch;
             for (int i = 0; i < str.Length; i++)
             {

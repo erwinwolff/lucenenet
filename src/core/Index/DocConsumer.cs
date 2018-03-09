@@ -15,13 +15,15 @@
  * limitations under the License.
  */
 
+using System.Collections.Generic;
+
 namespace Lucene.Net.Index
 {
     internal abstract class DocConsumer
     {
         public abstract DocConsumerPerThread AddThread(DocumentsWriterThreadState perThread);
 
-        public abstract void Flush(System.Collections.Generic.ICollection<DocConsumerPerThread> threads, SegmentWriteState state);
+        public abstract void Flush(ICollection<DocConsumerPerThread> threads, SegmentWriteState state);
 
         public abstract void CloseDocStore(SegmentWriteState state);
 

@@ -16,6 +16,7 @@
  */
 
 using Lucene.Net.Support;
+using System.Collections.Generic;
 using IndexReader = Lucene.Net.Index.IndexReader;
 
 namespace Lucene.Net.Util
@@ -28,7 +29,7 @@ namespace Lucene.Net.Util
         /// <summary>Gathers sub-readers from reader into a List.</summary>
         /// <param name="allSubReaders"></param>
         /// <param name="reader"></param>
-        public static void GatherSubReaders(System.Collections.Generic.IList<IndexReader> allSubReaders, IndexReader reader)
+        public static void GatherSubReaders(IList<IndexReader> allSubReaders, IndexReader reader)
         {
             IndexReader[] subReaders = reader.GetSequentialSubReaders();
             if (subReaders == null)
@@ -56,7 +57,7 @@ namespace Lucene.Net.Util
         /// </returns>
         public static IndexReader SubReader(int doc, IndexReader reader)
         {
-            var subReadersList = new System.Collections.Generic.List<IndexReader>();
+            var subReadersList = new List<IndexReader>();
             ReaderUtil.GatherSubReaders(subReadersList, reader);
             IndexReader[] subReaders = subReadersList.ToArray();
             int[] docStarts = new int[subReaders.Length];
@@ -80,7 +81,7 @@ namespace Lucene.Net.Util
         /// </returns>
         public static IndexReader SubReader(IndexReader reader, int subIndex)
         {
-            var subReadersList = new System.Collections.Generic.List<IndexReader>();
+            var subReadersList = new List<IndexReader>();
             ReaderUtil.GatherSubReaders(subReadersList, reader);
             IndexReader[] subReaders = subReadersList.ToArray();
             return subReaders[subIndex];

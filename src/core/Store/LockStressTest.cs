@@ -55,10 +55,10 @@ namespace Lucene.Net.Store
             string lockDirName = args[4];
             int sleepTimeMS = int.Parse(args[5]);
 
-            System.Type c;
+            Type c;
             try
             {
-                c = System.Type.GetType(lockFactoryClassName);
+                c = Type.GetType(lockFactoryClassName);
             }
             catch (System.Exception)
             {

@@ -17,6 +17,8 @@
 
 using Lucene.Net.Support;
 using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Lucene.Net.Store
 {
@@ -138,7 +140,7 @@ namespace Lucene.Net.Store
             int length = ReadVInt();
             byte[] bytes = new byte[length];
             ReadBytes(bytes, 0, length);
-            return System.Text.Encoding.UTF8.GetString(bytes, 0, length);
+            return Encoding.UTF8.GetString(bytes, 0, length);
         }
 
         private string ReadModifiedUTF8String()
@@ -270,7 +272,7 @@ namespace Lucene.Net.Store
         }
 
         // returns Map<String, String>
-        public virtual System.Collections.Generic.IDictionary<string, string> ReadStringStringMap()
+        public virtual IDictionary<string, string> ReadStringStringMap()
         {
             var map = new HashMap<string, string>();
             int count = ReadInt();

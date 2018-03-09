@@ -19,11 +19,12 @@ using Lucene.Net.Analysis.Tokenattributes;
 using Lucene.Net.Index;
 using Lucene.Net.Support;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Analyzer = Lucene.Net.Analysis.Analyzer;
 using TokenStream = Lucene.Net.Analysis.TokenStream;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Lucene.Net.Search
 {
@@ -118,7 +119,7 @@ namespace Lucene.Net.Search
 
         public override string ToString()
         {
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            StringBuilder sb = new StringBuilder();
             sb.Append('{');
             for (int i = 0; i < terms.Length; i++)
             {

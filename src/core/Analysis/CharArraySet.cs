@@ -30,9 +30,9 @@ namespace Lucene.Net.Analysis
     /// is in the set without the necessity of converting it
     /// to a String first.
     /// <p/>
-    /// <em>Please note:</em> This class implements <see cref="System.Collections.Generic.ISet{T}"/> but
+    /// <em>Please note:</em> This class implements <see cref="ISet{T}"/> but
     /// does not behave like it should in all cases. The generic type is
-    /// <see cref="System.Collections.Generic.ICollection{T}"/>, because you can add any object to it,
+    /// <see cref="ICollection{T}"/>, because you can add any object to it,
     /// that has a string representation. The add methods will use
     /// <see cref="object.ToString()"/> and store the result using a <see cref="char"/>
     /// buffer. The same behaviour have the <see cref="Contains(object)"/> methods.
@@ -40,7 +40,7 @@ namespace Lucene.Net.Analysis
     /// For type safety also {@link #stringIterator()} is provided.
     /// </summary>
     // TODO: java uses wildcards, .net doesn't have this, easiest way is to
-    //       make the entire class generic.  Ultimately, though, since this
+    //       make the entire class   Ultimately, though, since this
     //       works with strings, I can't think of a reason not to just declare
     //       this as an ISet<string>.
     public class CharArraySet : ISet<string>

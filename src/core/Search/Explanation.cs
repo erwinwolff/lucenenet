@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Lucene.Net.Search
 {
@@ -97,7 +98,7 @@ namespace Lucene.Net.Search
 
         protected internal virtual string ToString(int depth)
         {
-            System.Text.StringBuilder buffer = new System.Text.StringBuilder();
+            StringBuilder buffer = new StringBuilder();
             for (int i = 0; i < depth; i++)
             {
                 buffer.Append("  ");
@@ -120,7 +121,7 @@ namespace Lucene.Net.Search
         /// <summary>Render an explanation as HTML. </summary>
         public virtual string ToHtml()
         {
-            System.Text.StringBuilder buffer = new System.Text.StringBuilder();
+            StringBuilder buffer = new StringBuilder();
             buffer.Append("<list>\n");
 
             buffer.Append("<item>");

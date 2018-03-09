@@ -19,6 +19,7 @@ using Lucene.Net.Index;
 using Lucene.Net.Support;
 using System;
 using System.Collections.Generic;
+using System.Text;
 using IndexReader = Lucene.Net.Index.IndexReader;
 using ToStringUtils = Lucene.Net.Util.ToStringUtils;
 
@@ -93,7 +94,7 @@ namespace Lucene.Net.Search.Spans
 
             public override ICollection<byte[]> GetPayload()
             {
-                System.Collections.Generic.ICollection<byte[]> result = null;
+                ICollection<byte[]> result = null;
                 if (spans.IsPayloadAvailable())
                 {
                     result = spans.GetPayload();
@@ -145,7 +146,7 @@ namespace Lucene.Net.Search.Spans
 
         public override string ToString(string field)
         {
-            System.Text.StringBuilder buffer = new System.Text.StringBuilder();
+            StringBuilder buffer = new StringBuilder();
             buffer.Append("spanFirst(");
             buffer.Append(match.ToString(field));
             buffer.Append(", ");
@@ -162,7 +163,7 @@ namespace Lucene.Net.Search.Spans
             return spanFirstQuery;
         }
 
-        public override void ExtractTerms(System.Collections.Generic.ISet<Term> terms)
+        public override void ExtractTerms(ISet<Term> terms)
         {
             match.ExtractTerms(terms);
         }

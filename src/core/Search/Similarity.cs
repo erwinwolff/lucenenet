@@ -18,6 +18,7 @@
 using Lucene.Net.Documents;
 using System;
 using System.Collections.Generic;
+using System.Text;
 using FieldInvertState = Lucene.Net.Index.FieldInvertState;
 using IDFExplanation = Lucene.Net.Search.Explanation.IDFExplanation;
 using SmallFloat = Lucene.Net.Util.SmallFloat;
@@ -342,12 +343,12 @@ namespace Lucene.Net.Search
         [Serializable]
         private class AnonymousClassIDFExplanation3 : IDFExplanation
         {
-            public AnonymousClassIDFExplanation3(float fIdf, System.Text.StringBuilder exp, Similarity enclosingInstance)
+            public AnonymousClassIDFExplanation3(float fIdf, StringBuilder exp, Similarity enclosingInstance)
             {
                 InitBlock(fIdf, exp, enclosingInstance);
             }
 
-            private void InitBlock(float fIdf, System.Text.StringBuilder exp, Similarity enclosingInstance)
+            private void InitBlock(float fIdf, StringBuilder exp, Similarity enclosingInstance)
             {
                 this.fIdf = fIdf;
                 this.exp = exp;
@@ -355,7 +356,7 @@ namespace Lucene.Net.Search
             }
 
             private float fIdf;
-            private System.Text.StringBuilder exp;
+            private StringBuilder exp;
             private Similarity enclosingInstance;
 
             public Similarity Enclosing_Instance
@@ -615,7 +616,7 @@ namespace Lucene.Net.Search
         {
             int max = searcher.MaxDoc;
             float idf2 = 0.0f;
-            System.Text.StringBuilder exp = new System.Text.StringBuilder();
+            StringBuilder exp = new StringBuilder();
             foreach (Term term in terms)
             {
                 int df = searcher.DocFreq(term);

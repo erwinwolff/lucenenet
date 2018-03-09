@@ -17,6 +17,7 @@
 
 using Lucene.Net.Support;
 using System;
+using System.Collections.Generic;
 
 // {{Aroush-2.9}} Port issue?  Both of those were treated as: MemoryStream
 //using CharBuffer = java.nio.CharBuffer;
@@ -67,7 +68,7 @@ namespace Lucene.Net.Util
         /// <returns> The number of chars required to encode the given byte sequence
         /// </returns>
         /// <throws>  IllegalArgumentException If the given ByteBuffer is not backed by an array </throws>
-        public static int GetEncodedLength(System.Collections.Generic.List<byte> original)
+        public static int GetEncodedLength(List<byte> original)
         {
             return (original.Count == 0) ? 0 : ((original.Count * 8 + 14) / 15) + 1;
         }
@@ -80,7 +81,7 @@ namespace Lucene.Net.Util
         /// <returns> The number of bytes required to decode the given char sequence
         /// </returns>
         /// <throws>  IllegalArgumentException If the given CharBuffer is not backed by an array </throws>
-        public static int GetDecodedLength(System.Collections.Generic.List<char> encoded)
+        public static int GetDecodedLength(List<char> encoded)
         {
             int numChars = encoded.Count - 1;
             if (numChars <= 0)
@@ -97,7 +98,7 @@ namespace Lucene.Net.Util
 
         /// <summary> Encodes the input byte sequence into the output char sequence.  Before
         /// calling this method, ensure that the output CharBuffer has sufficient
-        /// capacity by calling <see cref="GetEncodedLength(System.Collections.Generic.List{byte})" />.
+        /// capacity by calling <see cref="GetEncodedLength(List{byte})" />.
         ///
         /// </summary>
         /// <param name="input">The byte sequence to encode
@@ -108,7 +109,7 @@ namespace Lucene.Net.Util
         /// <throws>  IllegalArgumentException If either the input or the output buffer </throws>
         /// <summary>  is not backed by an array
         /// </summary>
-        public static void Encode(System.Collections.Generic.List<byte> input, System.Collections.Generic.List<char> output)
+        public static void Encode(List<byte> input, List<char> output)
         {
             int outputLength = GetEncodedLength(input);
             // only adjust capacity if needed
@@ -177,7 +178,7 @@ namespace Lucene.Net.Util
 
         /// <summary> Decodes the input char sequence into the output byte sequence.  Before
         /// calling this method, ensure that the output ByteBuffer has sufficient
-        /// capacity by calling <see cref="GetDecodedLength(System.Collections.Generic.List{char})" />.
+        /// capacity by calling <see cref="GetDecodedLength(List{char})" />.
         ///
         /// </summary>
         /// <param name="input">The char sequence to decode
@@ -188,7 +189,7 @@ namespace Lucene.Net.Util
         /// <throws>  IllegalArgumentException If either the input or the output buffer </throws>
         /// <summary>  is not backed by an array
         /// </summary>
-        public static void Decode(System.Collections.Generic.List<char> input, System.Collections.Generic.List<byte> output)
+        public static void Decode(List<char> input, List<byte> output)
         {
             int numOutputBytes = GetDecodedLength(input);
             if (output.Capacity < numOutputBytes)
@@ -270,8 +271,8 @@ namespace Lucene.Net.Util
         }
 
         /// <summary> Decodes the given char sequence, which must have been encoded by
-        /// <see cref="Encode(System.Collections.Generic.List{byte})" /> or
-        /// <see cref="Encode(System.Collections.Generic.List{byte}, System.Collections.Generic.List{char})" />.
+        /// <see cref="Encode(List{byte})" /> or
+        /// <see cref="Encode(List{byte}, List{char})" />.
         ///
         /// </summary>
         /// <param name="input">The char sequence to decode
@@ -282,10 +283,10 @@ namespace Lucene.Net.Util
         /// <throws>  IllegalArgumentException If the input buffer is not backed by an </throws>
         /// <summary>  array
         /// </summary>
-        public static System.Collections.Generic.List<byte> Decode(System.Collections.Generic.List<char> input)
+        public static List<byte> Decode(List<char> input)
         {
-            System.Collections.Generic.List<byte> output =
-                new System.Collections.Generic.List<byte>(new byte[GetDecodedLength(input)]);
+            List<byte> output =
+                new List<byte>(new byte[GetDecodedLength(input)]);
             Decode(input, output);
             return output;
         }
@@ -301,10 +302,10 @@ namespace Lucene.Net.Util
         /// <throws>  IllegalArgumentException If the input buffer is not backed by an </throws>
         /// <summary>  array
         /// </summary>
-        public static System.Collections.Generic.List<char> Encode(System.Collections.Generic.List<byte> input)
+        public static List<char> Encode(List<byte> input)
         {
-            System.Collections.Generic.List<char> output =
-                new System.Collections.Generic.List<char>(new char[GetEncodedLength(input)]);
+            List<char> output =
+                new List<char>(new char[GetEncodedLength(input)]);
             Encode(input, output);
             return output;
         }

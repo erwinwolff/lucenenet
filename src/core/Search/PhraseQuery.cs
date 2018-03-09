@@ -17,6 +17,8 @@
 
 using Lucene.Net.Support;
 using System;
+using System.Collections.Generic;
+using System.Text;
 using IDFExplanation = Lucene.Net.Search.Explanation.IDFExplanation;
 using IndexReader = Lucene.Net.Index.IndexReader;
 using Term = Lucene.Net.Index.Term;
@@ -203,8 +205,8 @@ namespace Lucene.Net.Search
                 Explanation result = new Explanation();
                 result.Description = "weight(" + Query + " in " + doc + "), product of:";
 
-                System.Text.StringBuilder docFreqs = new System.Text.StringBuilder();
-                System.Text.StringBuilder query = new System.Text.StringBuilder();
+                StringBuilder docFreqs = new StringBuilder();
+                StringBuilder query = new StringBuilder();
                 query.Append('\"');
                 docFreqs.Append(idfExp.Explain());
                 for (int i = 0; i < Enclosing_Instance.terms.Count; i++)
@@ -290,9 +292,9 @@ namespace Lucene.Net.Search
             return new PhraseWeight(this, searcher);
         }
 
-        /// <seealso cref="Lucene.Net.Search.Query.ExtractTerms(System.Collections.Generic.ISet{Term})">
+        /// <seealso cref="Lucene.Net.Search.Query.ExtractTerms(ISet{Term})">
         /// </seealso>
-        public override void ExtractTerms(System.Collections.Generic.ISet<Term> queryTerms)
+        public override void ExtractTerms(ISet<Term> queryTerms)
         {
             queryTerms.UnionWith(terms);
         }
@@ -300,7 +302,7 @@ namespace Lucene.Net.Search
         /// <summary>Prints a user-readable version of this query. </summary>
         public override string ToString(string f)
         {
-            System.Text.StringBuilder buffer = new System.Text.StringBuilder();
+            StringBuilder buffer = new StringBuilder();
             if (field != null && !field.Equals(f))
             {
                 buffer.Append(field);

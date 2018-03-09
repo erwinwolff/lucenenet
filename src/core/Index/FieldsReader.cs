@@ -20,6 +20,7 @@ using Lucene.Net.Support;
 using Lucene.Net.Util;
 using System;
 using System.IO;
+using System.Text;
 using AlreadyClosedException = Lucene.Net.Store.AlreadyClosedException;
 using BufferedIndexInput = Lucene.Net.Store.BufferedIndexInput;
 using Directory = Lucene.Net.Store.Directory;
@@ -398,7 +399,7 @@ namespace Lucene.Net.Index
 
                     var b = new byte[toRead];
                     fieldsStream.ReadBytes(b, 0, b.Length);
-                    f = new Field(fi.name, false, System.Text.Encoding.GetEncoding("UTF-8").GetString(Uncompress(b)), store, index,
+                    f = new Field(fi.name, false, Encoding.GetEncoding("UTF-8").GetString(Uncompress(b)), store, index,
                                   termVector)
                     { OmitTermFreqAndPositions = fi.omitTermFreqAndPositions, OmitNorms = fi.omitNorms };
                 }
@@ -530,7 +531,7 @@ namespace Lucene.Net.Index
                                 var b = new byte[toRead];
                                 localFieldsStream.ReadBytes(b, 0, b.Length);
                                 fieldsData =
-                                    System.Text.Encoding.GetEncoding("UTF-8").GetString(Enclosing_Instance.Uncompress(b));
+                                    Encoding.GetEncoding("UTF-8").GetString(Enclosing_Instance.Uncompress(b));
                             }
                             else
                             {
@@ -538,7 +539,7 @@ namespace Lucene.Net.Index
                                 {
                                     var bytes = new byte[toRead];
                                     localFieldsStream.ReadBytes(bytes, 0, toRead);
-                                    fieldsData = System.Text.Encoding.GetEncoding("UTF-8").GetString(bytes);
+                                    fieldsData = Encoding.GetEncoding("UTF-8").GetString(bytes);
                                 }
                                 else
                                 {

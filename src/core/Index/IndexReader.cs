@@ -531,9 +531,9 @@ namespace Lucene.Net.Index
         }
 
         /// <summary> Reads commitUserData, previously passed to
-        /// <see cref="IndexWriter.Commit(System.Collections.Generic.IDictionary{string, string})" />,
+        /// <see cref="IndexWriter.Commit(IDictionary{string, string})" />,
 		/// from current index segments file.  This will return null if
-        /// <see cref="IndexWriter.Commit(System.Collections.Generic.IDictionary{string, string})" />
+        /// <see cref="IndexWriter.Commit(IDictionary{string, string})" />
 		/// has never been called for this index.
 		/// </summary>
 		/// <param name="directory">where the index resides.
@@ -546,7 +546,7 @@ namespace Lucene.Net.Index
 		/// </summary>
 		/// <seealso cref="GetCommitUserData(Store.Directory)">
 		/// </seealso>
-        public static System.Collections.Generic.IDictionary<string, string> GetCommitUserData(Store.Directory directory)
+        public static IDictionary<string, string> GetCommitUserData(Store.Directory directory)
         {
             return SegmentInfos.ReadCurrentUserData(directory);
         }
@@ -583,9 +583,9 @@ namespace Lucene.Net.Index
         }
 
         /// <summary> Retrieve the String userData optionally passed to
-        /// <see cref="IndexWriter.Commit(System.Collections.Generic.IDictionary{string, string})" />.
+        /// <see cref="IndexWriter.Commit(IDictionary{string, string})" />.
         /// This will return null if
-        /// <see cref="IndexWriter.Commit(System.Collections.Generic.IDictionary{string, string})" />
+        /// <see cref="IndexWriter.Commit(IDictionary{string, string})" />
         /// has never been called for this index.
         /// </summary>
         /// <seealso cref="GetCommitUserData(Store.Directory)">
@@ -1310,7 +1310,7 @@ namespace Lucene.Net.Index
         /// progress while this method is running, that commit
         /// may or may not be returned array.
         /// </summary>
-        public static System.Collections.Generic.ICollection<IndexCommit> ListCommits(Store.Directory dir)
+        public static ICollection<IndexCommit> ListCommits(Store.Directory dir)
         {
             return DirectoryReader.ListCommits(dir);
         }

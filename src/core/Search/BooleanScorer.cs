@@ -16,6 +16,8 @@
  */
 
 using System;
+using System.Collections.Generic;
+using System.Text;
 using IndexReader = Lucene.Net.Index.IndexReader;
 
 namespace Lucene.Net.Search
@@ -225,7 +227,7 @@ namespace Lucene.Net.Search
         private int doc = -1;
 
         public /*internal*/ BooleanScorer(Similarity similarity, int minNrShouldMatch,
-            System.Collections.Generic.List<Scorer> optionalScorers, System.Collections.Generic.List<Scorer> prohibitedScorers)
+            List<Scorer> optionalScorers, List<Scorer> prohibitedScorers)
             : base(similarity)
         {
             InitBlock();
@@ -390,7 +392,7 @@ namespace Lucene.Net.Search
 
         public override string ToString()
         {
-            System.Text.StringBuilder buffer = new System.Text.StringBuilder();
+            StringBuilder buffer = new StringBuilder();
             buffer.Append("boolean(");
             for (SubScorer sub = scorers; sub != null; sub = sub.next)
             {

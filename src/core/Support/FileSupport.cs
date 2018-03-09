@@ -20,6 +20,7 @@
 */
 
 using System;
+using System.Collections;
 using System.IO;
 
 namespace Lucene.Net.Support
@@ -65,7 +66,7 @@ namespace Lucene.Net.Support
                                                           Index.IndexFileNameFilter indexFileNameFilter)
         {
             DirectoryInfo dInfo = new DirectoryInfo(fullName);
-            System.Collections.ArrayList list = new System.Collections.ArrayList();
+            ArrayList list = new ArrayList();
             foreach (FileInfo fInfo in dInfo.GetFiles())
             {
                 if (indexFileNameFilter.Accept(fInfo, fInfo.Name) == true)

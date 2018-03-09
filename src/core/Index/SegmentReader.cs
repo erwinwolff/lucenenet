@@ -18,6 +18,7 @@
 using Lucene.Net.Support;
 using Lucene.Net.Util;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using BitVector = Lucene.Net.Util.BitVector;
 using BufferedIndexInput = Lucene.Net.Store.BufferedIndexInput;
@@ -760,7 +761,7 @@ namespace Lucene.Net.Index
             }
         }
 
-        internal System.Collections.Generic.IDictionary<string, Norm> norms = new HashMap<string, Norm>();
+        internal IDictionary<string, Norm> norms = new HashMap<string, Norm>();
 
         /// <throws>  CorruptIndexException if the index is corrupt </throws>
         /// <throws>  IOException if there is a low-level IO error </throws>
@@ -997,7 +998,7 @@ namespace Lucene.Net.Index
             }
         }
 
-        protected internal override void DoCommit(System.Collections.Generic.IDictionary<string, string> commitUserData)
+        protected internal override void DoCommit(IDictionary<string, string> commitUserData)
         {
             if (hasChanges)
             {
@@ -1018,7 +1019,7 @@ namespace Lucene.Net.Index
             }
         }
 
-        private void CommitChanges(System.Collections.Generic.IDictionary<string, string> commitUserData)
+        private void CommitChanges(IDictionary<string, string> commitUserData)
         {
             if (deletedDocsDirty)
             {               // re-write deleted
@@ -1169,7 +1170,7 @@ namespace Lucene.Net.Index
             }
         }
 
-        internal virtual System.Collections.Generic.IList<string> Files()
+        internal virtual IList<string> Files()
         {
             return si.Files();
         }
@@ -1259,11 +1260,11 @@ namespace Lucene.Net.Index
 
         /// <seealso cref="IndexReader.GetFieldNames(IndexReader.FieldOption)">
         /// </seealso>
-        public override System.Collections.Generic.ICollection<string> GetFieldNames(IndexReader.FieldOption fieldOption)
+        public override ICollection<string> GetFieldNames(IndexReader.FieldOption fieldOption)
         {
             EnsureOpen();
 
-            System.Collections.Generic.ISet<string> fieldSet = Lucene.Net.Support.Compatibility.SetFactory.CreateHashSet<string>();
+            ISet<string> fieldSet = Lucene.Net.Support.Compatibility.SetFactory.CreateHashSet<string>();
             for (int i = 0; i < core.fieldInfos.Size(); i++)
             {
                 FieldInfo fi = core.fieldInfos.FieldInfo(i);
@@ -1667,7 +1668,7 @@ namespace Lucene.Net.Index
             get { return core.termsIndexDivisor; }
         }
 
-        public System.Collections.Generic.IDictionary<string, Norm> norms_ForNUnit
+        public IDictionary<string, Norm> norms_ForNUnit
         {
             get { return norms; }
         }

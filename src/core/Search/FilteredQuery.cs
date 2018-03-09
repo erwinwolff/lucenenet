@@ -17,6 +17,8 @@
 
 using Lucene.Net.Index;
 using System;
+using System.Collections.Generic;
+using System.Text;
 using IndexReader = Lucene.Net.Index.IndexReader;
 using ToStringUtils = Lucene.Net.Util.ToStringUtils;
 
@@ -262,7 +264,7 @@ namespace Lucene.Net.Search
         }
 
         // inherit javadoc
-        public override void ExtractTerms(System.Collections.Generic.ISet<Term> terms)
+        public override void ExtractTerms(ISet<Term> terms)
         {
             Query.ExtractTerms(terms);
         }
@@ -270,7 +272,7 @@ namespace Lucene.Net.Search
         /// <summary>Prints a user-readable version of this query. </summary>
         public override string ToString(string s)
         {
-            System.Text.StringBuilder buffer = new System.Text.StringBuilder();
+            StringBuilder buffer = new StringBuilder();
             buffer.Append("filtered(");
             buffer.Append(query.ToString(s));
             buffer.Append(")->");

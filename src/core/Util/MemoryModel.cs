@@ -15,6 +15,8 @@
  * limitations under the License.
  */
 
+using System;
+
 namespace Lucene.Net.Util
 {
     /// <summary> Returns primitive memory sizes for estimating RAM usage.
@@ -33,7 +35,7 @@ namespace Lucene.Net.Util
         /// </param>
         /// <returns> the size in bytes of given primitive Class
         /// </returns>
-        public abstract int GetPrimitiveSize(System.Type clazz);
+        public abstract int GetPrimitiveSize(Type clazz);
 
         /// <value> size of reference </value>
         public abstract int ReferenceSize { get; }

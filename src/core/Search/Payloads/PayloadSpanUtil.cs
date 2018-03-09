@@ -122,7 +122,7 @@ namespace Lucene.Net.Search.Payloads
             else if (query is MultiPhraseQuery)
             {
                 MultiPhraseQuery mpq = (MultiPhraseQuery)query;
-                System.Collections.Generic.IList<Term[]> termArrays = mpq.GetTermArrays();
+                IList<Term[]> termArrays = mpq.GetTermArrays();
                 int[] positions = mpq.GetPositions();
                 if (positions.Length > 0)
                 {

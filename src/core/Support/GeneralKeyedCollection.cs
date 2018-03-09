@@ -20,6 +20,8 @@
 */
 
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 
 namespace Lucene.Net.Support
@@ -30,7 +32,7 @@ namespace Lucene.Net.Support
     /// collection.</typeparam>
     /// <typeparam name="TKey">The type of the keys that can be used to look
     /// up the items.</typeparam>
-    internal class GeneralKeyedCollection<TKey, TItem> : System.Collections.ObjectModel.KeyedCollection<TKey, TItem>
+    internal class GeneralKeyedCollection<TKey, TItem> : KeyedCollection<TKey, TItem>
     {
         /// <summary>Creates a new instance of the
         /// <see cref="GeneralKeyedCollection{TKey, TItem}"/> class.</summary>
@@ -88,7 +90,7 @@ namespace Lucene.Net.Support
             }
         }
 
-        public System.Collections.Generic.IList<TItem> Values()
+        public IList<TItem> Values()
         {
             return base.Items;
         }

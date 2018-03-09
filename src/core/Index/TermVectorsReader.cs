@@ -17,6 +17,7 @@
 
 using System;
 using System.IO;
+using System.Text;
 using BufferedIndexInput = Lucene.Net.Store.BufferedIndexInput;
 using Directory = Lucene.Net.Store.Directory;
 using IndexInput = Lucene.Net.Store.IndexInput;
@@ -583,7 +584,7 @@ namespace Lucene.Net.Index
                         byteBuffer = newByteBuffer;
                     }
                     tvf.ReadBytes(byteBuffer, start, deltaLength);
-                    term = System.Text.Encoding.UTF8.GetString(byteBuffer, 0, totalLength);
+                    term = Encoding.UTF8.GetString(byteBuffer, 0, totalLength);
                 }
                 int freq = tvf.ReadVInt();
                 int[] positions = null;

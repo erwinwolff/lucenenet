@@ -16,6 +16,8 @@
  */
 
 using System;
+using System.Collections.Generic;
+using System.Text;
 using IDFExplanation = Lucene.Net.Search.Explanation.IDFExplanation;
 using IndexReader = Lucene.Net.Index.IndexReader;
 using Term = Lucene.Net.Index.Term;
@@ -199,7 +201,7 @@ namespace Lucene.Net.Search
             return new TermWeight(this, searcher);
         }
 
-        public override void ExtractTerms(System.Collections.Generic.ISet<Term> terms)
+        public override void ExtractTerms(ISet<Term> terms)
         {
             terms.Add(Term);
         }
@@ -207,7 +209,7 @@ namespace Lucene.Net.Search
         /// <summary>Prints a user-readable version of this query. </summary>
         public override string ToString(string field)
         {
-            System.Text.StringBuilder buffer = new System.Text.StringBuilder();
+            StringBuilder buffer = new StringBuilder();
             if (!term.Field.Equals(field))
             {
                 buffer.Append(term.Field);

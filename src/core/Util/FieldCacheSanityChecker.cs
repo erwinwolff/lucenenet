@@ -16,7 +16,9 @@
  */
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using CacheEntry = Lucene.Net.Search.CacheEntry;
 using FieldCache = Lucene.Net.Search.FieldCache;
 using IndexReader = Lucene.Net.Index.IndexReader;
@@ -211,7 +213,7 @@ namespace Lucene.Net.Util
                 if (seen.Contains(rf))
                     continue;
 
-                System.Collections.IList kids = GetAllDecendentReaderKeys(rf.readerKey);
+                IList kids = GetAllDecendentReaderKeys(rf.readerKey);
                 foreach (Object kidKey in kids)
                 {
                     ReaderField kid = new ReaderField(kidKey, rf.fieldName);
@@ -268,7 +270,7 @@ namespace Lucene.Net.Util
         /// the hierarchy of subReaders building up a list of the objects
         /// returned by obj.getFieldCacheKey()
         /// </summary>
-        private System.Collections.IList GetAllDecendentReaderKeys(object seed)
+        private IList GetAllDecendentReaderKeys(object seed)
         {
             List<object> all = new List<object>(17); // will grow as we iter
             all.Add(seed);
@@ -369,7 +371,7 @@ namespace Lucene.Net.Util
             /// </summary>
             public override string ToString()
             {
-                System.Text.StringBuilder buf = new System.Text.StringBuilder();
+                StringBuilder buf = new StringBuilder();
                 buf.Append(Type).Append(": ");
 
                 string m = Msg;

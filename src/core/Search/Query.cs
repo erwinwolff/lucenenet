@@ -17,6 +17,7 @@
 
 using Lucene.Net.Index;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using IndexReader = Lucene.Net.Index.IndexReader;
 
@@ -124,7 +125,7 @@ namespace Lucene.Net.Search
         /// </summary>
         public virtual Query Combine(Query[] queries)
         {
-            var uniques = new System.Collections.Generic.HashSet<Query>();
+            var uniques = new HashSet<Query>();
             for (int i = 0; i < queries.Length; i++)
             {
                 Query query = queries[i];
@@ -171,7 +172,7 @@ namespace Lucene.Net.Search
         ///
         /// </summary>
         /// <throws>  UnsupportedOperationException if this query is not yet rewritten </throws>
-        public virtual void ExtractTerms(System.Collections.Generic.ISet<Term> terms)
+        public virtual void ExtractTerms(ISet<Term> terms)
         {
             // needs to be implemented by query subclasses
             throw new NotSupportedException();
@@ -184,7 +185,7 @@ namespace Lucene.Net.Search
         /// </summary>
         public static Query MergeBooleanQueries(params BooleanQuery[] queries)
         {
-            var allClauses = new System.Collections.Generic.HashSet<BooleanClause>();
+            var allClauses = new HashSet<BooleanClause>();
             foreach (BooleanQuery booleanQuery in queries)
             {
                 foreach (BooleanClause clause in booleanQuery)

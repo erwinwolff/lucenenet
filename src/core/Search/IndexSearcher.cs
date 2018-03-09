@@ -16,6 +16,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Directory = Lucene.Net.Store.Directory;
 using Document = Lucene.Net.Documents.Document;
@@ -112,7 +113,7 @@ namespace Lucene.Net.Search
             reader = r;
             this.closeReader = closeReader;
 
-            System.Collections.Generic.IList<IndexReader> subReadersList = new System.Collections.Generic.List<IndexReader>();
+            IList<IndexReader> subReadersList = new List<IndexReader>();
             GatherSubReaders(subReadersList, reader);
             subReaders = subReadersList.ToArray();
             docStarts = new int[subReaders.Length];
@@ -124,7 +125,7 @@ namespace Lucene.Net.Search
             }
         }
 
-        protected internal virtual void GatherSubReaders(System.Collections.Generic.IList<IndexReader> allSubReaders, IndexReader r)
+        protected internal virtual void GatherSubReaders(IList<IndexReader> allSubReaders, IndexReader r)
         {
             ReaderUtil.GatherSubReaders(allSubReaders, r);
         }

@@ -580,7 +580,7 @@ namespace Lucene.Net.Index
             return rc;
         }
 
-        internal void DeleteFiles(System.Collections.Generic.IList<string> files)
+        internal void DeleteFiles(IList<string> files)
         {
             foreach (string file in files)
                 DeleteFile(file);
@@ -589,7 +589,7 @@ namespace Lucene.Net.Index
         /// <summary>Deletes the specified files, but only if they are new
         /// (have not yet been incref'd).
         /// </summary>
-        internal void DeleteNewFiles(System.Collections.Generic.ICollection<string> files)
+        internal void DeleteNewFiles(ICollection<string> files)
         {
             foreach (string fileName in files)
             {

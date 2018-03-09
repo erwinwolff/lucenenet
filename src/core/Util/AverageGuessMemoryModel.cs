@@ -16,6 +16,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 
 namespace Lucene.Net.Util
 {
@@ -46,7 +47,7 @@ namespace Lucene.Net.Util
         }
 
         // best guess primitive sizes
-        private System.Collections.Generic.Dictionary<Type, int> sizes;
+        private Dictionary<Type, int> sizes;
 
         /*
 		* (non-Javadoc)

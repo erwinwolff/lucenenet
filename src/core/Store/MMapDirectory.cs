@@ -88,12 +88,12 @@ namespace Lucene.Net.Store
             {
                 // {{Aroush-2.9
                 /*
-				System.Reflection.MethodInfo getCleanerMethod = buffer.GetType().GetMethod("cleaner", (Lucene.Net.Store.MMapDirectory.NO_PARAM_TYPES == null)?new System.Type[0]:(System.Type[]) Lucene.Net.Store.MMapDirectory.NO_PARAM_TYPES);
+				System.Reflection.MethodInfo getCleanerMethod = buffer.GetType().GetMethod("cleaner", (Lucene.Net.Store.MMapDirectory.NO_PARAM_TYPES == null)?new Type[0]:(Type[]) Lucene.Net.Store.MMapDirectory.NO_PARAM_TYPES);
                 getCleanerMethod.SetAccessible(true);
 				object cleaner = getCleanerMethod.Invoke(buffer, (object[]) Lucene.Net.Store.MMapDirectory.NO_PARAMS);
 				if (cleaner != null)
 				{
-					cleaner.GetType().GetMethod("clean", (Lucene.Net.Store.MMapDirectory.NO_PARAM_TYPES == null)?new System.Type[0]:(System.Type[]) Lucene.Net.Store.MMapDirectory.NO_PARAM_TYPES).Invoke(cleaner, (object[]) Lucene.Net.Store.MMapDirectory.NO_PARAMS);
+					cleaner.GetType().GetMethod("clean", (Lucene.Net.Store.MMapDirectory.NO_PARAM_TYPES == null)?new Type[0]:(Type[]) Lucene.Net.Store.MMapDirectory.NO_PARAM_TYPES).Invoke(cleaner, (object[]) Lucene.Net.Store.MMapDirectory.NO_PARAMS);
 				}
                 */
                 //System.Diagnostics.Debug.Fail("Port issue:", "sun.misc.Cleaner()"); // {{Aroush-2.9}}
@@ -522,8 +522,8 @@ namespace Lucene.Net.Store
                 {
                     // {{Aroush-2.9
                     /*
-                    System.Type.GetType("sun.misc.Cleaner"); // {{Aroush-2.9}} port issue?
-					System.Type.GetType("java.nio.DirectByteBuffer").GetMethod("cleaner", (NO_PARAM_TYPES == null)?new System.Type[0]:(System.Type[]) NO_PARAM_TYPES);
+                    Type.GetType("sun.misc.Cleaner"); // {{Aroush-2.9}} port issue?
+					Type.GetType("java.nio.DirectByteBuffer").GetMethod("cleaner", (NO_PARAM_TYPES == null)?new Type[0]:(Type[]) NO_PARAM_TYPES);
                     */
                     //System.Diagnostics.Debug.Fail("Port issue:", "sun.misc.Cleaner.clean()"); // {{Aroush-2.9}}
                     throw new NotImplementedException("Port issue: sun.misc.Cleaner.clean()");

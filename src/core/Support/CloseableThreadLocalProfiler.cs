@@ -20,6 +20,7 @@
 */
 
 using System;
+using System.Collections.Generic;
 
 namespace Lucene.Net.Support
 {
@@ -29,7 +30,7 @@ namespace Lucene.Net.Support
     public class CloseableThreadLocalProfiler
     {
         private static bool _enableCloseableThreadLocalProfiler = false;
-        public static System.Collections.Generic.List<WeakReference> Instances = new System.Collections.Generic.List<WeakReference>();
+        public static List<WeakReference> Instances = new List<WeakReference>();
 
         public static bool EnableCloseableThreadLocalProfiler
         {

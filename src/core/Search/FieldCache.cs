@@ -18,6 +18,7 @@
 using Lucene.Net.Support;
 using System;
 using System.IO;
+using System.Text;
 using Double = Lucene.Net.Support.Double;
 using IndexReader = Lucene.Net.Index.IndexReader;
 using NumericField = Lucene.Net.Documents.NumericField;
@@ -125,7 +126,7 @@ namespace Lucene.Net.Search
 
         public override string ToString()
         {
-            var b = new System.Text.StringBuilder();
+            var b = new StringBuilder();
             b.Append("'").Append(ReaderKey).Append("'=>");
             b.Append("'").Append(FieldName).Append("',");
             b.Append(CacheType).Append(",").Append(Custom);

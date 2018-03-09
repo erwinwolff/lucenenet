@@ -16,7 +16,7 @@
  */
 
 using System;
-
+using System.Text;
 using Term = Lucene.Net.Index.Term;
 
 namespace Lucene.Net.Search
@@ -39,7 +39,7 @@ namespace Lucene.Net.Search
         /// <summary>Prints a user-readable version of this query. </summary>
         public override string ToString()
         {
-            System.Text.StringBuilder buffer = new System.Text.StringBuilder();
+            StringBuilder buffer = new StringBuilder();
             buffer.Append("PrefixFilter(");
             buffer.Append(Prefix.ToString());
             buffer.Append(")");

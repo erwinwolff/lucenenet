@@ -17,6 +17,7 @@
 
 using Lucene.Net.Support;
 using System;
+using System.Text;
 
 namespace Lucene.Net.Search
 {
@@ -152,7 +153,7 @@ namespace Lucene.Net.Search
 
         public override string ToString()
         {
-            System.Text.StringBuilder buffer = new System.Text.StringBuilder();
+            StringBuilder buffer = new StringBuilder();
 
             for (int i = 0; i < fields.Length; i++)
             {

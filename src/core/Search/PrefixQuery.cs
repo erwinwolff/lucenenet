@@ -16,7 +16,7 @@
  */
 
 using System;
-
+using System.Text;
 using IndexReader = Lucene.Net.Index.IndexReader;
 using Term = Lucene.Net.Index.Term;
 using ToStringUtils = Lucene.Net.Util.ToStringUtils;
@@ -55,7 +55,7 @@ namespace Lucene.Net.Search
         /// <summary>Prints a user-readable version of this query. </summary>
         public override string ToString(string field)
         {
-            System.Text.StringBuilder buffer = new System.Text.StringBuilder();
+            StringBuilder buffer = new StringBuilder();
             if (!prefix.Field.Equals(field))
             {
                 buffer.Append(prefix.Field);

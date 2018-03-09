@@ -15,6 +15,7 @@
  * limitations under the License.
  */
 
+using System.Collections.Generic;
 using Directory = Lucene.Net.Store.Directory;
 
 namespace Lucene.Net.Index
@@ -28,7 +29,7 @@ namespace Lucene.Net.Index
         internal int numDocs;
         internal int termIndexInterval;
         internal int numDocsInStore;
-        internal System.Collections.Generic.ICollection<string> flushedFiles;
+        internal ICollection<string> flushedFiles;
 
         public SegmentWriteState(DocumentsWriter docWriter, Directory directory, string segmentName, string docStoreSegmentName, int numDocs, int numDocsInStore, int termIndexInterval)
         {
@@ -39,7 +40,7 @@ namespace Lucene.Net.Index
             this.numDocs = numDocs;
             this.numDocsInStore = numDocsInStore;
             this.termIndexInterval = termIndexInterval;
-            flushedFiles = new System.Collections.Generic.HashSet<string>();
+            flushedFiles = new HashSet<string>();
         }
 
         public virtual string SegmentFileName(string ext)

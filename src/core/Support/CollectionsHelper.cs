@@ -21,6 +21,9 @@
 
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Text;
 
 namespace Lucene.Net.Support
 {
@@ -30,12 +33,12 @@ namespace Lucene.Net.Support
     /// </summary>
     public class CollectionsHelper
     {
-        public static void Add(System.Collections.Hashtable hashtable, object item)
+        public static void Add(Hashtable hashtable, object item)
         {
             hashtable.Add(item, item);
         }
 
-        public static void AddIfNotContains(System.Collections.Hashtable hashtable, object item)
+        public static void AddIfNotContains(Hashtable hashtable, object item)
         {
             // Added lock around check.  Even though the collection should already have
             // a synchronized wrapper around it, it doesn't prevent this test from having
@@ -52,7 +55,7 @@ namespace Lucene.Net.Support
             }
         }
 
-        public static void AddIfNotContains(System.Collections.ArrayList hashtable, object item)
+        public static void AddIfNotContains(ArrayList hashtable, object item)
         {
             // see AddIfNotContains(Hashtable, object) for information about the lock
             lock (hashtable)
@@ -64,9 +67,9 @@ namespace Lucene.Net.Support
             }
         }
 
-        public static void AddAll(System.Collections.Hashtable hashtable, System.Collections.ICollection items)
+        public static void AddAll(Hashtable hashtable, ICollection items)
         {
-            System.Collections.IEnumerator iter = items.GetEnumerator();
+            IEnumerator iter = items.GetEnumerator();
             object item;
             while (iter.MoveNext())
             {
@@ -75,7 +78,7 @@ namespace Lucene.Net.Support
             }
         }
 
-        public static void AddAllIfNotContains(System.Collections.Hashtable hashtable, System.Collections.IList items)
+        public static void AddAllIfNotContains(Hashtable hashtable, IList items)
         {
             object item;
             for (int i = 0; i < items.Count; i++)
@@ -88,9 +91,9 @@ namespace Lucene.Net.Support
             }
         }
 
-        public static void AddAllIfNotContains(System.Collections.Hashtable hashtable, System.Collections.ICollection items)
+        public static void AddAllIfNotContains(Hashtable hashtable, ICollection items)
         {
-            System.Collections.IEnumerator iter = items.GetEnumerator();
+            IEnumerator iter = items.GetEnumerator();
             object item;
             while (iter.MoveNext())
             {
@@ -102,7 +105,7 @@ namespace Lucene.Net.Support
             }
         }
 
-        public static void AddAllIfNotContains(System.Collections.Generic.IDictionary<string, string> hashtable, System.Collections.Generic.ICollection<string> items)
+        public static void AddAllIfNotContains(IDictionary<string, string> hashtable, ICollection<string> items)
         {
             foreach (string s in items)
             {
@@ -113,7 +116,7 @@ namespace Lucene.Net.Support
             }
         }
 
-        public static void AddAll(System.Collections.Generic.IDictionary<string, string> hashtable, System.Collections.Generic.ICollection<string> items)
+        public static void AddAll(IDictionary<string, string> hashtable, ICollection<string> items)
         {
             foreach (string s in items)
             {
@@ -121,15 +124,15 @@ namespace Lucene.Net.Support
             }
         }
 
-        public static bool Contains(System.Collections.Generic.ICollection<string> col, string item)
+        public static bool Contains(ICollection<string> col, string item)
         {
             foreach (string s in col) if (s == item) return true;
             return false;
         }
 
-        public static bool Contains(System.Collections.ICollection col, object item)
+        public static bool Contains(ICollection col, object item)
         {
-            System.Collections.IEnumerator iter = col.GetEnumerator();
+            IEnumerator iter = col.GetEnumerator();
             while (iter.MoveNext())
             {
                 if (iter.Current.Equals(item))
@@ -138,7 +141,7 @@ namespace Lucene.Net.Support
             return false;
         }
 
-        public static string CollectionToString(System.Collections.Generic.IDictionary<string, string> c)
+        public static string CollectionToString(IDictionary<string, string> c)
         {
             Hashtable t = new Hashtable();
             foreach (string key in c.Keys)
@@ -153,15 +156,15 @@ namespace Lucene.Net.Support
         /// </summary>
         /// <param name="c">The collection to convert to string.</param>
         /// <returns>A string representation of the specified collection.</returns>
-        public static string CollectionToString(System.Collections.ICollection c)
+        public static string CollectionToString(ICollection c)
         {
-            System.Text.StringBuilder s = new System.Text.StringBuilder();
+            StringBuilder s = new StringBuilder();
 
             if (c != null)
             {
-                System.Collections.ArrayList l = new System.Collections.ArrayList(c);
+                ArrayList l = new ArrayList(c);
 
-                bool isDictionary = (c is System.Collections.BitArray || c is System.Collections.Hashtable || c is System.Collections.IDictionary || c is System.Collections.Specialized.NameValueCollection || (l.Count > 0 && l[0] is System.Collections.DictionaryEntry));
+                bool isDictionary = (c is BitArray || c is Hashtable || c is IDictionary || c is NameValueCollection || (l.Count > 0 && l[0] is DictionaryEntry));
                 for (int index = 0; index < l.Count; index++)
                 {
                     if (l[index] == null)
@@ -171,15 +174,15 @@ namespace Lucene.Net.Support
                     else
                     {
                         isDictionary = true;
-                        if (c is System.Collections.Specialized.NameValueCollection)
-                            s.Append(((System.Collections.Specialized.NameValueCollection)c).GetKey(index));
+                        if (c is NameValueCollection)
+                            s.Append(((NameValueCollection)c).GetKey(index));
                         else
-                            s.Append(((System.Collections.DictionaryEntry)l[index]).Key);
+                            s.Append(((DictionaryEntry)l[index]).Key);
                         s.Append("=");
-                        if (c is System.Collections.Specialized.NameValueCollection)
-                            s.Append(((System.Collections.Specialized.NameValueCollection)c).GetValues(index)[0]);
+                        if (c is NameValueCollection)
+                            s.Append(((NameValueCollection)c).GetValues(index)[0]);
                         else
-                            s.Append(((System.Collections.DictionaryEntry)l[index]).Value);
+                            s.Append(((DictionaryEntry)l[index]).Value);
                     }
                     if (index < l.Count - 1)
                         s.Append(", ");
@@ -187,7 +190,7 @@ namespace Lucene.Net.Support
 
                 if (isDictionary)
                 {
-                    if (c is System.Collections.ArrayList)
+                    if (c is ArrayList)
                         isDictionary = false;
                 }
                 if (isDictionary)
@@ -227,18 +230,18 @@ namespace Lucene.Net.Support
         /// <summary>
         /// Sorts an IList collections
         /// </summary>
-        /// <param name="list">The System.Collections.IList instance that will be sorted</param>
+        /// <param name="list">The IList instance that will be sorted</param>
         /// <param name="Comparator">The Comparator criteria, null to use natural comparator.</param>
-        public static void Sort(System.Collections.IList list, System.Collections.IComparer Comparator)
+        public static void Sort(IList list, IComparer Comparator)
         {
-            if (((System.Collections.ArrayList)list).IsReadOnly)
+            if (((ArrayList)list).IsReadOnly)
                 throw new NotSupportedException();
 
-            if ((Comparator == null) || (Comparator is System.Collections.Comparer))
+            if ((Comparator == null) || (Comparator is Comparer))
             {
                 try
                 {
-                    ((System.Collections.ArrayList)list).Sort();
+                    ((ArrayList)list).Sort();
                 }
                 catch (System.InvalidOperationException e)
                 {
@@ -249,7 +252,7 @@ namespace Lucene.Net.Support
             {
                 try
                 {
-                    ((System.Collections.ArrayList)list).Sort(Comparator);
+                    ((ArrayList)list).Sort(Comparator);
                 }
                 catch (System.InvalidOperationException e)
                 {
@@ -268,7 +271,7 @@ namespace Lucene.Net.Support
         public static void Fill(Array array, int fromindex, int toindex, object val)
         {
             object Temp_Object = val;
-            System.Type elementtype = array.GetType().GetElementType();
+            Type elementtype = array.GetType().GetElementType();
             if (elementtype != val.GetType())
                 Temp_Object = Convert.ChangeType(val, elementtype);
             if (array.Length == 0)

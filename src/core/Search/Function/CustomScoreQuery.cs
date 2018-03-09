@@ -17,7 +17,9 @@
 
 using Lucene.Net.Index;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using IndexReader = Lucene.Net.Index.IndexReader;
 using ToStringUtils = Lucene.Net.Util.ToStringUtils;
 
@@ -107,7 +109,7 @@ namespace Lucene.Net.Search.Function
 
         /*(non-Javadoc) <see cref="Lucene.Net.Search.Query.extractTerms(java.util.Set) */
 
-        public override void ExtractTerms(System.Collections.Generic.ISet<Term> terms)
+        public override void ExtractTerms(ISet<Term> terms)
         {
             subQuery.ExtractTerms(terms);
             for (int i = 0; i < valSrcQueries.Length; i++)
@@ -134,7 +136,7 @@ namespace Lucene.Net.Search.Function
 
         public override string ToString(string field)
         {
-            System.Text.StringBuilder sb = new System.Text.StringBuilder(Name()).Append("(");
+            StringBuilder sb = new StringBuilder(Name()).Append("(");
             sb.Append(subQuery.ToString(field));
             for (int i = 0; i < valSrcQueries.Length; i++)
             {

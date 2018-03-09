@@ -76,7 +76,7 @@ namespace Lucene.Net.Index
 
             /// <summary>Empty unless you passed specific segments list to check as optional 3rd argument.</summary>
             /// <seealso>
-            ///   <cref>CheckIndex.CheckIndex_Renamed_Method(System.Collections.IList)</cref>
+            ///   <cref>CheckIndex.CheckIndex_Renamed_Method(IList)</cref>
             /// </seealso>
             public List<string> segmentsChecked = new List<string>();
 

@@ -15,6 +15,7 @@
  * limitations under the License.
  */
 
+using System.Collections.Generic;
 using ScorerDocQueue = Lucene.Net.Util.ScorerDocQueue;
 
 namespace Lucene.Net.Search
@@ -28,7 +29,7 @@ namespace Lucene.Net.Search
         private int nrScorers;
 
         /// <summary>The subscorers. </summary>
-        protected internal System.Collections.Generic.IList<Scorer> subScorers;
+        protected internal IList<Scorer> subScorers;
 
         /// <summary>The minimum number of scorers that should match. </summary>
         private int minimumNrMatchers;
@@ -66,7 +67,7 @@ namespace Lucene.Net.Search
         /// <br/>When minimumNrMatchers equals the number of subScorers,
         /// it more efficient to use <c>ConjunctionScorer</c>.
         /// </param>
-        public DisjunctionSumScorer(System.Collections.Generic.IList<Scorer> subScorers, int minimumNrMatchers) : base(null)
+        public DisjunctionSumScorer(IList<Scorer> subScorers, int minimumNrMatchers) : base(null)
         {
             nrScorers = subScorers.Count;
 
@@ -88,7 +89,7 @@ namespace Lucene.Net.Search
         /// <summary>Construct a <c>DisjunctionScorer</c>, using one as the minimum number
         /// of matching subscorers.
         /// </summary>
-        public DisjunctionSumScorer(System.Collections.Generic.IList<Scorer> subScorers)
+        public DisjunctionSumScorer(IList<Scorer> subScorers)
             : this(subScorers, 1)
         {
         }

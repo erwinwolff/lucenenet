@@ -17,6 +17,7 @@
 
 using System;
 using System.IO;
+using System.Text;
 using PhraseQuery = Lucene.Net.Search.PhraseQuery;
 using SpanQuery = Lucene.Net.Search.Spans.SpanQuery;
 using StringHelper = Lucene.Net.Util.StringHelper;
@@ -241,7 +242,7 @@ namespace Lucene.Net.Documents
         /// <summary>Prints a Field for human consumption. </summary>
         public override string ToString()
         {
-            System.Text.StringBuilder result = new System.Text.StringBuilder();
+            StringBuilder result = new StringBuilder();
             if (internalIsStored)
             {
                 result.Append("stored");

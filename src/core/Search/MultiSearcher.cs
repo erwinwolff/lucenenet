@@ -17,13 +17,13 @@
 
 using Lucene.Net.Support;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using Document = Lucene.Net.Documents.Document;
 using FieldSelector = Lucene.Net.Documents.FieldSelector;
 using IndexReader = Lucene.Net.Index.IndexReader;
 using ReaderUtil = Lucene.Net.Util.ReaderUtil;
 using Term = Lucene.Net.Index.Term;
+using System.Collections.Generic;
 
 namespace Lucene.Net.Search
 {

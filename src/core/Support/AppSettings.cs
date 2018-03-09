@@ -20,6 +20,7 @@
 */
 
 using System;
+using System.Collections.Specialized;
 using System.Configuration;
 
 namespace Lucene.Net.Support
@@ -29,7 +30,7 @@ namespace Lucene.Net.Support
     /// </summary>
     public class AppSettings
     {
-        private static System.Collections.Specialized.ListDictionary settings = new System.Collections.Specialized.ListDictionary();
+        private static ListDictionary settings = new ListDictionary();
 
         /// <summary>
         ///

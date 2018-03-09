@@ -17,6 +17,7 @@
 
 using Lucene.Net.Search;
 using System;
+using System.Text;
 using NumericUtils = Lucene.Net.Util.NumericUtils;
 
 namespace Lucene.Net.Documents
@@ -81,7 +82,7 @@ namespace Lucene.Net.Documents
                 return MIN_STRING_VALUE;
             }
 
-            System.Text.StringBuilder buf = new System.Text.StringBuilder(STR_SIZE);
+            StringBuilder buf = new StringBuilder(STR_SIZE);
 
             if (l < 0)
             {

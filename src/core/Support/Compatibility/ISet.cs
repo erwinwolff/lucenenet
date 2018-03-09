@@ -17,7 +17,7 @@
 
 #if NET35
 
-namespace System.Collections.Generic
+namespace Generic
 {
     public interface ISet<T> : ICollection<T>
     {

@@ -16,6 +16,7 @@
  */
 
 using System;
+using System.Text;
 
 namespace Lucene.Net.Util
 {
@@ -47,8 +48,8 @@ namespace Lucene.Net.Util
         /// </summary>
         public override string ToString()
         {
-            System.Text.StringBuilder buffer = new System.Text.StringBuilder();
-            System.Type clazz = this.GetType();
+            StringBuilder buffer = new StringBuilder();
+            Type clazz = this.GetType();
             System.Reflection.FieldInfo[] fields = clazz.GetFields(System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.DeclaredOnly | System.Reflection.BindingFlags.Static);
             try
             {

@@ -17,6 +17,7 @@
 
 using Lucene.Net.Support;
 using System;
+using System.Text;
 using IndexReader = Lucene.Net.Index.IndexReader;
 using NumericField = Lucene.Net.Documents.NumericField;
 using NumericUtils = Lucene.Net.Util.NumericUtils;
@@ -781,7 +782,7 @@ namespace Lucene.Net.Search
 
         public override string ToString()
         {
-            System.Text.StringBuilder sb = new System.Text.StringBuilder(field).Append(":");
+            StringBuilder sb = new StringBuilder(field).Append(":");
             return sb.Append(includeLower ? '[' : '{').Append((lowerVal == null) ? "*" : lowerVal.ToString()).Append(" TO ").Append((upperVal == null) ? "*" : upperVal.ToString()).Append(includeUpper ? ']' : '}').ToString();
         }
 

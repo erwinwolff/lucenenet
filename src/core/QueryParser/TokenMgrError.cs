@@ -19,6 +19,7 @@
 /* JavaCCOptions: */
 
 using System;
+using System.Text;
 
 namespace Lucene.Net.QueryParsers
 {
@@ -68,7 +69,7 @@ namespace Lucene.Net.QueryParsers
         /// </summary>
         protected internal static string addEscapes(string str)
         {
-            System.Text.StringBuilder retval = new System.Text.StringBuilder();
+            StringBuilder retval = new StringBuilder();
             char ch;
             for (int i = 0; i < str.Length; i++)
             {

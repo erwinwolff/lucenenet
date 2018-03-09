@@ -19,11 +19,13 @@
  *
 */
 
+using System.Collections;
+
 namespace Lucene.Net.Support
 {
     /// <summary>
     /// This class provides supporting methods of java.util.BitSet
-    /// that are not present in System.Collections.BitArray.
+    /// that are not present in BitArray.
     /// </summary>
     public class BitSetSupport
     {
@@ -33,7 +35,7 @@ namespace Lucene.Net.Support
         /// <param name="bitArray"></param>
         /// <param name="index">the index of bit array at which to start checking</param>
         /// <returns>the next set bit or -1</returns>
-        public static int NextSetBit(System.Collections.BitArray bitArray, int index)
+        public static int NextSetBit(BitArray bitArray, int index)
         {
             while (index < bitArray.Length)
             {
@@ -54,7 +56,7 @@ namespace Lucene.Net.Support
         /// <param name="bitArray"></param>
         /// <param name="index">the index of bit array at which to start checking</param>
         /// <returns>the next set bit or -1</returns>
-        public static int NextClearBit(System.Collections.BitArray bitArray, int index)
+        public static int NextClearBit(BitArray bitArray, int index)
         {
             while (index < bitArray.Length)
             {
@@ -74,7 +76,7 @@ namespace Lucene.Net.Support
         /// </summary>
         /// <param name="bits">The BitArray object.</param>
         /// <returns>The number of bits set to true in this BitSet.</returns>
-        public static int Cardinality(System.Collections.BitArray bits)
+        public static int Cardinality(BitArray bits)
         {
             int count = 0;
             for (int i = 0; i < bits.Count; i++)

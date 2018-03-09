@@ -121,11 +121,11 @@ namespace Lucene.Net.Search
         {
             private object readerKey;
             private string fieldName;
-            private System.Type cacheType;
+            private Type cacheType;
             private object custom;
             private object value;
 
-            internal CacheEntryImpl(object readerKey, string fieldName, System.Type cacheType, object custom, object value)
+            internal CacheEntryImpl(object readerKey, string fieldName, Type cacheType, object custom, object value)
             {
                 this.readerKey = readerKey;
                 this.fieldName = fieldName;

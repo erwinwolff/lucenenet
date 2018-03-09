@@ -17,6 +17,7 @@
 
 using System;
 using System.Globalization;
+using System.Text;
 using IndexReader = Lucene.Net.Index.IndexReader;
 using ToStringUtils = Lucene.Net.Util.ToStringUtils;
 
@@ -159,7 +160,7 @@ namespace Lucene.Net.Search
         /// <summary>Prints a user-readable version of this query. </summary>
         public override string ToString(string field)
         {
-            System.Text.StringBuilder buffer = new System.Text.StringBuilder();
+            StringBuilder buffer = new StringBuilder();
             if (!Field.Equals(field))
             {
                 buffer.Append(Field);

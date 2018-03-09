@@ -525,7 +525,7 @@ namespace Lucene.Net.Index
             Lucene.Net.Search.FieldCache_Fields.DEFAULT.Purge(this);
         }
 
-        public override System.Collections.Generic.ICollection<string> GetFieldNames(IndexReader.FieldOption fieldNames)
+        public override ICollection<string> GetFieldNames(IndexReader.FieldOption fieldNames)
         {
             EnsureOpen();
             ISet<string> fieldSet = Lucene.Net.Support.Compatibility.SetFactory.CreateHashSet<string>();

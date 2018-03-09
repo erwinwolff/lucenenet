@@ -18,6 +18,7 @@
 using Lucene.Net.Documents;
 using Lucene.Net.Support;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using Directory = Lucene.Net.Store.Directory;
 using Document = Lucene.Net.Documents.Document;
@@ -51,7 +52,7 @@ namespace Lucene.Net.Index
         internal const byte STORE_PAYLOADS = (0x20);
         internal const byte OMIT_TERM_FREQ_AND_POSITIONS = (0x40);
 
-        private readonly System.Collections.Generic.List<FieldInfo> byNumber = new System.Collections.Generic.List<FieldInfo>();
+        private readonly List<FieldInfo> byNumber = new List<FieldInfo>();
         private readonly HashMap<string, FieldInfo> byName = new HashMap<string, FieldInfo>();
         private int format;
 
@@ -140,7 +141,7 @@ namespace Lucene.Net.Index
         {
             lock (this)
             {
-                System.Collections.Generic.IList<IFieldable> fields = doc.GetFields();
+                IList<IFieldable> fields = doc.GetFields();
                 foreach (IFieldable field in fields)
                 {
                     Add(field.Name, field.IsIndexed, field.IsTermVectorStored,
@@ -176,7 +177,7 @@ namespace Lucene.Net.Index
         /// </param>
         /// <param name="storeOffsetWithTermVector">true if offsets should be stored
         /// </param>
-        public void AddIndexed(System.Collections.Generic.ICollection<string> names, bool storeTermVectors, bool storePositionWithTermVector, bool storeOffsetWithTermVector)
+        public void AddIndexed(ICollection<string> names, bool storeTermVectors, bool storePositionWithTermVector, bool storeOffsetWithTermVector)
         {
             lock (this)
             {
@@ -197,7 +198,7 @@ namespace Lucene.Net.Index
         /// </param>
         /// <seealso cref="Add(String, bool)">
         /// </seealso>
-        public void Add(System.Collections.Generic.ICollection<string> names, bool isIndexed)
+        public void Add(ICollection<string> names, bool isIndexed)
         {
             lock (this)
             {

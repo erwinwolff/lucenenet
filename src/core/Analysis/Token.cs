@@ -19,6 +19,7 @@ using Lucene.Net.Analysis.Tokenattributes;
 using Lucene.Net.Support;
 using Lucene.Net.Util;
 using System;
+using System.Text;
 using ArrayUtil = Lucene.Net.Util.ArrayUtil;
 using Attribute = Lucene.Net.Util.Attribute;
 using Payload = Lucene.Net.Index.Payload;
@@ -499,7 +500,7 @@ namespace Lucene.Net.Analysis
 
         public override String ToString()
         {
-            var sb = new System.Text.StringBuilder();
+            var sb = new StringBuilder();
             sb.Append('(');
             InitTermBuffer();
             if (termBuffer == null)

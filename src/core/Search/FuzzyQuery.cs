@@ -18,6 +18,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using IndexReader = Lucene.Net.Index.IndexReader;
 using Single = Lucene.Net.Support.Single;
 using Term = Lucene.Net.Index.Term;
@@ -184,7 +185,7 @@ namespace Lucene.Net.Search
 
         public override string ToString(string field)
         {
-            System.Text.StringBuilder buffer = new System.Text.StringBuilder();
+            StringBuilder buffer = new StringBuilder();
             if (!Term.Field.Equals(field))
             {
                 buffer.Append(Term.Field);

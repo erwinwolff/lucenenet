@@ -17,6 +17,8 @@
 
 using Lucene.Net.Support;
 using System;
+using System.Collections.Generic;
+using System.Text;
 using IndexReader = Lucene.Net.Index.IndexReader;
 using MultipleTermPositions = Lucene.Net.Index.MultipleTermPositions;
 using Term = Lucene.Net.Index.Term;
@@ -39,8 +41,8 @@ namespace Lucene.Net.Search
     public class MultiPhraseQuery : Query
     {
         private string field;
-        private System.Collections.Generic.List<Term[]> termArrays = new System.Collections.Generic.List<Term[]>();
-        private System.Collections.Generic.List<int> positions = new System.Collections.Generic.List<int>();
+        private List<Term[]> termArrays = new List<Term[]>();
+        private List<int> positions = new List<int>();
 
         private int slop = 0;
 
@@ -106,7 +108,7 @@ namespace Lucene.Net.Search
 		/// Do not modify the List or its contents.
 		/// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
-        public virtual System.Collections.Generic.IList<Term[]> GetTermArrays()
+        public virtual IList<Term[]> GetTermArrays()
         {
             return termArrays.AsReadOnly();
         }
@@ -121,7 +123,7 @@ namespace Lucene.Net.Search
         }
 
         // inherit javadoc
-        public override void ExtractTerms(System.Collections.Generic.ISet<Term> terms)
+        public override void ExtractTerms(ISet<Term> terms)
         {
             foreach (Term[] arr in termArrays)
             {
@@ -314,7 +316,7 @@ namespace Lucene.Net.Search
         /// <summary>Prints a user-readable version of this query. </summary>
         public override string ToString(string f)
         {
-            System.Text.StringBuilder buffer = new System.Text.StringBuilder();
+            StringBuilder buffer = new StringBuilder();
             if (!field.Equals(f))
             {
                 buffer.Append(field);
@@ -322,7 +324,7 @@ namespace Lucene.Net.Search
             }
 
             buffer.Append("\"");
-            System.Collections.Generic.IEnumerator<Term[]> i = termArrays.GetEnumerator();
+            IEnumerator<Term[]> i = termArrays.GetEnumerator();
             bool first = true;
             while (i.MoveNext())
             {
@@ -448,7 +450,7 @@ namespace Lucene.Net.Search
         }
 
         // Breakout calculation of the termArrays equals
-        private bool TermArraysEquals(System.Collections.Generic.List<Term[]> termArrays1, System.Collections.Generic.List<Term[]> termArrays2)
+        private bool TermArraysEquals(List<Term[]> termArrays1, List<Term[]> termArrays2)
         {
             if (termArrays1.Count != termArrays2.Count)
             {

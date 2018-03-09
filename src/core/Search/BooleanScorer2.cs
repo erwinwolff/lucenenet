@@ -15,6 +15,8 @@
  * limitations under the License.
  */
 
+using System.Collections.Generic;
+
 namespace Lucene.Net.Search
 {
     /* See the description in BooleanScorer.java, comparing
@@ -44,7 +46,7 @@ namespace Lucene.Net.Search
                 }
             }
 
-            internal AnonymousClassDisjunctionSumScorer(BooleanScorer2 enclosingInstance, System.Collections.Generic.IList<Scorer> scorers, int minNrShouldMatch)
+            internal AnonymousClassDisjunctionSumScorer(BooleanScorer2 enclosingInstance, IList<Scorer> scorers, int minNrShouldMatch)
                 : base(scorers, minNrShouldMatch)
             {
                 InitBlock(enclosingInstance);
@@ -91,7 +93,7 @@ namespace Lucene.Net.Search
                 }
             }
 
-            internal AnonymousClassConjunctionScorer(int requiredNrMatchers, BooleanScorer2 enclosingInstance, Lucene.Net.Search.Similarity defaultSimilarity, System.Collections.Generic.IList<Scorer> requiredScorers)
+            internal AnonymousClassConjunctionScorer(int requiredNrMatchers, BooleanScorer2 enclosingInstance, Lucene.Net.Search.Similarity defaultSimilarity, IList<Scorer> requiredScorers)
                 : base(defaultSimilarity, requiredScorers)
             {
                 InitBlock(requiredNrMatchers, enclosingInstance);
@@ -123,9 +125,9 @@ namespace Lucene.Net.Search
             }
         }
 
-        private System.Collections.Generic.List<Scorer> requiredScorers;
-        private System.Collections.Generic.List<Scorer> optionalScorers;
-        private System.Collections.Generic.List<Scorer> prohibitedScorers;
+        private List<Scorer> requiredScorers;
+        private List<Scorer> optionalScorers;
+        private List<Scorer> prohibitedScorers;
 
         private class Coordinator
         {
@@ -195,9 +197,9 @@ namespace Lucene.Net.Search
         /// <param name="optional">the list of optional scorers.
         /// </param>
         public BooleanScorer2(Similarity similarity, int minNrShouldMatch,
-                                System.Collections.Generic.List<Scorer> required,
-                                System.Collections.Generic.List<Scorer> prohibited,
-                                System.Collections.Generic.List<Scorer> optional)
+                                List<Scorer> required,
+                                List<Scorer> prohibited,
+                                List<Scorer> optional)
             : base(similarity)
         {
             if (minNrShouldMatch < 0)
@@ -281,7 +283,7 @@ namespace Lucene.Net.Search
             }
         }
 
-        private Scorer CountingDisjunctionSumScorer(System.Collections.Generic.List<Scorer> scorers, int minNrShouldMatch)
+        private Scorer CountingDisjunctionSumScorer(List<Scorer> scorers, int minNrShouldMatch)
         {
             // each scorer from the list counted as a single matcher
             return new AnonymousClassDisjunctionSumScorer(this, scorers, minNrShouldMatch);
@@ -289,7 +291,7 @@ namespace Lucene.Net.Search
 
         private static readonly Similarity defaultSimilarity;
 
-        private Scorer CountingConjunctionSumScorer(System.Collections.Generic.List<Scorer> requiredScorers)
+        private Scorer CountingConjunctionSumScorer(List<Scorer> requiredScorers)
         {
             // each scorer from the list counted as a single matcher
             int requiredNrMatchers = requiredScorers.Count;
@@ -336,7 +338,7 @@ namespace Lucene.Net.Search
             if (optionalScorers.Count == minNrShouldMatch)
             {
                 // all optional scorers also required.
-                var allReq = new System.Collections.Generic.List<Scorer>(requiredScorers);
+                var allReq = new List<Scorer>(requiredScorers);
                 allReq.AddRange(optionalScorers);
                 return AddProhibitedScorers(CountingConjunctionSumScorer(allReq));
             }

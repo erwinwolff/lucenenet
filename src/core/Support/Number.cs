@@ -20,7 +20,9 @@
 */
 
 using System;
+using System.Collections;
 using System.Globalization;
+using System.Text;
 
 namespace Lucene.Net.Support
 {
@@ -48,7 +50,7 @@ namespace Lucene.Net.Support
         /// <returns></returns>
         public static string ToString(long number)
         {
-            System.Text.StringBuilder s = new System.Text.StringBuilder();
+            StringBuilder s = new StringBuilder();
 
             if (number == 0)
             {
@@ -197,7 +199,7 @@ namespace Lucene.Net.Support
         /// <param name="bits">The BitArray object.</param>
         /// <param name="fromIndex">The index to start checking from (inclusive).</param>
         /// <returns>The index of the next set bit.</returns>
-        public static int NextSetBit(System.Collections.BitArray bits, int fromIndex)
+        public static int NextSetBit(BitArray bits, int fromIndex)
         {
             for (int i = fromIndex; i < bits.Length; i++)
             {

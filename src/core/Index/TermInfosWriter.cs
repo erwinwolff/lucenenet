@@ -16,7 +16,7 @@
  */
 
 using System;
-
+using System.Text;
 using Directory = Lucene.Net.Store.Directory;
 using IndexOutput = Lucene.Net.Store.IndexOutput;
 using UnicodeUtil = Lucene.Net.Util.UnicodeUtil;
@@ -170,7 +170,7 @@ namespace Lucene.Net.Index
                     (isIndex && termBytesLength == 0 && lastTermBytesLength == 0),
                 "Terms are out of order: field=" + fieldInfos.FieldName(fieldNumber) + " (number " + fieldNumber + ")" +
                  " lastField=" + fieldInfos.FieldName(lastFieldNumber) + " (number " + lastFieldNumber + ")" +
-                 " text=" + System.Text.Encoding.UTF8.GetString(termBytes, 0, termBytesLength) + " lastText=" + System.Text.Encoding.UTF8.GetString(lastTermBytes, 0, lastTermBytesLength));
+                 " text=" + Encoding.UTF8.GetString(termBytes, 0, termBytesLength) + " lastText=" + Encoding.UTF8.GetString(lastTermBytes, 0, lastTermBytesLength));
 
             System.Diagnostics.Debug.Assert(ti.freqPointer >= lastTi.freqPointer, "freqPointer out of order (" + ti.freqPointer + " < " + lastTi.freqPointer + ")");
             System.Diagnostics.Debug.Assert(ti.proxPointer >= lastTi.proxPointer, "proxPointer out of order (" + ti.proxPointer + " < " + lastTi.proxPointer + ")");

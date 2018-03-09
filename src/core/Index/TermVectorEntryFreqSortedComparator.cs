@@ -16,6 +16,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 
 namespace Lucene.Net.Index
 {
@@ -24,7 +25,7 @@ namespace Lucene.Net.Index
     ///
     ///
     /// </summary>
-    public class TermVectorEntryFreqSortedComparator : System.Collections.Generic.IComparer<TermVectorEntry>
+    public class TermVectorEntryFreqSortedComparator : IComparer<TermVectorEntry>
     {
         public virtual int Compare(TermVectorEntry entry, TermVectorEntry entry1)
         {

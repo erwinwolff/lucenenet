@@ -18,6 +18,7 @@
 using Lucene.Net.Documents;
 using Lucene.Net.Support;
 using System;
+using System.Collections.Generic;
 using ArrayUtil = Lucene.Net.Util.ArrayUtil;
 using Document = Lucene.Net.Documents.Document;
 
@@ -85,10 +86,10 @@ namespace Lucene.Net.Index
             consumer.Abort();
         }
 
-        public System.Collections.Generic.ICollection<DocFieldConsumerPerField> Fields()
+        public ICollection<DocFieldConsumerPerField> Fields()
         {
-            System.Collections.Generic.ICollection<DocFieldConsumerPerField> fields =
-                new System.Collections.Generic.HashSet<DocFieldConsumerPerField>();
+            ICollection<DocFieldConsumerPerField> fields =
+                new HashSet<DocFieldConsumerPerField>();
             for (int i = 0; i < fieldHash.Length; i++)
             {
                 DocFieldProcessorPerField field = fieldHash[i];
@@ -182,7 +183,7 @@ namespace Lucene.Net.Index
 
             int thisFieldGen = fieldGen++;
 
-            System.Collections.Generic.IList<IFieldable> docFields = doc.GetFields();
+            IList<IFieldable> docFields = doc.GetFields();
             int numDocFields = docFields.Count;
 
             // Absorb any new fields first seen in this document.

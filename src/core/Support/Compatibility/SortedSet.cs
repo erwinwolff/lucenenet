@@ -17,7 +17,7 @@
 
 #if NET35
 
-namespace System.Collections.Generic
+namespace Generic
 {
     [Serializable]
     public class SortedSet<T> : ISet<T>, ICollection
@@ -38,9 +38,9 @@ namespace System.Collections.Generic
         public T Max { get { return (_list.Count) >= 1 ? _list.Keys[_list.Count - 1] : default(T); } }
 
         /// <summary>
-        /// Removes all items from the <see cref="T:System.Collections.Generic.ICollection`1"/>.
+        /// Removes all items from the <see cref="T:ICollection`1"/>.
         /// </summary>
-        /// <exception cref="T:NotSupportedException">The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.
+        /// <exception cref="T:NotSupportedException">The <see cref="T:ICollection`1"/> is read-only.
         ///                 </exception>
         public void Clear()
         {

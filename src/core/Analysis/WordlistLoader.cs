@@ -17,6 +17,7 @@
 
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 
 namespace Lucene.Net.Analysis
 {
@@ -32,7 +33,7 @@ namespace Lucene.Net.Analysis
         /// <returns> A HashSet with the file's words</returns>
         public static ISet<string> GetWordSet(FileInfo wordfile)
         {
-            using (var reader = new StreamReader(wordfile.FullName, System.Text.Encoding.Default))
+            using (var reader = new StreamReader(wordfile.FullName, Encoding.Default))
             {
                 return GetWordSet(reader);
             }
@@ -48,7 +49,7 @@ namespace Lucene.Net.Analysis
         /// <returns> A HashSet with the file's words</returns>
         public static ISet<string> GetWordSet(FileInfo wordfile, string comment)
         {
-            using (var reader = new StreamReader(wordfile.FullName, System.Text.Encoding.Default))
+            using (var reader = new StreamReader(wordfile.FullName, Encoding.Default))
             {
                 return GetWordSet(reader, comment);
             }
@@ -119,7 +120,7 @@ namespace Lucene.Net.Analysis
             StreamReader fr = null;
             try
             {
-                fr = new StreamReader(wordstemfile.FullName, System.Text.Encoding.Default);
+                fr = new StreamReader(wordstemfile.FullName, Encoding.Default);
                 br = new StreamReader(fr.BaseStream, fr.CurrentEncoding);
                 string line;
                 char[] tab = { '\t' };

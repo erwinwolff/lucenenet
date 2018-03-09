@@ -118,7 +118,7 @@ namespace Lucene.Net.Index
         /// </exception>
         public MultipleTermPositions(IndexReader indexReader, Term[] terms)
         {
-            var termPositions = new System.Collections.Generic.LinkedList<TermPositions>();
+            var termPositions = new LinkedList<TermPositions>();
 
             for (int i = 0; i < terms.Length; i++)
                 termPositions.AddLast(indexReader.TermPositions(terms[i]));

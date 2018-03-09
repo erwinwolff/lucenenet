@@ -18,6 +18,9 @@
 using Lucene.Net.Index;
 using Lucene.Net.Support;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Text;
 using IndexReader = Lucene.Net.Index.IndexReader;
 
 namespace Lucene.Net.Search
@@ -36,7 +39,7 @@ namespace Lucene.Net.Search
     /// in the multiple fields.
     /// </summary>
     [Serializable]
-    public class DisjunctionMaxQuery : Query, System.Collections.Generic.IEnumerable<Query>, System.ICloneable
+    public class DisjunctionMaxQuery : Query, IEnumerable<Query>, System.ICloneable
     {
         /* The subqueries */
         private EquatableList<Query> disjuncts = new EquatableList<Query>();
@@ -60,7 +63,7 @@ namespace Lucene.Net.Search
         /// </param>
         /// <param name="tieBreakerMultiplier">  the weight to give to each matching non-maximum disjunct
         /// </param>
-        public DisjunctionMaxQuery(System.Collections.Generic.ICollection<Query> disjuncts, float tieBreakerMultiplier)
+        public DisjunctionMaxQuery(ICollection<Query> disjuncts, float tieBreakerMultiplier)
         {
             this.tieBreakerMultiplier = tieBreakerMultiplier;
             Add(disjuncts);
@@ -77,18 +80,18 @@ namespace Lucene.Net.Search
         /// <summary>Add a collection of disjuncts to this disjunction
         /// via Iterable
         /// </summary>
-        public virtual void Add(System.Collections.Generic.ICollection<Query> disjuncts)
+        public virtual void Add(ICollection<Query> disjuncts)
         {
             this.disjuncts.AddRange(disjuncts);
         }
 
         /// <summary>An Iterator&lt;Query&gt; over the disjuncts </summary>
-        public virtual System.Collections.Generic.IEnumerator<Query> GetEnumerator()
+        public virtual IEnumerator<Query> GetEnumerator()
         {
             return disjuncts.GetEnumerator();
         }
 
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
         }
@@ -121,7 +124,7 @@ namespace Lucene.Net.Search
             protected internal Similarity similarity;
 
             /// <summary>The Weights for our subqueries, in 1-1 correspondence with disjuncts </summary>
-            protected internal System.Collections.Generic.List<Weight> weights = new System.Collections.Generic.List<Weight>(); // The Weight's for our subqueries, in 1-1 correspondence with disjuncts
+            protected internal List<Weight> weights = new List<Weight>(); // The Weight's for our subqueries, in 1-1 correspondence with disjuncts
 
             /* Construct the Weight for this Query searched by searcher.  Recursively construct subquery weights. */
 
@@ -278,7 +281,7 @@ namespace Lucene.Net.Search
         }
 
         // inherit javadoc
-        public override void ExtractTerms(System.Collections.Generic.ISet<Term> terms)
+        public override void ExtractTerms(ISet<Term> terms)
         {
             foreach (Query query in disjuncts)
             {
@@ -293,7 +296,7 @@ namespace Lucene.Net.Search
         /// </returns>
         public override string ToString(string field)
         {
-            System.Text.StringBuilder buffer = new System.Text.StringBuilder();
+            StringBuilder buffer = new StringBuilder();
             buffer.Append("(");
             int numDisjunctions = disjuncts.Count;
             for (int i = 0; i < numDisjunctions; i++)

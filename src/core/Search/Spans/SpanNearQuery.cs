@@ -18,7 +18,10 @@
 using Lucene.Net.Index;
 using Lucene.Net.Support;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using IndexReader = Lucene.Net.Index.IndexReader;
 using ToStringUtils = Lucene.Net.Util.ToStringUtils;
 
@@ -31,7 +34,7 @@ namespace Lucene.Net.Search.Spans
     [Serializable]
     public class SpanNearQuery : SpanQuery, System.ICloneable
     {
-        protected internal System.Collections.Generic.IList<SpanQuery> clauses;
+        protected internal IList<SpanQuery> clauses;
         protected internal int internalSlop;
         protected internal bool inOrder;
 
@@ -50,7 +53,7 @@ namespace Lucene.Net.Search.Spans
         public SpanNearQuery(SpanQuery[] clauses, int slop, bool inOrder, bool collectPayloads)
         {
             // copy clauses array into an ArrayList
-            this.clauses = new System.Collections.Generic.List<SpanQuery>(clauses.Length);
+            this.clauses = new List<SpanQuery>(clauses.Length);
             for (int i = 0; i < clauses.Length; i++)
             {
                 SpanQuery clause = clauses[i];
@@ -94,7 +97,7 @@ namespace Lucene.Net.Search.Spans
             get { return internalField; }
         }
 
-        public override void ExtractTerms(System.Collections.Generic.ISet<Term> terms)
+        public override void ExtractTerms(ISet<Term> terms)
         {
             foreach (SpanQuery clause in clauses)
             {
@@ -104,9 +107,9 @@ namespace Lucene.Net.Search.Spans
 
         public override string ToString(string field)
         {
-            System.Text.StringBuilder buffer = new System.Text.StringBuilder();
+            StringBuilder buffer = new StringBuilder();
             buffer.Append("spanNear([");
-            System.Collections.Generic.IEnumerator<SpanQuery> i = clauses.GetEnumerator();
+            IEnumerator<SpanQuery> i = clauses.GetEnumerator();
             while (i.MoveNext())
             {
                 SpanQuery clause = i.Current;
@@ -192,8 +195,8 @@ namespace Lucene.Net.Search.Spans
                 return false;
             if (clauses.Count != spanNearQuery.clauses.Count)
                 return false;
-            System.Collections.IEnumerator iter1 = clauses.GetEnumerator();
-            System.Collections.IEnumerator iter2 = spanNearQuery.clauses.GetEnumerator();
+            IEnumerator iter1 = clauses.GetEnumerator();
+            IEnumerator iter2 = spanNearQuery.clauses.GetEnumerator();
             while (iter1.MoveNext() && iter2.MoveNext())
             {
                 SpanQuery item1 = (SpanQuery)iter1.Current;

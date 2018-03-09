@@ -17,6 +17,7 @@
 
 using Lucene.Net.Support;
 using System;
+using System.Collections;
 using DocIdSet = Lucene.Net.Search.DocIdSet;
 using DocIdSetIterator = Lucene.Net.Search.DocIdSetIterator;
 
@@ -141,7 +142,7 @@ namespace Lucene.Net.Util
         /// <summary> Create a SortedVIntList from a BitSet.</summary>
         /// <param name="bits"> A bit set representing a set of integers.
         /// </param>
-        public SortedVIntList(System.Collections.BitArray bits)
+        public SortedVIntList(BitArray bits)
         {
             SortedVIntListBuilder builder = new SortedVIntListBuilder(this);
             int nextInt = BitSetSupport.NextSetBit(bits, 0);

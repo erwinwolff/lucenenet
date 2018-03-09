@@ -19,6 +19,7 @@ using Lucene.Net.Support;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using ChecksumIndexInput = Lucene.Net.Store.ChecksumIndexInput;
 using ChecksumIndexOutput = Lucene.Net.Store.ChecksumIndexOutput;
 using Directory = Lucene.Net.Store.Directory;
@@ -489,7 +490,7 @@ namespace Lucene.Net.Index
         /// <summary> Returns userData from latest segments file</summary>
         /// <throws>  CorruptIndexException if the index is corrupt </throws>
         /// <throws>  IOException if there is a low-level IO error </throws>
-        public static System.Collections.Generic.IDictionary<string, string> ReadCurrentUserData(Directory directory)
+        public static IDictionary<string, string> ReadCurrentUserData(Directory directory)
         {
             var sis = new SegmentInfos();
             sis.Read(directory);
@@ -870,9 +871,9 @@ namespace Lucene.Net.Index
         /// The returned collection is recomputed on each
         /// invocation.
         /// </summary>
-        public System.Collections.Generic.ICollection<string> Files(Directory dir, bool includeSegmentsFile)
+        public ICollection<string> Files(Directory dir, bool includeSegmentsFile)
         {
-            System.Collections.Generic.HashSet<string> files = new System.Collections.Generic.HashSet<string>();
+            HashSet<string> files = new HashSet<string>();
             if (includeSegmentsFile)
             {
                 files.Add(GetCurrentSegmentFileName());
@@ -975,7 +976,7 @@ namespace Lucene.Net.Index
         {
             lock (this)
             {
-                var buffer = new System.Text.StringBuilder();
+                var buffer = new StringBuilder();
                 int count = Count;
                 for (int i = 0; i < count; i++)
                 {

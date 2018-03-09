@@ -18,6 +18,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace Lucene.Net.Index
 {
@@ -53,11 +54,11 @@ namespace Lucene.Net.Index
                 {
                     return true;
                 }
-                else if (extension.StartsWith("f") && (new System.Text.RegularExpressions.Regex("f\\d+")).Match(extension).Success)
+                else if (extension.StartsWith("f") && (new Regex("f\\d+")).Match(extension).Success)
                 {
                     return true;
                 }
-                else if (extension.StartsWith("s") && (new System.Text.RegularExpressions.Regex("s\\d+")).Match(extension).Success)
+                else if (extension.StartsWith("s") && (new Regex("s\\d+")).Match(extension).Success)
                 {
                     return true;
                 }
@@ -87,7 +88,7 @@ namespace Lucene.Net.Index
                 {
                     return true;
                 }
-                if (extension.StartsWith("f") && (new System.Text.RegularExpressions.Regex("f\\d+")).Match(extension).Success)
+                if (extension.StartsWith("f") && (new Regex("f\\d+")).Match(extension).Success)
                 {
                     return true;
                 }

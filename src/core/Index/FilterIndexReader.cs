@@ -16,6 +16,7 @@
  */
 
 using Lucene.Net.Store;
+using System.Collections.Generic;
 using Document = Lucene.Net.Documents.Document;
 using FieldSelector = Lucene.Net.Documents.FieldSelector;
 
@@ -308,7 +309,7 @@ namespace Lucene.Net.Index
             in_Renamed.DeleteDocument(n);
         }
 
-        protected internal override void DoCommit(System.Collections.Generic.IDictionary<string, string> commitUserData)
+        protected internal override void DoCommit(IDictionary<string, string> commitUserData)
         {
             in_Renamed.Commit(commitUserData);
         }
@@ -322,7 +323,7 @@ namespace Lucene.Net.Index
             Lucene.Net.Search.FieldCache_Fields.DEFAULT.Purge(this);
         }
 
-        public override System.Collections.Generic.ICollection<string> GetFieldNames(IndexReader.FieldOption fieldNames)
+        public override ICollection<string> GetFieldNames(IndexReader.FieldOption fieldNames)
         {
             EnsureOpen();
             return in_Renamed.GetFieldNames(fieldNames);

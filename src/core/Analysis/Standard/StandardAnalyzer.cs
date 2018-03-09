@@ -16,9 +16,9 @@
  */
 
 using Lucene.Net.Util;
-using System.Collections.Generic;
 using System.IO;
 using Version = Lucene.Net.Util.Version;
+using System.Collections.Generic;
 
 namespace Lucene.Net.Analysis.Standard
 {

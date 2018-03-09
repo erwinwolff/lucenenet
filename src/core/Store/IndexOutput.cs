@@ -17,6 +17,7 @@
 
 using Lucene.Net.Support;
 using System;
+using System.Collections.Generic;
 using UnicodeUtil = Lucene.Net.Util.UnicodeUtil;
 
 namespace Lucene.Net.Store
@@ -263,7 +264,7 @@ namespace Lucene.Net.Store
         }
 
         // map must be Map<String, String>
-        public virtual void WriteStringStringMap(System.Collections.Generic.IDictionary<string, string> map)
+        public virtual void WriteStringStringMap(IDictionary<string, string> map)
         {
             if (map == null)
             {

@@ -61,7 +61,7 @@ namespace Lucene.Net.Index
         /// <summary> Get the mapping between fields and terms, sorted by the comparator
         ///
         /// </summary>
-        /// <value> A map between field names and &lt;see cref=&quot;System.Collections.Generic.SortedDictionary{Object,Object}&quot; /&gt;s per field. SortedSet entries are &lt;see cref=&quot;TermVectorEntry&quot; /&gt; </value>
+        /// <value> A map between field names and &lt;see cref=&quot;SortedDictionary{Object,Object}&quot; /&gt;s per field. SortedSet entries are &lt;see cref=&quot;TermVectorEntry&quot; /&gt; </value>
         public virtual IDictionary<string, SortedSet<TermVectorEntry>> FieldToTerms
         {
             get { return fieldToTerms; }

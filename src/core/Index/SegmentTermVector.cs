@@ -16,6 +16,7 @@
  */
 
 using System;
+using System.Text;
 
 namespace Lucene.Net.Index
 {
@@ -41,7 +42,7 @@ namespace Lucene.Net.Index
 
         public override string ToString()
         {
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            StringBuilder sb = new StringBuilder();
             sb.Append('{');
             sb.Append(field).Append(": ");
             if (terms != null)

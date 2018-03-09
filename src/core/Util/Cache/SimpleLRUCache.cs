@@ -139,7 +139,7 @@ namespace Lucene.Net.Util.Cache
                         return enclosingInstance;
                     }
                 }
-                protected internal virtual bool RemoveEldestEntry(System.Collections.DictionaryEntry eldest)
+                protected internal virtual bool RemoveEldestEntry(DictionaryEntry eldest)
                 {
                     return size() > Enclosing_Instance.cacheSize;
                 }

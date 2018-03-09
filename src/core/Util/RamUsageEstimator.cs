@@ -116,7 +116,7 @@ namespace Lucene.Net.Util
             // add to seen
             seen[obj] = null;
 
-            System.Type clazz = obj.GetType();
+            Type clazz = obj.GetType();
             if (clazz.IsArray)
             {
                 return SizeOfArray(obj);
@@ -171,7 +171,7 @@ namespace Lucene.Net.Util
                 return 0;
             }
             long size = arraySize;
-            System.Type arrayElementClazz = obj.GetType().GetElementType();
+            Type arrayElementClazz = obj.GetType().GetElementType();
             if (arrayElementClazz.IsPrimitive)
             {
                 size += len * memoryModel.GetPrimitiveSize(arrayElementClazz);

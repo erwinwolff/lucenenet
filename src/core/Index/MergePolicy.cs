@@ -18,6 +18,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using Directory = Lucene.Net.Store.Directory;
 
 namespace Lucene.Net.Index
@@ -145,7 +146,7 @@ namespace Lucene.Net.Index
 
             internal virtual String SegString(Directory dir)
             {
-                var b = new System.Text.StringBuilder();
+                var b = new StringBuilder();
                 int numSegments = segments.Count;
                 for (int i = 0; i < numSegments; i++)
                 {
@@ -188,7 +189,7 @@ namespace Lucene.Net.Index
 
             public virtual String SegString(Directory dir)
             {
-                var b = new System.Text.StringBuilder();
+                var b = new StringBuilder();
                 b.Append("MergeSpec:\n");
                 int count = merges.Count;
                 for (int i = 0; i < count; i++)

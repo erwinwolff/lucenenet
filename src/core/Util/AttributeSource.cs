@@ -19,6 +19,7 @@ using Lucene.Net.Support;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace Lucene.Net.Util
 {
@@ -69,21 +70,21 @@ namespace Lucene.Net.Util
                     //}
                 }
 
-                private static System.Type GetClassForInterface<T>() where T : IAttribute
+                private static Type GetClassForInterface<T>() where T : IAttribute
                 {
                     lock (attClassImplMap)
                     {
                         var attClass = typeof(T);
                         WeakReference refz = attClassImplMap[attClass];
-                        System.Type clazz = (refz == null) ? null : ((System.Type)refz.Target);
+                        Type clazz = (refz == null) ? null : ((Type)refz.Target);
                         if (clazz == null)
                         {
                             try
                             {
                                 string name = attClass.FullName.Replace(attClass.Name, attClass.Name.Substring(1)) + ", " + attClass.Assembly.FullName;
-                                attClassImplMap.Add(attClass, new WeakReference(clazz = System.Type.GetType(name, true))); //OK
+                                attClassImplMap.Add(attClass, new WeakReference(clazz = Type.GetType(name, true))); //OK
                             }
-                            catch (System.TypeLoadException) // was System.Exception
+                            catch (TypeLoadException) // was System.Exception
                             {
                                 throw new System.ArgumentException("Could not find implementing class for " + attClass.FullName);
                             }
@@ -167,8 +168,8 @@ namespace Lucene.Net.Util
         }
 
         /// <summary>a cache that stores all interfaces for known implementation classes for performance (slow reflection) </summary>
-        private static readonly WeakDictionary<Type, System.Collections.Generic.LinkedList<WeakReference>>
-            knownImplClasses = new WeakDictionary<Type, System.Collections.Generic.LinkedList<WeakReference>>();
+        private static readonly WeakDictionary<Type, LinkedList<WeakReference>>
+            knownImplClasses = new WeakDictionary<Type, LinkedList<WeakReference>>();
 
         /// <summary>
         /// <b>Expert:</b> Adds a custom AttributeImpl instance with one or more Attribute interfaces.
@@ -181,10 +182,10 @@ namespace Lucene.Net.Util
         /// </summary>
 		public virtual void AddAttributeImpl(Attribute att)
         {
-            System.Type clazz = att.GetType();
+            Type clazz = att.GetType();
             if (attributeImpls.Contains(clazz))
                 return;
-            System.Collections.Generic.LinkedList<WeakReference> foundInterfaces;
+            LinkedList<WeakReference> foundInterfaces;
             lock (knownImplClasses)
             {
                 foundInterfaces = knownImplClasses[clazz];
@@ -195,13 +196,13 @@ namespace Lucene.Net.Util
                     knownImplClasses.Add(clazz, foundInterfaces = new LinkedList<WeakReference>());
                     // find all interfaces that this attribute instance implements
                     // and that extend the Attribute interface
-                    System.Type actClazz = clazz;
+                    Type actClazz = clazz;
                     do
                     {
-                        System.Type[] interfaces = actClazz.GetInterfaces();
+                        Type[] interfaces = actClazz.GetInterfaces();
                         for (int i = 0; i < interfaces.Length; i++)
                         {
-                            System.Type curInterface = interfaces[i];
+                            Type curInterface = interfaces[i];
                             if (curInterface != typeof(IAttribute) && typeof(IAttribute).IsAssignableFrom(curInterface))
                             {
                                 foundInterfaces.AddLast(new WeakReference(curInterface));
@@ -216,7 +217,7 @@ namespace Lucene.Net.Util
             // add all interfaces of this AttributeImpl to the maps
             foreach (var curInterfaceRef in foundInterfaces)
             {
-                System.Type curInterface = (System.Type)curInterfaceRef.Target;
+                Type curInterface = (Type)curInterfaceRef.Target;
                 System.Diagnostics.Debug.Assert(curInterface != null,
                                                 "We have a strong reference on the class holding the interfaces, so they should never get evicted");
                 // Attribute is a superclass of this interface
@@ -456,7 +457,7 @@ namespace Lucene.Net.Util
 
         public override string ToString()
         {
-            System.Text.StringBuilder sb = new System.Text.StringBuilder().Append('(');
+            StringBuilder sb = new StringBuilder().Append('(');
 
             if (HasAttributes)
             {

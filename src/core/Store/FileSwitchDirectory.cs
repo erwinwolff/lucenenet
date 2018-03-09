@@ -15,6 +15,8 @@
  * limitations under the License.
  */
 
+using System.Collections.Generic;
+
 namespace Lucene.Net.Store
 {
     /// <summary> Expert: A Directory instance that switches files between
@@ -33,11 +35,11 @@ namespace Lucene.Net.Store
     {
         private Directory secondaryDir;
         private Directory primaryDir;
-        private System.Collections.Generic.HashSet<string> primaryExtensions;
+        private HashSet<string> primaryExtensions;
         private bool doClose;
         private bool isDisposed;
 
-        public FileSwitchDirectory(System.Collections.Generic.HashSet<string> primaryExtensions,
+        public FileSwitchDirectory(HashSet<string> primaryExtensions,
                                     Directory primaryDir,
                                     Directory secondaryDir,
                                     bool doClose)
@@ -91,7 +93,7 @@ namespace Lucene.Net.Store
 
         public override string[] ListAll()
         {
-            var files = new System.Collections.Generic.List<string>();
+            var files = new List<string>();
             files.AddRange(primaryDir.ListAll());
             files.AddRange(secondaryDir.ListAll());
             return files.ToArray();

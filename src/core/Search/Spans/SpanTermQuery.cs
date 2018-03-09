@@ -16,7 +16,8 @@
  */
 
 using System;
-
+using System.Collections.Generic;
+using System.Text;
 using IndexReader = Lucene.Net.Index.IndexReader;
 using Term = Lucene.Net.Index.Term;
 using ToStringUtils = Lucene.Net.Util.ToStringUtils;
@@ -46,14 +47,14 @@ namespace Lucene.Net.Search.Spans
             get { return internalTerm.Field; }
         }
 
-        public override void ExtractTerms(System.Collections.Generic.ISet<Term> terms)
+        public override void ExtractTerms(ISet<Term> terms)
         {
             terms.Add(internalTerm);
         }
 
         public override string ToString(string field)
         {
-            System.Text.StringBuilder buffer = new System.Text.StringBuilder();
+            StringBuilder buffer = new StringBuilder();
             if (internalTerm.Field.Equals(field))
                 buffer.Append(internalTerm.Text);
             else

@@ -19,6 +19,7 @@ using Lucene.Net.Support;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using AlreadyClosedException = Lucene.Net.Store.AlreadyClosedException;
 using Analyzer = Lucene.Net.Analysis.Analyzer;
 using BufferedIndexInput = Lucene.Net.Store.BufferedIndexInput;
@@ -4948,8 +4949,8 @@ namespace Lucene.Net.Index
             diagnostics["java.vendor"] = Constants.JAVA_VENDOR + "";
             if (details != null)
             {
-                //System.Collections.ArrayList keys = new System.Collections.ArrayList(details.Keys);
-                //System.Collections.ArrayList values = new System.Collections.ArrayList(details.Values);
+                //ArrayList keys = new ArrayList(details.Keys);
+                //ArrayList values = new ArrayList(details.Values);
                 foreach (string key in details.Keys)
                 {
                     diagnostics[key] = details[key];
@@ -5387,7 +5388,7 @@ namespace Lucene.Net.Index
         {
             lock (this)
             {
-                System.Text.StringBuilder buffer = new System.Text.StringBuilder();
+                StringBuilder buffer = new StringBuilder();
                 int count = infos.Count;
                 for (int i = 0; i < count; i++)
                 {

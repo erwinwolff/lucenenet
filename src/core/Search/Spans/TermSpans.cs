@@ -97,7 +97,7 @@ namespace Lucene.Net.Search.Spans
         {
             byte[] bytes = new byte[internalPositions.PayloadLength];
             bytes = internalPositions.GetPayload(bytes, 0);
-            var val = new System.Collections.Generic.List<byte[]>();
+            var val = new List<byte[]>();
             val.Add(bytes);
             return val;
         }

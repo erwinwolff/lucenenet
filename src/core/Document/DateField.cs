@@ -18,6 +18,7 @@
 using Lucene.Net.Search;
 using Lucene.Net.Support;
 using System;
+using System.Text;
 using NumericUtils = Lucene.Net.Util.NumericUtils;
 using PrefixQuery = Lucene.Net.Search.PrefixQuery;
 using TermRangeQuery = Lucene.Net.Search.TermRangeQuery;
@@ -112,7 +113,7 @@ namespace Lucene.Net.Documents
             // Pad with leading zeros
             if (s.Length < DATE_LEN)
             {
-                System.Text.StringBuilder sb = new System.Text.StringBuilder(s);
+                StringBuilder sb = new StringBuilder(s);
                 while (sb.Length < DATE_LEN)
                     sb.Insert(0, 0);
                 s = sb.ToString();

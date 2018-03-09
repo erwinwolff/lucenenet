@@ -367,7 +367,7 @@ namespace Lucene.Net.Index
             si.diagnostics = new HashMap<string, string>(this.diagnostics);
             if (this.diagnostics != null)
             {
-                si.diagnostics = new System.Collections.Generic.Dictionary<string, string>();
+                si.diagnostics = new Dictionary<string, string>();
                 foreach (string o in diagnostics.Keys)
                 {
                     si.diagnostics.Add(o, diagnostics[o]);
@@ -383,7 +383,7 @@ namespace Lucene.Net.Index
             si.docStoreIsCompoundFile = docStoreIsCompoundFile;
             if (this.files != null)
             {
-                si.files = new System.Collections.Generic.List<string>();
+                si.files = new List<string>();
                 foreach (string file in files)
                 {
                     si.files.Add(file);
@@ -703,7 +703,7 @@ namespace Lucene.Net.Index
                 return files;
             }
 
-            var fileList = new System.Collections.Generic.List<string>();
+            var fileList = new List<string>();
 
             bool useCompoundFile = GetUseCompoundFile();
 

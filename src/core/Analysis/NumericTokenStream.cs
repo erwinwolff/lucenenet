@@ -17,6 +17,7 @@
 
 using Lucene.Net.Analysis.Tokenattributes;
 using Lucene.Net.Search;
+using System.Text;
 using AttributeSource = Lucene.Net.Util.AttributeSource;
 using NumericField = Lucene.Net.Documents.NumericField;
 using NumericUtils = Lucene.Net.Util.NumericUtils;
@@ -248,7 +249,7 @@ namespace Lucene.Net.Analysis
         // @Override
         public override string ToString()
         {
-            System.Text.StringBuilder sb = new System.Text.StringBuilder("(numeric,valSize=").Append(valSize);
+            StringBuilder sb = new StringBuilder("(numeric,valSize=").Append(valSize);
             sb.Append(",precisionStep=").Append(precisionStep).Append(')');
             return sb.ToString();
         }

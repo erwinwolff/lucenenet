@@ -31,7 +31,7 @@ namespace Lucene.Net.Search.Spans
     {
         private SpanNearQuery query;
 
-        private System.Collections.Generic.IList<SpansCell> ordered = new System.Collections.Generic.List<SpansCell>(); // spans in query order
+        private IList<SpansCell> ordered = new List<SpansCell>(); // spans in query order
         private Spans[] subSpans;
         private int slop; // from query
 
@@ -327,7 +327,7 @@ namespace Lucene.Net.Search.Spans
         /// <throws>  IOException </throws>
         public override ICollection<byte[]> GetPayload()
         {
-            System.Collections.Generic.ISet<byte[]> matchPayload = Lucene.Net.Support.Compatibility.SetFactory.CreateHashSet<byte[]>();
+            ISet<byte[]> matchPayload = Lucene.Net.Support.Compatibility.SetFactory.CreateHashSet<byte[]>();
             for (SpansCell cell = first; cell != null; cell = cell.next)
             {
                 if (cell.IsPayloadAvailable())

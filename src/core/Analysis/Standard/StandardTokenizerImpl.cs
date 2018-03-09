@@ -29,6 +29,7 @@
 using Lucene.Net.Analysis.Tokenattributes;
 using System;
 using System.IO;
+using System.Text;
 
 namespace Lucene.Net.Analysis.Standard
 {
@@ -296,7 +297,7 @@ namespace Lucene.Net.Analysis.Standard
         /// </summary>
         /// <param name="in_Renamed"> the java.io.Inputstream to read input from.
         /// </param>
-        internal StandardTokenizerImpl(Stream in_Renamed) : this(new StreamReader(in_Renamed, System.Text.Encoding.Default))
+        internal StandardTokenizerImpl(Stream in_Renamed) : this(new StreamReader(in_Renamed, Encoding.Default))
         {
         }
 

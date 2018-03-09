@@ -17,6 +17,8 @@
 
 using Lucene.Net.Index;
 using System;
+using System.Collections.Generic;
+using System.Text;
 using IndexReader = Lucene.Net.Index.IndexReader;
 using TermDocs = Lucene.Net.Index.TermDocs;
 using ToStringUtils = Lucene.Net.Util.ToStringUtils;
@@ -172,13 +174,13 @@ namespace Lucene.Net.Search
             return new MatchAllDocsWeight(this, searcher);
         }
 
-        public override void ExtractTerms(System.Collections.Generic.ISet<Term> terms)
+        public override void ExtractTerms(ISet<Term> terms)
         {
         }
 
         public override string ToString(string field)
         {
-            System.Text.StringBuilder buffer = new System.Text.StringBuilder();
+            StringBuilder buffer = new StringBuilder();
             buffer.Append("*:*");
             buffer.Append(ToStringUtils.Boost(Boost));
             return buffer.ToString();

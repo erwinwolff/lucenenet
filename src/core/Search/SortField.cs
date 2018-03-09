@@ -17,6 +17,7 @@
 
 using System;
 using System.Globalization;
+using System.Text;
 using StringHelper = Lucene.Net.Util.StringHelper;
 
 namespace Lucene.Net.Search
@@ -312,7 +313,7 @@ namespace Lucene.Net.Search
 
         public override string ToString()
         {
-            System.Text.StringBuilder buffer = new System.Text.StringBuilder();
+            StringBuilder buffer = new StringBuilder();
             switch (type)
             {
                 case SCORE:

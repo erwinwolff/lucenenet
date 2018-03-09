@@ -16,6 +16,7 @@
  */
 
 using System;
+using System.Text;
 
 namespace Lucene.Net.Search
 {
@@ -67,7 +68,7 @@ namespace Lucene.Net.Search
         {
             // super.toString returns the doc and score information, so just add the
             // fields information
-            System.Text.StringBuilder sb = new System.Text.StringBuilder(base.ToString());
+            StringBuilder sb = new StringBuilder(base.ToString());
             sb.Append("[");
             for (int i = 0; i < fields.Length; i++)
             {

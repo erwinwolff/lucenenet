@@ -108,7 +108,7 @@ namespace Lucene.Net.Index
         }
 
         /// <summary>Returns userData, previously passed to
-        /// <see cref="IndexWriter.Commit(System.Collections.Generic.IDictionary{string, string})" />
+        /// <see cref="IndexWriter.Commit(IDictionary{string, string})" />
         /// for this commit.  IDictionary is String -> String.
         /// </summary>
         public abstract IDictionary<string, string> UserData { get; }

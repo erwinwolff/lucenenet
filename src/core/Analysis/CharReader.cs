@@ -16,6 +16,7 @@
  */
 
 using System.IO;
+using System.Text;
 
 namespace Lucene.Net.Analysis
 {
@@ -39,7 +40,7 @@ namespace Lucene.Net.Analysis
                 return charStream;
 
             // {{Aroush-2.9}} isn't there a better (faster) way to do this?
-            var theString = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(input.ReadToEnd()));
+            var theString = new MemoryStream(Encoding.UTF8.GetBytes(input.ReadToEnd()));
             return new CharReader(new StreamReader(theString));
             //return input is CharStream?(CharStream) input:new CharReader(input);
         }

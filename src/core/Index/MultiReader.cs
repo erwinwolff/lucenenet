@@ -17,6 +17,7 @@
 
 using Lucene.Net.Support;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using DefaultSimilarity = Lucene.Net.Search.DefaultSimilarity;
@@ -36,7 +37,7 @@ namespace Lucene.Net.Index
         protected internal IndexReader[] subReaders;
         private int[] starts; // 1st docno for each segment
         private bool[] decrefOnClose; // remember which subreaders to decRef on close
-        private System.Collections.Generic.IDictionary<string, byte[]> normsCache = new HashMap<string, byte[]>();
+        private IDictionary<string, byte[]> normsCache = new HashMap<string, byte[]>();
         private int maxDoc = 0;
         private int numDocs = -1;
         private bool hasDeletions = false;
@@ -428,7 +429,7 @@ namespace Lucene.Net.Index
             return new MultiTermPositions(this, subReaders, starts);
         }
 
-        protected internal override void DoCommit(System.Collections.Generic.IDictionary<string, string> commitUserData)
+        protected internal override void DoCommit(IDictionary<string, string> commitUserData)
         {
             for (int i = 0; i < subReaders.Length; i++)
                 subReaders[i].Commit(commitUserData);
@@ -457,7 +458,7 @@ namespace Lucene.Net.Index
             Lucene.Net.Search.FieldCache_Fields.DEFAULT.Purge(this);
         }
 
-        public override System.Collections.Generic.ICollection<string> GetFieldNames(IndexReader.FieldOption fieldNames)
+        public override ICollection<string> GetFieldNames(IndexReader.FieldOption fieldNames)
         {
             EnsureOpen();
             return DirectoryReader.GetFieldNames(fieldNames, this.subReaders);

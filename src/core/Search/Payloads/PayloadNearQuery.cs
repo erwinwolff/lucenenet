@@ -16,6 +16,8 @@
  */
 
 using System;
+using System.Collections.Generic;
+using System.Text;
 using IndexReader = Lucene.Net.Index.IndexReader;
 using NearSpansOrdered = Lucene.Net.Search.Spans.NearSpansOrdered;
 using NearSpansUnordered = Lucene.Net.Search.Spans.NearSpansUnordered;
@@ -78,7 +80,7 @@ namespace Lucene.Net.Search.Payloads
 
         public override string ToString(string field)
         {
-            System.Text.StringBuilder buffer = new System.Text.StringBuilder();
+            StringBuilder buffer = new StringBuilder();
             buffer.Append("payloadNear([");
             var i = clauses.GetEnumerator();
             while (i.MoveNext())
@@ -232,7 +234,7 @@ namespace Lucene.Net.Search.Payloads
             /// </param>
             /// <seealso cref="Spans">
             /// </seealso>
-            protected internal virtual void ProcessPayloads(System.Collections.Generic.ICollection<byte[]> payLoads, int start, int end)
+            protected internal virtual void ProcessPayloads(ICollection<byte[]> payLoads, int start, int end)
             {
                 foreach (byte[] thePayload in payLoads)
                 {

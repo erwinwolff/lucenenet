@@ -20,6 +20,7 @@ using System;
 
 // Used only for WRITE_LOCK_NAME in deprecated create=true case:
 using System.IO;
+using System.Text;
 using Constants = Lucene.Net.Util.Constants;
 
 namespace Lucene.Net.Store
@@ -447,9 +448,9 @@ namespace Lucene.Net.Store
             byte[] digest;
             lock (DIGESTER)
             {
-                digest = DIGESTER.ComputeHash(System.Text.Encoding.UTF8.GetBytes(dirName));
+                digest = DIGESTER.ComputeHash(Encoding.UTF8.GetBytes(dirName));
             }
-            System.Text.StringBuilder buf = new System.Text.StringBuilder();
+            StringBuilder buf = new StringBuilder();
             buf.Append("lucene-");
             for (int i = 0; i < digest.Length; i++)
             {

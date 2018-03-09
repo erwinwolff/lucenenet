@@ -17,6 +17,8 @@
 
 using Lucene.Net.Index;
 using System;
+using System.Collections.Generic;
+using System.Text;
 using IndexReader = Lucene.Net.Index.IndexReader;
 using ToStringUtils = Lucene.Net.Util.ToStringUtils;
 
@@ -93,7 +95,7 @@ namespace Lucene.Net.Search.Spans
             return maskedQuery.GetSpans(reader);
         }
 
-        public override void ExtractTerms(System.Collections.Generic.ISet<Term> terms)
+        public override void ExtractTerms(ISet<Term> terms)
         {
             maskedQuery.ExtractTerms(terms);
         }
@@ -131,7 +133,7 @@ namespace Lucene.Net.Search.Spans
 
         public override string ToString(string field)
         {
-            System.Text.StringBuilder buffer = new System.Text.StringBuilder();
+            StringBuilder buffer = new StringBuilder();
             buffer.Append("mask(");
             buffer.Append(maskedQuery.ToString(field));
             buffer.Append(")");

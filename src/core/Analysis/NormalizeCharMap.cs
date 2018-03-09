@@ -16,6 +16,7 @@
  */
 
 using Lucene.Net.Support;
+using System.Collections.Generic;
 
 namespace Lucene.Net.Analysis
 {
@@ -24,7 +25,7 @@ namespace Lucene.Net.Analysis
     /// </summary>
     public class NormalizeCharMap
     {
-        internal System.Collections.Generic.IDictionary<char, NormalizeCharMap> submap;
+        internal IDictionary<char, NormalizeCharMap> submap;
         internal string normStr;
         internal int diff;
 

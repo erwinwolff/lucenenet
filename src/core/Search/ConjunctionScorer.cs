@@ -16,6 +16,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Lucene.Net.Search
@@ -27,7 +28,7 @@ namespace Lucene.Net.Search
         private float coord;
         private int lastDoc = -1;
 
-        public ConjunctionScorer(Similarity similarity, System.Collections.Generic.ICollection<Scorer> scorers)
+        public ConjunctionScorer(Similarity similarity, ICollection<Scorer> scorers)
             : this(similarity, scorers.ToArray())
         {
         }

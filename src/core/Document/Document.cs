@@ -16,6 +16,9 @@
  */
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Text;
 
 // for javadoc
 using IndexReader = Lucene.Net.Index.IndexReader;
@@ -40,7 +43,7 @@ namespace Lucene.Net.Documents
     [Serializable]
     public sealed class Document
     {
-        private class AnonymousClassEnumeration : System.Collections.IEnumerator
+        private class AnonymousClassEnumeration : IEnumerator
         {
             public AnonymousClassEnumeration(Document enclosingInstance)
             {
@@ -88,7 +91,7 @@ namespace Lucene.Net.Documents
                 }
             }
 
-            internal System.Collections.IEnumerator iter;
+            internal IEnumerator iter;
 
             public bool HasMoreElements()
             {
@@ -101,7 +104,7 @@ namespace Lucene.Net.Documents
             }
         }
 
-        internal System.Collections.Generic.IList<IFieldable> fields = new System.Collections.Generic.List<IFieldable>();
+        internal IList<IFieldable> fields = new List<IFieldable>();
         private float boost = 1.0f;
 
         /// <summary>Constructs a new document with no fields. </summary>
@@ -152,7 +155,7 @@ namespace Lucene.Net.Documents
         /// </summary>
         public void RemoveField(string name)
         {
-            System.Collections.Generic.IEnumerator<IFieldable> it = fields.GetEnumerator();
+            IEnumerator<IFieldable> it = fields.GetEnumerator();
             while (it.MoveNext())
             {
                 IFieldable field = it.Current;
@@ -228,7 +231,7 @@ namespace Lucene.Net.Documents
         /// <i>not</i> available in documents retrieved from the
         /// index, e.g. <see cref="Searcher.Doc(int)" /> or <see cref="IndexReader.Document(int)" />.
         /// </summary>
-        public System.Collections.Generic.IList<IFieldable> GetFields()
+        public IList<IFieldable> GetFields()
         {
             return fields;
         }
@@ -247,7 +250,7 @@ namespace Lucene.Net.Documents
         /// </returns>
         public Field[] GetFields(string name)
         {
-            var result = new System.Collections.Generic.List<Field>();
+            var result = new List<Field>();
             foreach (IFieldable field in fields)
             {
                 if (field.Name.Equals(name))
@@ -275,7 +278,7 @@ namespace Lucene.Net.Documents
         /// </returns>
         public IFieldable[] GetFieldables(string name)
         {
-            var result = new System.Collections.Generic.List<IFieldable>();
+            var result = new List<IFieldable>();
             foreach (IFieldable field in fields)
             {
                 if (field.Name.Equals(name))
@@ -302,7 +305,7 @@ namespace Lucene.Net.Documents
         /// </returns>
         public string[] GetValues(string name)
         {
-            var result = new System.Collections.Generic.List<string>();
+            var result = new List<string>();
             foreach (IFieldable field in fields)
             {
                 if (field.Name.Equals(name) && (!field.IsBinary))
@@ -329,7 +332,7 @@ namespace Lucene.Net.Documents
         /// </returns>
         public byte[][] GetBinaryValues(string name)
         {
-            var result = new System.Collections.Generic.List<byte[]>();
+            var result = new List<byte[]>();
             foreach (IFieldable field in fields)
             {
                 if (field.Name.Equals(name) && (field.IsBinary))
@@ -365,7 +368,7 @@ namespace Lucene.Net.Documents
         /// <summary>Prints the fields of a document for human consumption. </summary>
         public override string ToString()
         {
-            System.Text.StringBuilder buffer = new System.Text.StringBuilder();
+            StringBuilder buffer = new StringBuilder();
             buffer.Append("Document<");
             for (int i = 0; i < fields.Count; i++)
             {
@@ -378,7 +381,7 @@ namespace Lucene.Net.Documents
             return buffer.ToString();
         }
 
-        public System.Collections.Generic.IList<IFieldable> fields_ForNUnit
+        public IList<IFieldable> fields_ForNUnit
         {
             get { return fields; }
         }

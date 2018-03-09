@@ -15,6 +15,8 @@
  * limitations under the License.
  */
 
+using System.Collections.Generic;
+
 namespace Lucene.Net.Store
 {
     /// <summary> Implements <see cref="LockFactory" /> for a single in-process instance,
@@ -30,7 +32,7 @@ namespace Lucene.Net.Store
 
     public class SingleInstanceLockFactory : LockFactory
     {
-        private System.Collections.Generic.HashSet<string> locks = new System.Collections.Generic.HashSet<string>();
+        private HashSet<string> locks = new HashSet<string>();
 
         public override Lock MakeLock(string lockName)
         {
@@ -55,9 +57,9 @@ namespace Lucene.Net.Store
     internal class SingleInstanceLock : Lock
     {
         internal string lockName;
-        private System.Collections.Generic.HashSet<string> locks;
+        private HashSet<string> locks;
 
-        public SingleInstanceLock(System.Collections.Generic.HashSet<string> locks, string lockName)
+        public SingleInstanceLock(HashSet<string> locks, string lockName)
         {
             this.locks = locks;
             this.lockName = lockName;

@@ -15,6 +15,8 @@
  * limitations under the License.
  */
 
+using System.Collections.Generic;
+
 namespace Lucene.Net.Analysis
 {
     /// <summary> This class can be used if the token attributes of a TokenStream
@@ -27,8 +29,8 @@ namespace Lucene.Net.Analysis
     /// </summary>
     public sealed class CachingTokenFilter : TokenFilter
     {
-        private System.Collections.Generic.LinkedList<State> cache = null;
-        private System.Collections.Generic.IEnumerator<State> iterator = null;
+        private LinkedList<State> cache = null;
+        private IEnumerator<State> iterator = null;
         private State finalState;
 
         public CachingTokenFilter(TokenStream input) : base(input)
@@ -40,7 +42,7 @@ namespace Lucene.Net.Analysis
             if (cache == null)
             {
                 // fill cache lazily
-                cache = new System.Collections.Generic.LinkedList<State>();
+                cache = new LinkedList<State>();
                 FillCache();
                 iterator = cache.GetEnumerator();
             }

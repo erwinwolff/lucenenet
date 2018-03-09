@@ -25,9 +25,9 @@ namespace Lucene.Net.Util
     /// <summary>Simple DocIdSet and DocIdSetIterator backed by a BitSet </summary>
     public class DocIdBitSet : DocIdSet
     {
-        private System.Collections.BitArray bitSet;
+        private BitArray bitSet;
 
-        public DocIdBitSet(System.Collections.BitArray bitSet)
+        public DocIdBitSet(BitArray bitSet)
         {
             this.bitSet = bitSet;
         }
@@ -52,9 +52,9 @@ namespace Lucene.Net.Util
         private class DocIdBitSetIterator : DocIdSetIterator
         {
             private int docId;
-            private System.Collections.BitArray bitSet;
+            private BitArray bitSet;
 
-            internal DocIdBitSetIterator(System.Collections.BitArray bitSet)
+            internal DocIdBitSetIterator(BitArray bitSet)
             {
                 this.bitSet = bitSet;
                 this.docId = -1;

@@ -19,6 +19,8 @@ using Lucene.Net.Index;
 using Lucene.Net.Support;
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Text;
 using IndexReader = Lucene.Net.Index.IndexReader;
 using ToStringUtils = Lucene.Net.Util.ToStringUtils;
 
@@ -29,7 +31,7 @@ namespace Lucene.Net.Search
     /// BooleanQuerys.
     /// </summary>
     [Serializable]
-    public class BooleanQuery : Query, System.Collections.Generic.IEnumerable<BooleanClause>, System.ICloneable
+    public class BooleanQuery : Query, IEnumerable<BooleanClause>, System.ICloneable
     {
         [Serializable]
         private class AnonymousClassSimilarityDelegator : SimilarityDelegator
@@ -192,7 +194,7 @@ namespace Lucene.Net.Search
         }
 
         /// <summary>Returns the list of clauses in this query. </summary>
-	    public virtual System.Collections.Generic.List<BooleanClause> Clauses
+	    public virtual List<BooleanClause> Clauses
         {
             get { return clauses; }
         }
@@ -201,7 +203,7 @@ namespace Lucene.Net.Search
         /// Returns an iterator on the clauses in this query.
         /// </summary>
         /// <returns></returns>
-        public System.Collections.Generic.IEnumerator<BooleanClause> GetEnumerator()
+        public IEnumerator<BooleanClause> GetEnumerator()
         {
             return clauses.GetEnumerator();
         }
@@ -233,13 +235,13 @@ namespace Lucene.Net.Search
             /// <summary>The Similarity implementation. </summary>
             protected internal Similarity similarity;
 
-            protected internal System.Collections.Generic.List<Weight> weights;
+            protected internal List<Weight> weights;
 
             public BooleanWeight(BooleanQuery enclosingInstance, Searcher searcher)
             {
                 InitBlock(enclosingInstance);
                 this.similarity = Enclosing_Instance.GetSimilarity(searcher);
-                weights = new System.Collections.Generic.List<Weight>(Enclosing_Instance.clauses.Count);
+                weights = new List<Weight>(Enclosing_Instance.clauses.Count);
                 for (int i = 0; i < Enclosing_Instance.clauses.Count; i++)
                 {
                     weights.Add(Enclosing_Instance.clauses[i].Query.CreateWeight(searcher));
@@ -293,8 +295,8 @@ namespace Lucene.Net.Search
                 float sum = 0.0f;
                 bool fail = false;
                 int shouldMatchCount = 0;
-                System.Collections.Generic.IEnumerator<BooleanClause> cIter = Enclosing_Instance.clauses.GetEnumerator();
-                for (System.Collections.Generic.IEnumerator<Weight> wIter = weights.GetEnumerator(); wIter.MoveNext();)
+                IEnumerator<BooleanClause> cIter = Enclosing_Instance.clauses.GetEnumerator();
+                for (IEnumerator<Weight> wIter = weights.GetEnumerator(); wIter.MoveNext();)
                 {
                     cIter.MoveNext();
                     Weight w = wIter.Current;
@@ -368,11 +370,11 @@ namespace Lucene.Net.Search
 
             public override Scorer Scorer(IndexReader reader, bool scoreDocsInOrder, bool topScorer)
             {
-                var required = new System.Collections.Generic.List<Scorer>();
-                var prohibited = new System.Collections.Generic.List<Scorer>();
-                var optional = new System.Collections.Generic.List<Scorer>();
+                var required = new List<Scorer>();
+                var prohibited = new List<Scorer>();
+                var optional = new List<Scorer>();
 
-                System.Collections.Generic.IEnumerator<BooleanClause> cIter = Enclosing_Instance.clauses.GetEnumerator();
+                IEnumerator<BooleanClause> cIter = Enclosing_Instance.clauses.GetEnumerator();
                 foreach (Weight w in weights)
                 {
                     cIter.MoveNext();
@@ -500,7 +502,7 @@ namespace Lucene.Net.Search
         }
 
         // inherit javadoc
-        public override void ExtractTerms(System.Collections.Generic.ISet<Term> terms)
+        public override void ExtractTerms(ISet<Term> terms)
         {
             foreach (BooleanClause clause in clauses)
             {
@@ -518,7 +520,7 @@ namespace Lucene.Net.Search
         /// <summary>Prints a user-readable version of this query. </summary>
         public override string ToString(string field)
         {
-            System.Text.StringBuilder buffer = new System.Text.StringBuilder();
+            StringBuilder buffer = new StringBuilder();
             bool needParens = (Boost != 1.0) || (MinimumNumberShouldMatch > 0);
             if (needParens)
             {

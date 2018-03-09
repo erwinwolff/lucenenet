@@ -20,6 +20,7 @@ using Lucene.Net.Support;
 using Lucene.Net.Util;
 using System;
 using System.Collections.Generic;
+using System.Text;
 using IndexReader = Lucene.Net.Index.IndexReader;
 using ToStringUtils = Lucene.Net.Util.ToStringUtils;
 
@@ -58,7 +59,7 @@ namespace Lucene.Net.Search.Spans
             private bool InitSpanQueue(int target)
             {
                 queue = new SpanQueue(enclosingInstance, Enclosing_Instance.clauses.Count);
-                System.Collections.Generic.IEnumerator<SpanQuery> i = Enclosing_Instance.clauses.GetEnumerator();
+                IEnumerator<SpanQuery> i = Enclosing_Instance.clauses.GetEnumerator();
                 while (i.MoveNext())
                 {
                     Spans spans = i.Current.GetSpans(reader);
@@ -144,7 +145,7 @@ namespace Lucene.Net.Search.Spans
 
             public override ICollection<byte[]> GetPayload()
             {
-                System.Collections.Generic.ICollection<byte[]> result = null;
+                ICollection<byte[]> result = null;
                 Spans theTop = Top();
                 if (theTop != null && theTop.IsPayloadAvailable())
                 {
@@ -200,7 +201,7 @@ namespace Lucene.Net.Search.Spans
             get { return field; }
         }
 
-        public override void ExtractTerms(System.Collections.Generic.ISet<Term> terms)
+        public override void ExtractTerms(ISet<Term> terms)
         {
             foreach (SpanQuery clause in clauses)
             {
@@ -249,9 +250,9 @@ namespace Lucene.Net.Search.Spans
 
         public override string ToString(string field)
         {
-            System.Text.StringBuilder buffer = new System.Text.StringBuilder();
+            StringBuilder buffer = new StringBuilder();
             buffer.Append("spanOr([");
-            System.Collections.Generic.IEnumerator<SpanQuery> i = clauses.GetEnumerator();
+            IEnumerator<SpanQuery> i = clauses.GetEnumerator();
             int j = 0;
             while (i.MoveNext())
             {

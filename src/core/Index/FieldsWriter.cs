@@ -17,6 +17,7 @@
 
 using Lucene.Net.Documents;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Directory = Lucene.Net.Store.Directory;
@@ -277,7 +278,7 @@ namespace Lucene.Net.Index
         {
             indexStream.WriteLong(fieldsStream.FilePointer);
 
-            System.Collections.Generic.IList<IFieldable> fields = doc.GetFields();
+            IList<IFieldable> fields = doc.GetFields();
             int storedCount = fields.Count(field => field.IsStored);
             fieldsStream.WriteVInt(storedCount);
 

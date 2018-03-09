@@ -25,14 +25,14 @@ namespace Lucene.Net.Util.Cache
     /// </summary>
     public class SimpleMapCache<TKey, TValue> : Cache<TKey, TValue>
     {
-        internal System.Collections.Generic.Dictionary<TKey, TValue> map;
+        internal Dictionary<TKey, TValue> map;
 
         public SimpleMapCache()
-            : this(new System.Collections.Generic.Dictionary<TKey, TValue>())
+            : this(new Dictionary<TKey, TValue>())
         {
         }
 
-        public SimpleMapCache(System.Collections.Generic.Dictionary<TKey, TValue> map)
+        public SimpleMapCache(Dictionary<TKey, TValue> map)
         {
             this.map = map;
         }
@@ -58,7 +58,7 @@ namespace Lucene.Net.Util.Cache
         }
 
         /// <summary> Returns a Set containing all keys in this cache.</summary>
-        public virtual System.Collections.Generic.HashSet<TKey> KeySet()
+        public virtual HashSet<TKey> KeySet()
         {
             return new HashSet<TKey>(map.Keys);
         }

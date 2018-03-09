@@ -17,6 +17,7 @@
 
 using Lucene.Net.Index;
 using System;
+using System.Collections.Generic;
 using IndexReader = Lucene.Net.Index.IndexReader;
 using TermDocs = Lucene.Net.Index.TermDocs;
 using ToStringUtils = Lucene.Net.Util.ToStringUtils;
@@ -60,7 +61,7 @@ namespace Lucene.Net.Search.Function
 
         /*(non-Javadoc) <see cref="Lucene.Net.Search.Query.extractTerms(java.util.Set) */
 
-        public override void ExtractTerms(System.Collections.Generic.ISet<Term> terms)
+        public override void ExtractTerms(ISet<Term> terms)
         {
             // no terms involved here
         }
