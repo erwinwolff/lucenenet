@@ -35,8 +35,7 @@ namespace Lucene.Net.Analysis
 
         public static CharStream Get(TextReader input)
         {
-            var charStream = input as CharStream;
-            if (charStream != null)
+            if (input is CharStream charStream)
                 return charStream;
 
             // {{Aroush-2.9}} isn't there a better (faster) way to do this?

@@ -307,7 +307,7 @@ namespace Lucene.Net.Index
                 return length;
             }
 
-            public IndexInput base_Renamed_ForNUnit
+            public IndexInput Base_Renamed_ForNUnit
             {
                 get { return base_Renamed; }
             }

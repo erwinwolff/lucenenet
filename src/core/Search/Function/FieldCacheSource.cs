@@ -22,7 +22,7 @@ using IndexReader = Lucene.Net.Index.IndexReader;
 namespace Lucene.Net.Search.Function
 {
     /// <summary> Expert: A base class for ValueSource implementations that retrieve values for
-    /// a single field from the <see cref="Lucene.Net.Search.FieldCache">FieldCache</see>.
+    /// a single field from the <see cref="Lucene.Net.Search.IFieldCache">FieldCache</see>.
     /// <p/>
     /// Fields used herein nust be indexed (doesn't matter if these fields are stored or not).
     /// <p/>
@@ -76,7 +76,7 @@ namespace Lucene.Net.Search.Function
         /// </param>
         /// <seealso cref="ValueSource">
         /// </seealso>
-        public abstract DocValues GetCachedFieldValues(FieldCache cache, string field, IndexReader reader);
+        public abstract DocValues GetCachedFieldValues(IFieldCache cache, string field, IndexReader reader);
 
         /*(non-Javadoc) <see cref="java.lang.Object.equals(java.lang.Object) */
 

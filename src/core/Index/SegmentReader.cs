@@ -1673,17 +1673,17 @@ namespace Lucene.Net.Index
             get { return norms; }
         }
 
-        public BitVector deletedDocs_ForNUnit
+        public BitVector DeletedDocs_ForNUnit
         {
             get { return deletedDocs; }
         }
 
-        public CoreReaders core_ForNUnit
+        public CoreReaders Core_ForNUnit
         {
             get { return core; }
         }
 
-        public Ref deletedDocsRef_ForNUnit
+        public Ref DeletedDocsRef_ForNUnit
         {
             get { return deletedDocsRef; }
         }

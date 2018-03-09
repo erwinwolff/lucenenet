@@ -61,7 +61,7 @@ namespace Lucene.Net.Search
     /// when the search is switching to the next segment.
     /// You may need to update internal state of the
     /// comparator, for example retrieving new values from
-    /// the <see cref="FieldCache" />.</item>
+    /// the <see cref="IFieldCache" />.</item>
     ///
     /// <item> <see cref="P:Lucene.Net.Search.FieldComparator.Item(int)" /> Return the sort value stored in
     /// the specified slot.  This is only called at the end
@@ -162,7 +162,7 @@ namespace Lucene.Net.Search
         /// </returns>
         public abstract IComparable this[int slot] { get; }
 
-        /// <summary>Parses field's values as byte (using <see cref="FieldCache.GetBytes(Lucene.Net.Index.IndexReader,string)" />
+        /// <summary>Parses field's values as byte (using <see cref="IFieldCache.GetBytes(Lucene.Net.Index.IndexReader,string)" />
         /// and sorts by ascending value
         /// </summary>
         public sealed class ByteComparator : FieldComparator
@@ -170,14 +170,14 @@ namespace Lucene.Net.Search
             private sbyte[] values;
             private sbyte[] currentReaderValues;
             private string field;
-            private ByteParser parser;
+            private IByteParser parser;
             private sbyte bottom;
 
-            internal ByteComparator(int numHits, string field, Lucene.Net.Search.Parser parser)
+            internal ByteComparator(int numHits, string field, Lucene.Net.Search.IParser parser)
             {
                 values = new sbyte[numHits];
                 this.field = field;
-                this.parser = (ByteParser)parser;
+                this.parser = (IByteParser)parser;
             }
 
             public override int Compare(int slot1, int slot2)
@@ -259,7 +259,7 @@ namespace Lucene.Net.Search
             }
         }
 
-        /// <summary>Parses field's values as double (using <see cref="FieldCache.GetDoubles(Lucene.Net.Index.IndexReader,string)" />
+        /// <summary>Parses field's values as double (using <see cref="IFieldCache.GetDoubles(Lucene.Net.Index.IndexReader,string)" />
         /// and sorts by ascending value
         /// </summary>
         public sealed class DoubleComparator : FieldComparator
@@ -267,14 +267,14 @@ namespace Lucene.Net.Search
             private double[] values;
             private double[] currentReaderValues;
             private string field;
-            private DoubleParser parser;
+            private IDoubleParser parser;
             private double bottom;
 
-            internal DoubleComparator(int numHits, string field, Lucene.Net.Search.Parser parser)
+            internal DoubleComparator(int numHits, string field, Lucene.Net.Search.IParser parser)
             {
                 values = new double[numHits];
                 this.field = field;
-                this.parser = (DoubleParser)parser;
+                this.parser = (IDoubleParser)parser;
             }
 
             public override int Compare(int slot1, int slot2)
@@ -333,7 +333,7 @@ namespace Lucene.Net.Search
             }
         }
 
-        /// <summary>Parses field's values as float (using <see cref="FieldCache.GetFloats(Lucene.Net.Index.IndexReader,string)" />
+        /// <summary>Parses field's values as float (using <see cref="IFieldCache.GetFloats(Lucene.Net.Index.IndexReader,string)" />
         /// and sorts by ascending value
         /// </summary>
         public sealed class FloatComparator : FieldComparator
@@ -341,14 +341,14 @@ namespace Lucene.Net.Search
             private float[] values;
             private float[] currentReaderValues;
             private string field;
-            private FloatParser parser;
+            private IFloatParser parser;
             private float bottom;
 
-            internal FloatComparator(int numHits, string field, Lucene.Net.Search.Parser parser)
+            internal FloatComparator(int numHits, string field, Lucene.Net.Search.IParser parser)
             {
                 values = new float[numHits];
                 this.field = field;
-                this.parser = (FloatParser)parser;
+                this.parser = (IFloatParser)parser;
             }
 
             public override int Compare(int slot1, int slot2)
@@ -411,7 +411,7 @@ namespace Lucene.Net.Search
             }
         }
 
-        /// <summary>Parses field's values as int (using <see cref="FieldCache.GetInts(Lucene.Net.Index.IndexReader,string)" />
+        /// <summary>Parses field's values as int (using <see cref="IFieldCache.GetInts(Lucene.Net.Index.IndexReader,string)" />
         /// and sorts by ascending value
         /// </summary>
         public sealed class IntComparator : FieldComparator
@@ -422,7 +422,7 @@ namespace Lucene.Net.Search
             private IntParser parser;
             private int bottom; // Value of bottom of queue
 
-            internal IntComparator(int numHits, string field, Lucene.Net.Search.Parser parser)
+            internal IntComparator(int numHits, string field, Lucene.Net.Search.IParser parser)
             {
                 values = new int[numHits];
                 this.field = field;
@@ -493,7 +493,7 @@ namespace Lucene.Net.Search
             }
         }
 
-        /// <summary>Parses field's values as long (using <see cref="FieldCache.GetLongs(Lucene.Net.Index.IndexReader,string)" />
+        /// <summary>Parses field's values as long (using <see cref="IFieldCache.GetLongs(Lucene.Net.Index.IndexReader,string)" />
         /// and sorts by ascending value
         /// </summary>
         public sealed class LongComparator : FieldComparator
@@ -501,14 +501,14 @@ namespace Lucene.Net.Search
             private long[] values;
             private long[] currentReaderValues;
             private string field;
-            private LongParser parser;
+            private ILongParser parser;
             private long bottom;
 
-            internal LongComparator(int numHits, string field, Lucene.Net.Search.Parser parser)
+            internal LongComparator(int numHits, string field, Lucene.Net.Search.IParser parser)
             {
                 values = new long[numHits];
                 this.field = field;
-                this.parser = (LongParser)parser;
+                this.parser = (ILongParser)parser;
             }
 
             public override int Compare(int slot1, int slot2)
@@ -629,7 +629,7 @@ namespace Lucene.Net.Search
             }
         }
 
-        /// <summary>Parses field's values as short (using <see cref="FieldCache.GetShorts(IndexReader, string)" />)
+        /// <summary>Parses field's values as short (using <see cref="IFieldCache.GetShorts(IndexReader, string)" />)
         /// and sorts by ascending value
         /// </summary>
         public sealed class ShortComparator : FieldComparator
@@ -637,14 +637,14 @@ namespace Lucene.Net.Search
             private short[] values;
             private short[] currentReaderValues;
             private string field;
-            private ShortParser parser;
+            private IShortParser parser;
             private short bottom;
 
-            internal ShortComparator(int numHits, string field, Lucene.Net.Search.Parser parser)
+            internal ShortComparator(int numHits, string field, Lucene.Net.Search.IParser parser)
             {
                 values = new short[numHits];
                 this.field = field;
-                this.parser = (ShortParser)parser;
+                this.parser = (IShortParser)parser;
             }
 
             public override int Compare(int slot1, int slot2)
@@ -758,7 +758,7 @@ namespace Lucene.Net.Search
         /// ordinals.  This is functionally equivalent to <see cref="FieldComparator.StringValComparator" />
         ///, but it first resolves the string
         /// to their relative ordinal positions (using the index
-        /// returned by <see cref="FieldCache.GetStringIndex" />), and
+        /// returned by <see cref="IFieldCache.GetStringIndex" />), and
         /// does most comparisons using the ordinals.  For medium
         /// to large results, this comparator will be much faster
         /// than <see cref="FieldComparator.StringValComparator" />.  For very small

@@ -27,7 +27,7 @@ namespace Lucene.Net.Search.Function
     /// so overriding the similar (now deprecated) methods in <see cref="CustomScoreQuery" />
     /// is no longer suitable, as the supplied <c>doc</c> ID is per-segment
     /// and without knowledge of the IndexReader you cannot access the
-    /// document or <see cref="FieldCache" />.</para>
+    /// document or <see cref="IFieldCache" />.</para>
     ///
     /// @lucene.experimental
     /// @since 2.9.2

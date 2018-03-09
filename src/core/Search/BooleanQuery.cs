@@ -288,8 +288,10 @@ namespace Lucene.Net.Search
             public override Explanation Explain(IndexReader reader, int doc)
             {
                 int minShouldMatch = Enclosing_Instance.MinimumNumberShouldMatch;
-                ComplexExplanation sumExpl = new ComplexExplanation();
-                sumExpl.Description = "sum of:";
+                ComplexExplanation sumExpl = new ComplexExplanation
+                {
+                    Description = "sum of:"
+                };
                 int coord = 0;
                 int maxCoord = 0;
                 float sum = 0.0f;

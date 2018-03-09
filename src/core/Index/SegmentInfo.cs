@@ -357,14 +357,16 @@ namespace Lucene.Net.Index
 
         public object Clone()
         {
-            SegmentInfo si = new SegmentInfo(name, docCount, dir);
-            si.isCompoundFile = isCompoundFile;
-            si.delGen = delGen;
-            si.delCount = delCount;
-            si.hasProx = hasProx;
-            si.preLockless = preLockless;
-            si.hasSingleNormFile = hasSingleNormFile;
-            si.diagnostics = new HashMap<string, string>(this.diagnostics);
+            SegmentInfo si = new SegmentInfo(name, docCount, dir)
+            {
+                isCompoundFile = isCompoundFile,
+                delGen = delGen,
+                delCount = delCount,
+                hasProx = hasProx,
+                preLockless = preLockless,
+                hasSingleNormFile = hasSingleNormFile,
+                diagnostics = new HashMap<string, string>(this.diagnostics)
+            };
             if (this.diagnostics != null)
             {
                 si.diagnostics = new Dictionary<string, string>();

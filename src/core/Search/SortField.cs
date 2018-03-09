@@ -104,7 +104,7 @@ namespace Lucene.Net.Search
         private int type; // defaults to determining type dynamically
         private System.Globalization.CultureInfo locale; // defaults to "natural order" (no Locale)
         internal bool reverse = false; // defaults to natural order
-        private Lucene.Net.Search.Parser parser;
+        private Lucene.Net.Search.IParser parser;
 
         // Used for CUSTOM sort
         private FieldComparatorSource comparatorSource;
@@ -139,30 +139,30 @@ namespace Lucene.Net.Search
         }
 
         /// <summary>Creates a sort by terms in the given field, parsed
-        /// to numeric values using a custom <see cref="Search.Parser" />.
+        /// to numeric values using a custom <see cref="Search.IParser" />.
         /// </summary>
         /// <param name="field"> Name of field to sort by.  Must not be null.
         /// </param>
-        /// <param name="parser">Instance of a <see cref="Search.Parser" />,
+        /// <param name="parser">Instance of a <see cref="Search.IParser" />,
         /// which must subclass one of the existing numeric
-        /// parsers from <see cref="FieldCache" />. Sort type is inferred
+        /// parsers from <see cref="IFieldCache" />. Sort type is inferred
         /// by testing which numeric parser the parser subclasses.
         /// </param>
         /// <throws>  IllegalArgumentException if the parser fails to </throws>
         /// <summary>  subclass an existing numeric parser, or field is null
         /// </summary>
-        public SortField(string field, Lucene.Net.Search.Parser parser) : this(field, parser, false)
+        public SortField(string field, Lucene.Net.Search.IParser parser) : this(field, parser, false)
         {
         }
 
         /// <summary>Creates a sort, possibly in reverse, by terms in the given field, parsed
-        /// to numeric values using a custom <see cref="Search.Parser" />.
+        /// to numeric values using a custom <see cref="Search.IParser" />.
         /// </summary>
         /// <param name="field"> Name of field to sort by.  Must not be null.
         /// </param>
-        /// <param name="parser">Instance of a <see cref="Search.Parser" />,
+        /// <param name="parser">Instance of a <see cref="Search.IParser" />,
         /// which must subclass one of the existing numeric
-        /// parsers from <see cref="FieldCache" />. Sort type is inferred
+        /// parsers from <see cref="IFieldCache" />. Sort type is inferred
         /// by testing which numeric parser the parser subclasses.
         /// </param>
         /// <param name="reverse">True if natural order should be reversed.
@@ -170,19 +170,19 @@ namespace Lucene.Net.Search
         /// <throws>  IllegalArgumentException if the parser fails to </throws>
         /// <summary>  subclass an existing numeric parser, or field is null
         /// </summary>
-        public SortField(string field, Lucene.Net.Search.Parser parser, bool reverse)
+        public SortField(string field, Lucene.Net.Search.IParser parser, bool reverse)
         {
             if (parser is Lucene.Net.Search.IntParser)
                 InitFieldType(field, INT);
-            else if (parser is Lucene.Net.Search.FloatParser)
+            else if (parser is Lucene.Net.Search.IFloatParser)
                 InitFieldType(field, FLOAT);
-            else if (parser is Lucene.Net.Search.ShortParser)
+            else if (parser is Lucene.Net.Search.IShortParser)
                 InitFieldType(field, SHORT);
-            else if (parser is Lucene.Net.Search.ByteParser)
+            else if (parser is Lucene.Net.Search.IByteParser)
                 InitFieldType(field, BYTE);
-            else if (parser is Lucene.Net.Search.LongParser)
+            else if (parser is Lucene.Net.Search.ILongParser)
                 InitFieldType(field, LONG);
-            else if (parser is Lucene.Net.Search.DoubleParser)
+            else if (parser is Lucene.Net.Search.IDoubleParser)
                 InitFieldType(field, DOUBLE);
             else
             {
@@ -286,11 +286,11 @@ namespace Lucene.Net.Search
             get { return locale; }
         }
 
-        /// <summary>Returns the instance of a <see cref="FieldCache" /> parser that fits to the given sort type.
+        /// <summary>Returns the instance of a <see cref="IFieldCache" /> parser that fits to the given sort type.
         /// May return <c>null</c> if no parser was specified. Sorting is using the default parser then.
         /// </summary>
         /// <value> An instance of a &lt;see cref=&quot;FieldCache&quot; /&gt; parser, or &lt;c&gt;null&lt;/c&gt;. </value>
-        public virtual Parser Parser
+        public virtual IParser Parser
         {
             get { return parser; }
         }
@@ -376,7 +376,7 @@ namespace Lucene.Net.Search
         }
 
         /// <summary>Returns true if <c>o</c> is equal to this.  If a
-        /// <see cref="FieldComparatorSource" />  or <see cref="Search.Parser" />
+        /// <see cref="FieldComparatorSource" />  or <see cref="Search.IParser" />
         /// was provided, it must properly
         /// implement equals (unless a singleton is always used).
         /// </summary>
@@ -397,7 +397,7 @@ namespace Lucene.Net.Search
         }
 
         /// <summary>Returns true if <c>o</c> is equal to this.  If a
-        /// <see cref="FieldComparatorSource" /> (deprecated) or <see cref="Search.Parser" />
+        /// <see cref="FieldComparatorSource" /> (deprecated) or <see cref="Search.IParser" />
         /// was provided, it must properly
         /// implement hashCode (unless a singleton is always
         /// used).

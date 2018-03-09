@@ -316,9 +316,8 @@ namespace Lucene.Net.Index
             for (int i = 0; i < numReaders; i++)
             {
                 IndexReader reader = readers[i];
-                if (reader is SegmentReader)
+                if (reader is SegmentReader segmentReader)
                 {
-                    SegmentReader segmentReader = (SegmentReader)reader;
                     bool same = true;
                     FieldInfos segmentFieldInfos = segmentReader.FieldInfos();
                     int numFieldInfos = segmentFieldInfos.Size();
@@ -361,9 +360,8 @@ namespace Lucene.Net.Index
 
             foreach (IndexReader reader in readers)
             {
-                if (reader is SegmentReader)
+                if (reader is SegmentReader segmentReader)
                 {
-                    SegmentReader segmentReader = (SegmentReader)reader;
                     FieldInfos readerFieldInfos = segmentReader.FieldInfos();
                     int numReaderFieldInfos = readerFieldInfos.Size();
                     for (int j = 0; j < numReaderFieldInfos; j++)

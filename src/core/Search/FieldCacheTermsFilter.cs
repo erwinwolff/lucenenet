@@ -103,7 +103,7 @@ namespace Lucene.Net.Search
             this.terms = terms;
         }
 
-        public virtual FieldCache FieldCache
+        public virtual IFieldCache FieldCache
         {
             get { return FieldCache_Fields.DEFAULT; }
         }

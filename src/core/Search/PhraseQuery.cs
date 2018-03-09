@@ -202,8 +202,10 @@ namespace Lucene.Net.Search
 
             public override Explanation Explain(IndexReader reader, int doc)
             {
-                Explanation result = new Explanation();
-                result.Description = "weight(" + Query + " in " + doc + "), product of:";
+                Explanation result = new Explanation
+                {
+                    Description = "weight(" + Query + " in " + doc + "), product of:"
+                };
 
                 StringBuilder docFreqs = new StringBuilder();
                 StringBuilder query = new StringBuilder();
@@ -225,8 +227,10 @@ namespace Lucene.Net.Search
                 Explanation idfExpl = new Explanation(idf, "idf(" + Enclosing_Instance.field + ":" + docFreqs + ")");
 
                 // explain query weight
-                Explanation queryExpl = new Explanation();
-                queryExpl.Description = "queryWeight(" + Query + "), product of:";
+                Explanation queryExpl = new Explanation
+                {
+                    Description = "queryWeight(" + Query + "), product of:"
+                };
 
                 Explanation boostExpl = new Explanation(Enclosing_Instance.Boost, "boost");
                 if (Enclosing_Instance.Boost != 1.0f)
@@ -241,8 +245,10 @@ namespace Lucene.Net.Search
                 result.AddDetail(queryExpl);
 
                 // explain field weight
-                Explanation fieldExpl = new Explanation();
-                fieldExpl.Description = "fieldWeight(" + Enclosing_Instance.field + ":" + query + " in " + doc + "), product of:";
+                Explanation fieldExpl = new Explanation
+                {
+                    Description = "fieldWeight(" + Enclosing_Instance.field + ":" + query + " in " + doc + "), product of:"
+                };
 
                 PhraseScorer scorer = (PhraseScorer)Scorer(reader, true, false);
                 if (scorer == null)
@@ -285,8 +291,10 @@ namespace Lucene.Net.Search
             {
                 // optimize one-term case
                 Term term = terms[0];
-                Query termQuery = new TermQuery(term);
-                termQuery.Boost = Boost;
+                Query termQuery = new TermQuery(term)
+                {
+                    Boost = Boost
+                };
                 return termQuery.CreateWeight(searcher);
             }
             return new PhraseWeight(this, searcher);

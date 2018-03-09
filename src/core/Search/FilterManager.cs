@@ -76,9 +76,11 @@ namespace Lucene.Net.Search
             cleanSleepTime = DEFAULT_CACHE_SLEEP_TIME; // 10 minutes between cleanings
 
             internalFilterCleaner = new FilterCleaner(this);
-            ThreadClass fcThread = new ThreadClass(new System.Threading.ThreadStart(internalFilterCleaner.Run));
-            // setto be a Daemon so it doesn't have to be stopped
-            fcThread.IsBackground = true;
+            ThreadClass fcThread = new ThreadClass(new System.Threading.ThreadStart(internalFilterCleaner.Run))
+            {
+                // setto be a Daemon so it doesn't have to be stopped
+                IsBackground = true
+            };
             fcThread.Start();
         }
 

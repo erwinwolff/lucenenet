@@ -42,11 +42,9 @@ namespace Lucene.Net.Support
         internal GeneralKeyedCollection(Converter<TItem, TKey> converter)
             : base()
         {
-            // If the converter is null, throw an exception.
-            if (converter == null) throw new ArgumentNullException("converter");
 
             // Store the converter.
-            this.converter = converter;
+            this.converter = converter ?? throw new ArgumentNullException("converter");
 
             // That's all folks.
             return;

@@ -66,7 +66,7 @@ namespace Lucene.Net.Index
             private int _lastIndex = 0;
             private int[] _array;
 
-            internal void add(int i)
+            internal void Add(int i)
             {
                 if (_lastIndex == _arraySize)
                     growArray();
@@ -84,7 +84,7 @@ namespace Lucene.Net.Index
                 Array.Sort(_array, _index, _lastIndex - _index);
             }
 
-            internal void clear()
+            internal void Clear()
             {
                 _index = 0;
                 _lastIndex = 0;
@@ -132,7 +132,7 @@ namespace Lucene.Net.Index
             if (_termPositionsQueue.Size() == 0)
                 return false;
 
-            _posList.clear();
+            _posList.Clear();
             _doc = _termPositionsQueue.Peek().Doc;
 
             TermPositions tp;
@@ -141,7 +141,7 @@ namespace Lucene.Net.Index
                 tp = _termPositionsQueue.Peek();
 
                 for (int i = 0; i < tp.Freq; i++)
-                    _posList.add(tp.NextPosition());
+                    _posList.Add(tp.NextPosition());
 
                 if (tp.Next())
                     _termPositionsQueue.UpdateTop();

@@ -104,8 +104,10 @@ namespace Lucene.Net.Analysis.Standard
         /// </summary>
         public override TokenStream TokenStream(string fieldName, TextReader reader)
         {
-            StandardTokenizer tokenStream = new StandardTokenizer(matchVersion, reader);
-            tokenStream.MaxTokenLength = maxTokenLength;
+            StandardTokenizer tokenStream = new StandardTokenizer(matchVersion, reader)
+            {
+                MaxTokenLength = maxTokenLength
+            };
             TokenStream result = new StandardFilter(tokenStream);
             result = new LowerCaseFilter(result);
             result = new StopFilter(enableStopPositionIncrements, result, stopSet);

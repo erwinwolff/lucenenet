@@ -67,7 +67,7 @@ namespace Lucene.Net.QueryParsers
         /// <summary> Replaces unprintable characters by their escaped (or unicode escaped)
         /// equivalents in the given string
         /// </summary>
-        protected internal static string addEscapes(string str)
+        protected internal static string AddEscapes(string str)
         {
             StringBuilder retval = new StringBuilder();
             char ch;
@@ -139,7 +139,7 @@ namespace Lucene.Net.QueryParsers
         /// </summary>
         protected internal static string LexicalError(bool EOFSeen, int lexState, int errorLine, int errorColumn, string errorAfter, char curChar)
         {
-            return ("Lexical error at line " + errorLine + ", column " + errorColumn + ".  Encountered: " + (EOFSeen ? "<EOF> " : ("\"" + addEscapes(System.Convert.ToString(curChar)) + "\"") + " (" + (int)curChar + "), ") + "after : \"" + addEscapes(errorAfter) + "\"");
+            return ("Lexical error at line " + errorLine + ", column " + errorColumn + ".  Encountered: " + (EOFSeen ? "<EOF> " : ("\"" + AddEscapes(System.Convert.ToString(curChar)) + "\"") + " (" + (int)curChar + "), ") + "after : \"" + AddEscapes(errorAfter) + "\"");
         }
 
         /*

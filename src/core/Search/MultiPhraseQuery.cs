@@ -225,14 +225,18 @@ namespace Lucene.Net.Search
 
             public override Explanation Explain(IndexReader reader, int doc)
             {
-                ComplexExplanation result = new ComplexExplanation();
-                result.Description = "weight(" + Query + " in " + doc + "), product of:";
+                ComplexExplanation result = new ComplexExplanation
+                {
+                    Description = "weight(" + Query + " in " + doc + "), product of:"
+                };
 
                 Explanation idfExpl = new Explanation(idf, "idf(" + Query + ")");
 
                 // explain query weight
-                Explanation queryExpl = new Explanation();
-                queryExpl.Description = "queryWeight(" + Query + "), product of:";
+                Explanation queryExpl = new Explanation
+                {
+                    Description = "queryWeight(" + Query + "), product of:"
+                };
 
                 Explanation boostExpl = new Explanation(Enclosing_Instance.Boost, "boost");
                 if (Enclosing_Instance.Boost != 1.0f)
@@ -248,8 +252,10 @@ namespace Lucene.Net.Search
                 result.AddDetail(queryExpl);
 
                 // explain field weight
-                ComplexExplanation fieldExpl = new ComplexExplanation();
-                fieldExpl.Description = "fieldWeight(" + Query + " in " + doc + "), product of:";
+                ComplexExplanation fieldExpl = new ComplexExplanation
+                {
+                    Description = "fieldWeight(" + Query + " in " + doc + "), product of:"
+                };
 
                 PhraseScorer scorer = (PhraseScorer)Scorer(reader, true, false);
                 if (scorer == null)

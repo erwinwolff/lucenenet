@@ -74,13 +74,9 @@ namespace Lucene.Net.Index
 
         internal CompoundFileWriter(Directory dir, string name, SegmentMerger.CheckAbort checkAbort)
         {
-            if (dir == null)
-                throw new ArgumentNullException("dir");
-            if (name == null)
-                throw new ArgumentNullException("name");
             this.checkAbort = checkAbort;
-            directory = dir;
-            fileName = name;
+            directory = dir ?? throw new ArgumentNullException("dir");
+            fileName = name ?? throw new ArgumentNullException("name");
             ids = new HashSet<string>();
             entries = new LinkedList<FileEntry>();
         }

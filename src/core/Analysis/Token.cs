@@ -779,9 +779,8 @@ namespace Lucene.Net.Analysis
 
         public override void CopyTo(Attribute target)
         {
-            if (target is Token)
+            if (target is Token to)
             {
-                var to = (Token)target;
                 to.Reinit(this);
                 // reinit shares the payload, so clone it:
                 if (payload != null)

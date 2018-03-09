@@ -73,8 +73,10 @@ namespace Lucene.Net.Search.Payloads
             {
                 newClauses[i] = clauses[i];
             }
-            PayloadNearQuery boostingNearQuery = new PayloadNearQuery(newClauses, internalSlop, inOrder);
-            boostingNearQuery.Boost = Boost;
+            PayloadNearQuery boostingNearQuery = new PayloadNearQuery(newClauses, internalSlop, inOrder)
+            {
+                Boost = Boost
+            };
             return boostingNearQuery;
         }
 

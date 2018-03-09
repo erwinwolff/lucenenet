@@ -151,25 +151,25 @@ namespace Lucene.Net.Search
         public readonly static int STRING_INDEX = -1;
 
         /// <summary>Expert: The cache used internally by sorting and range query classes. </summary>
-        public readonly static FieldCache DEFAULT;
+        public readonly static IFieldCache DEFAULT;
 
         /// <summary>The default parser for byte values, which are encoded by <see cref="byte.ToString()" /> </summary>
-        public readonly static ByteParser DEFAULT_BYTE_PARSER;
+        public readonly static IByteParser DEFAULT_BYTE_PARSER;
 
         /// <summary>The default parser for short values, which are encoded by <see cref="short.ToString()" /> </summary>
-        public readonly static ShortParser DEFAULT_SHORT_PARSER;
+        public readonly static IShortParser DEFAULT_SHORT_PARSER;
 
         /// <summary>The default parser for int values, which are encoded by <see cref="int.ToString()" /> </summary>
         public readonly static IntParser DEFAULT_INT_PARSER;
 
         /// <summary>The default parser for float values, which are encoded by <see cref="float.ToString()" /> </summary>
-        public readonly static FloatParser DEFAULT_FLOAT_PARSER;
+        public readonly static IFloatParser DEFAULT_FLOAT_PARSER;
 
         /// <summary>The default parser for long values, which are encoded by <see cref="long.ToString()" /> </summary>
-        public readonly static LongParser DEFAULT_LONG_PARSER;
+        public readonly static ILongParser DEFAULT_LONG_PARSER;
 
         /// <summary>The default parser for double values, which are encoded by <see cref="double.ToString()" /> </summary>
-        public readonly static DoubleParser DEFAULT_DOUBLE_PARSER;
+        public readonly static IDoubleParser DEFAULT_DOUBLE_PARSER;
 
         /// <summary> A parser instance for int values encoded by <see cref="NumericUtils.IntToPrefixCoded(int)" />, e.g. when indexed
         /// via <see cref="NumericField" />/<see cref="NumericTokenStream" />.
@@ -179,17 +179,17 @@ namespace Lucene.Net.Search
         /// <summary> A parser instance for float values encoded with <see cref="NumericUtils" />, e.g. when indexed
         /// via <see cref="NumericField" />/<see cref="NumericTokenStream" />.
         /// </summary>
-        public readonly static FloatParser NUMERIC_UTILS_FLOAT_PARSER;
+        public readonly static IFloatParser NUMERIC_UTILS_FLOAT_PARSER;
 
         /// <summary> A parser instance for long values encoded by <see cref="NumericUtils.LongToPrefixCoded(long)" />, e.g. when indexed
         /// via <see cref="NumericField" />/<see cref="NumericTokenStream" />.
         /// </summary>
-        public readonly static LongParser NUMERIC_UTILS_LONG_PARSER;
+        public readonly static ILongParser NUMERIC_UTILS_LONG_PARSER;
 
         /// <summary> A parser instance for double values encoded with <see cref="NumericUtils" />, e.g. when indexed
         /// via <see cref="NumericField" />/<see cref="NumericTokenStream" />.
         /// </summary>
-        public readonly static DoubleParser NUMERIC_UTILS_DOUBLE_PARSER;
+        public readonly static IDoubleParser NUMERIC_UTILS_DOUBLE_PARSER;
 
         static FieldCache_Fields()
         {
@@ -208,7 +208,7 @@ namespace Lucene.Net.Search
     }
 
     [Serializable]
-    internal class AnonymousClassByteParser : ByteParser
+    internal class AnonymousClassByteParser : IByteParser
     {
         public virtual sbyte ParseByte(string value_Renamed)
         {
@@ -222,12 +222,12 @@ namespace Lucene.Net.Search
 
         public override string ToString()
         {
-            return typeof(FieldCache).FullName + ".DEFAULT_BYTE_PARSER";
+            return typeof(IFieldCache).FullName + ".DEFAULT_BYTE_PARSER";
         }
     }
 
     [Serializable]
-    internal class AnonymousClassShortParser : ShortParser
+    internal class AnonymousClassShortParser : IShortParser
     {
         public virtual short ParseShort(string value_Renamed)
         {
@@ -241,7 +241,7 @@ namespace Lucene.Net.Search
 
         public override string ToString()
         {
-            return typeof(FieldCache).FullName + ".DEFAULT_SHORT_PARSER";
+            return typeof(IFieldCache).FullName + ".DEFAULT_SHORT_PARSER";
         }
     }
 
@@ -260,12 +260,12 @@ namespace Lucene.Net.Search
 
         public override string ToString()
         {
-            return typeof(FieldCache).FullName + ".DEFAULT_INT_PARSER";
+            return typeof(IFieldCache).FullName + ".DEFAULT_INT_PARSER";
         }
     }
 
     [Serializable]
-    internal class AnonymousClassFloatParser : FloatParser
+    internal class AnonymousClassFloatParser : IFloatParser
     {
         public virtual float ParseFloat(string value_Renamed)
         {
@@ -286,12 +286,12 @@ namespace Lucene.Net.Search
 
         public override string ToString()
         {
-            return typeof(FieldCache).FullName + ".DEFAULT_FLOAT_PARSER";
+            return typeof(IFieldCache).FullName + ".DEFAULT_FLOAT_PARSER";
         }
     }
 
     [Serializable]
-    internal class AnonymousClassLongParser : LongParser
+    internal class AnonymousClassLongParser : ILongParser
     {
         public virtual long ParseLong(string value_Renamed)
         {
@@ -305,12 +305,12 @@ namespace Lucene.Net.Search
 
         public override string ToString()
         {
-            return typeof(FieldCache).FullName + ".DEFAULT_LONG_PARSER";
+            return typeof(IFieldCache).FullName + ".DEFAULT_LONG_PARSER";
         }
     }
 
     [Serializable]
-    internal class AnonymousClassDoubleParser : DoubleParser
+    internal class AnonymousClassDoubleParser : IDoubleParser
     {
         public virtual double ParseDouble(string value_Renamed)
         {
@@ -324,7 +324,7 @@ namespace Lucene.Net.Search
 
         public override string ToString()
         {
-            return typeof(FieldCache).FullName + ".DEFAULT_DOUBLE_PARSER";
+            return typeof(IFieldCache).FullName + ".DEFAULT_DOUBLE_PARSER";
         }
     }
 
@@ -346,12 +346,12 @@ namespace Lucene.Net.Search
 
         public override string ToString()
         {
-            return typeof(FieldCache).FullName + ".NUMERIC_UTILS_INT_PARSER";
+            return typeof(IFieldCache).FullName + ".NUMERIC_UTILS_INT_PARSER";
         }
     }
 
     [Serializable]
-    internal class AnonymousClassFloatParser1 : FloatParser
+    internal class AnonymousClassFloatParser1 : IFloatParser
     {
         public virtual float ParseFloat(string val)
         {
@@ -368,12 +368,12 @@ namespace Lucene.Net.Search
 
         public override string ToString()
         {
-            return typeof(FieldCache).FullName + ".NUMERIC_UTILS_FLOAT_PARSER";
+            return typeof(IFieldCache).FullName + ".NUMERIC_UTILS_FLOAT_PARSER";
         }
     }
 
     [Serializable]
-    internal class AnonymousClassLongParser1 : LongParser
+    internal class AnonymousClassLongParser1 : ILongParser
     {
         public virtual long ParseLong(string val)
         {
@@ -390,12 +390,12 @@ namespace Lucene.Net.Search
 
         public override string ToString()
         {
-            return typeof(FieldCache).FullName + ".NUMERIC_UTILS_LONG_PARSER";
+            return typeof(IFieldCache).FullName + ".NUMERIC_UTILS_LONG_PARSER";
         }
     }
 
     [Serializable]
-    internal class AnonymousClassDoubleParser1 : DoubleParser
+    internal class AnonymousClassDoubleParser1 : IDoubleParser
     {
         public virtual double ParseDouble(string val)
         {
@@ -412,11 +412,11 @@ namespace Lucene.Net.Search
 
         public override string ToString()
         {
-            return typeof(FieldCache).FullName + ".NUMERIC_UTILS_DOUBLE_PARSER";
+            return typeof(IFieldCache).FullName + ".NUMERIC_UTILS_DOUBLE_PARSER";
         }
     }
 
-    public interface FieldCache
+    public interface IFieldCache
     {
         /// <summary>Checks the internal cache for an appropriate entry, and if none is
         /// found, reads the terms in <c>field</c> as a single byte and returns an array
@@ -446,7 +446,7 @@ namespace Lucene.Net.Search
         /// <returns> The values in the given field for each document.
         /// </returns>
         /// <throws>  IOException  If any error occurs. </throws>
-        sbyte[] GetBytes(IndexReader reader, string field, ByteParser parser);
+        sbyte[] GetBytes(IndexReader reader, string field, IByteParser parser);
 
         /// <summary>Checks the internal cache for an appropriate entry, and if none is
         /// found, reads the terms in <c>field</c> as shorts and returns an array
@@ -476,7 +476,7 @@ namespace Lucene.Net.Search
         /// <returns> The values in the given field for each document.
         /// </returns>
         /// <throws>  IOException  If any error occurs. </throws>
-        short[] GetShorts(IndexReader reader, string field, ShortParser parser);
+        short[] GetShorts(IndexReader reader, string field, IShortParser parser);
 
         /// <summary>Checks the internal cache for an appropriate entry, and if none is
         /// found, reads the terms in <c>field</c> as integers and returns an array
@@ -536,7 +536,7 @@ namespace Lucene.Net.Search
         /// <returns> The values in the given field for each document.
         /// </returns>
         /// <throws>  IOException  If any error occurs. </throws>
-        float[] GetFloats(IndexReader reader, string field, FloatParser parser);
+        float[] GetFloats(IndexReader reader, string field, IFloatParser parser);
 
         /// <summary> Checks the internal cache for an appropriate entry, and if none is
         /// found, reads the terms in <c>field</c> as longs and returns an array
@@ -568,7 +568,7 @@ namespace Lucene.Net.Search
         /// <returns> The values in the given field for each document.
         /// </returns>
         /// <throws>  IOException If any error occurs. </throws>
-        long[] GetLongs(IndexReader reader, string field, LongParser parser);
+        long[] GetLongs(IndexReader reader, string field, ILongParser parser);
 
         /// <summary> Checks the internal cache for an appropriate entry, and if none is
         /// found, reads the terms in <c>field</c> as integers and returns an array
@@ -600,7 +600,7 @@ namespace Lucene.Net.Search
         /// <returns> The values in the given field for each document.
         /// </returns>
         /// <throws>  IOException If any error occurs. </throws>
-        double[] GetDoubles(IndexReader reader, string field, DoubleParser parser);
+        double[] GetDoubles(IndexReader reader, string field, IDoubleParser parser);
 
         /// <summary>Checks the internal cache for an appropriate entry, and if none
         /// is found, reads the term values in <c>field</c> and returns an array
@@ -683,65 +683,65 @@ namespace Lucene.Net.Search
     }
 
     /// <summary> Marker interface as super-interface to all parsers. It
-    /// is used to specify a custom parser to <see cref="SortField(String, Parser)" />.
+    /// is used to specify a custom parser to <see cref="SortField(String, IParser)" />.
     /// </summary>
-    public interface Parser
+    public interface IParser
     {
     }
 
     /// <summary>Interface to parse bytes from document fields.</summary>
-    /// <seealso cref="FieldCache.GetBytes(IndexReader, String, ByteParser)">
+    /// <seealso cref="IFieldCache.GetBytes(IndexReader, String, IByteParser)">
     /// </seealso>
-    public interface ByteParser : Parser
+    public interface IByteParser : IParser
     {
         /// <summary>Return a single Byte representation of this field's value. </summary>
         sbyte ParseByte(string string_Renamed);
     }
 
     /// <summary>Interface to parse shorts from document fields.</summary>
-    /// <seealso cref="FieldCache.GetShorts(IndexReader, String, ShortParser)">
+    /// <seealso cref="IFieldCache.GetShorts(IndexReader, String, IShortParser)">
     /// </seealso>
-    public interface ShortParser : Parser
+    public interface IShortParser : IParser
     {
         /// <summary>Return a short representation of this field's value. </summary>
         short ParseShort(string string_Renamed);
     }
 
     /// <summary>Interface to parse ints from document fields.</summary>
-    /// <seealso cref="FieldCache.GetInts(IndexReader, String, IntParser)">
+    /// <seealso cref="IFieldCache.GetInts(IndexReader, String, IntParser)">
     /// </seealso>
-    public interface IntParser : Parser
+    public interface IntParser : IParser
     {
         /// <summary>Return an integer representation of this field's value. </summary>
         int ParseInt(string string_Renamed);
     }
 
     /// <summary>Interface to parse floats from document fields.</summary>
-    /// <seealso cref="FieldCache.GetFloats(IndexReader, String, FloatParser)">
+    /// <seealso cref="IFieldCache.GetFloats(IndexReader, String, IFloatParser)">
     /// </seealso>
-    public interface FloatParser : Parser
+    public interface IFloatParser : IParser
     {
         /// <summary>Return an float representation of this field's value. </summary>
         float ParseFloat(string string_Renamed);
     }
 
     /// <summary>Interface to parse long from document fields.</summary>
-    /// <seealso cref="FieldCache.GetLongs(IndexReader, String, LongParser)">
+    /// <seealso cref="IFieldCache.GetLongs(IndexReader, String, ILongParser)">
     /// </seealso>
-    /// <deprecated> Use <see cref="LongParser" />, this will be removed in Lucene 3.0
+    /// <deprecated> Use <see cref="ILongParser" />, this will be removed in Lucene 3.0
     /// </deprecated>
-    public interface LongParser : Parser
+    public interface ILongParser : IParser
     {
         /// <summary>Return an long representation of this field's value. </summary>
         long ParseLong(string string_Renamed);
     }
 
     /// <summary>Interface to parse doubles from document fields.</summary>
-    /// <seealso cref="FieldCache.GetDoubles(IndexReader, String, DoubleParser)">
+    /// <seealso cref="IFieldCache.GetDoubles(IndexReader, String, IDoubleParser)">
     /// </seealso>
-    /// <deprecated> Use <see cref="DoubleParser" />, this will be removed in Lucene 3.0
+    /// <deprecated> Use <see cref="IDoubleParser" />, this will be removed in Lucene 3.0
     /// </deprecated>
-    public interface DoubleParser : Parser
+    public interface IDoubleParser : IParser
     {
         /// <summary>Return an long representation of this field's value. </summary>
         double ParseDouble(string string_Renamed);

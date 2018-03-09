@@ -213,8 +213,10 @@ namespace Lucene.Net.Index
                                                   field.IsStorePositionWithTermVector, field.IsStoreOffsetWithTermVector,
                                                   field.OmitNorms, false, field.OmitTermFreqAndPositions);
 
-                    fp = new DocFieldProcessorPerField(this, fi);
-                    fp.next = fieldHash[hashPos];
+                    fp = new DocFieldProcessorPerField(this, fi)
+                    {
+                        next = fieldHash[hashPos]
+                    };
                     fieldHash[hashPos] = fp;
                     totalFieldCount++;
 

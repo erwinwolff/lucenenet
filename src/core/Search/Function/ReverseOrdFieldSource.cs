@@ -22,7 +22,7 @@ using IndexReader = Lucene.Net.Index.IndexReader;
 namespace Lucene.Net.Search.Function
 {
     /// <summary> Expert: obtains the ordinal of the field value from the default Lucene
-    /// <see cref="Lucene.Net.Search.FieldCache">FieldCache</see> using getStringIndex()
+    /// <see cref="Lucene.Net.Search.IFieldCache">FieldCache</see> using getStringIndex()
     /// and reverses the order.
     /// <p/>
     /// The native lucene index order is used to assign an ordinal value for each field value.

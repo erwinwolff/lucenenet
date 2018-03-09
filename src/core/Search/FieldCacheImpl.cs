@@ -37,7 +37,7 @@ namespace Lucene.Net.Search
     /// </summary>
     /// <since>   lucene 1.4
     /// </since>
-    internal class FieldCacheImpl : FieldCache
+    internal class FieldCacheImpl : IFieldCache
     {
         private IDictionary<Type, Cache> caches;
 
@@ -182,12 +182,12 @@ namespace Lucene.Net.Search
                 this.wrapper = null;
             }
 
-            internal Cache(FieldCache wrapper)
+            internal Cache(IFieldCache wrapper)
             {
                 this.wrapper = wrapper;
             }
 
-            internal FieldCache wrapper;
+            internal IFieldCache wrapper;
 
             internal IDictionary<object, IDictionary<Entry, object>> readerCache = new WeakDictionary<object, IDictionary<Entry, object>>();
 
@@ -330,14 +330,14 @@ namespace Lucene.Net.Search
         }
 
         // inherit javadocs
-        public virtual sbyte[] GetBytes(IndexReader reader, string field, ByteParser parser)
+        public virtual sbyte[] GetBytes(IndexReader reader, string field, IByteParser parser)
         {
             return (sbyte[])caches[typeof(sbyte)].Get(reader, new Entry(field, parser));
         }
 
         internal sealed class ByteCache : Cache
         {
-            internal ByteCache(FieldCache wrapper) : base(wrapper)
+            internal ByteCache(IFieldCache wrapper) : base(wrapper)
             {
             }
 
@@ -345,7 +345,7 @@ namespace Lucene.Net.Search
             {
                 Entry entry = entryKey;
                 string field = entry.field;
-                ByteParser parser = (ByteParser)entry.custom;
+                IByteParser parser = (IByteParser)entry.custom;
                 if (parser == null)
                 {
                     return wrapper.GetBytes(reader, field, Lucene.Net.Search.FieldCache_Fields.DEFAULT_BYTE_PARSER);
@@ -388,14 +388,14 @@ namespace Lucene.Net.Search
         }
 
         // inherit javadocs
-        public virtual short[] GetShorts(IndexReader reader, string field, ShortParser parser)
+        public virtual short[] GetShorts(IndexReader reader, string field, IShortParser parser)
         {
             return (short[])caches[typeof(short)].Get(reader, new Entry(field, parser));
         }
 
         internal sealed class ShortCache : Cache
         {
-            internal ShortCache(FieldCache wrapper) : base(wrapper)
+            internal ShortCache(IFieldCache wrapper) : base(wrapper)
             {
             }
 
@@ -403,7 +403,7 @@ namespace Lucene.Net.Search
             {
                 Entry entry = entryKey;
                 string field = entry.field;
-                ShortParser parser = (ShortParser)entry.custom;
+                IShortParser parser = (IShortParser)entry.custom;
                 if (parser == null)
                 {
                     return wrapper.GetShorts(reader, field, Lucene.Net.Search.FieldCache_Fields.DEFAULT_SHORT_PARSER);
@@ -453,7 +453,7 @@ namespace Lucene.Net.Search
 
         internal sealed class IntCache : Cache
         {
-            internal IntCache(FieldCache wrapper) : base(wrapper)
+            internal IntCache(IFieldCache wrapper) : base(wrapper)
             {
             }
 
@@ -517,14 +517,14 @@ namespace Lucene.Net.Search
         }
 
         // inherit javadocs
-        public virtual float[] GetFloats(IndexReader reader, string field, FloatParser parser)
+        public virtual float[] GetFloats(IndexReader reader, string field, IFloatParser parser)
         {
             return (float[])caches[typeof(float)].Get(reader, new Entry(field, parser));
         }
 
         internal sealed class FloatCache : Cache
         {
-            internal FloatCache(FieldCache wrapper) : base(wrapper)
+            internal FloatCache(IFieldCache wrapper) : base(wrapper)
             {
             }
 
@@ -532,7 +532,7 @@ namespace Lucene.Net.Search
             {
                 Entry entry = entryKey;
                 string field = entry.field;
-                FloatParser parser = (FloatParser)entry.custom;
+                IFloatParser parser = (IFloatParser)entry.custom;
                 if (parser == null)
                 {
                     try
@@ -587,14 +587,14 @@ namespace Lucene.Net.Search
         }
 
         // inherit javadocs
-        public virtual long[] GetLongs(IndexReader reader, string field, Lucene.Net.Search.LongParser parser)
+        public virtual long[] GetLongs(IndexReader reader, string field, Lucene.Net.Search.ILongParser parser)
         {
             return (long[])caches[typeof(long)].Get(reader, new Entry(field, parser));
         }
 
         internal sealed class LongCache : Cache
         {
-            internal LongCache(FieldCache wrapper) : base(wrapper)
+            internal LongCache(IFieldCache wrapper) : base(wrapper)
             {
             }
 
@@ -602,7 +602,7 @@ namespace Lucene.Net.Search
             {
                 Entry entry = entryKey;
                 string field = entry.field;
-                Lucene.Net.Search.LongParser parser = (Lucene.Net.Search.LongParser)entry.custom;
+                Lucene.Net.Search.ILongParser parser = (Lucene.Net.Search.ILongParser)entry.custom;
                 if (parser == null)
                 {
                     try
@@ -658,14 +658,14 @@ namespace Lucene.Net.Search
         }
 
         // inherit javadocs
-        public virtual double[] GetDoubles(IndexReader reader, string field, Lucene.Net.Search.DoubleParser parser)
+        public virtual double[] GetDoubles(IndexReader reader, string field, Lucene.Net.Search.IDoubleParser parser)
         {
             return (double[])caches[typeof(double)].Get(reader, new Entry(field, parser));
         }
 
         internal sealed class DoubleCache : Cache
         {
-            internal DoubleCache(FieldCache wrapper) : base(wrapper)
+            internal DoubleCache(IFieldCache wrapper) : base(wrapper)
             {
             }
 
@@ -673,7 +673,7 @@ namespace Lucene.Net.Search
             {
                 Entry entry = entryKey;
                 string field = entry.field;
-                Lucene.Net.Search.DoubleParser parser = (Lucene.Net.Search.DoubleParser)entry.custom;
+                Lucene.Net.Search.IDoubleParser parser = (Lucene.Net.Search.IDoubleParser)entry.custom;
                 if (parser == null)
                 {
                     try
@@ -725,12 +725,12 @@ namespace Lucene.Net.Search
         // inherit javadocs
         public virtual string[] GetStrings(IndexReader reader, string field)
         {
-            return (string[])caches[typeof(string)].Get(reader, new Entry(field, (Parser)null));
+            return (string[])caches[typeof(string)].Get(reader, new Entry(field, (IParser)null));
         }
 
         internal sealed class StringCache : Cache
         {
-            internal StringCache(FieldCache wrapper) : base(wrapper)
+            internal StringCache(IFieldCache wrapper) : base(wrapper)
             {
             }
 
@@ -768,12 +768,12 @@ namespace Lucene.Net.Search
         // inherit javadocs
         public virtual StringIndex GetStringIndex(IndexReader reader, string field)
         {
-            return (StringIndex)caches[typeof(StringIndex)].Get(reader, new Entry(field, (Parser)null));
+            return (StringIndex)caches[typeof(StringIndex)].Get(reader, new Entry(field, (IParser)null));
         }
 
         internal sealed class StringIndexCache : Cache
         {
-            internal StringIndexCache(FieldCache wrapper) : base(wrapper)
+            internal StringIndexCache(IFieldCache wrapper) : base(wrapper)
             {
             }
 

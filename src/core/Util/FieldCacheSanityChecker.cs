@@ -20,7 +20,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using CacheEntry = Lucene.Net.Search.CacheEntry;
-using FieldCache = Lucene.Net.Search.FieldCache;
+using IFieldCache = Lucene.Net.Search.IFieldCache;
 using IndexReader = Lucene.Net.Index.IndexReader;
 
 namespace Lucene.Net.Util
@@ -47,7 +47,7 @@ namespace Lucene.Net.Util
     /// of Lucene.
     /// <p/>
     /// </summary>
-    /// <seealso cref="FieldCache">
+    /// <seealso cref="IFieldCache">
     /// </seealso>
     /// <seealso cref="FieldCacheSanityChecker.Insanity">
     /// </seealso>
@@ -73,7 +73,7 @@ namespace Lucene.Net.Util
         /// <summary> Quick and dirty convenience method</summary>
         /// <seealso cref="Check">
         /// </seealso>
-        public static Insanity[] CheckSanity(FieldCache cache)
+        public static Insanity[] CheckSanity(IFieldCache cache)
         {
             return CheckSanity(cache.GetCacheEntries());
         }
@@ -272,8 +272,10 @@ namespace Lucene.Net.Util
         /// </summary>
         private IList GetAllDecendentReaderKeys(object seed)
         {
-            List<object> all = new List<object>(17); // will grow as we iter
-            all.Add(seed);
+            List<object> all = new List<object>(17)
+            {
+                seed
+            }; // will grow as we iter
             for (int i = 0; i < all.Count; i++)
             {
                 object obj = all[i];
@@ -334,15 +336,11 @@ namespace Lucene.Net.Util
 
             public Insanity(InsanityType type, string msg, params CacheEntry[] entries)
             {
-                if (null == type)
-                {
-                    throw new ArgumentException("Insanity requires non-null InsanityType");
-                }
                 if (null == entries || 0 == entries.Length)
                 {
                     throw new ArgumentException("Insanity requires non-null/non-empty CacheEntry[]");
                 }
-                this.type = type;
+                this.type = type ?? throw new ArgumentException("Insanity requires non-null InsanityType");
                 this.msg = msg;
                 this.entries = entries;
             }

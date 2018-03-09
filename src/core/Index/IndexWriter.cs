@@ -4918,10 +4918,12 @@ namespace Lucene.Net.Index
                 // names.
                 merge.info = new SegmentInfo(NewSegmentName(), 0, directory, false, true, docStoreOffset, docStoreSegment2, docStoreIsCompoundFile, false);
 
-                IDictionary<string, string> details = new Dictionary<string, string>();
-                details["optimize"] = merge.optimize + "";
-                details["mergeFactor"] = end + "";
-                details["mergeDocStores"] = mergeDocStores + "";
+                IDictionary<string, string> details = new Dictionary<string, string>
+                {
+                    ["optimize"] = merge.optimize + "",
+                    ["mergeFactor"] = end + "",
+                    ["mergeDocStores"] = mergeDocStores + ""
+                };
                 SetDiagnostics(merge.info, "merge", details);
 
                 // Also enroll the merged segment into mergingSegments;
@@ -4939,14 +4941,16 @@ namespace Lucene.Net.Index
 
         private void SetDiagnostics(SegmentInfo info, string source, IDictionary<string, string> details)
         {
-            IDictionary<string, string> diagnostics = new Dictionary<string, string>();
-            diagnostics["source"] = source;
-            diagnostics["lucene.version"] = Constants.LUCENE_VERSION;
-            diagnostics["os"] = Constants.OS_NAME + "";
-            diagnostics["os.arch"] = Constants.OS_ARCH + "";
-            diagnostics["os.version"] = Constants.OS_VERSION + "";
-            diagnostics["java.version"] = Constants.JAVA_VERSION + "";
-            diagnostics["java.vendor"] = Constants.JAVA_VENDOR + "";
+            IDictionary<string, string> diagnostics = new Dictionary<string, string>
+            {
+                ["source"] = source,
+                ["lucene.version"] = Constants.LUCENE_VERSION,
+                ["os"] = Constants.OS_NAME + "",
+                ["os.arch"] = Constants.OS_ARCH + "",
+                ["os.version"] = Constants.OS_VERSION + "",
+                ["java.version"] = Constants.JAVA_VERSION + "",
+                ["java.vendor"] = Constants.JAVA_VENDOR + ""
+            };
             if (details != null)
             {
                 //ArrayList keys = new ArrayList(details.Keys);

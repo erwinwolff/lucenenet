@@ -29,7 +29,7 @@ namespace Lucene.Net.Search
     ///
     /// </summary>
     /// <seealso cref="Searcher.Search(Query,Filter,int,Sort)"></seealso>
-    /// <seealso cref="FieldCache"></seealso>
+    /// <seealso cref="IFieldCache"></seealso>
     public abstract class FieldValueHitQueue : PriorityQueue<FieldValueHitQueue.Entry>
     {
         // had to change from internal to public, due to public accessability of FieldValueHitQueue

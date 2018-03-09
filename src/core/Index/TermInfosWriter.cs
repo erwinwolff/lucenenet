@@ -86,8 +86,10 @@ namespace Lucene.Net.Index
         internal TermInfosWriter(Directory directory, string segment, FieldInfos fis, int interval)
         {
             Initialize(directory, segment, fis, interval, false);
-            other = new TermInfosWriter(directory, segment, fis, interval, true);
-            other.other = this;
+            other = new TermInfosWriter(directory, segment, fis, interval, true)
+            {
+                other = this
+            };
         }
 
         private TermInfosWriter(Directory directory, string segment, FieldInfos fis, int interval, bool isIndex)

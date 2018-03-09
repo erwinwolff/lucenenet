@@ -18,7 +18,7 @@
 using Lucene.Net.Search;
 using System;
 using System.IO;
-using FieldCache = Lucene.Net.Search.FieldCache;
+using IFieldCache = Lucene.Net.Search.IFieldCache;
 using NumericTokenStream = Lucene.Net.Analysis.NumericTokenStream;
 using NumericUtils = Lucene.Net.Util.NumericUtils;
 using SortField = Lucene.Net.Search.SortField;
@@ -70,7 +70,7 @@ namespace Lucene.Net.Documents
     ///.  To sort according to a
     /// <c>NumericField</c>, use the normal numeric sort types, eg
     /// <see cref="SortField.INT" />  <c>NumericField</c> values
-    /// can also be loaded directly from <see cref="FieldCache" />.<p/>
+    /// can also be loaded directly from <see cref="IFieldCache" />.<p/>
     ///
     /// <p/>By default, a <c>NumericField</c>'s value is not stored but
     /// is indexed for range filtering and sorting.  You can use

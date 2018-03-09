@@ -175,8 +175,10 @@ namespace Lucene.Net.Search
             BooleanQuery query = new BooleanQuery(true);
             foreach (ScoreTerm st in stQueue.Keys)
             {
-                TermQuery tq = new TermQuery(st.term); // found a match
-                tq.Boost = Boost * st.score; // set the boost
+                TermQuery tq = new TermQuery(st.term)
+                {
+                    Boost = Boost * st.score // set the boost
+                }; // found a match
                 query.Add(tq, Occur.SHOULD); // add to query
             }
 

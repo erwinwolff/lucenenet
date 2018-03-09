@@ -22,7 +22,7 @@ using IndexReader = Lucene.Net.Index.IndexReader;
 namespace Lucene.Net.Search.Function
 {
     /// <summary> Expert: obtains single byte field values from the
-    /// <see cref="Lucene.Net.Search.FieldCache">FieldCache</see>
+    /// <see cref="Lucene.Net.Search.IFieldCache">FieldCache</see>
     /// using <c>getBytes()</c> and makes those values
     /// available as other numeric types, casting as needed.
     ///
@@ -98,7 +98,7 @@ namespace Lucene.Net.Search.Function
             }
         }
 
-        private Lucene.Net.Search.ByteParser parser;
+        private Lucene.Net.Search.IByteParser parser;
 
         /// <summary> Create a cached byte field source with default string-to-byte parser. </summary>
         public ByteFieldSource(string field) : this(field, null)
@@ -106,7 +106,7 @@ namespace Lucene.Net.Search.Function
         }
 
         /// <summary> Create a cached byte field source with a specific string-to-byte parser. </summary>
-        public ByteFieldSource(string field, Lucene.Net.Search.ByteParser parser) : base(field)
+        public ByteFieldSource(string field, Lucene.Net.Search.IByteParser parser) : base(field)
         {
             this.parser = parser;
         }
@@ -120,7 +120,7 @@ namespace Lucene.Net.Search.Function
 
         /*(non-Javadoc) <see cref="Lucene.Net.Search.Function.FieldCacheSource.getCachedValues(Lucene.Net.Search.FieldCache, java.lang.String, Lucene.Net.Index.IndexReader) */
 
-        public override DocValues GetCachedFieldValues(FieldCache cache, string field, IndexReader reader)
+        public override DocValues GetCachedFieldValues(IFieldCache cache, string field, IndexReader reader)
         {
             sbyte[] arr = cache.GetBytes(reader, field, parser);
             return new AnonymousClassDocValues(arr, this);

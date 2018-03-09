@@ -22,7 +22,7 @@ using IndexReader = Lucene.Net.Index.IndexReader;
 namespace Lucene.Net.Search.Function
 {
     /// <summary> Expert: obtains int field values from the
-    /// <see cref="Lucene.Net.Search.FieldCache">FieldCache</see>
+    /// <see cref="Lucene.Net.Search.IFieldCache">FieldCache</see>
     /// using <c>getInts()</c> and makes those values
     /// available as other numeric types, casting as needed.
     ///
@@ -120,7 +120,7 @@ namespace Lucene.Net.Search.Function
 
         /*(non-Javadoc) <see cref="Lucene.Net.Search.Function.FieldCacheSource.getCachedValues(Lucene.Net.Search.FieldCache, java.lang.String, Lucene.Net.Index.IndexReader) */
 
-        public override DocValues GetCachedFieldValues(FieldCache cache, string field, IndexReader reader)
+        public override DocValues GetCachedFieldValues(IFieldCache cache, string field, IndexReader reader)
         {
             int[] arr = cache.GetInts(reader, field, parser);
             return new AnonymousClassDocValues(arr, this);

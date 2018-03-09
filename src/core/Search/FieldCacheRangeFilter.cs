@@ -25,7 +25,7 @@ using TermDocs = Lucene.Net.Index.TermDocs;
 
 namespace Lucene.Net.Search
 {
-    /// <summary> A range filter built on top of a cached single term field (in <see cref="FieldCache" />).
+    /// <summary> A range filter built on top of a cached single term field (in <see cref="IFieldCache" />).
     ///
     /// <p/><see cref="FieldCacheRangeFilter" /> builds a single cache for the field the first time it is used.
     /// Each subsequent <see cref="FieldCacheRangeFilter" /> on the same field then reuses this cache,
@@ -39,9 +39,9 @@ namespace Lucene.Net.Search
     /// Furthermore, it does not need the numeric values encoded by <see cref="NumericField" />. But
     /// it has the problem that it only works with exact one value/document (see below).
     ///
-    /// <p/>As with all <see cref="FieldCache" /> based functionality, <see cref="FieldCacheRangeFilter" /> is only valid for
+    /// <p/>As with all <see cref="IFieldCache" /> based functionality, <see cref="FieldCacheRangeFilter" /> is only valid for
     /// fields which exact one term for each document (except for <see cref="NewStringRange" />
-    /// where 0 terms are also allowed). Due to a restriction of <see cref="FieldCache" />, for numeric ranges
+    /// where 0 terms are also allowed). Due to a restriction of <see cref="IFieldCache" />, for numeric ranges
     /// all terms that do not have a numeric value, 0 is assumed.
     ///
     /// <p/>Thus it works on dates, prices and other single value fields but will not work on
@@ -49,7 +49,7 @@ namespace Lucene.Net.Search
     /// there is only a single term.
     ///
     /// <p/>This class does not have an constructor, use one of the static factory methods available,
-    /// that create a correct instance for different data types supported by <see cref="FieldCache" />.
+    /// that create a correct instance for different data types supported by <see cref="IFieldCache" />.
     /// </summary>
 
     public static class FieldCacheRangeFilter
@@ -92,7 +92,7 @@ namespace Lucene.Net.Search
                 }
             }
 
-            internal AnonymousClassFieldCacheRangeFilter(string field, Lucene.Net.Search.Parser parser, string lowerVal, string upperVal, bool includeLower, bool includeUpper)
+            internal AnonymousClassFieldCacheRangeFilter(string field, Lucene.Net.Search.IParser parser, string lowerVal, string upperVal, bool includeLower, bool includeUpper)
                 : base(field, parser, lowerVal, upperVal, includeLower, includeUpper)
             {
             }
@@ -195,7 +195,7 @@ namespace Lucene.Net.Search
                 }
             }
 
-            internal AnonymousClassFieldCacheRangeFilter1(string field, Parser parser, sbyte? lowerVal, sbyte? upperVal, bool includeLower, bool includeUpper)
+            internal AnonymousClassFieldCacheRangeFilter1(string field, IParser parser, sbyte? lowerVal, sbyte? upperVal, bool includeLower, bool includeUpper)
                 : base(field, parser, lowerVal, upperVal, includeLower, includeUpper)
             {
             }
@@ -230,7 +230,7 @@ namespace Lucene.Net.Search
                 if (inclusiveLowerPoint > inclusiveUpperPoint)
                     return DocIdSet.EMPTY_DOCIDSET;
 
-                sbyte[] values = Lucene.Net.Search.FieldCache_Fields.DEFAULT.GetBytes(reader, field, (Lucene.Net.Search.ByteParser)parser);
+                sbyte[] values = Lucene.Net.Search.FieldCache_Fields.DEFAULT.GetBytes(reader, field, (Lucene.Net.Search.IByteParser)parser);
                 // we only request the usage of termDocs, if the range contains 0
                 return new AnonymousClassFieldCacheDocIdSet(values, inclusiveLowerPoint, inclusiveUpperPoint, this, reader, (inclusiveLowerPoint <= 0 && inclusiveUpperPoint >= 0));
             }
@@ -274,7 +274,7 @@ namespace Lucene.Net.Search
                 }
             }
 
-            internal AnonymousClassFieldCacheRangeFilter2(string field, Parser parser, short? lowerVal, short? upperVal, bool includeLower, bool includeUpper)
+            internal AnonymousClassFieldCacheRangeFilter2(string field, IParser parser, short? lowerVal, short? upperVal, bool includeLower, bool includeUpper)
                 : base(field, parser, lowerVal, upperVal, includeLower, includeUpper)
             {
             }
@@ -309,7 +309,7 @@ namespace Lucene.Net.Search
                 if (inclusiveLowerPoint > inclusiveUpperPoint)
                     return DocIdSet.EMPTY_DOCIDSET;
 
-                short[] values = Lucene.Net.Search.FieldCache_Fields.DEFAULT.GetShorts(reader, field, (Lucene.Net.Search.ShortParser)parser);
+                short[] values = Lucene.Net.Search.FieldCache_Fields.DEFAULT.GetShorts(reader, field, (Lucene.Net.Search.IShortParser)parser);
                 // we only request the usage of termDocs, if the range contains 0
                 return new AnonymousClassFieldCacheDocIdSet(values, inclusiveLowerPoint, inclusiveUpperPoint, this, reader, (inclusiveLowerPoint <= 0 && inclusiveUpperPoint >= 0));
             }
@@ -353,7 +353,7 @@ namespace Lucene.Net.Search
                 }
             }
 
-            internal AnonymousClassFieldCacheRangeFilter3(string field, Lucene.Net.Search.Parser parser, int? lowerVal, int? upperVal, bool includeLower, bool includeUpper)
+            internal AnonymousClassFieldCacheRangeFilter3(string field, Lucene.Net.Search.IParser parser, int? lowerVal, int? upperVal, bool includeLower, bool includeUpper)
                 : base(field, parser, lowerVal, upperVal, includeLower, includeUpper)
             {
             }
@@ -432,7 +432,7 @@ namespace Lucene.Net.Search
                 }
             }
 
-            internal AnonymousClassFieldCacheRangeFilter4(string field, Lucene.Net.Search.Parser parser, long? lowerVal, long? upperVal, bool includeLower, bool includeUpper)
+            internal AnonymousClassFieldCacheRangeFilter4(string field, Lucene.Net.Search.IParser parser, long? lowerVal, long? upperVal, bool includeLower, bool includeUpper)
                 : base(field, parser, lowerVal, upperVal, includeLower, includeUpper)
             {
             }
@@ -467,7 +467,7 @@ namespace Lucene.Net.Search
                 if (inclusiveLowerPoint > inclusiveUpperPoint)
                     return DocIdSet.EMPTY_DOCIDSET;
 
-                long[] values = Lucene.Net.Search.FieldCache_Fields.DEFAULT.GetLongs(reader, field, (Lucene.Net.Search.LongParser)parser);
+                long[] values = Lucene.Net.Search.FieldCache_Fields.DEFAULT.GetLongs(reader, field, (Lucene.Net.Search.ILongParser)parser);
                 // we only request the usage of termDocs, if the range contains 0
                 return new AnonymousClassFieldCacheDocIdSet(values, inclusiveLowerPoint, inclusiveUpperPoint, this, reader, (inclusiveLowerPoint <= 0L && inclusiveUpperPoint >= 0L));
             }
@@ -511,7 +511,7 @@ namespace Lucene.Net.Search
                 }
             }
 
-            internal AnonymousClassFieldCacheRangeFilter5(string field, Lucene.Net.Search.Parser parser, float? lowerVal, float? upperVal, bool includeLower, bool includeUpper)
+            internal AnonymousClassFieldCacheRangeFilter5(string field, Lucene.Net.Search.IParser parser, float? lowerVal, float? upperVal, bool includeLower, bool includeUpper)
                 : base(field, parser, lowerVal, upperVal, includeLower, includeUpper)
             {
             }
@@ -550,7 +550,7 @@ namespace Lucene.Net.Search
                 if (inclusiveLowerPoint > inclusiveUpperPoint)
                     return DocIdSet.EMPTY_DOCIDSET;
 
-                float[] values = Lucene.Net.Search.FieldCache_Fields.DEFAULT.GetFloats(reader, field, (Lucene.Net.Search.FloatParser)parser);
+                float[] values = Lucene.Net.Search.FieldCache_Fields.DEFAULT.GetFloats(reader, field, (Lucene.Net.Search.IFloatParser)parser);
                 // we only request the usage of termDocs, if the range contains 0
                 return new AnonymousClassFieldCacheDocIdSet(values, inclusiveLowerPoint, inclusiveUpperPoint, this, reader, (inclusiveLowerPoint <= 0.0f && inclusiveUpperPoint >= 0.0f));
             }
@@ -594,7 +594,7 @@ namespace Lucene.Net.Search
                 }
             }
 
-            internal AnonymousClassFieldCacheRangeFilter6(string field, Lucene.Net.Search.Parser parser, double? lowerVal, double? upperVal, bool includeLower, bool includeUpper)
+            internal AnonymousClassFieldCacheRangeFilter6(string field, Lucene.Net.Search.IParser parser, double? lowerVal, double? upperVal, bool includeLower, bool includeUpper)
                 : base(field, parser, lowerVal, upperVal, includeLower, includeUpper)
             {
             }
@@ -633,13 +633,13 @@ namespace Lucene.Net.Search
                 if (inclusiveLowerPoint > inclusiveUpperPoint)
                     return DocIdSet.EMPTY_DOCIDSET;
 
-                double[] values = Lucene.Net.Search.FieldCache_Fields.DEFAULT.GetDoubles(reader, field, (Lucene.Net.Search.DoubleParser)parser);
+                double[] values = Lucene.Net.Search.FieldCache_Fields.DEFAULT.GetDoubles(reader, field, (Lucene.Net.Search.IDoubleParser)parser);
                 // we only request the usage of termDocs, if the range contains 0
                 return new AnonymousClassFieldCacheDocIdSet(values, inclusiveLowerPoint, inclusiveUpperPoint, this, reader, (inclusiveLowerPoint <= 0.0 && inclusiveUpperPoint >= 0.0));
             }
         }
 
-        /// <summary> Creates a string range filter using <see cref="FieldCache.GetStringIndex(IndexReader,string)" />. This works with all
+        /// <summary> Creates a string range filter using <see cref="IFieldCache.GetStringIndex(IndexReader,string)" />. This works with all
         /// fields containing zero or one term in the field. The range can be half-open by setting one
         /// of the values to <c>null</c>.
         /// </summary>
@@ -648,7 +648,7 @@ namespace Lucene.Net.Search
             return new AnonymousClassFieldCacheRangeFilter(field, null, lowerVal, upperVal, includeLower, includeUpper);
         }
 
-        /// <summary> Creates a numeric range filter using <see cref="FieldCache.GetBytes(IndexReader,String)" />. This works with all
+        /// <summary> Creates a numeric range filter using <see cref="IFieldCache.GetBytes(IndexReader,String)" />. This works with all
         /// byte fields containing exactly one numeric term in the field. The range can be half-open by setting one
         /// of the values to <c>null</c>.
         /// </summary>
@@ -657,16 +657,16 @@ namespace Lucene.Net.Search
             return NewByteRange(field, null, lowerVal, upperVal, includeLower, includeUpper);
         }
 
-        /// <summary> Creates a numeric range filter using <see cref="FieldCache.GetBytes(IndexReader,String,ByteParser)" />. This works with all
+        /// <summary> Creates a numeric range filter using <see cref="IFieldCache.GetBytes(IndexReader,String,IByteParser)" />. This works with all
         /// byte fields containing exactly one numeric term in the field. The range can be half-open by setting one
         /// of the values to <c>null</c>.
         /// </summary>
-        public static FieldCacheRangeFilter<sbyte?> NewByteRange(string field, Lucene.Net.Search.ByteParser parser, sbyte? lowerVal, sbyte? upperVal, bool includeLower, bool includeUpper)
+        public static FieldCacheRangeFilter<sbyte?> NewByteRange(string field, Lucene.Net.Search.IByteParser parser, sbyte? lowerVal, sbyte? upperVal, bool includeLower, bool includeUpper)
         {
             return new AnonymousClassFieldCacheRangeFilter1(field, parser, lowerVal, upperVal, includeLower, includeUpper);
         }
 
-        /// <summary> Creates a numeric range query using <see cref="FieldCache.GetShorts(IndexReader,String)" />. This works with all
+        /// <summary> Creates a numeric range query using <see cref="IFieldCache.GetShorts(IndexReader,String)" />. This works with all
         /// short fields containing exactly one numeric term in the field. The range can be half-open by setting one
         /// of the values to <c>null</c>.
         /// </summary>
@@ -675,16 +675,16 @@ namespace Lucene.Net.Search
             return NewShortRange(field, null, lowerVal, upperVal, includeLower, includeUpper);
         }
 
-        /// <summary> Creates a numeric range query using <see cref="FieldCache.GetShorts(IndexReader,String,ShortParser)" />. This works with all
+        /// <summary> Creates a numeric range query using <see cref="IFieldCache.GetShorts(IndexReader,String,IShortParser)" />. This works with all
         /// short fields containing exactly one numeric term in the field. The range can be half-open by setting one
         /// of the values to <c>null</c>.
         /// </summary>
-        public static FieldCacheRangeFilter<short?> NewShortRange(string field, Lucene.Net.Search.ShortParser parser, short? lowerVal, short? upperVal, bool includeLower, bool includeUpper)
+        public static FieldCacheRangeFilter<short?> NewShortRange(string field, Lucene.Net.Search.IShortParser parser, short? lowerVal, short? upperVal, bool includeLower, bool includeUpper)
         {
             return new AnonymousClassFieldCacheRangeFilter2(field, parser, lowerVal, upperVal, includeLower, includeUpper);
         }
 
-        /// <summary> Creates a numeric range query using <see cref="FieldCache.GetInts(IndexReader,String)" />. This works with all
+        /// <summary> Creates a numeric range query using <see cref="IFieldCache.GetInts(IndexReader,String)" />. This works with all
         /// int fields containing exactly one numeric term in the field. The range can be half-open by setting one
         /// of the values to <c>null</c>.
         /// </summary>
@@ -693,7 +693,7 @@ namespace Lucene.Net.Search
             return NewIntRange(field, null, lowerVal, upperVal, includeLower, includeUpper);
         }
 
-        /// <summary> Creates a numeric range query using <see cref="FieldCache.GetInts(IndexReader,String,IntParser)" />. This works with all
+        /// <summary> Creates a numeric range query using <see cref="IFieldCache.GetInts(IndexReader,String,IntParser)" />. This works with all
         /// int fields containing exactly one numeric term in the field. The range can be half-open by setting one
         /// of the values to <c>null</c>.
         /// </summary>
@@ -702,7 +702,7 @@ namespace Lucene.Net.Search
             return new AnonymousClassFieldCacheRangeFilter3(field, parser, lowerVal, upperVal, includeLower, includeUpper);
         }
 
-        /// <summary> Creates a numeric range query using <see cref="FieldCache.GetLongs(IndexReader,String)" />. This works with all
+        /// <summary> Creates a numeric range query using <see cref="IFieldCache.GetLongs(IndexReader,String)" />. This works with all
         /// long fields containing exactly one numeric term in the field. The range can be half-open by setting one
         /// of the values to <c>null</c>.
         /// </summary>
@@ -711,16 +711,16 @@ namespace Lucene.Net.Search
             return NewLongRange(field, null, lowerVal, upperVal, includeLower, includeUpper);
         }
 
-        /// <summary> Creates a numeric range query using <see cref="FieldCache.GetLongs(IndexReader,String,LongParser)" />. This works with all
+        /// <summary> Creates a numeric range query using <see cref="IFieldCache.GetLongs(IndexReader,String,ILongParser)" />. This works with all
         /// long fields containing exactly one numeric term in the field. The range can be half-open by setting one
         /// of the values to <c>null</c>.
         /// </summary>
-        public static FieldCacheRangeFilter<long?> NewLongRange(string field, Lucene.Net.Search.LongParser parser, long? lowerVal, long? upperVal, bool includeLower, bool includeUpper)
+        public static FieldCacheRangeFilter<long?> NewLongRange(string field, Lucene.Net.Search.ILongParser parser, long? lowerVal, long? upperVal, bool includeLower, bool includeUpper)
         {
             return new AnonymousClassFieldCacheRangeFilter4(field, parser, lowerVal, upperVal, includeLower, includeUpper);
         }
 
-        /// <summary> Creates a numeric range query using <see cref="FieldCache.GetFloats(IndexReader,String)" />. This works with all
+        /// <summary> Creates a numeric range query using <see cref="IFieldCache.GetFloats(IndexReader,String)" />. This works with all
         /// float fields containing exactly one numeric term in the field. The range can be half-open by setting one
         /// of the values to <c>null</c>.
         /// </summary>
@@ -729,16 +729,16 @@ namespace Lucene.Net.Search
             return NewFloatRange(field, null, lowerVal, upperVal, includeLower, includeUpper);
         }
 
-        /// <summary> Creates a numeric range query using <see cref="FieldCache.GetFloats(IndexReader,String,FloatParser)" />. This works with all
+        /// <summary> Creates a numeric range query using <see cref="IFieldCache.GetFloats(IndexReader,String,IFloatParser)" />. This works with all
         /// float fields containing exactly one numeric term in the field. The range can be half-open by setting one
         /// of the values to <c>null</c>.
         /// </summary>
-        public static FieldCacheRangeFilter<float?> NewFloatRange(string field, Lucene.Net.Search.FloatParser parser, float? lowerVal, float? upperVal, bool includeLower, bool includeUpper)
+        public static FieldCacheRangeFilter<float?> NewFloatRange(string field, Lucene.Net.Search.IFloatParser parser, float? lowerVal, float? upperVal, bool includeLower, bool includeUpper)
         {
             return new AnonymousClassFieldCacheRangeFilter5(field, parser, lowerVal, upperVal, includeLower, includeUpper);
         }
 
-        /// <summary> Creates a numeric range query using <see cref="FieldCache.GetDoubles(IndexReader,String)" />. This works with all
+        /// <summary> Creates a numeric range query using <see cref="IFieldCache.GetDoubles(IndexReader,String)" />. This works with all
         /// double fields containing exactly one numeric term in the field. The range can be half-open by setting one
         /// of the values to <c>null</c>.
         /// </summary>
@@ -747,11 +747,11 @@ namespace Lucene.Net.Search
             return NewDoubleRange(field, null, lowerVal, upperVal, includeLower, includeUpper);
         }
 
-        /// <summary> Creates a numeric range query using <see cref="FieldCache.GetDoubles(IndexReader,String,DoubleParser)" />. This works with all
+        /// <summary> Creates a numeric range query using <see cref="IFieldCache.GetDoubles(IndexReader,String,IDoubleParser)" />. This works with all
         /// double fields containing exactly one numeric term in the field. The range can be half-open by setting one
         /// of the values to <c>null</c>.
         /// </summary>
-        public static FieldCacheRangeFilter<double?> NewDoubleRange(string field, Lucene.Net.Search.DoubleParser parser, double? lowerVal, double? upperVal, bool includeLower, bool includeUpper)
+        public static FieldCacheRangeFilter<double?> NewDoubleRange(string field, Lucene.Net.Search.IDoubleParser parser, double? lowerVal, double? upperVal, bool includeLower, bool includeUpper)
         {
             return new AnonymousClassFieldCacheRangeFilter6(field, parser, lowerVal, upperVal, includeLower, includeUpper);
         }
@@ -761,13 +761,13 @@ namespace Lucene.Net.Search
     public abstract class FieldCacheRangeFilter<T> : Filter
     {
         internal string field;
-        internal Lucene.Net.Search.Parser parser;
+        internal Lucene.Net.Search.IParser parser;
         internal T lowerVal;
         internal T upperVal;
         internal bool includeLower;
         internal bool includeUpper;
 
-        protected internal FieldCacheRangeFilter(string field, Lucene.Net.Search.Parser parser, T lowerVal, T upperVal, bool includeLower, bool includeUpper)
+        protected internal FieldCacheRangeFilter(string field, Lucene.Net.Search.IParser parser, T lowerVal, T upperVal, bool includeLower, bool includeUpper)
         {
             this.field = field;
             this.parser = parser;
@@ -843,7 +843,7 @@ namespace Lucene.Net.Search
         /// </summary>
         public T UpperValue { get { return upperVal; } }
 
-        public Parser Parser { get { return parser; } }
+        public IParser Parser { get { return parser; } }
 
         internal abstract class FieldCacheDocIdSet : DocIdSet
         {

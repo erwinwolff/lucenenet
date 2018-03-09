@@ -208,8 +208,10 @@ namespace Lucene.Net.Index
                         newDecrefOnClose[i] = true;
                     }
                 }
-                MultiReader mr = new MultiReader(newSubReaders);
-                mr.decrefOnClose = newDecrefOnClose;
+                MultiReader mr = new MultiReader(newSubReaders)
+                {
+                    decrefOnClose = newDecrefOnClose
+                };
                 return mr;
             }
             else
