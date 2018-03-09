@@ -16,7 +16,7 @@
  */
 
 using System;
-
+using System.IO;
 using Constants = Lucene.Net.Util.Constants;
 
 namespace Lucene.Net.Store
@@ -116,7 +116,7 @@ namespace Lucene.Net.Store
         /// <param name="lockFactory">the lock factory to use, or null for the default.
         /// </param>
         /// <throws>  IOException </throws>
-        public MMapDirectory(System.IO.DirectoryInfo path, LockFactory lockFactory)
+        public MMapDirectory(DirectoryInfo path, LockFactory lockFactory)
             : base(path, lockFactory)
         {
             InitBlock();
@@ -128,7 +128,7 @@ namespace Lucene.Net.Store
         /// <param name="path">the path of the directory
         /// </param>
         /// <throws>  IOException </throws>
-        public MMapDirectory(System.IO.DirectoryInfo path)
+        public MMapDirectory(DirectoryInfo path)
             : base(path, null)
         {
             InitBlock();
@@ -167,7 +167,7 @@ namespace Lucene.Net.Store
         /// for that in the JVM. On Windows, this leads to the fact,
         /// that mmapped files cannot be modified or deleted.
         /// </summary>
-        internal void CleanMapping(System.IO.MemoryStream buffer)
+        internal void CleanMapping(MemoryStream buffer)
         {
             if (useUnmapHack)
             {
@@ -180,7 +180,7 @@ namespace Lucene.Net.Store
                 }
                 catch (System.Exception e)
                 {
-                    System.IO.IOException ioe = new System.IO.IOException("unable to unmap the mapped buffer", e.InnerException);
+                    IOException ioe = new IOException("unable to unmap the mapped buffer", e.InnerException);
                     throw ioe;
                 }
             }
@@ -224,19 +224,19 @@ namespace Lucene.Net.Store
                 }
             }
 
-            private System.IO.MemoryStream buffer;
+            private MemoryStream buffer;
             private long length;
             private bool isClone;
             private bool isDisposed;
 
-            internal MMapIndexInput(MMapDirectory enclosingInstance, System.IO.FileStream raf)
+            internal MMapIndexInput(MMapDirectory enclosingInstance, FileStream raf)
             {
                 byte[] data = new byte[raf.Length];
                 raf.Read(data, 0, (int)raf.Length);
 
                 InitBlock(enclosingInstance);
                 this.length = raf.Length;
-                this.buffer = new System.IO.MemoryStream(data);
+                this.buffer = new MemoryStream(data);
             }
 
             public override byte ReadByte()
@@ -247,7 +247,7 @@ namespace Lucene.Net.Store
                 }
                 catch (ObjectDisposedException)
                 {
-                    throw new System.IO.IOException("read past EOF");
+                    throw new IOException("read past EOF");
                 }
             }
 
@@ -259,7 +259,7 @@ namespace Lucene.Net.Store
                 }
                 catch (ObjectDisposedException)
                 {
-                    throw new System.IO.IOException("read past EOF");
+                    throw new IOException("read past EOF");
                 }
             }
 
@@ -273,7 +273,7 @@ namespace Lucene.Net.Store
 
             public override void Seek(long pos)
             {
-                buffer.Seek(pos, System.IO.SeekOrigin.Begin);
+                buffer.Seek(pos, SeekOrigin.Begin);
             }
 
             public override long Length()
@@ -334,7 +334,7 @@ namespace Lucene.Net.Store
                 }
             }
 
-            private System.IO.MemoryStream[] buffers;
+            private MemoryStream[] buffers;
             private int[] bufSizes; // keep here, ByteBuffer.size() method is optional
 
             private long length;
@@ -344,12 +344,12 @@ namespace Lucene.Net.Store
             private int curBufIndex;
             private int maxBufSize;
 
-            private System.IO.MemoryStream curBuf; // redundant for speed: buffers[curBufIndex]
+            private MemoryStream curBuf; // redundant for speed: buffers[curBufIndex]
             private int curAvail; // redundant for speed: (bufSizes[curBufIndex] - curBuf.position())
 
             private bool isClone = false;
 
-            public MultiMMapIndexInput(MMapDirectory enclosingInstance, System.IO.FileStream raf, int maxBufSize)
+            public MultiMMapIndexInput(MMapDirectory enclosingInstance, FileStream raf, int maxBufSize)
             {
                 InitBlock(enclosingInstance);
                 this.length = raf.Length;
@@ -367,18 +367,18 @@ namespace Lucene.Net.Store
                 if (((long)nrBuffers * maxBufSize) < length)
                     nrBuffers++;
 
-                this.buffers = new System.IO.MemoryStream[nrBuffers];
+                this.buffers = new MemoryStream[nrBuffers];
                 this.bufSizes = new int[nrBuffers];
 
                 long bufferStart = 0;
-                System.IO.FileStream rafc = raf;
+                FileStream rafc = raf;
                 for (int bufNr = 0; bufNr < nrBuffers; bufNr++)
                 {
                     byte[] data = new byte[rafc.Length];
                     raf.Read(data, 0, (int)rafc.Length);
 
                     int bufSize = (length > (bufferStart + maxBufSize)) ? maxBufSize : (int)(length - bufferStart);
-                    this.buffers[bufNr] = new System.IO.MemoryStream(data);
+                    this.buffers[bufNr] = new MemoryStream(data);
                     this.bufSizes[bufNr] = bufSize;
                     bufferStart += bufSize;
                 }
@@ -393,9 +393,9 @@ namespace Lucene.Net.Store
                 {
                     curBufIndex++;
                     if (curBufIndex >= buffers.Length)
-                        throw new System.IO.IOException("read past EOF");
+                        throw new IOException("read past EOF");
                     curBuf = buffers[curBufIndex];
-                    curBuf.Seek(0, System.IO.SeekOrigin.Begin);
+                    curBuf.Seek(0, SeekOrigin.Begin);
                     curAvail = bufSizes[curBufIndex];
                 }
                 curAvail--;
@@ -411,9 +411,9 @@ namespace Lucene.Net.Store
                     offset += curAvail;
                     curBufIndex++;
                     if (curBufIndex >= buffers.Length)
-                        throw new System.IO.IOException("read past EOF");
+                        throw new IOException("read past EOF");
                     curBuf = buffers[curBufIndex];
-                    curBuf.Seek(0, System.IO.SeekOrigin.Begin);
+                    curBuf.Seek(0, SeekOrigin.Begin);
                     curAvail = bufSizes[curBufIndex];
                 }
                 curBuf.Read(b, offset, len);
@@ -430,7 +430,7 @@ namespace Lucene.Net.Store
                 curBufIndex = (int)(pos / maxBufSize);
                 curBuf = buffers[curBufIndex];
                 int bufOffset = (int)(pos - ((long)curBufIndex * maxBufSize));
-                curBuf.Seek(bufOffset, System.IO.SeekOrigin.Begin);
+                curBuf.Seek(bufOffset, SeekOrigin.Begin);
                 curAvail = bufSizes[curBufIndex] - bufOffset;
             }
 
@@ -443,7 +443,7 @@ namespace Lucene.Net.Store
             {
                 MultiMMapIndexInput clone = (MultiMMapIndexInput)base.Clone();
                 clone.isClone = true;
-                clone.buffers = new System.IO.MemoryStream[buffers.Length];
+                clone.buffers = new MemoryStream[buffers.Length];
                 // No need to clone bufSizes.
                 // Since most clones will use only one buffer, duplicate() could also be
                 // done lazy in clones, e.g. when adapting curBuf.
@@ -455,7 +455,7 @@ namespace Lucene.Net.Store
                 {
                     clone.Seek(FilePointer);
                 }
-                catch (System.IO.IOException ioe)
+                catch (IOException ioe)
                 {
                     System.SystemException newException = new System.SystemException(ioe.Message, ioe);
                     throw newException;
@@ -495,8 +495,8 @@ namespace Lucene.Net.Store
         public override IndexInput OpenInput(string name, int bufferSize)
         {
             EnsureOpen();
-            string path = System.IO.Path.Combine(Directory.FullName, name);
-            System.IO.FileStream raf = new System.IO.FileStream(path, System.IO.FileMode.Open, System.IO.FileAccess.Read);
+            string path = Path.Combine(Directory.FullName, name);
+            FileStream raf = new FileStream(path, FileMode.Open, FileAccess.Read);
             try
             {
                 return (raf.Length <= (long)maxBBuf) ? (IndexInput)new MMapIndexInput(this, raf) : (IndexInput)new MultiMMapIndexInput(this, raf, maxBBuf);
@@ -511,7 +511,7 @@ namespace Lucene.Net.Store
         public override IndexOutput CreateOutput(string name)
         {
             InitOutput(name);
-            return new SimpleFSDirectory.SimpleFSIndexOutput(new System.IO.FileInfo(System.IO.Path.Combine(internalDirectory.FullName, name)));
+            return new SimpleFSDirectory.SimpleFSIndexOutput(new FileInfo(Path.Combine(internalDirectory.FullName, name)));
         }
 
         static MMapDirectory()

@@ -18,6 +18,7 @@
 using Lucene.Net.Support;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Directory = Lucene.Net.Store.Directory;
 
 namespace Lucene.Net.Index
@@ -85,7 +86,7 @@ namespace Lucene.Net.Index
         //// Commits that the IndexDeletionPolicy have decided to delete: ////
         private List<CommitPoint> commitsToDelete = new List<CommitPoint>();
 
-        private System.IO.StreamWriter infoStream;
+        private StreamWriter infoStream;
         private Directory directory;
         private IndexDeletionPolicy policy;
         private DocumentsWriter docWriter;
@@ -100,7 +101,7 @@ namespace Lucene.Net.Index
         /// </summary>
         public static bool VERBOSE_REF_COUNTS = false;
 
-        internal void SetInfoStream(System.IO.StreamWriter infoStream)
+        internal void SetInfoStream(StreamWriter infoStream)
         {
             this.infoStream = infoStream;
             if (infoStream != null)
@@ -121,7 +122,7 @@ namespace Lucene.Net.Index
         /// </summary>
         /// <throws>  CorruptIndexException if the index is corrupt </throws>
         /// <throws>  IOException if there is a low-level IO error </throws>
-        public IndexFileDeleter(Directory directory, IndexDeletionPolicy policy, SegmentInfos segmentInfos, System.IO.StreamWriter infoStream, DocumentsWriter docWriter, HashSet<string> synced)
+        public IndexFileDeleter(Directory directory, IndexDeletionPolicy policy, SegmentInfos segmentInfos, StreamWriter infoStream, DocumentsWriter docWriter, HashSet<string> synced)
         {
             this.docWriter = docWriter;
             this.infoStream = infoStream;
@@ -167,7 +168,7 @@ namespace Lucene.Net.Index
                         {
                             sis.Read(directory, fileName);
                         }
-                        catch (System.IO.FileNotFoundException)
+                        catch (FileNotFoundException)
                         {
                             // LUCENE-948: on NFS (and maybe others), if
                             // you have writers switching back and forth
@@ -182,7 +183,7 @@ namespace Lucene.Net.Index
                             }
                             sis = null;
                         }
-                        catch (System.IO.IOException)
+                        catch (IOException)
                         {
                             if (SegmentInfos.GenerationFromSegmentsFileName(fileName) <= currentGen)
                             {
@@ -229,7 +230,7 @@ namespace Lucene.Net.Index
                 {
                     sis.Read(directory, segmentInfos.GetCurrentSegmentFileName());
                 }
-                catch (System.IO.IOException)
+                catch (IOException)
                 {
                     throw new CorruptIndexException("failed to locate current segments_N file");
                 }
@@ -613,7 +614,7 @@ namespace Lucene.Net.Index
                 }
                 directory.DeleteFile(fileName);
             }
-            catch (System.IO.IOException e)
+            catch (IOException e)
             {
                 // if delete fails
                 if (directory.FileExists(fileName))

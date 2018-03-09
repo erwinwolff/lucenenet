@@ -18,6 +18,7 @@
 using Lucene.Net.Support;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Document = Lucene.Net.Documents.Document;
 using FieldSelector = Lucene.Net.Documents.FieldSelector;
@@ -211,7 +212,7 @@ namespace Lucene.Net.Index
                             {
                                 r.Close();
                             }
-                            catch (System.IO.IOException)
+                            catch (IOException)
                             {
                                 // keep going - we want to clean up as much as possible
                             }
@@ -489,7 +490,7 @@ namespace Lucene.Net.Index
         /// <throws>  UnsupportedOperationException </throws>
         public override long Version
         {
-            get { throw new System.NotSupportedException("ParallelReader does not support this method."); }
+            get { throw new NotSupportedException("ParallelReader does not support this method."); }
         }
 
         // for testing

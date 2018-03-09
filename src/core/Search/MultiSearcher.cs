@@ -138,37 +138,37 @@ namespace Lucene.Net.Search
             // TODO: This probably shouldn't throw an exception?
             protected override void Dispose(bool disposing)
             {
-                throw new System.NotSupportedException();
+                throw new NotSupportedException();
             }
 
             public override Document Doc(int i)
             {
-                throw new System.NotSupportedException();
+                throw new NotSupportedException();
             }
 
             public override Document Doc(int i, FieldSelector fieldSelector)
             {
-                throw new System.NotSupportedException();
+                throw new NotSupportedException();
             }
 
             public override Explanation Explain(Weight weight, int doc)
             {
-                throw new System.NotSupportedException();
+                throw new NotSupportedException();
             }
 
             public override void Search(Weight weight, Filter filter, Collector results)
             {
-                throw new System.NotSupportedException();
+                throw new NotSupportedException();
             }
 
             public override TopDocs Search(Weight weight, Filter filter, int n)
             {
-                throw new System.NotSupportedException();
+                throw new NotSupportedException();
             }
 
             public override TopFieldDocs Search(Weight weight, Filter filter, int n, Sort sort)
             {
-                throw new System.NotSupportedException();
+                throw new NotSupportedException();
             }
         }
 

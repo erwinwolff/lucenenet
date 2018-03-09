@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Directory = Lucene.Net.Store.Directory;
 using IndexInput = Lucene.Net.Store.IndexInput;
 using IndexOutput = Lucene.Net.Store.IndexOutput;
@@ -216,7 +217,7 @@ namespace Lucene.Net.Index
                     {
                         os.Close();
                     }
-                    catch (System.IO.IOException)
+                    catch (IOException)
                     {
                     }
             }
@@ -252,13 +253,13 @@ namespace Lucene.Net.Index
 
                 // Verify that remainder is 0
                 if (remainder != 0)
-                    throw new System.IO.IOException("Non-zero remainder length after copying: " + remainder + " (id: " + source.file + ", length: " + length + ", buffer size: " + chunk + ")");
+                    throw new IOException("Non-zero remainder length after copying: " + remainder + " (id: " + source.file + ", length: " + length + ", buffer size: " + chunk + ")");
 
                 // Verify that the output length diff is equal to original file
                 long endPtr = os.FilePointer;
                 long diff = endPtr - startPtr;
                 if (diff != length)
-                    throw new System.IO.IOException("Difference in the output file offsets " + diff + " does not match the original file length " + length);
+                    throw new IOException("Difference in the output file offsets " + diff + " does not match the original file length " + length);
             }
             finally
             {

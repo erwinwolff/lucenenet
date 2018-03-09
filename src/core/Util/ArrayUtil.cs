@@ -104,7 +104,7 @@ namespace Lucene.Net.Util
             int result = 0;
             for (int i = 0; i < len; i++)
             {
-                int digit = (int)System.Char.GetNumericValue(chars[i + offset]);
+                int digit = (int)char.GetNumericValue(chars[i + offset]);
                 if (digit == -1)
                 {
                     throw new System.FormatException("Unable to parse");

@@ -41,6 +41,7 @@ optimize for fewer object creations.  ]
 */
 
 using System;
+using System.IO;
 
 namespace Lucene.Net.Analysis
 {
@@ -688,7 +689,7 @@ namespace Lucene.Net.Analysis
             {
                 try
                 {
-                    System.IO.Stream in_Renamed = new System.IO.FileStream(args[i], System.IO.FileMode.Open, System.IO.FileAccess.Read);
+                    Stream in_Renamed = new FileStream(args[i], FileMode.Open, FileAccess.Read);
                     var buffer = new byte[1024];
 
                     int bufferLen = in_Renamed.Read(buffer, 0, buffer.Length);
@@ -730,7 +731,7 @@ namespace Lucene.Net.Analysis
 
                     in_Renamed.Close();
                 }
-                catch (System.IO.IOException)
+                catch (IOException)
                 {
                     Console.Out.WriteLine("error reading " + args[i]);
                 }

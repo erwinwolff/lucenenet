@@ -17,6 +17,7 @@
 
 using Lucene.Net.Analysis.Tokenattributes;
 using Lucene.Net.Documents;
+using System.IO;
 using TokenStream = Lucene.Net.Analysis.TokenStream;
 
 namespace Lucene.Net.Index
@@ -113,8 +114,8 @@ namespace Lucene.Net.Index
                         {
                             // the field does not have a TokenStream,
                             // so we have to obtain one from the analyzer
-                            System.IO.TextReader reader; // find or make Reader
-                            System.IO.TextReader readerValue = field.ReaderValue;
+                            TextReader reader; // find or make Reader
+                            TextReader readerValue = field.ReaderValue;
 
                             if (readerValue != null)
                                 reader = readerValue;

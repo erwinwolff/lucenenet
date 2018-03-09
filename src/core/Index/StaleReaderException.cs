@@ -16,6 +16,7 @@
  */
 
 using System;
+using System.IO;
 
 namespace Lucene.Net.Index
 {
@@ -29,7 +30,7 @@ namespace Lucene.Net.Index
     /// the changes.
     /// </summary>
     [Serializable]
-    public class StaleReaderException : System.IO.IOException
+    public class StaleReaderException : IOException
     {
         public StaleReaderException(string message) : base(message)
         {

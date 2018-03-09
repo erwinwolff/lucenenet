@@ -59,12 +59,12 @@ namespace Lucene.Net.Search
         {
             public override int TermCountCutoff
             {
-                set { throw new System.NotSupportedException("Please create a private instance"); }
+                set { throw new NotSupportedException("Please create a private instance"); }
             }
 
             public override double DocCountPercent
             {
-                set { throw new System.NotSupportedException("Please create a private instance"); }
+                set { throw new NotSupportedException("Please create a private instance"); }
             }
 
             // Make sure we are still a singleton even after deserializing

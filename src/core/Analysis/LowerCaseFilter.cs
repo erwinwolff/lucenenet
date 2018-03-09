@@ -37,7 +37,7 @@ namespace Lucene.Net.Analysis
                 char[] buffer = termAtt.TermBuffer();
                 int length = termAtt.TermLength();
                 for (int i = 0; i < length; i++)
-                    buffer[i] = System.Char.ToLower(buffer[i]);
+                    buffer[i] = char.ToLower(buffer[i]);
 
                 return true;
             }

@@ -19,6 +19,7 @@ using Lucene.Net.Documents;
 using Lucene.Net.Store;
 using Lucene.Net.Util;
 using System;
+using System.IO;
 
 namespace Lucene.Net.Analysis
 {
@@ -35,7 +36,7 @@ namespace Lucene.Net.Analysis
         /// Reader.  Must be able to handle null field name for
         /// backward compatibility.
         /// </summary>
-        public abstract TokenStream TokenStream(String fieldName, System.IO.TextReader reader);
+        public abstract TokenStream TokenStream(String fieldName, TextReader reader);
 
         /// <summary>Creates a TokenStream that is allowed to be re-used
         /// from the previous time that the same thread called
@@ -44,7 +45,7 @@ namespace Lucene.Net.Analysis
         /// analyzer should use this method for better
         /// performance.
         /// </summary>
-        public virtual TokenStream ReusableTokenStream(String fieldName, System.IO.TextReader reader)
+        public virtual TokenStream ReusableTokenStream(String fieldName, TextReader reader)
         {
             return TokenStream(fieldName, reader);
         }
@@ -95,7 +96,7 @@ namespace Lucene.Net.Analysis
         {
             try
             {
-                System.Reflection.MethodInfo m = this.GetType().GetMethod("TokenStream", new[] { typeof(string), typeof(System.IO.TextReader) });
+                System.Reflection.MethodInfo m = this.GetType().GetMethod("TokenStream", new[] { typeof(string), typeof(TextReader) });
                 overridesTokenStreamMethod = m.DeclaringType != typeof(TClass);
             }
             catch (MethodAccessException)
@@ -117,7 +118,7 @@ namespace Lucene.Net.Analysis
         /// </summary>
         /// <param name="fieldName">Fieldable name being indexed.
         /// </param>
-        /// <returns> position increment gap, added to the next token emitted from <see cref="TokenStream(String,System.IO.TextReader)" />
+        /// <returns> position increment gap, added to the next token emitted from <see cref="TokenStream(String,TextReader)" />
         /// </returns>
         public virtual int GetPositionIncrementGap(String fieldName)
         {
@@ -134,7 +135,7 @@ namespace Lucene.Net.Analysis
         /// </summary>
         /// <param name="field">the field just indexed
         /// </param>
-        /// <returns> offset gap, added to the next token emitted from <see cref="TokenStream(String,System.IO.TextReader)" />
+        /// <returns> offset gap, added to the next token emitted from <see cref="TokenStream(String,TextReader)" />
         /// </returns>
         public virtual int GetOffsetGap(IFieldable field)
         {

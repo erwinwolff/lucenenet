@@ -119,7 +119,7 @@ namespace Lucene.Net.Search
 
         public override RewriteMethod RewriteMethod
         {
-            set { throw new System.NotSupportedException("FuzzyQuery cannot change rewrite method"); }
+            set { throw new NotSupportedException("FuzzyQuery cannot change rewrite method"); }
         }
 
         public override Query Rewrite(IndexReader reader)

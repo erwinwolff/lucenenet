@@ -15,6 +15,7 @@
  * limitations under the License.
  */
 
+using System;
 using IndexReader = Lucene.Net.Index.IndexReader;
 
 namespace Lucene.Net.Search
@@ -330,7 +331,7 @@ namespace Lucene.Net.Search
 
         public override int Advance(int target)
         {
-            throw new System.NotSupportedException();
+            throw new NotSupportedException();
         }
 
         public override int DocID()

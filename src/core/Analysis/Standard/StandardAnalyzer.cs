@@ -17,6 +17,7 @@
 
 using Lucene.Net.Util;
 using System.Collections.Generic;
+using System.IO;
 using Version = Lucene.Net.Util.Version;
 
 namespace Lucene.Net.Analysis.Standard
@@ -74,34 +75,34 @@ namespace Lucene.Net.Analysis.Standard
         }
 
         /// <summary>Builds an analyzer with the stop words from the given file.</summary>
-        /// <seealso cref="WordlistLoader.GetWordSet(System.IO.FileInfo)">
+        /// <seealso cref="WordlistLoader.GetWordSet(FileInfo)">
         /// </seealso>
         /// <param name="matchVersion">Lucene version to match See <see cref="Version">above</see> />
         ///
         /// </param>
         /// <param name="stopwords">File to read stop words from
         /// </param>
-        public StandardAnalyzer(Version matchVersion, System.IO.FileInfo stopwords)
+        public StandardAnalyzer(Version matchVersion, FileInfo stopwords)
             : this(matchVersion, WordlistLoader.GetWordSet(stopwords))
         {
         }
 
         /// <summary>Builds an analyzer with the stop words from the given reader.</summary>
-        /// <seealso cref="WordlistLoader.GetWordSet(System.IO.TextReader)">
+        /// <seealso cref="WordlistLoader.GetWordSet(TextReader)">
         /// </seealso>
         /// <param name="matchVersion">Lucene version to match See <see cref="Version">above</see> />
         ///
         /// </param>
         /// <param name="stopwords">Reader to read stop words from
         /// </param>
-        public StandardAnalyzer(Version matchVersion, System.IO.TextReader stopwords)
+        public StandardAnalyzer(Version matchVersion, TextReader stopwords)
             : this(matchVersion, WordlistLoader.GetWordSet(stopwords))
         { }
 
         /// <summary>Constructs a <see cref="StandardTokenizer" /> filtered by a <see cref="StandardFilter" />
         ///, a <see cref="LowerCaseFilter" /> and a <see cref="StopFilter" />.
         /// </summary>
-        public override TokenStream TokenStream(string fieldName, System.IO.TextReader reader)
+        public override TokenStream TokenStream(string fieldName, TextReader reader)
         {
             StandardTokenizer tokenStream = new StandardTokenizer(matchVersion, reader);
             tokenStream.MaxTokenLength = maxTokenLength;
@@ -133,7 +134,7 @@ namespace Lucene.Net.Analysis.Standard
             set { maxTokenLength = value; }
         }
 
-        public override TokenStream ReusableTokenStream(string fieldName, System.IO.TextReader reader)
+        public override TokenStream ReusableTokenStream(string fieldName, TextReader reader)
         {
             if (overridesTokenStreamMethod)
             {

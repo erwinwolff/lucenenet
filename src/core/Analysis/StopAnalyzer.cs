@@ -16,6 +16,7 @@
  */
 
 using System.Collections.Generic;
+using System.IO;
 using Version = Lucene.Net.Util.Version;
 
 namespace Lucene.Net.Analysis
@@ -59,33 +60,33 @@ namespace Lucene.Net.Analysis
         /// <summary> Builds an analyzer with the stop words from the given file.
         ///
         /// </summary>
-        /// <seealso cref="WordlistLoader.GetWordSet(System.IO.FileInfo)">
+        /// <seealso cref="WordlistLoader.GetWordSet(FileInfo)">
         /// </seealso>
         /// <param name="matchVersion">See <a href="#version">above</a>
         /// </param>
         /// <param name="stopwordsFile">File to load stop words from
         /// </param>
-        public StopAnalyzer(Version matchVersion, System.IO.FileInfo stopwordsFile)
+        public StopAnalyzer(Version matchVersion, FileInfo stopwordsFile)
         {
             stopWords = WordlistLoader.GetWordSet(stopwordsFile);
             enablePositionIncrements = StopFilter.GetEnablePositionIncrementsVersionDefault(matchVersion);
         }
 
         /// <summary>Builds an analyzer with the stop words from the given reader. </summary>
-        /// <seealso cref="WordlistLoader.GetWordSet(System.IO.TextReader)">
+        /// <seealso cref="WordlistLoader.GetWordSet(TextReader)">
         /// </seealso>
         /// <param name="matchVersion">See <a href="#Version">above</a>
         /// </param>
         /// <param name="stopwords">Reader to load stop words from
         /// </param>
-        public StopAnalyzer(Version matchVersion, System.IO.TextReader stopwords)
+        public StopAnalyzer(Version matchVersion, TextReader stopwords)
         {
             stopWords = WordlistLoader.GetWordSet(stopwords);
             enablePositionIncrements = StopFilter.GetEnablePositionIncrementsVersionDefault(matchVersion);
         }
 
         /// <summary>Filters LowerCaseTokenizer with StopFilter. </summary>
-		public override TokenStream TokenStream(string fieldName, System.IO.TextReader reader)
+		public override TokenStream TokenStream(string fieldName, TextReader reader)
         {
             return new StopFilter(enablePositionIncrements, new LowerCaseTokenizer(reader), stopWords);
         }
@@ -117,7 +118,7 @@ namespace Lucene.Net.Analysis
             internal TokenStream result;
         }
 
-        public override TokenStream ReusableTokenStream(string fieldName, System.IO.TextReader reader)
+        public override TokenStream ReusableTokenStream(string fieldName, TextReader reader)
         {
             var streams = (SavedStreams)PreviousTokenStream;
             if (streams == null)

@@ -16,7 +16,7 @@
  */
 
 using System;
-
+using System.IO;
 using Directory = Lucene.Net.Store.Directory;
 using IndexOutput = Lucene.Net.Store.IndexOutput;
 using StringHelper = Lucene.Net.Util.StringHelper;
@@ -204,13 +204,13 @@ namespace Lucene.Net.Index
 
             // make an effort to close all streams we can but remember and re-throw
             // the first exception encountered in this process
-            System.IO.IOException keep = null;
+            IOException keep = null;
             if (tvx != null)
                 try
                 {
                     tvx.Close();
                 }
-                catch (System.IO.IOException e)
+                catch (IOException e)
                 {
                     keep = e;
                 }
@@ -219,7 +219,7 @@ namespace Lucene.Net.Index
                 {
                     tvd.Close();
                 }
-                catch (System.IO.IOException e)
+                catch (IOException e)
                 {
                     if (keep == null)
                         keep = e;
@@ -229,14 +229,14 @@ namespace Lucene.Net.Index
                 {
                     tvf.Close();
                 }
-                catch (System.IO.IOException e)
+                catch (IOException e)
                 {
                     if (keep == null)
                         keep = e;
                 }
             if (keep != null)
             {
-                throw new System.IO.IOException(keep.StackTrace);
+                throw new IOException(keep.StackTrace);
             }
         }
     }

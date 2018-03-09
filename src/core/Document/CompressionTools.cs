@@ -21,6 +21,7 @@
 // http://www.icsharpcode.net/OpenSource/SharpZipLib/
 
 using Lucene.Net.Support;
+using System.IO;
 using UnicodeUtil = Lucene.Net.Util.UnicodeUtil;
 
 namespace Lucene.Net.Documents
@@ -48,7 +49,7 @@ namespace Lucene.Net.Documents
 			* You cannot use an array that's the same size as the orginal because
 			* there is no guarantee that the compressed data will be smaller than
 			* the uncompressed data. */
-            System.IO.MemoryStream bos = new System.IO.MemoryStream(length);
+            MemoryStream bos = new MemoryStream(length);
 
             Deflater compressor = SharpZipLib.CreateDeflater();
 
@@ -108,7 +109,7 @@ namespace Lucene.Net.Documents
         public static byte[] Decompress(byte[] value_Renamed)
         {
             // Create an expandable byte array to hold the decompressed data
-            System.IO.MemoryStream bos = new System.IO.MemoryStream(value_Renamed.Length);
+            MemoryStream bos = new MemoryStream(value_Renamed.Length);
 
             Inflater decompressor = SharpZipLib.CreateInflater();
 

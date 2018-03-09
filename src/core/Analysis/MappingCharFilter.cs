@@ -16,6 +16,7 @@
  */
 
 using System.Collections.Generic;
+using System.IO;
 
 namespace Lucene.Net.Analysis
 {
@@ -39,8 +40,8 @@ namespace Lucene.Net.Analysis
             this.normMap = normMap;
         }
 
-        /// Easy-use constructor that takes a <see cref="System.IO.TextReader" />.
-        public MappingCharFilter(NormalizeCharMap normMap, System.IO.TextReader @in)
+        /// Easy-use constructor that takes a <see cref="TextReader" />.
+        public MappingCharFilter(NormalizeCharMap normMap, TextReader @in)
             : base(CharReader.Get(@in))
         {
             this.normMap = normMap;
@@ -141,7 +142,7 @@ namespace Lucene.Net.Analysis
             return result;
         }
 
-        public override int Read(System.Char[] cbuf, int off, int len)
+        public override int Read(char[] cbuf, int off, int len)
         {
             var tmp = new char[len];
             int l = input.Read(tmp, 0, len);

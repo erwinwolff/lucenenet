@@ -18,7 +18,7 @@
 namespace Lucene.Net.Analysis
 {
     /// <summary> Subclasses of CharFilter can be chained to filter CharStream.
-    /// They can be used as <see cref="System.IO.TextReader" /> with additional offset
+    /// They can be used as <see cref="TextReader" /> with additional offset
     /// correction. <see cref="Tokenizer" />s will automatically use <see cref="CorrectOffset" />
     /// if a CharFilter/CharStream subclass is used.
     ///
@@ -70,7 +70,7 @@ namespace Lucene.Net.Analysis
             base.Dispose(disposing);
         }
 
-        public override int Read(System.Char[] cbuf, int off, int len)
+        public override int Read(char[] cbuf, int off, int len)
         {
             return input.Read(cbuf, off, len);
         }

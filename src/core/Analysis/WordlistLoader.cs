@@ -16,6 +16,7 @@
  */
 
 using System.Collections.Generic;
+using System.IO;
 
 namespace Lucene.Net.Analysis
 {
@@ -29,9 +30,9 @@ namespace Lucene.Net.Analysis
         /// </summary>
         /// <param name="wordfile">File containing the wordlist</param>
         /// <returns> A HashSet with the file's words</returns>
-        public static ISet<string> GetWordSet(System.IO.FileInfo wordfile)
+        public static ISet<string> GetWordSet(FileInfo wordfile)
         {
-            using (var reader = new System.IO.StreamReader(wordfile.FullName, System.Text.Encoding.Default))
+            using (var reader = new StreamReader(wordfile.FullName, System.Text.Encoding.Default))
             {
                 return GetWordSet(reader);
             }
@@ -45,9 +46,9 @@ namespace Lucene.Net.Analysis
         /// <param name="wordfile">File containing the wordlist</param>
         /// <param name="comment">The comment string to ignore</param>
         /// <returns> A HashSet with the file's words</returns>
-        public static ISet<string> GetWordSet(System.IO.FileInfo wordfile, string comment)
+        public static ISet<string> GetWordSet(FileInfo wordfile, string comment)
         {
-            using (var reader = new System.IO.StreamReader(wordfile.FullName, System.Text.Encoding.Default))
+            using (var reader = new StreamReader(wordfile.FullName, System.Text.Encoding.Default))
             {
                 return GetWordSet(reader, comment);
             }
@@ -60,7 +61,7 @@ namespace Lucene.Net.Analysis
         /// </summary>
         /// <param name="reader">Reader containing the wordlist</param>
         /// <returns>A HashSet with the reader's words</returns>
-        public static ISet<string> GetWordSet(System.IO.TextReader reader)
+        public static ISet<string> GetWordSet(TextReader reader)
         {
             var result = Support.Compatibility.SetFactory.CreateHashSet<string>();
 
@@ -85,7 +86,7 @@ namespace Lucene.Net.Analysis
         /// </param>
         /// <returns> A HashSet with the reader's words
         /// </returns>
-        public static ISet<string> GetWordSet(System.IO.TextReader reader, string comment)
+        public static ISet<string> GetWordSet(TextReader reader, string comment)
         {
             var result = Support.Compatibility.SetFactory.CreateHashSet<string>();
 
@@ -109,17 +110,17 @@ namespace Lucene.Net.Analysis
         /// <returns> stem dictionary that overrules the stemming algorithm
         /// </returns>
         /// <throws>  IOException  </throws>
-        public static Dictionary<string, string> GetStemDict(System.IO.FileInfo wordstemfile)
+        public static Dictionary<string, string> GetStemDict(FileInfo wordstemfile)
         {
             if (wordstemfile == null)
                 throw new System.NullReferenceException("wordstemfile may not be null");
             var result = new Dictionary<string, string>();
-            System.IO.StreamReader br = null;
-            System.IO.StreamReader fr = null;
+            StreamReader br = null;
+            StreamReader fr = null;
             try
             {
-                fr = new System.IO.StreamReader(wordstemfile.FullName, System.Text.Encoding.Default);
-                br = new System.IO.StreamReader(fr.BaseStream, fr.CurrentEncoding);
+                fr = new StreamReader(wordstemfile.FullName, System.Text.Encoding.Default);
+                br = new StreamReader(fr.BaseStream, fr.CurrentEncoding);
                 string line;
                 char[] tab = { '\t' };
                 while ((line = br.ReadLine()) != null)

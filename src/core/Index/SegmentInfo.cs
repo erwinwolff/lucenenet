@@ -18,6 +18,7 @@
 using Lucene.Net.Support;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using BitVector = Lucene.Net.Util.BitVector;
 using Directory = Lucene.Net.Store.Directory;
 using IndexInput = Lucene.Net.Store.IndexInput;
@@ -450,7 +451,7 @@ namespace Lucene.Net.Index
                     string[] result = dir.ListAll();
                     if (result == null)
                     {
-                        throw new System.IO.IOException("cannot read directory " + dir + ": ListAll() returned null");
+                        throw new IOException("cannot read directory " + dir + ": ListAll() returned null");
                     }
 
                     IndexFileNameFilter filter = IndexFileNameFilter.Filter;
@@ -806,7 +807,7 @@ namespace Lucene.Net.Index
                 for (int i = 0; i < allFiles.Length; i++)
                 {
                     string fileName = allFiles[i];
-                    if (filter.Accept(null, fileName) && fileName.Length > prefixLength && System.Char.IsDigit(fileName[prefixLength]) && fileName.StartsWith(prefix))
+                    if (filter.Accept(null, fileName) && fileName.Length > prefixLength && char.IsDigit(fileName[prefixLength]) && fileName.StartsWith(prefix))
                     {
                         fileList.Add(fileName);
                     }
@@ -837,7 +838,7 @@ namespace Lucene.Net.Index
                 else
                     cfs = "C";
             }
-            catch (System.IO.IOException)
+            catch (IOException)
             {
                 cfs = "?";
             }

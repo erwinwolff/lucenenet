@@ -86,7 +86,7 @@ namespace Lucene.Net.Search
         /// </summary>
         public virtual Weight CreateWeight(Searcher searcher)
         {
-            throw new System.NotSupportedException();
+            throw new NotSupportedException();
         }
 
         /// <summary> Expert: Constructs and initializes a Weight for a top-level query.</summary>
@@ -174,7 +174,7 @@ namespace Lucene.Net.Search
         public virtual void ExtractTerms(System.Collections.Generic.ISet<Term> terms)
         {
             // needs to be implemented by query subclasses
-            throw new System.NotSupportedException();
+            throw new NotSupportedException();
         }
 
         /// <summary>Expert: merges the clauses of a set of BooleanQuery's into a single

@@ -34,14 +34,14 @@ namespace Lucene.Net.Support
         /// </summary>
         /// <param name="path">The abstract pathname to list it childs.</param>
         /// <returns>An array of abstract pathnames childs of the path specified or null if the path is not a directory</returns>
-        public static System.IO.FileInfo[] GetFiles(System.IO.FileInfo path)
+        public static FileInfo[] GetFiles(FileInfo path)
         {
             if ((path.Attributes & FileAttributes.Directory) > 0)
             {
                 String[] fullpathnames = Directory.GetFileSystemEntries(path.FullName);
-                System.IO.FileInfo[] result = new System.IO.FileInfo[fullpathnames.Length];
+                FileInfo[] result = new FileInfo[fullpathnames.Length];
                 for (int i = 0; i < result.Length; i++)
-                    result[i] = new System.IO.FileInfo(fullpathnames[i]);
+                    result[i] = new FileInfo(fullpathnames[i]);
                 return result;
             }
             else
@@ -50,7 +50,7 @@ namespace Lucene.Net.Support
 
         // TODO: This filesupport thing is silly.  Same goes with _TestUtil's RMDir.
         //       If we're removing a directory
-        public static System.IO.FileInfo[] GetFiles(System.IO.DirectoryInfo path)
+        public static FileInfo[] GetFiles(DirectoryInfo path)
         {
             return GetFiles(new FileInfo(path.FullName));
         }
@@ -64,9 +64,9 @@ namespace Lucene.Net.Support
         public static string[] GetLuceneIndexFiles(string fullName,
                                                           Index.IndexFileNameFilter indexFileNameFilter)
         {
-            System.IO.DirectoryInfo dInfo = new System.IO.DirectoryInfo(fullName);
+            DirectoryInfo dInfo = new DirectoryInfo(fullName);
             System.Collections.ArrayList list = new System.Collections.ArrayList();
-            foreach (System.IO.FileInfo fInfo in dInfo.GetFiles())
+            foreach (FileInfo fInfo in dInfo.GetFiles())
             {
                 if (indexFileNameFilter.Accept(fInfo, fInfo.Name) == true)
                 {
@@ -87,7 +87,7 @@ namespace Lucene.Net.Support
         /// data is actually written to the file system.
         /// </summary>
         /// <param name="fileStream">The file stream.</param>
-        public static void Sync(System.IO.FileStream fileStream)
+        public static void Sync(FileStream fileStream)
         {
             if (fileStream == null)
                 throw new ArgumentNullException("fileStream");
@@ -97,12 +97,12 @@ namespace Lucene.Net.Support
             //if (OS.IsWindows)
             //{
             //    if (!FlushFileBuffers(fileStream.Handle))
-            //        throw new System.IO.IOException();
+            //        throw new IOException();
             //}
             //else if (OS.IsUnix)
             //{
             //    if (fsync(fileStream.Handle) != IntPtr.Zero)
-            //    throw new System.IO.IOException();
+            //    throw new IOException();
             //}
             //else
             //{

@@ -875,7 +875,7 @@ namespace Lucene.Net.Index
                 infoStream.WriteLine("IW " + messageID + " [" + DateTime.Now.ToString() + "; " + ThreadClass.Current().Name + "]: " + message);
         }
 
-        private void SetMessageID(System.IO.StreamWriter infoStream)
+        private void SetMessageID(StreamWriter infoStream)
         {
             lock (this)
             {
@@ -1250,7 +1250,7 @@ namespace Lucene.Net.Index
                         segmentInfos.Clear();
                         doCommit = false;
                     }
-                    catch (System.IO.IOException)
+                    catch (IOException)
                     {
                         // Likely this means it's a fresh directory
                         doCommit = true;
@@ -1718,7 +1718,7 @@ namespace Lucene.Net.Index
         /// message when maxFieldLength is reached will be printed
         /// to this.
         /// </summary>
-        public virtual void SetInfoStream(System.IO.StreamWriter infoStream)
+        public virtual void SetInfoStream(StreamWriter infoStream)
         {
             EnsureOpen();
             SetMessageID(infoStream);
@@ -2606,9 +2606,9 @@ namespace Lucene.Net.Index
         }
 
         /// <summary>If non-null, information about merges will be printed to this.</summary>
-        private System.IO.StreamWriter infoStream = null;
+        private StreamWriter infoStream = null;
 
-        private static System.IO.StreamWriter defaultInfoStream = null;
+        private static StreamWriter defaultInfoStream = null;
 
         /// <summary> Requests an "optimize" operation on an index, priming the index
         /// for the fastest available search. Traditionally this has meant
@@ -2774,12 +2774,12 @@ namespace Lucene.Net.Index
                                 MergePolicy.OneMerge merge = mergeExceptions[i];
                                 if (merge.optimize)
                                 {
-                                    System.IO.IOException err;
+                                    IOException err;
                                     System.Exception t = merge.GetException();
                                     if (t != null)
-                                        err = new System.IO.IOException("background merge hit exception: " + merge.SegString(directory), t);
+                                        err = new IOException("background merge hit exception: " + merge.SegString(directory), t);
                                     else
-                                        err = new System.IO.IOException("background merge hit exception: " + merge.SegString(directory));
+                                        err = new IOException("background merge hit exception: " + merge.SegString(directory));
                                     throw err;
                                 }
                             }
@@ -2882,7 +2882,7 @@ namespace Lucene.Net.Index
                             System.Exception t = merge.GetException();
                             if (t != null)
                             {
-                                System.IO.IOException ioe = new System.IO.IOException("background merge hit exception: " + merge.SegString(directory), t);
+                                IOException ioe = new IOException("background merge hit exception: " + merge.SegString(directory), t);
                                 throw ioe;
                             }
                         }
@@ -4609,7 +4609,7 @@ namespace Lucene.Net.Index
                 if (merge.isExternal)
                     throw t;
             }
-            else if (t is System.IO.IOException || t is System.SystemException || t is System.ApplicationException)
+            else if (t is IOException || t is System.SystemException || t is System.ApplicationException)
             {
                 throw t;
             }
@@ -5191,7 +5191,7 @@ namespace Lucene.Net.Index
                         merger.CreateCompoundFile(compoundFileName);
                         success = true;
                     }
-                    catch (System.IO.IOException ioe)
+                    catch (IOException ioe)
                     {
                         lock (this)
                         {

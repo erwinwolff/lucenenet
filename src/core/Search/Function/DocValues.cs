@@ -15,6 +15,8 @@
  * limitations under the License.
  */
 
+using System;
+
 namespace Lucene.Net.Search.Function
 {
     /// <summary> Expert: represents field values as different types.
@@ -109,7 +111,7 @@ namespace Lucene.Net.Search.Function
         /// </summary>
         protected internal virtual object InnerArray
         {
-            get { throw new System.NotSupportedException("this optional method is for test purposes only"); }
+            get { throw new NotSupportedException("this optional method is for test purposes only"); }
         }
 
         // --- some simple statistics on values

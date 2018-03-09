@@ -16,6 +16,7 @@
  */
 
 using System;
+using System.IO;
 
 namespace Lucene.Net.Store
 {
@@ -25,7 +26,7 @@ namespace Lucene.Net.Store
     /// <seealso cref="Lock.Release()">
     /// </seealso>
     [Serializable]
-    public class LockReleaseFailedException : System.IO.IOException
+    public class LockReleaseFailedException : IOException
     {
         public LockReleaseFailedException(string message) : base(message)
         {

@@ -16,6 +16,7 @@
  */
 
 using Lucene.Net.Analysis.Tokenattributes;
+using System.IO;
 using AttributeSource = Lucene.Net.Util.AttributeSource;
 
 namespace Lucene.Net.Analysis
@@ -23,19 +24,19 @@ namespace Lucene.Net.Analysis
     /// <summary>An abstract base class for simple, character-oriented tokenizers.</summary>
     public abstract class CharTokenizer : Tokenizer
     {
-        protected CharTokenizer(System.IO.TextReader input) : base(input)
+        protected CharTokenizer(TextReader input) : base(input)
         {
             offsetAtt = AddAttribute<IOffsetAttribute>();
             termAtt = AddAttribute<ITermAttribute>();
         }
 
-        protected CharTokenizer(AttributeSource source, System.IO.TextReader input) : base(source, input)
+        protected CharTokenizer(AttributeSource source, TextReader input) : base(source, input)
         {
             offsetAtt = AddAttribute<IOffsetAttribute>();
             termAtt = AddAttribute<ITermAttribute>();
         }
 
-        protected CharTokenizer(AttributeFactory factory, System.IO.TextReader input) : base(factory, input)
+        protected CharTokenizer(AttributeFactory factory, TextReader input) : base(factory, input)
         {
             offsetAtt = AddAttribute<IOffsetAttribute>();
             termAtt = AddAttribute<ITermAttribute>();
@@ -122,7 +123,7 @@ namespace Lucene.Net.Analysis
             offsetAtt.SetOffset(finalOffset, finalOffset);
         }
 
-        public override void Reset(System.IO.TextReader input)
+        public override void Reset(TextReader input)
         {
             base.Reset(input);
             bufferIndex = 0;

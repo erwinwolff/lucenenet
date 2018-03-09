@@ -57,7 +57,7 @@ namespace Lucene.Net.Documents
     /// directly supported.  However, any value that can be
     /// converted into these native types can also be indexed.
     /// For example, date/time values represented by a
-    /// <see cref="System.DateTime" /> can be translated into a long
+    /// <see cref="DateTime" /> can be translated into a long
     /// value using the <c>java.util.Date.getTime</c> method.  If you
     /// don't need millisecond precision, you can quantize the
     /// value, either by dividing the result of

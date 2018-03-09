@@ -956,7 +956,7 @@ namespace Lucene.Net.Index
             Directory dir = null;
             try
             {
-                dir = FSDirectory.Open(new System.IO.DirectoryInfo(indexPath));
+                dir = FSDirectory.Open(new DirectoryInfo(indexPath));
             }
             catch (Exception t)
             {
@@ -966,7 +966,7 @@ namespace Lucene.Net.Index
             }
 
             var checker = new CheckIndex(dir);
-            var tempWriter = new System.IO.StreamWriter(System.Console.OpenStandardOutput(), System.Console.Out.Encoding)
+            var tempWriter = new StreamWriter(System.Console.OpenStandardOutput(), System.Console.Out.Encoding)
             { AutoFlush = true };
             checker.SetInfoStream(tempWriter);
 

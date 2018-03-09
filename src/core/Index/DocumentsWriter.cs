@@ -18,6 +18,7 @@
 using Lucene.Net.Support;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using AlreadyClosedException = Lucene.Net.Store.AlreadyClosedException;
 using Analyzer = Lucene.Net.Analysis.Analyzer;
@@ -178,7 +179,7 @@ namespace Lucene.Net.Index
 
         private DocFieldProcessor docFieldProcessor;
 
-        internal System.IO.StreamWriter infoStream;
+        internal StreamWriter infoStream;
         internal int maxFieldLength;
         internal Similarity similarity;
 
@@ -189,7 +190,7 @@ namespace Lucene.Net.Index
             internal DocumentsWriter docWriter;
             internal Analyzer analyzer;
             internal int maxFieldLength;
-            internal System.IO.StreamWriter infoStream;
+            internal StreamWriter infoStream;
             internal Similarity similarity;
             internal int docID;
             internal Document doc;
@@ -382,7 +383,7 @@ namespace Lucene.Net.Index
         /// <summary>If non-null, various details of indexing are printed
         /// here.
         /// </summary>
-        internal void SetInfoStream(System.IO.StreamWriter infoStream)
+        internal void SetInfoStream(StreamWriter infoStream)
         {
             lock (this)
             {

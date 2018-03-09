@@ -18,6 +18,7 @@
 using Lucene.Net.Analysis.Tokenattributes;
 using Lucene.Net.Util;
 using System;
+using System.IO;
 using AttributeSource = Lucene.Net.Util.AttributeSource;
 using Version = Lucene.Net.Util.Version;
 
@@ -100,7 +101,7 @@ namespace Lucene.Net.Analysis.Standard
         ///
         /// See http://issues.apache.org/jira/browse/LUCENE-1068
         /// </param>
-        public StandardTokenizer(Version matchVersion, System.IO.TextReader input) : base()
+        public StandardTokenizer(Version matchVersion, TextReader input) : base()
         {
             InitBlock();
             this.scanner = new StandardTokenizerImpl(input);
@@ -108,7 +109,7 @@ namespace Lucene.Net.Analysis.Standard
         }
 
         /// <summary> Creates a new StandardTokenizer with a given <see cref="AttributeSource" />.</summary>
-        public StandardTokenizer(Version matchVersion, AttributeSource source, System.IO.TextReader input) : base(source)
+        public StandardTokenizer(Version matchVersion, AttributeSource source, TextReader input) : base(source)
         {
             InitBlock();
             this.scanner = new StandardTokenizerImpl(input);
@@ -118,14 +119,14 @@ namespace Lucene.Net.Analysis.Standard
         /// <summary> Creates a new StandardTokenizer with a given
         /// <see cref="Lucene.Net.Util.AttributeSource.AttributeFactory" />
         /// </summary>
-        public StandardTokenizer(Version matchVersion, AttributeFactory factory, System.IO.TextReader input) : base(factory)
+        public StandardTokenizer(Version matchVersion, AttributeFactory factory, TextReader input) : base(factory)
         {
             InitBlock();
             this.scanner = new StandardTokenizerImpl(input);
             Init(input, matchVersion);
         }
 
-        private void Init(System.IO.TextReader input, Version matchVersion)
+        private void Init(TextReader input, Version matchVersion)
         {
             if (matchVersion.OnOrAfter(Version.LUCENE_24))
             {
@@ -209,7 +210,7 @@ namespace Lucene.Net.Analysis.Standard
             offsetAtt.SetOffset(finalOffset, finalOffset);
         }
 
-        public override void Reset(System.IO.TextReader reader)
+        public override void Reset(TextReader reader)
         {
             base.Reset(reader);
             scanner.Reset(reader);

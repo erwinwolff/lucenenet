@@ -16,6 +16,7 @@
  */
 
 using System;
+using System.IO;
 
 namespace Lucene.Net.Store
 {
@@ -27,7 +28,7 @@ namespace Lucene.Net.Store
     /// <seealso cref="Lock.Obtain(long)">
     /// </seealso>
     [Serializable]
-    public class LockObtainFailedException : System.IO.IOException
+    public class LockObtainFailedException : IOException
     {
         public LockObtainFailedException(string message) : base(message)
         {

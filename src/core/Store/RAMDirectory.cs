@@ -17,6 +17,7 @@
 
 using Lucene.Net.Support;
 using System;
+using System.IO;
 
 namespace Lucene.Net.Store
 {
@@ -57,7 +58,7 @@ namespace Lucene.Net.Store
         /// </summary>
         /// <param name="dir">a <c>Directory</c> value
         /// </param>
-        /// <exception cref="System.IO.IOException">if an error occurs
+        /// <exception cref="IOException">if an error occurs
         /// </exception>
         public RAMDirectory(Directory dir) : this(dir, false)
         {
@@ -118,7 +119,7 @@ namespace Lucene.Net.Store
                 file = fileMap[name];
             }
             if (file == null)
-                throw new System.IO.FileNotFoundException(name);
+                throw new FileNotFoundException(name);
 
             // RAMOutputStream.Flush() was changed to use DateTime.UtcNow.
             // Convert it back to local time before returning (previous behavior)
@@ -137,9 +138,9 @@ namespace Lucene.Net.Store
                 file = fileMap[name];
             }
             if (file == null)
-                throw new System.IO.FileNotFoundException(name);
+                throw new FileNotFoundException(name);
 
-            long ts2, ts1 = System.DateTime.UtcNow.Ticks / TimeSpan.TicksPerMillisecond;
+            long ts2, ts1 = DateTime.UtcNow.Ticks / TimeSpan.TicksPerMillisecond;
             do
             {
                 try
@@ -153,7 +154,7 @@ namespace Lucene.Net.Store
                     ThreadClass.Current().Interrupt();
                     throw new System.SystemException(ie.Message, ie);
                 }
-                ts2 = System.DateTime.UtcNow.Ticks / TimeSpan.TicksPerMillisecond;
+                ts2 = DateTime.UtcNow.Ticks / TimeSpan.TicksPerMillisecond;
             }
             while (ts1 == ts2);
 
@@ -171,7 +172,7 @@ namespace Lucene.Net.Store
                 file = fileMap[name];
             }
             if (file == null)
-                throw new System.IO.FileNotFoundException(name);
+                throw new FileNotFoundException(name);
             return file.Length;
         }
 
@@ -203,7 +204,7 @@ namespace Lucene.Net.Store
                     internalSizeInBytes -= file.sizeInBytes;
                 }
                 else
-                    throw new System.IO.FileNotFoundException(name);
+                    throw new FileNotFoundException(name);
             }
         }
 
@@ -235,7 +236,7 @@ namespace Lucene.Net.Store
                 file = fileMap[name];
             }
             if (file == null)
-                throw new System.IO.FileNotFoundException(name);
+                throw new FileNotFoundException(name);
             return new RAMInputStream(file);
         }
 

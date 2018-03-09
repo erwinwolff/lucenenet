@@ -85,11 +85,11 @@ namespace Lucene.Net.Store
     ///
     /// Unfortunately, because of system peculiarities, there is
     /// no single overall best implementation.  Therefore, we've
-    /// added the <see cref="Open(System.IO.DirectoryInfo)" /> method, to allow Lucene to choose
+    /// added the <see cref="Open(DirectoryInfo)" /> method, to allow Lucene to choose
     /// the best FSDirectory implementation given your
     /// environment, and the known limitations of each
     /// implementation.  For users who have no reason to prefer a
-    /// specific implementation, it's best to simply use <see cref="FSDirectory.Open(System.IO.DirectoryInfo)" />
+    /// specific implementation, it's best to simply use <see cref="FSDirectory.Open(DirectoryInfo)" />
     ///.  For all others, you should instantiate the
     /// desired implementation directly.
     ///
@@ -127,7 +127,7 @@ namespace Lucene.Net.Store
                     }
                     catch (Exception)
                     {
-                        throw new System.IO.IOException("Cannot create directory: " + internalDirectory);
+                        throw new IOException("Cannot create directory: " + internalDirectory);
                     }
                     this.internalDirectory.Refresh(); // need to see the creation
                 }
@@ -143,7 +143,7 @@ namespace Lucene.Net.Store
         {
             EnsureOpen();
             CreateDir();
-            System.IO.FileInfo file = new System.IO.FileInfo(System.IO.Path.Combine(internalDirectory.FullName, name));
+            FileInfo file = new FileInfo(Path.Combine(internalDirectory.FullName, name));
             if (file.Exists) // delete existing, if any
             {
                 try
@@ -152,13 +152,13 @@ namespace Lucene.Net.Store
                 }
                 catch (Exception)
                 {
-                    throw new System.IO.IOException("Cannot overwrite: " + file);
+                    throw new IOException("Cannot overwrite: " + file);
                 }
             }
         }
 
         /// <summary>The underlying filesystem directory </summary>
-        protected internal System.IO.DirectoryInfo internalDirectory = null;
+        protected internal DirectoryInfo internalDirectory = null;
 
         /// <summary>Create a new FSDirectory for the named location (ctor for subclasses).</summary>
         /// <param name="path">the path of the directory
@@ -167,7 +167,7 @@ namespace Lucene.Net.Store
         /// (<see cref="NativeFSLockFactory" />);
         /// </param>
         /// <throws>  IOException </throws>
-        protected internal FSDirectory(System.IO.DirectoryInfo path, LockFactory lockFactory)
+        protected internal FSDirectory(DirectoryInfo path, LockFactory lockFactory)
         {
             // new ctors use always NativeFSLockFactory as default:
             if (lockFactory == null)
@@ -182,7 +182,7 @@ namespace Lucene.Net.Store
             internalDirectory = path;
 
             // due to differences in how Java & .NET refer to files, the checks are a bit different
-            if (!internalDirectory.Exists && System.IO.File.Exists(internalDirectory.FullName))
+            if (!internalDirectory.Exists && File.Exists(internalDirectory.FullName))
             {
                 throw new NoSuchDirectoryException("file '" + internalDirectory.FullName + "' exists but is not a directory");
             }
@@ -193,7 +193,7 @@ namespace Lucene.Net.Store
             if (lockFactory is FSLockFactory)
             {
                 FSLockFactory lf = (FSLockFactory)lockFactory;
-                System.IO.DirectoryInfo dir = lf.LockDir;
+                DirectoryInfo dir = lf.LockDir;
                 // if the lock factory has no lockDir set, use the this directory as lockDir
                 if (dir == null)
                 {
@@ -252,15 +252,15 @@ namespace Lucene.Net.Store
         ///
         /// <p/>See <a href="#subclasses">above</a>
         /// </summary>
-        public static FSDirectory Open(System.IO.DirectoryInfo path)
+        public static FSDirectory Open(DirectoryInfo path)
         {
             return Open(path, null);
         }
 
-        /// <summary>Just like <see cref="Open(System.IO.DirectoryInfo)" />, but allows you to
+        /// <summary>Just like <see cref="Open(DirectoryInfo)" />, but allows you to
 		/// also specify a custom <see cref="LockFactory" />.
 		/// </summary>
-		public static FSDirectory Open(System.IO.DirectoryInfo path, LockFactory lockFactory)
+		public static FSDirectory Open(DirectoryInfo path, LockFactory lockFactory)
         {
             /* For testing:
 			MMapDirectory dir=new MMapDirectory(path, lockFactory);
@@ -282,7 +282,7 @@ namespace Lucene.Net.Store
 
         /// <summary>Lists all files (not subdirectories) in the
         /// directory.  This method never returns null (throws
-        /// <see cref="System.IO.IOException" /> instead).
+        /// <see cref="IOException" /> instead).
         ///
         /// </summary>
         /// <throws>  NoSuchDirectoryException if the directory </throws>
@@ -290,19 +290,19 @@ namespace Lucene.Net.Store
         /// directory.
         /// </summary>
         /// <throws>  IOException if list() returns null  </throws>
-        public static string[] ListAll(System.IO.DirectoryInfo dir)
+        public static string[] ListAll(DirectoryInfo dir)
         {
             if (!dir.Exists)
             {
                 throw new NoSuchDirectoryException("directory '" + dir.FullName + "' does not exist");
             }
-            else if (System.IO.File.Exists(dir.FullName))
+            else if (File.Exists(dir.FullName))
             {
                 throw new NoSuchDirectoryException("File '" + dir.FullName + "' does not exist");
             }
 
             // Exclude subdirs, only the file names, not the paths
-            System.IO.FileInfo[] files = dir.GetFiles();
+            FileInfo[] files = dir.GetFiles();
             string[] result = new string[files.Length];
             for (int i = 0; i < files.Length; i++)
             {
@@ -319,7 +319,7 @@ namespace Lucene.Net.Store
         /// <summary>Lists all files (not subdirectories) in the
         /// directory.
         /// </summary>
-        /// <seealso cref="ListAll(System.IO.DirectoryInfo)">
+        /// <seealso cref="ListAll(DirectoryInfo)">
         /// </seealso>
         public override string[] ListAll()
         {
@@ -331,7 +331,7 @@ namespace Lucene.Net.Store
         public override bool FileExists(string name)
         {
             EnsureOpen();
-            System.IO.FileInfo file = new System.IO.FileInfo(System.IO.Path.Combine(internalDirectory.FullName, name));
+            FileInfo file = new FileInfo(Path.Combine(internalDirectory.FullName, name));
             return file.Exists;
         }
 
@@ -339,14 +339,14 @@ namespace Lucene.Net.Store
         public override long FileModified(string name)
         {
             EnsureOpen();
-            System.IO.FileInfo file = new System.IO.FileInfo(System.IO.Path.Combine(internalDirectory.FullName, name));
+            FileInfo file = new FileInfo(Path.Combine(internalDirectory.FullName, name));
             return (long)file.LastWriteTime.ToUniversalTime().Subtract(new DateTime(1970, 1, 1, 0, 0, 0)).TotalMilliseconds; //{{LUCENENET-353}}
         }
 
         /// <summary>Returns the time the named file was last modified. </summary>
-        public static long FileModified(System.IO.FileInfo directory, string name)
+        public static long FileModified(FileInfo directory, string name)
         {
-            System.IO.FileInfo file = new System.IO.FileInfo(System.IO.Path.Combine(directory.FullName, name));
+            FileInfo file = new FileInfo(Path.Combine(directory.FullName, name));
             return (long)file.LastWriteTime.ToUniversalTime().Subtract(new DateTime(1970, 1, 1, 0, 0, 0)).TotalMilliseconds; //{{LUCENENET-353}}
         }
 
@@ -354,15 +354,15 @@ namespace Lucene.Net.Store
         public override void TouchFile(string name)
         {
             EnsureOpen();
-            System.IO.FileInfo file = new System.IO.FileInfo(System.IO.Path.Combine(internalDirectory.FullName, name));
-            file.LastWriteTime = System.DateTime.Now;
+            FileInfo file = new FileInfo(Path.Combine(internalDirectory.FullName, name));
+            file.LastWriteTime = DateTime.Now;
         }
 
         /// <summary>Returns the length in bytes of a file in the directory. </summary>
         public override long FileLength(string name)
         {
             EnsureOpen();
-            System.IO.FileInfo file = new System.IO.FileInfo(System.IO.Path.Combine(internalDirectory.FullName, name));
+            FileInfo file = new FileInfo(Path.Combine(internalDirectory.FullName, name));
             return file.Exists ? file.Length : 0;
         }
 
@@ -370,33 +370,33 @@ namespace Lucene.Net.Store
         public override void DeleteFile(string name)
         {
             EnsureOpen();
-            System.IO.FileInfo file = new System.IO.FileInfo(System.IO.Path.Combine(internalDirectory.FullName, name));
+            FileInfo file = new FileInfo(Path.Combine(internalDirectory.FullName, name));
             try
             {
                 file.Delete();
             }
             catch (Exception)
             {
-                throw new System.IO.IOException("Cannot delete " + file);
+                throw new IOException("Cannot delete " + file);
             }
         }
 
         public override void Sync(string name)
         {
             EnsureOpen();
-            System.IO.FileInfo fullFile = new System.IO.FileInfo(System.IO.Path.Combine(internalDirectory.FullName, name));
+            FileInfo fullFile = new FileInfo(Path.Combine(internalDirectory.FullName, name));
             bool success = false;
             int retryCount = 0;
-            System.IO.IOException exc = null;
+            IOException exc = null;
             while (!success && retryCount < 5)
             {
                 retryCount++;
-                System.IO.FileStream file = null;
+                FileStream file = null;
                 try
                 {
                     try
                     {
-                        file = new System.IO.FileStream(fullFile.FullName, System.IO.FileMode.OpenOrCreate, System.IO.FileAccess.Write, System.IO.FileShare.ReadWrite);
+                        file = new FileStream(fullFile.FullName, FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite);
                         FileSupport.Sync(file);
                         success = true;
                     }
@@ -406,7 +406,7 @@ namespace Lucene.Net.Store
                             file.Close();
                     }
                 }
-                catch (System.IO.IOException ioe)
+                catch (IOException ioe)
                 {
                     if (exc == null)
                         exc = ioe;
@@ -439,7 +439,7 @@ namespace Lucene.Net.Store
             {
                 dirName = internalDirectory.FullName;
             }
-            catch (System.IO.IOException e)
+            catch (IOException e)
             {
                 throw new System.SystemException(e.ToString(), e);
             }

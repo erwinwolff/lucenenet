@@ -136,7 +136,7 @@ namespace Lucene.Net.Index
         /// <summary> If non-null, information about loading segments_N files</summary>
         /// <seealso cref="SetInfoStream">
         /// </seealso>
-        private static System.IO.StreamWriter infoStream;
+        private static StreamWriter infoStream;
 
         public SegmentInfo Info(int i)
         {
@@ -499,7 +499,7 @@ namespace Lucene.Net.Index
         /// <summary>If non-null, information about retries when loading
         /// the segments file will be printed to this.
         /// </summary>
-        public static void SetInfoStream(System.IO.StreamWriter infoStream)
+        public static void SetInfoStream(StreamWriter infoStream)
         {
             SegmentInfos.infoStream = infoStream;
         }
@@ -581,7 +581,7 @@ namespace Lucene.Net.Index
                 if (commit != null)
                 {
                     if (directory != commit.Directory)
-                        throw new System.IO.IOException("the specified commit does not match the specified Directory");
+                        throw new IOException("the specified commit does not match the specified Directory");
                     return DoBody(commit.SegmentsFileName);
                 }
 
@@ -589,7 +589,7 @@ namespace Lucene.Net.Index
                 long lastGen = -1;
                 long gen = 0;
                 int genLookaheadCount = 0;
-                System.IO.IOException exc = null;
+                IOException exc = null;
                 bool retry = false;
 
                 int method = 0;
@@ -642,12 +642,12 @@ namespace Lucene.Net.Index
                             {
                                 genInput = directory.OpenInput(IndexFileNames.SEGMENTS_GEN);
                             }
-                            catch (System.IO.FileNotFoundException e)
+                            catch (FileNotFoundException e)
                             {
                                 Lucene.Net.Index.SegmentInfos.Message("segments.gen open: FileNotFoundException " + e);
                                 break;
                             }
-                            catch (System.IO.IOException e)
+                            catch (IOException e)
                             {
                                 Lucene.Net.Index.SegmentInfos.Message("segments.gen open: IOException " + e);
                             }
@@ -670,7 +670,7 @@ namespace Lucene.Net.Index
                                         }
                                     }
                                 }
-                                catch (System.IO.IOException)
+                                catch (IOException)
                                 {
                                     // will retry
                                 }
@@ -693,7 +693,7 @@ namespace Lucene.Net.Index
 
                         if (gen == -1)
                         {
-                            throw new System.IO.FileNotFoundException("no segments* file found in " + directory + ": files:" + string.Join(" ", files));
+                            throw new FileNotFoundException("no segments* file found in " + directory + ": files:" + string.Join(" ", files));
                         }
                     }
 
@@ -749,7 +749,7 @@ namespace Lucene.Net.Index
 
                         return v;
                     }
-                    catch (System.IO.IOException err)
+                    catch (IOException err)
                     {
                         // Save the original root cause:
                         if (exc == null)
@@ -783,7 +783,7 @@ namespace Lucene.Net.Index
                                     }
                                     return v;
                                 }
-                                catch (System.IO.IOException err2)
+                                catch (IOException err2)
                                 {
                                     Lucene.Net.Index.SegmentInfos.Message("secondary Exception on '" + prevSegmentFileName + "': " + err2 + "'; will retry");
                                 }

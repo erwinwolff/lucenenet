@@ -16,6 +16,7 @@
  */
 
 using System;
+using System.IO;
 
 namespace Lucene.Net.Store
 {
@@ -36,7 +37,7 @@ namespace Lucene.Net.Store
         /// <param name="lockFactory">the lock factory to use, or null for the default.
         /// </param>
         /// <throws>  IOException </throws>
-        public SimpleFSDirectory(System.IO.DirectoryInfo path, LockFactory lockFactory)
+        public SimpleFSDirectory(DirectoryInfo path, LockFactory lockFactory)
             : base(path, lockFactory)
         {
         }
@@ -47,7 +48,7 @@ namespace Lucene.Net.Store
         /// <param name="path">the path of the directory
         /// </param>
         /// <throws>  IOException </throws>
-        public SimpleFSDirectory(System.IO.DirectoryInfo path) : base(path, null)
+        public SimpleFSDirectory(DirectoryInfo path) : base(path, null)
         {
         }
 
@@ -55,7 +56,7 @@ namespace Lucene.Net.Store
         public override IndexOutput CreateOutput(string name)
         {
             InitOutput(name);
-            return new SimpleFSIndexOutput(new System.IO.FileInfo(System.IO.Path.Combine(internalDirectory.FullName, name)));
+            return new SimpleFSIndexOutput(new FileInfo(Path.Combine(internalDirectory.FullName, name)));
         }
 
         /// <summary>Creates an IndexInput for the file with the given name. </summary>
@@ -68,8 +69,8 @@ namespace Lucene.Net.Store
             {
                 try
                 {
-                    return new SimpleFSIndexInput(new System.IO.FileInfo(
-                        System.IO.Path.Combine(internalDirectory.FullName, name)), bufferSize, ReadChunkSize);
+                    return new SimpleFSIndexInput(new FileInfo(
+                        Path.Combine(internalDirectory.FullName, name)), bufferSize, ReadChunkSize);
                 }
                 catch (System.UnauthorizedAccessException ex)
                 {
@@ -84,7 +85,7 @@ namespace Lucene.Net.Store
         protected internal class SimpleFSIndexInput : BufferedIndexInput
         {
             // TODO: This is a bad way to handle memory and disposing
-            protected internal class Descriptor : System.IO.BinaryReader
+            protected internal class Descriptor : BinaryReader
             {
                 // remember if the file is open, so that we don't try to close it
                 // more than once
@@ -95,8 +96,8 @@ namespace Lucene.Net.Store
 
                 private bool isDisposed;
 
-                public Descriptor(/*FSIndexInput enclosingInstance,*/ System.IO.FileInfo file, System.IO.FileAccess mode)
-                    : base(new System.IO.FileStream(file.FullName, System.IO.FileMode.Open, mode, System.IO.FileShare.ReadWrite))
+                public Descriptor(/*FSIndexInput enclosingInstance,*/ FileInfo file, FileAccess mode)
+                    : base(new FileStream(file.FullName, FileMode.Open, mode, FileShare.ReadWrite))
                 {
                     isOpen = true;
                     length = file.Length;
@@ -137,10 +138,10 @@ namespace Lucene.Net.Store
             //  LUCENE-1566 - maximum read length on a 32bit JVM to prevent incorrect OOM
             protected internal int chunkSize;
 
-            public SimpleFSIndexInput(System.IO.FileInfo path, int bufferSize, int chunkSize)
+            public SimpleFSIndexInput(FileInfo path, int bufferSize, int chunkSize)
                 : base(bufferSize)
             {
-                file = new Descriptor(path, System.IO.FileAccess.Read);
+                file = new Descriptor(path, FileAccess.Read);
                 this.chunkSize = chunkSize;
             }
 
@@ -152,7 +153,7 @@ namespace Lucene.Net.Store
                     long position = FilePointer;
                     if (position != file.position)
                     {
-                        file.BaseStream.Seek(position, System.IO.SeekOrigin.Begin);
+                        file.BaseStream.Seek(position, SeekOrigin.Begin);
                         file.position = position;
                     }
                     int total = 0;
@@ -174,7 +175,7 @@ namespace Lucene.Net.Store
                             int i = file.Read(b, offset + total, readLength);
                             if (i == -1)
                             {
-                                throw new System.IO.IOException("read past EOF");
+                                throw new IOException("read past EOF");
                             }
                             file.position += i;
                             total += i;
@@ -241,15 +242,15 @@ namespace Lucene.Net.Store
 
         public class SimpleFSIndexOutput : BufferedIndexOutput
         {
-            internal System.IO.FileStream file = null;
+            internal FileStream file = null;
 
             // remember if the file is open, so that we don't try to close it
             // more than once
             private volatile bool isOpen;
 
-            public SimpleFSIndexOutput(System.IO.FileInfo path)
+            public SimpleFSIndexOutput(FileInfo path)
             {
-                file = new System.IO.FileStream(path.FullName, System.IO.FileMode.OpenOrCreate, System.IO.FileAccess.ReadWrite);
+                file = new FileStream(path.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite);
                 isOpen = true;
             }
 
@@ -305,7 +306,7 @@ namespace Lucene.Net.Store
             public override void Seek(long pos)
             {
                 base.Seek(pos);
-                file.Seek(pos, System.IO.SeekOrigin.Begin);
+                file.Seek(pos, SeekOrigin.Begin);
             }
 
             public override long Length

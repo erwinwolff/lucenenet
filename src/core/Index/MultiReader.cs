@@ -17,6 +17,7 @@
 
 using Lucene.Net.Support;
 using System;
+using System.IO;
 using System.Linq;
 using DefaultSimilarity = Lucene.Net.Search.DefaultSimilarity;
 using Document = Lucene.Net.Documents.Document;
@@ -186,7 +187,7 @@ namespace Lucene.Net.Index
                             {
                                 newSubReaders[i].Close();
                             }
-                            catch (System.IO.IOException)
+                            catch (IOException)
                             {
                                 // keep going - we want to clean up as much as possible
                             }
@@ -481,7 +482,7 @@ namespace Lucene.Net.Index
         /// <throws>  UnsupportedOperationException </throws>
         public override long Version
         {
-            get { throw new System.NotSupportedException("MultiReader does not support this method."); }
+            get { throw new NotSupportedException("MultiReader does not support this method."); }
         }
 
         public override IndexReader[] GetSequentialSubReaders()

@@ -49,7 +49,7 @@ namespace Lucene.Net.Store
         protected internal LockFactory interalLockFactory;
 
         /// <summary>Returns an array of strings, one for each file in the directory.</summary>
-        /// <exception cref="System.IO.IOException"></exception>
+        /// <exception cref="IOException"></exception>
         public abstract string[] ListAll();
 
         /// <summary>Returns true iff a file with the given name exists. </summary>

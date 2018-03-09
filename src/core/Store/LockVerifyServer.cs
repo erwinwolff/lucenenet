@@ -16,6 +16,7 @@
  */
 
 using System;
+using System.IO;
 
 namespace Lucene.Net.Store
 {
@@ -61,8 +62,8 @@ namespace Lucene.Net.Store
             while (true)
             {
                 System.Net.Sockets.TcpClient cs = s.AcceptTcpClient();
-                System.IO.Stream out_Renamed = cs.GetStream();
-                System.IO.Stream in_Renamed = cs.GetStream();
+                Stream out_Renamed = cs.GetStream();
+                Stream in_Renamed = cs.GetStream();
 
                 int id = in_Renamed.ReadByte();
                 int command = in_Renamed.ReadByte();

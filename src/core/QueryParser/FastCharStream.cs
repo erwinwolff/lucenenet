@@ -18,6 +18,7 @@
 // FastCharStream.java
 
 using System;
+using System.IO;
 
 namespace Lucene.Net.QueryParsers
 {
@@ -37,10 +38,10 @@ namespace Lucene.Net.QueryParsers
         internal int tokenStart = 0; // offset in buffer
         internal int bufferStart = 0; // position in file of buffer
 
-        internal System.IO.TextReader input; // source of chars
+        internal TextReader input; // source of chars
 
         /// <summary>Constructs from a Reader. </summary>
-        public FastCharStream(System.IO.TextReader r)
+        public FastCharStream(TextReader r)
         {
             input = r;
         }
@@ -85,7 +86,7 @@ namespace Lucene.Net.QueryParsers
 
             int charsRead = input.Read(buffer, newPosition, buffer.Length - newPosition);
             if (charsRead <= 0)
-                throw new System.IO.IOException("read past eof");
+                throw new IOException("read past eof");
             else
                 bufferLength += charsRead;
         }
@@ -119,7 +120,7 @@ namespace Lucene.Net.QueryParsers
             {
                 input.Close();
             }
-            catch (System.IO.IOException e)
+            catch (IOException e)
             {
                 System.Console.Error.WriteLine("Caught: " + e + "; ignoring.");
             }

@@ -18,7 +18,7 @@
 using Lucene.Net.Support;
 using System;
 
-// {{Aroush-2.9}} Port issue?  Both of those were treated as: System.IO.MemoryStream
+// {{Aroush-2.9}} Port issue?  Both of those were treated as: MemoryStream
 //using CharBuffer = java.nio.CharBuffer;
 //using ByteBuffer = java.nio.ByteBuffer;
 

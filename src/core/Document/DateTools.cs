@@ -71,7 +71,7 @@ namespace Lucene.Net.Documents
         /// <returns> a string in format <c>yyyyMMddHHmmssSSS</c> or shorter,
         /// depending on <c>resolution</c>; using GMT as timezone
         /// </returns>
-        public static string DateToString(System.DateTime date, Resolution resolution)
+        public static string DateToString(DateTime date, Resolution resolution)
         {
             return TimeToString(date.Ticks / TimeSpan.TicksPerMillisecond, resolution);
         }
@@ -89,7 +89,7 @@ namespace Lucene.Net.Documents
         /// </returns>
         public static string TimeToString(long time, Resolution resolution)
         {
-            System.DateTime date = new System.DateTime(Round(time, resolution));
+            DateTime date = new DateTime(Round(time, resolution));
 
             if (resolution == Resolution.YEAR)
             {
@@ -152,30 +152,30 @@ namespace Lucene.Net.Documents
         /// <throws>  ParseException if <c>dateString</c> is not in the  </throws>
         /// <summary>  expected format
         /// </summary>
-        public static System.DateTime StringToDate(string dateString)
+        public static DateTime StringToDate(string dateString)
         {
-            System.DateTime date;
+            DateTime date;
             if (dateString.Length == 4)
             {
-                date = new System.DateTime(Convert.ToInt16(dateString.Substring(0, 4)),
+                date = new DateTime(Convert.ToInt16(dateString.Substring(0, 4)),
                     1, 1, 0, 0, 0, 0);
             }
             else if (dateString.Length == 6)
             {
-                date = new System.DateTime(Convert.ToInt16(dateString.Substring(0, 4)),
+                date = new DateTime(Convert.ToInt16(dateString.Substring(0, 4)),
                     Convert.ToInt16(dateString.Substring(4, 2)),
                     1, 0, 0, 0, 0);
             }
             else if (dateString.Length == 8)
             {
-                date = new System.DateTime(Convert.ToInt16(dateString.Substring(0, 4)),
+                date = new DateTime(Convert.ToInt16(dateString.Substring(0, 4)),
                     Convert.ToInt16(dateString.Substring(4, 2)),
                     Convert.ToInt16(dateString.Substring(6, 2)),
                     0, 0, 0, 0);
             }
             else if (dateString.Length == 10)
             {
-                date = new System.DateTime(Convert.ToInt16(dateString.Substring(0, 4)),
+                date = new DateTime(Convert.ToInt16(dateString.Substring(0, 4)),
                     Convert.ToInt16(dateString.Substring(4, 2)),
                     Convert.ToInt16(dateString.Substring(6, 2)),
                     Convert.ToInt16(dateString.Substring(8, 2)),
@@ -183,7 +183,7 @@ namespace Lucene.Net.Documents
             }
             else if (dateString.Length == 12)
             {
-                date = new System.DateTime(Convert.ToInt16(dateString.Substring(0, 4)),
+                date = new DateTime(Convert.ToInt16(dateString.Substring(0, 4)),
                     Convert.ToInt16(dateString.Substring(4, 2)),
                     Convert.ToInt16(dateString.Substring(6, 2)),
                     Convert.ToInt16(dateString.Substring(8, 2)),
@@ -192,7 +192,7 @@ namespace Lucene.Net.Documents
             }
             else if (dateString.Length == 14)
             {
-                date = new System.DateTime(Convert.ToInt16(dateString.Substring(0, 4)),
+                date = new DateTime(Convert.ToInt16(dateString.Substring(0, 4)),
                     Convert.ToInt16(dateString.Substring(4, 2)),
                     Convert.ToInt16(dateString.Substring(6, 2)),
                     Convert.ToInt16(dateString.Substring(8, 2)),
@@ -202,7 +202,7 @@ namespace Lucene.Net.Documents
             }
             else if (dateString.Length == 17)
             {
-                date = new System.DateTime(Convert.ToInt16(dateString.Substring(0, 4)),
+                date = new DateTime(Convert.ToInt16(dateString.Substring(0, 4)),
                     Convert.ToInt16(dateString.Substring(4, 2)),
                     Convert.ToInt16(dateString.Substring(6, 2)),
                     Convert.ToInt16(dateString.Substring(8, 2)),
@@ -228,9 +228,9 @@ namespace Lucene.Net.Documents
         /// <returns> the date with all values more precise than <c>resolution</c>
         /// set to 0 or 1
         /// </returns>
-        public static System.DateTime Round(System.DateTime date, Resolution resolution)
+        public static DateTime Round(DateTime date, Resolution resolution)
         {
-            return new System.DateTime(Round(date.Ticks / TimeSpan.TicksPerMillisecond, resolution));
+            return new DateTime(Round(date.Ticks / TimeSpan.TicksPerMillisecond, resolution));
         }
 
         /// <summary> Limit a date's resolution. For example, the date <c>1095767411000</c>
@@ -247,7 +247,7 @@ namespace Lucene.Net.Documents
         /// </returns>
         public static long Round(long time, Resolution resolution)
         {
-            System.DateTime dt = new System.DateTime(time * TimeSpan.TicksPerMillisecond);
+            DateTime dt = new DateTime(time * TimeSpan.TicksPerMillisecond);
 
             if (resolution == Resolution.YEAR)
             {

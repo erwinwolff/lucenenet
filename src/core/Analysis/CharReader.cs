@@ -15,6 +15,8 @@
  * limitations under the License.
  */
 
+using System.IO;
+
 namespace Lucene.Net.Analysis
 {
     /// <summary> CharReader is a Reader wrapper. It reads chars from
@@ -28,21 +30,21 @@ namespace Lucene.Net.Analysis
 
         private bool isDisposed;
 
-        internal System.IO.StreamReader input;
+        internal StreamReader input;
 
-        public static CharStream Get(System.IO.TextReader input)
+        public static CharStream Get(TextReader input)
         {
             var charStream = input as CharStream;
             if (charStream != null)
                 return charStream;
 
             // {{Aroush-2.9}} isn't there a better (faster) way to do this?
-            var theString = new System.IO.MemoryStream(System.Text.Encoding.UTF8.GetBytes(input.ReadToEnd()));
-            return new CharReader(new System.IO.StreamReader(theString));
+            var theString = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(input.ReadToEnd()));
+            return new CharReader(new StreamReader(theString));
             //return input is CharStream?(CharStream) input:new CharReader(input);
         }
 
-        private CharReader(System.IO.StreamReader in_Renamed) : base(in_Renamed)
+        private CharReader(StreamReader in_Renamed) : base(in_Renamed)
         {
             input = in_Renamed;
         }
@@ -69,7 +71,7 @@ namespace Lucene.Net.Analysis
             base.Dispose(disposing);
         }
 
-        public override int Read(System.Char[] cbuf, int off, int len)
+        public override int Read(char[] cbuf, int off, int len)
         {
             return input.Read(cbuf, off, len);
         }

@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Lucene.Net.Index
 {
@@ -42,13 +43,9 @@ namespace Lucene.Net.Index
             }
         }
 
-        /* (non-Javadoc)
-		* <see cref="java.io.FilenameFilter.accept(java.io.File, java.lang.String)"/>
-		*/
-
-        public virtual bool Accept(System.IO.FileInfo dir, string name)
+        public virtual bool Accept(FileInfo dir, string name)
         {
-            int i = name.LastIndexOf((System.Char)'.');
+            int i = name.LastIndexOf((char)'.');
             if (i != -1)
             {
                 string extension = name.Substring(1 + i);
@@ -82,7 +79,7 @@ namespace Lucene.Net.Index
         /// </summary>
         public virtual bool IsCFSFile(string name)
         {
-            int i = name.LastIndexOf((System.Char)'.');
+            int i = name.LastIndexOf((char)'.');
             if (i != -1)
             {
                 string extension = name.Substring(1 + i);

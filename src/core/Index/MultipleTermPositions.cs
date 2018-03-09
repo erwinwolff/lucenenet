@@ -114,7 +114,7 @@ namespace Lucene.Net.Index
         /// <summary> Creates a new <c>MultipleTermPositions</c> instance.
         ///
         /// </summary>
-        /// <exception cref="System.IO.IOException">
+        /// <exception cref="IOException">
         /// </exception>
         public MultipleTermPositions(IndexReader indexReader, Term[] terms)
         {
@@ -215,35 +215,35 @@ namespace Lucene.Net.Index
         /// <throws>  UnsupportedOperationException </throws>
         public virtual void Seek(Term arg0)
         {
-            throw new System.NotSupportedException();
+            throw new NotSupportedException();
         }
 
         /// <summary> Not implemented.</summary>
         /// <throws>  UnsupportedOperationException </throws>
         public virtual void Seek(TermEnum termEnum)
         {
-            throw new System.NotSupportedException();
+            throw new NotSupportedException();
         }
 
         /// <summary> Not implemented.</summary>
         /// <throws>  UnsupportedOperationException </throws>
         public virtual int Read(int[] arg0, int[] arg1)
         {
-            throw new System.NotSupportedException();
+            throw new NotSupportedException();
         }
 
         /// <summary> Not implemented.</summary>
         /// <throws>  UnsupportedOperationException </throws>
         public virtual int PayloadLength
         {
-            get { throw new System.NotSupportedException(); }
+            get { throw new NotSupportedException(); }
         }
 
         /// <summary> Not implemented.</summary>
         /// <throws>  UnsupportedOperationException </throws>
         public virtual byte[] GetPayload(byte[] data, int offset)
         {
-            throw new System.NotSupportedException();
+            throw new NotSupportedException();
         }
 
         /// <summary> </summary>

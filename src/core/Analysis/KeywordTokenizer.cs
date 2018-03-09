@@ -16,6 +16,7 @@
  */
 
 using Lucene.Net.Analysis.Tokenattributes;
+using System.IO;
 using AttributeSource = Lucene.Net.Util.AttributeSource;
 
 namespace Lucene.Net.Analysis
@@ -30,21 +31,21 @@ namespace Lucene.Net.Analysis
         private ITermAttribute termAtt;
         private IOffsetAttribute offsetAtt;
 
-        public KeywordTokenizer(System.IO.TextReader input) : this(input, DEFAULT_BUFFER_SIZE)
+        public KeywordTokenizer(TextReader input) : this(input, DEFAULT_BUFFER_SIZE)
         {
         }
 
-        public KeywordTokenizer(System.IO.TextReader input, int bufferSize) : base(input)
-        {
-            Init(bufferSize);
-        }
-
-        public KeywordTokenizer(AttributeSource source, System.IO.TextReader input, int bufferSize) : base(source, input)
+        public KeywordTokenizer(TextReader input, int bufferSize) : base(input)
         {
             Init(bufferSize);
         }
 
-        public KeywordTokenizer(AttributeFactory factory, System.IO.TextReader input, int bufferSize) : base(factory, input)
+        public KeywordTokenizer(AttributeSource source, TextReader input, int bufferSize) : base(source, input)
+        {
+            Init(bufferSize);
+        }
+
+        public KeywordTokenizer(AttributeFactory factory, TextReader input, int bufferSize) : base(factory, input)
         {
             Init(bufferSize);
         }
@@ -88,7 +89,7 @@ namespace Lucene.Net.Analysis
             offsetAtt.SetOffset(finalOffset, finalOffset);
         }
 
-        public override void Reset(System.IO.TextReader input)
+        public override void Reset(TextReader input)
         {
             base.Reset(input);
             this.done = false;

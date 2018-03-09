@@ -17,6 +17,7 @@
 
 using Lucene.Net.Documents;
 using System;
+using System.IO;
 using System.Linq;
 using Directory = Lucene.Net.Store.Directory;
 using Document = Lucene.Net.Documents.Document;
@@ -107,7 +108,7 @@ namespace Lucene.Net.Index
                     {
                         Dispose();
                     }
-                    catch (System.IO.IOException)
+                    catch (IOException)
                     {
                     }
                     try
@@ -187,7 +188,7 @@ namespace Lucene.Net.Index
                         }
                     }
                 }
-                catch (System.IO.IOException)
+                catch (IOException)
                 {
                     try
                     {
@@ -203,7 +204,7 @@ namespace Lucene.Net.Index
                             }
                         }
                     }
-                    catch (System.IO.IOException)
+                    catch (IOException)
                     {
                         // Ignore so we throw only first IOException hit
                     }

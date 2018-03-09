@@ -19,6 +19,7 @@ using Lucene.Net.Analysis.Tokenattributes;
 using Lucene.Net.Index;
 using Lucene.Net.Support;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Analyzer = Lucene.Net.Analysis.Analyzer;
 using TokenStream = Lucene.Net.Analysis.TokenStream;
@@ -51,7 +52,7 @@ namespace Lucene.Net.Search
         {
             if (analyzer != null)
             {
-                TokenStream stream = analyzer.TokenStream("", new System.IO.StringReader(queryString));
+                TokenStream stream = analyzer.TokenStream("", new StringReader(queryString));
                 if (stream != null)
                 {
                     IList<string> terms = new List<string>();
@@ -70,7 +71,7 @@ namespace Lucene.Net.Search
                         }
                         ProcessTerms(terms.ToArray());
                     }
-                    catch (System.IO.IOException)
+                    catch (IOException)
                     {
                     }
                 }

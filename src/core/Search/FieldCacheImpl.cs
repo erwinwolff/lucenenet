@@ -246,7 +246,7 @@ namespace Lucene.Net.Search
                             // call to FieldCache.getXXX
                             if (key.custom != null && wrapper != null)
                             {
-                                System.IO.StreamWriter infoStream = wrapper.InfoStream;
+                                StreamWriter infoStream = wrapper.InfoStream;
                                 if (infoStream != null)
                                 {
                                     PrintNewInsanity(infoStream, progress.value_Renamed);
@@ -259,7 +259,7 @@ namespace Lucene.Net.Search
                 return value;
             }
 
-            private void PrintNewInsanity(System.IO.StreamWriter infoStream, System.Object value_Renamed)
+            private void PrintNewInsanity(StreamWriter infoStream, System.Object value_Renamed)
             {
                 FieldCacheSanityChecker.Insanity[] insanities = FieldCacheSanityChecker.CheckSanity(wrapper);
                 for (int i = 0; i < insanities.Length; i++)
@@ -838,7 +838,7 @@ namespace Lucene.Net.Search
             }
         }
 
-        private volatile System.IO.StreamWriter infoStream;
+        private volatile StreamWriter infoStream;
 
         public virtual StreamWriter InfoStream
         {

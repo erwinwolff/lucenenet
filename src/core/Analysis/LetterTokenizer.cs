@@ -15,6 +15,7 @@
  * limitations under the License.
  */
 
+using System.IO;
 using AttributeSource = Lucene.Net.Util.AttributeSource;
 
 namespace Lucene.Net.Analysis
@@ -29,18 +30,18 @@ namespace Lucene.Net.Analysis
     public class LetterTokenizer : CharTokenizer
     {
         /// <summary>Construct a new LetterTokenizer. </summary>
-        public LetterTokenizer(System.IO.TextReader @in) : base(@in)
+        public LetterTokenizer(TextReader @in) : base(@in)
         {
         }
 
         /// <summary>Construct a new LetterTokenizer using a given <see cref="AttributeSource" />. </summary>
-        public LetterTokenizer(AttributeSource source, System.IO.TextReader @in)
+        public LetterTokenizer(AttributeSource source, TextReader @in)
             : base(source, @in)
         {
         }
 
         /// <summary>Construct a new LetterTokenizer using a given <see cref="Lucene.Net.Util.AttributeSource.AttributeFactory" />. </summary>
-        public LetterTokenizer(AttributeFactory factory, System.IO.TextReader @in)
+        public LetterTokenizer(AttributeFactory factory, TextReader @in)
             : base(factory, @in)
         {
         }
@@ -50,7 +51,7 @@ namespace Lucene.Net.Analysis
         /// </summary>
         protected internal override bool IsTokenChar(char c)
         {
-            return System.Char.IsLetter(c);
+            return char.IsLetter(c);
         }
     }
 }

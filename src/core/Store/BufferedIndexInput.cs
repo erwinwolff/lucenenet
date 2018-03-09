@@ -16,6 +16,7 @@
  */
 
 using System;
+using System.IO;
 
 namespace Lucene.Net.Store
 {
@@ -136,7 +137,7 @@ namespace Lucene.Net.Store
                     {
                         // Throw an exception when refill() could not read len bytes:
                         Array.Copy(buffer, 0, b, offset, bufferLength);
-                        throw new System.IO.IOException("read past EOF");
+                        throw new IOException("read past EOF");
                     }
                     else
                     {
@@ -155,7 +156,7 @@ namespace Lucene.Net.Store
                     // had in the buffer.
                     long after = bufferStart + bufferPosition + len;
                     if (after > Length())
-                        throw new System.IO.IOException("read past EOF");
+                        throw new IOException("read past EOF");
                     ReadInternal(b, offset, len);
                     bufferStart = after;
                     bufferPosition = 0;
@@ -173,7 +174,7 @@ namespace Lucene.Net.Store
                 end = Length();
             int newLength = (int)(end - start);
             if (newLength <= 0)
-                throw new System.IO.IOException("read past EOF");
+                throw new IOException("read past EOF");
 
             if (buffer == null)
             {

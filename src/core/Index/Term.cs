@@ -152,7 +152,7 @@ namespace Lucene.Net.Index
             return field + ":" + text;
         }
 
-        //		private void  ReadObject(System.IO.BinaryReader in_Renamed)
+        //		private void  ReadObject(BinaryReader in_Renamed)
         //		{
         //			in_Renamed.defaultReadObject();
         //			field = StringHelper.Intern(field);

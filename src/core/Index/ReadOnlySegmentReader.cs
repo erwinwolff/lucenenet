@@ -15,13 +15,15 @@
  * limitations under the License.
  */
 
+using System;
+
 namespace Lucene.Net.Index
 {
     public class ReadOnlySegmentReader : SegmentReader
     {
         internal static void NoWrite()
         {
-            throw new System.NotSupportedException("This IndexReader cannot make any changes to the index (it was opened with readOnly = true)");
+            throw new NotSupportedException("This IndexReader cannot make any changes to the index (it was opened with readOnly = true)");
         }
 
         protected internal override void AcquireWriteLock()

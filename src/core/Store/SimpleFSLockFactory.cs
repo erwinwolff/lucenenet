@@ -15,9 +15,11 @@
  * limitations under the License.
  */
 
+using System.IO;
+
 namespace Lucene.Net.Store
 {
-    /// <summary> <p/>Implements <see cref="LockFactory" /> using <see cref="System.IO.FileInfo.Create()" />
+    /// <summary> <p/>Implements <see cref="LockFactory" /> using <see cref="FileInfo.Create()" />
     ///.<p/>
     ///
     /// <p/><b>NOTE:</b> the <a target="_top"
@@ -55,14 +57,14 @@ namespace Lucene.Net.Store
         /// directory itsself. Be sure to create one instance for each directory
         /// your create!
         /// </summary>
-        public SimpleFSLockFactory() : this((System.IO.DirectoryInfo)null)
+        public SimpleFSLockFactory() : this((DirectoryInfo)null)
         {
         }
 
         /// <summary> Instantiate using the provided directory (as a File instance).</summary>
         /// <param name="lockDir">where lock files should be created.
         /// </param>
-        public SimpleFSLockFactory(System.IO.DirectoryInfo lockDir)
+        public SimpleFSLockFactory(DirectoryInfo lockDir)
         {
             LockDir = lockDir;
         }
@@ -71,7 +73,7 @@ namespace Lucene.Net.Store
         /// <param name="lockDirName">where lock files should be created.
         /// </param>
         public SimpleFSLockFactory(string lockDirName)
-            : this(new System.IO.DirectoryInfo(lockDirName))
+            : this(new DirectoryInfo(lockDirName))
         {
         }
 
@@ -87,7 +89,7 @@ namespace Lucene.Net.Store
         public override void ClearLock(string lockName)
         {
             bool tmpBool;
-            if (System.IO.File.Exists(internalLockDir.FullName))
+            if (File.Exists(internalLockDir.FullName))
                 tmpBool = true;
             else
                 tmpBool = System.IO.Directory.Exists(internalLockDir.FullName);
@@ -97,16 +99,16 @@ namespace Lucene.Net.Store
                 {
                     lockName = internalLockPrefix + "-" + lockName;
                 }
-                System.IO.FileInfo lockFile = new System.IO.FileInfo(System.IO.Path.Combine(internalLockDir.FullName, lockName));
+                FileInfo lockFile = new FileInfo(Path.Combine(internalLockDir.FullName, lockName));
                 bool tmpBool2;
-                if (System.IO.File.Exists(lockFile.FullName))
+                if (File.Exists(lockFile.FullName))
                     tmpBool2 = true;
                 else
                     tmpBool2 = System.IO.Directory.Exists(lockFile.FullName);
                 bool tmpBool3;
-                if (System.IO.File.Exists(lockFile.FullName))
+                if (File.Exists(lockFile.FullName))
                 {
-                    System.IO.File.Delete(lockFile.FullName);
+                    File.Delete(lockFile.FullName);
                     tmpBool3 = true;
                 }
                 else if (System.IO.Directory.Exists(lockFile.FullName))
@@ -118,7 +120,7 @@ namespace Lucene.Net.Store
                     tmpBool3 = false;
                 if (tmpBool2 && !tmpBool3)
                 {
-                    throw new System.IO.IOException("Cannot delete " + lockFile);
+                    throw new IOException("Cannot delete " + lockFile);
                 }
             }
         }
@@ -126,25 +128,25 @@ namespace Lucene.Net.Store
 
     internal class SimpleFSLock : Lock
     {
-        internal System.IO.FileInfo lockFile;
-        internal System.IO.DirectoryInfo lockDir;
+        internal FileInfo lockFile;
+        internal DirectoryInfo lockDir;
 
         [System.Obsolete("Use the constructor that takes a DirectoryInfo, this will be removed in the 3.0 release")]
-        public SimpleFSLock(System.IO.FileInfo lockDir, string lockFileName) : this(new System.IO.DirectoryInfo(lockDir.FullName), lockFileName)
+        public SimpleFSLock(FileInfo lockDir, string lockFileName) : this(new DirectoryInfo(lockDir.FullName), lockFileName)
         {
         }
 
-        public SimpleFSLock(System.IO.DirectoryInfo lockDir, string lockFileName)
+        public SimpleFSLock(DirectoryInfo lockDir, string lockFileName)
         {
-            this.lockDir = new System.IO.DirectoryInfo(lockDir.FullName);
-            lockFile = new System.IO.FileInfo(System.IO.Path.Combine(lockDir.FullName, lockFileName));
+            this.lockDir = new DirectoryInfo(lockDir.FullName);
+            lockFile = new FileInfo(Path.Combine(lockDir.FullName, lockFileName));
         }
 
         public override bool Obtain()
         {
             // Ensure that lockDir exists and is a directory:
             bool tmpBool;
-            if (System.IO.File.Exists(lockDir.FullName))
+            if (File.Exists(lockDir.FullName))
                 tmpBool = true;
             else
                 tmpBool = System.IO.Directory.Exists(lockDir.FullName);
@@ -156,7 +158,7 @@ namespace Lucene.Net.Store
                 }
                 catch
                 {
-                    throw new System.IO.IOException("Cannot create directory: " + lockDir.FullName);
+                    throw new IOException("Cannot create directory: " + lockDir.FullName);
                 }
             }
             else
@@ -167,7 +169,7 @@ namespace Lucene.Net.Store
                 }
                 catch
                 {
-                    throw new System.IO.IOException("Found regular file where directory expected: " + lockDir.FullName);
+                    throw new IOException("Found regular file where directory expected: " + lockDir.FullName);
                 }
             }
 
@@ -177,7 +179,7 @@ namespace Lucene.Net.Store
             }
             else
             {
-                System.IO.FileStream createdFile = lockFile.Create();
+                FileStream createdFile = lockFile.Create();
                 createdFile.Close();
                 return true;
             }
@@ -186,14 +188,14 @@ namespace Lucene.Net.Store
         public override void Release()
         {
             bool tmpBool;
-            if (System.IO.File.Exists(lockFile.FullName))
+            if (File.Exists(lockFile.FullName))
                 tmpBool = true;
             else
                 tmpBool = System.IO.Directory.Exists(lockFile.FullName);
             bool tmpBool2;
-            if (System.IO.File.Exists(lockFile.FullName))
+            if (File.Exists(lockFile.FullName))
             {
-                System.IO.File.Delete(lockFile.FullName);
+                File.Delete(lockFile.FullName);
                 tmpBool2 = true;
             }
             else if (System.IO.Directory.Exists(lockFile.FullName))
@@ -210,7 +212,7 @@ namespace Lucene.Net.Store
         public override bool IsLocked()
         {
             bool tmpBool;
-            if (System.IO.File.Exists(lockFile.FullName))
+            if (File.Exists(lockFile.FullName))
                 tmpBool = true;
             else
                 tmpBool = System.IO.Directory.Exists(lockFile.FullName);

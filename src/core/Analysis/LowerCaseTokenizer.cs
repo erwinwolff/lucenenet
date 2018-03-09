@@ -15,6 +15,7 @@
  * limitations under the License.
  */
 
+using System.IO;
 using AttributeSource = Lucene.Net.Util.AttributeSource;
 
 namespace Lucene.Net.Analysis
@@ -31,19 +32,19 @@ namespace Lucene.Net.Analysis
     public sealed class LowerCaseTokenizer : LetterTokenizer
     {
         /// <summary>Construct a new LowerCaseTokenizer. </summary>
-        public LowerCaseTokenizer(System.IO.TextReader @in)
+        public LowerCaseTokenizer(TextReader @in)
             : base(@in)
         {
         }
 
         /// <summary>Construct a new LowerCaseTokenizer using a given <see cref="AttributeSource" />. </summary>
-        public LowerCaseTokenizer(AttributeSource source, System.IO.TextReader @in)
+        public LowerCaseTokenizer(AttributeSource source, TextReader @in)
             : base(source, @in)
         {
         }
 
         /// <summary>Construct a new LowerCaseTokenizer using a given <see cref="Lucene.Net.Util.AttributeSource.AttributeFactory" />. </summary>
-        public LowerCaseTokenizer(AttributeFactory factory, System.IO.TextReader @in)
+        public LowerCaseTokenizer(AttributeFactory factory, TextReader @in)
             : base(factory, @in)
         {
         }
@@ -53,7 +54,7 @@ namespace Lucene.Net.Analysis
         /// </summary>
         protected internal override char Normalize(char c)
         {
-            return System.Char.ToLower(c);
+            return char.ToLower(c);
         }
     }
 }

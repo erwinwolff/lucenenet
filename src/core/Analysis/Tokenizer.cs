@@ -15,6 +15,7 @@
  * limitations under the License.
  */
 
+using System.IO;
 using AttributeSource = Lucene.Net.Util.AttributeSource;
 
 namespace Lucene.Net.Analysis
@@ -30,7 +31,7 @@ namespace Lucene.Net.Analysis
     public abstract class Tokenizer : TokenStream
     {
         /// <summary>The text source for this Tokenizer. </summary>
-        protected internal System.IO.TextReader input;
+        protected internal TextReader input;
 
         private bool isDisposed;
 
@@ -40,7 +41,7 @@ namespace Lucene.Net.Analysis
         }
 
         /// <summary>Construct a token stream processing the given input. </summary>
-        protected internal Tokenizer(System.IO.TextReader input)
+        protected internal Tokenizer(TextReader input)
         {
             this.input = CharReader.Get(input);
         }
@@ -51,7 +52,7 @@ namespace Lucene.Net.Analysis
         }
 
         /// <summary>Construct a token stream processing the given input using the given AttributeFactory. </summary>
-        protected internal Tokenizer(AttributeFactory factory, System.IO.TextReader input) : base(factory)
+        protected internal Tokenizer(AttributeFactory factory, TextReader input) : base(factory)
         {
             this.input = CharReader.Get(input);
         }
@@ -62,7 +63,7 @@ namespace Lucene.Net.Analysis
         }
 
         /// <summary>Construct a token stream processing the given input using the given AttributeSource. </summary>
-        protected internal Tokenizer(AttributeSource source, System.IO.TextReader input) : base(source)
+        protected internal Tokenizer(AttributeSource source, TextReader input) : base(source)
         {
             this.input = CharReader.Get(input);
         }
@@ -103,7 +104,7 @@ namespace Lucene.Net.Analysis
         /// analyzer (in its reusableTokenStream method) will use
         /// this to re-use a previously created tokenizer.
         /// </summary>
-        public virtual void Reset(System.IO.TextReader input)
+        public virtual void Reset(TextReader input)
         {
             this.input = input;
         }

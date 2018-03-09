@@ -15,6 +15,8 @@
  * limitations under the License.
  */
 
+using System.IO;
+
 namespace Lucene.Net.Store
 {
     /// <summary> A <see cref="LockFactory" /> that wraps another <see cref="LockFactory" />
@@ -69,10 +71,10 @@ namespace Lucene.Net.Store
                 try
                 {
                     System.Net.Sockets.TcpClient s = new System.Net.Sockets.TcpClient(Enclosing_Instance.host, Enclosing_Instance.port);
-                    System.IO.Stream out_Renamed = s.GetStream();
+                    Stream out_Renamed = s.GetStream();
                     out_Renamed.WriteByte((byte)Enclosing_Instance.id);
                     out_Renamed.WriteByte((byte)message);
-                    System.IO.Stream in_Renamed = s.GetStream();
+                    Stream in_Renamed = s.GetStream();
                     int result = in_Renamed.ReadByte();
                     in_Renamed.Close();
                     out_Renamed.Close();

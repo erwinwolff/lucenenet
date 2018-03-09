@@ -17,6 +17,7 @@
 
 using Lucene.Net.Support;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Lucene.Net.Analysis
 {
@@ -88,14 +89,14 @@ namespace Lucene.Net.Analysis
             analyzerMap[fieldName] = analyzer;
         }
 
-        public override TokenStream TokenStream(string fieldName, System.IO.TextReader reader)
+        public override TokenStream TokenStream(string fieldName, TextReader reader)
         {
             var analyzer = analyzerMap[fieldName] ?? defaultAnalyzer;
 
             return analyzer.TokenStream(fieldName, reader);
         }
 
-        public override TokenStream ReusableTokenStream(string fieldName, System.IO.TextReader reader)
+        public override TokenStream ReusableTokenStream(string fieldName, TextReader reader)
         {
             if (overridesTokenStreamMethod)
             {

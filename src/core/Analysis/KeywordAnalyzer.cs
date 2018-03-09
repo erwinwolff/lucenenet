@@ -15,6 +15,8 @@
  * limitations under the License.
  */
 
+using System.IO;
+
 namespace Lucene.Net.Analysis
 {
     /// <summary> "Tokenizes" the entire stream as a single token. This is useful
@@ -27,12 +29,12 @@ namespace Lucene.Net.Analysis
             SetOverridesTokenStreamMethod<KeywordAnalyzer>();
         }
 
-        public override TokenStream TokenStream(string fieldName, System.IO.TextReader reader)
+        public override TokenStream TokenStream(string fieldName, TextReader reader)
         {
             return new KeywordTokenizer(reader);
         }
 
-        public override TokenStream ReusableTokenStream(string fieldName, System.IO.TextReader reader)
+        public override TokenStream ReusableTokenStream(string fieldName, TextReader reader)
         {
             if (overridesTokenStreamMethod)
             {

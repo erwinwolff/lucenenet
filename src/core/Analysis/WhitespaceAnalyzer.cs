@@ -15,18 +15,20 @@
  * limitations under the License.
  */
 
+using System.IO;
+
 namespace Lucene.Net.Analysis
 {
     /// <summary>An Analyzer that uses <see cref="WhitespaceTokenizer" />. </summary>
 
     public sealed class WhitespaceAnalyzer : Analyzer
     {
-        public override TokenStream TokenStream(string fieldName, System.IO.TextReader reader)
+        public override TokenStream TokenStream(string fieldName, TextReader reader)
         {
             return new WhitespaceTokenizer(reader);
         }
 
-        public override TokenStream ReusableTokenStream(string fieldName, System.IO.TextReader reader)
+        public override TokenStream ReusableTokenStream(string fieldName, TextReader reader)
         {
             var tokenizer = (Tokenizer)PreviousTokenStream;
             if (tokenizer == null)

@@ -46,8 +46,8 @@ namespace Lucene.Net.Search
             field = searchTerm.Field;
             string searchTermText = searchTerm.Text;
 
-            int sidx = searchTermText.IndexOf((System.Char)WILDCARD_STRING);
-            int cidx = searchTermText.IndexOf((System.Char)WILDCARD_CHAR);
+            int sidx = searchTermText.IndexOf((char)WILDCARD_STRING);
+            int cidx = searchTermText.IndexOf((char)WILDCARD_CHAR);
             int idx = sidx;
             if (idx == -1)
             {

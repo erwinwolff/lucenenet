@@ -16,6 +16,7 @@
  */
 
 using Lucene.Net.Support;
+using System.IO;
 
 namespace Lucene.Net.Index
 {
@@ -23,7 +24,7 @@ namespace Lucene.Net.Index
     /// that can be reset to a new string; we use this when
     /// tokenizing the string value from a Field.
     /// </summary>
-    internal sealed class ReusableStringReader : System.IO.TextReader
+    internal sealed class ReusableStringReader : TextReader
     {
         internal int upto;
         internal int left;
@@ -41,7 +42,7 @@ namespace Lucene.Net.Index
             return Read(c, 0, c.Length);
         }
 
-        public override int Read(System.Char[] c, int off, int len)
+        public override int Read(char[] c, int off, int len)
         {
             if (left > len)
             {

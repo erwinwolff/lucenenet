@@ -28,6 +28,7 @@
 
 using Lucene.Net.Analysis.Tokenattributes;
 using System;
+using System.IO;
 
 namespace Lucene.Net.Analysis.Standard
 {
@@ -181,7 +182,7 @@ namespace Lucene.Net.Analysis.Standard
         }
 
         /// <summary>the input device </summary>
-        private System.IO.TextReader zzReader;
+        private TextReader zzReader;
 
         /// <summary>the current state of the DFA </summary>
         private int zzState;
@@ -256,7 +257,7 @@ namespace Lucene.Net.Analysis.Standard
         * Resets the Tokenizer to a new Reader.
         */
 
-        internal void Reset(System.IO.TextReader r)
+        internal void Reset(TextReader r)
         {
             // reset to default buffer size, if buffer has grown
             if (zzBuffer.Length > ZZ_BUFFERSIZE)
@@ -284,7 +285,7 @@ namespace Lucene.Net.Analysis.Standard
         /// </summary>
         /// <param name="in_Renamed"> the java.io.Reader to read input from.
         /// </param>
-        internal StandardTokenizerImpl(System.IO.TextReader in_Renamed)
+        internal StandardTokenizerImpl(TextReader in_Renamed)
         {
             this.zzReader = in_Renamed;
         }
@@ -295,7 +296,7 @@ namespace Lucene.Net.Analysis.Standard
         /// </summary>
         /// <param name="in_Renamed"> the java.io.Inputstream to read input from.
         /// </param>
-        internal StandardTokenizerImpl(System.IO.Stream in_Renamed) : this(new System.IO.StreamReader(in_Renamed, System.Text.Encoding.Default))
+        internal StandardTokenizerImpl(Stream in_Renamed) : this(new StreamReader(in_Renamed, System.Text.Encoding.Default))
         {
         }
 
@@ -327,7 +328,7 @@ namespace Lucene.Net.Analysis.Standard
         /// <returns><c>false</c>, iff there was new input.
         ///
         /// </returns>
-        /// <exception cref="System.IO.IOException"> if any I/O-Error occurs
+        /// <exception cref="IOException"> if any I/O-Error occurs
         /// </exception>
         private bool ZzRefill()
         {
@@ -387,7 +388,7 @@ namespace Lucene.Net.Analysis.Standard
         /// </summary>
         /// <param name="reader">  the new input stream
         /// </param>
-        public void Yyreset(System.IO.TextReader reader)
+        public void Yyreset(TextReader reader)
         {
             zzReader = reader;
             zzAtBOL = true;
@@ -494,7 +495,7 @@ namespace Lucene.Net.Analysis.Standard
         /// </summary>
         /// <returns>      the next token
         /// </returns>
-        /// <exception cref="System.IO.IOException"> if any I/O-Error occurs
+        /// <exception cref="IOException"> if any I/O-Error occurs
         /// </exception>
         public virtual int GetNextToken()
         {

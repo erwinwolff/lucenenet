@@ -16,6 +16,7 @@
  */
 
 using System;
+using System.IO;
 
 namespace Lucene.Net.Store
 {
@@ -61,7 +62,7 @@ namespace Lucene.Net.Store
             }
             catch (System.Exception)
             {
-                throw new System.IO.IOException("unable to find LockClass " + lockFactoryClassName);
+                throw new IOException("unable to find LockClass " + lockFactoryClassName);
             }
 
             LockFactory lockFactory;
@@ -71,18 +72,18 @@ namespace Lucene.Net.Store
             }
             catch (System.UnauthorizedAccessException)
             {
-                throw new System.IO.IOException("IllegalAccessException when instantiating LockClass " + lockFactoryClassName);
+                throw new IOException("IllegalAccessException when instantiating LockClass " + lockFactoryClassName);
             }
             catch (System.InvalidCastException)
             {
-                throw new System.IO.IOException("unable to cast LockClass " + lockFactoryClassName + " instance to a LockFactory");
+                throw new IOException("unable to cast LockClass " + lockFactoryClassName + " instance to a LockFactory");
             }
             catch (System.Exception)
             {
-                throw new System.IO.IOException("InstantiationException when instantiating LockClass " + lockFactoryClassName);
+                throw new IOException("InstantiationException when instantiating LockClass " + lockFactoryClassName);
             }
 
-            System.IO.DirectoryInfo lockDir = new System.IO.DirectoryInfo(lockDirName);
+            DirectoryInfo lockDir = new DirectoryInfo(lockDirName);
 
             if (lockFactory is NativeFSLockFactory)
             {

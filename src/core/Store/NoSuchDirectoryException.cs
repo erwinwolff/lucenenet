@@ -16,6 +16,7 @@
  */
 
 using System;
+using System.IO;
 
 namespace Lucene.Net.Store
 {
@@ -24,7 +25,7 @@ namespace Lucene.Net.Store
     /// </summary>
 
     [Serializable]
-    public class NoSuchDirectoryException : System.IO.FileNotFoundException
+    public class NoSuchDirectoryException : FileNotFoundException
     {
         public NoSuchDirectoryException(string message) : base(message)
         {

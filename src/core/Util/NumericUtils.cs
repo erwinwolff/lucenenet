@@ -443,7 +443,7 @@ namespace Lucene.Net.Util
             /// </summary>
             public virtual void AddRange(string minPrefixCoded, string maxPrefixCoded)
             {
-                throw new System.NotSupportedException();
+                throw new NotSupportedException();
             }
 
             /// <summary> Overwrite this method, if you like to receive the raw long range bounds.
@@ -467,7 +467,7 @@ namespace Lucene.Net.Util
             /// </summary>
             public virtual void AddRange(string minPrefixCoded, string maxPrefixCoded)
             {
-                throw new System.NotSupportedException();
+                throw new NotSupportedException();
             }
 
             /// <summary> Overwrite this method, if you like to receive the raw int range bounds.

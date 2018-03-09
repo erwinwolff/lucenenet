@@ -16,6 +16,8 @@
  */
 
 using Lucene.Net.Support;
+using System;
+using System.IO;
 using IndexInput = Lucene.Net.Store.IndexInput;
 
 namespace Lucene.Net.Index
@@ -117,7 +119,7 @@ namespace Lucene.Net.Index
 
         public override int Read(int[] docs, int[] freqs)
         {
-            throw new System.NotSupportedException("TermPositions does not support processing multiple documents in one call. Use TermDocs instead.");
+            throw new NotSupportedException("TermPositions does not support processing multiple documents in one call. Use TermDocs instead.");
         }
 
         /// <summary>Called by super.skipTo(). </summary>
@@ -195,7 +197,7 @@ namespace Lucene.Net.Index
         {
             if (!needToLoadPayload)
             {
-                throw new System.IO.IOException("Either no payload exists at this term position or an attempt was made to load it more than once.");
+                throw new IOException("Either no payload exists at this term position or an attempt was made to load it more than once.");
             }
 
             // read payloads lazily

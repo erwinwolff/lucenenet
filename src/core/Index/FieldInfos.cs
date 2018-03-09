@@ -18,6 +18,7 @@
 using Lucene.Net.Documents;
 using Lucene.Net.Support;
 using System;
+using System.IO;
 using Directory = Lucene.Net.Store.Directory;
 using Document = Lucene.Net.Documents.Document;
 using IndexInput = Lucene.Net.Store.IndexInput;
@@ -75,7 +76,7 @@ namespace Lucene.Net.Index
                 {
                     Read(input, name);
                 }
-                catch (System.IO.IOException)
+                catch (IOException)
                 {
                     if (format == FORMAT_PRE)
                     {

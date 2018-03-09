@@ -24,7 +24,7 @@ namespace Lucene.Net.Store
     public abstract class FSLockFactory : LockFactory
     {
         /// <summary> Directory for the lock files.</summary>
-        protected internal System.IO.DirectoryInfo internalLockDir = null;
+        protected internal DirectoryInfo internalLockDir = null;
 
         /// <summary> Gets the lock directory.
         /// <para>Subclasses can use this to set the lock directory.

@@ -16,6 +16,8 @@
  */
 
 using Lucene.Net.Support;
+using System;
+using System.IO;
 using System.Linq;
 using BufferedIndexInput = Lucene.Net.Store.BufferedIndexInput;
 using Directory = Lucene.Net.Store.Directory;
@@ -99,7 +101,7 @@ namespace Lucene.Net.Index
                     {
                         stream.Close();
                     }
-                    catch (System.IO.IOException)
+                    catch (IOException)
                     {
                     }
                 }
@@ -153,11 +155,11 @@ namespace Lucene.Net.Index
             lock (this)
             {
                 if (stream == null)
-                    throw new System.IO.IOException("Stream closed");
+                    throw new IOException("Stream closed");
 
                 FileEntry entry = entries[id];
                 if (entry == null)
-                    throw new System.IO.IOException("No sub-file with id " + id + " found");
+                    throw new IOException("No sub-file with id " + id + " found");
 
                 return new CSIndexInput(stream, entry.offset, entry.length, readBufferSize);
             }
@@ -191,14 +193,14 @@ namespace Lucene.Net.Index
         /// <throws>  UnsupportedOperationException  </throws>
         public override void DeleteFile(string name)
         {
-            throw new System.NotSupportedException();
+            throw new NotSupportedException();
         }
 
         /// <summary>Not implemented</summary>
         /// <throws>  UnsupportedOperationException  </throws>
         public void RenameFile(string from, string to)
         {
-            throw new System.NotSupportedException();
+            throw new NotSupportedException();
         }
 
         /// <summary>Returns the length of a file in the directory.</summary>
@@ -207,7 +209,7 @@ namespace Lucene.Net.Index
         {
             FileEntry e = entries[name];
             if (e == null)
-                throw new System.IO.IOException("File " + name + " does not exist");
+                throw new IOException("File " + name + " does not exist");
             return e.length;
         }
 
@@ -215,14 +217,14 @@ namespace Lucene.Net.Index
         /// <throws>  UnsupportedOperationException  </throws>
         public override IndexOutput CreateOutput(string name)
         {
-            throw new System.NotSupportedException();
+            throw new NotSupportedException();
         }
 
         /// <summary>Not implemented</summary>
         /// <throws>  UnsupportedOperationException  </throws>
         public override Lock MakeLock(string name)
         {
-            throw new System.NotSupportedException();
+            throw new NotSupportedException();
         }
 
         /// <summary>Implementation of an IndexInput that reads from a portion of the
@@ -271,7 +273,7 @@ namespace Lucene.Net.Index
             {
                 long start = FilePointer;
                 if (start + len > length)
-                    throw new System.IO.IOException("read past EOF");
+                    throw new IOException("read past EOF");
                 base_Renamed.Seek(fileOffset + start);
                 base_Renamed.ReadBytes(b, offset, len, false);
             }

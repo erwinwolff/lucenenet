@@ -19,6 +19,7 @@ using Lucene.Net.Documents;
 using Lucene.Net.Store;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Document = Lucene.Net.Documents.Document;
 using FieldSelector = Lucene.Net.Documents.FieldSelector;
 using Similarity = Lucene.Net.Search.Similarity;
@@ -230,8 +231,8 @@ namespace Lucene.Net.Index
         /// <param name="directory">the index directory</param>
         /// <param name="readOnly">true if no changes (deletions, norms) will be made with this IndexReader</param>
         /// <exception cref="CorruptIndexException">CorruptIndexException if the index is corrupt</exception>
-        /// <exception cref="System.IO.IOException">IOException if there is a low-level IO error</exception>
-        public static IndexReader Open(Directory directory, bool readOnly)
+        /// <exception cref="IOException">IOException if there is a low-level IO error</exception>
+        public static IndexReader Open(Store.Directory directory, bool readOnly)
         {
             return Open(directory, null, null, readOnly, DEFAULT_TERMS_INDEX_DIVISOR);
         }
@@ -247,7 +248,7 @@ namespace Lucene.Net.Index
         /// <param name="readOnly">true if no changes (deletions, norms) will be made with this IndexReader
         /// </param>
         /// <throws>  CorruptIndexException if the index is corrupt </throws>
-        /// <exception cref="System.IO.IOException">If there is a low-level IO error</exception>
+        /// <exception cref="IOException">If there is a low-level IO error</exception>
         public static IndexReader Open(IndexCommit commit, bool readOnly)
         {
             return Open(commit.Directory, null, commit, readOnly, DEFAULT_TERMS_INDEX_DIVISOR);
@@ -269,8 +270,8 @@ namespace Lucene.Net.Index
         /// <param name="readOnly">true if no changes (deletions, norms) will be made with this IndexReader
         /// </param>
         /// <throws>  CorruptIndexException if the index is corrupt </throws>
-        /// <exception cref="System.IO.IOException">If there is a low-level IO error</exception>
-        public static IndexReader Open(Directory directory, IndexDeletionPolicy deletionPolicy, bool readOnly)
+        /// <exception cref="IOException">If there is a low-level IO error</exception>
+        public static IndexReader Open(Store.Directory directory, IndexDeletionPolicy deletionPolicy, bool readOnly)
         {
             return Open(directory, deletionPolicy, null, readOnly, DEFAULT_TERMS_INDEX_DIVISOR);
         }
@@ -303,8 +304,8 @@ namespace Lucene.Net.Index
         /// to -1 to skip loading the terms index entirely.
         /// </param>
         /// <throws>  CorruptIndexException if the index is corrupt </throws>
-        /// <exception cref="System.IO.IOException">If there is a low-level IO error</exception>
-        public static IndexReader Open(Directory directory, IndexDeletionPolicy deletionPolicy, bool readOnly, int termInfosIndexDivisor)
+        /// <exception cref="IOException">If there is a low-level IO error</exception>
+        public static IndexReader Open(Store.Directory directory, IndexDeletionPolicy deletionPolicy, bool readOnly, int termInfosIndexDivisor)
         {
             return Open(directory, deletionPolicy, null, readOnly, termInfosIndexDivisor);
         }
@@ -327,7 +328,7 @@ namespace Lucene.Net.Index
         /// <param name="readOnly">true if no changes (deletions, norms) will be made with this IndexReader
         /// </param>
         /// <throws>  CorruptIndexException if the index is corrupt </throws>
-        /// <exception cref="System.IO.IOException">If there is a low-level IO error</exception>
+        /// <exception cref="IOException">If there is a low-level IO error</exception>
         public static IndexReader Open(IndexCommit commit, IndexDeletionPolicy deletionPolicy, bool readOnly)
         {
             return Open(commit.Directory, deletionPolicy, commit, readOnly, DEFAULT_TERMS_INDEX_DIVISOR);
@@ -363,13 +364,13 @@ namespace Lucene.Net.Index
         /// to -1 to skip loading the terms index entirely.
         /// </param>
         /// <throws>  CorruptIndexException if the index is corrupt </throws>
-        /// <exception cref="System.IO.IOException">If there is a low-level IO error</exception>
+        /// <exception cref="IOException">If there is a low-level IO error</exception>
         public static IndexReader Open(IndexCommit commit, IndexDeletionPolicy deletionPolicy, bool readOnly, int termInfosIndexDivisor)
         {
             return Open(commit.Directory, deletionPolicy, commit, readOnly, termInfosIndexDivisor);
         }
 
-        private static IndexReader Open(Directory directory, IndexDeletionPolicy deletionPolicy, IndexCommit commit, bool readOnly, int termInfosIndexDivisor)
+        private static IndexReader Open(Store.Directory directory, IndexDeletionPolicy deletionPolicy, IndexCommit commit, bool readOnly, int termInfosIndexDivisor)
         {
             return DirectoryReader.Open(directory, deletionPolicy, commit, readOnly, termInfosIndexDivisor);
         }
@@ -417,7 +418,7 @@ namespace Lucene.Net.Index
         ///
         /// </summary>
         /// <throws>  CorruptIndexException if the index is corrupt </throws>
-        /// <exception cref="System.IO.IOException">If there is a low-level IO error</exception>
+        /// <exception cref="IOException">If there is a low-level IO error</exception>
         public virtual IndexReader Reopen()
         {
             lock (this)
@@ -471,22 +472,22 @@ namespace Lucene.Net.Index
         /// <p/>
         /// </summary>
         /// <throws>  CorruptIndexException if the index is corrupt </throws>
-        /// <exception cref="System.IO.IOException">If there is a low-level IO error</exception>
+        /// <exception cref="IOException">If there is a low-level IO error</exception>
         public virtual System.Object Clone()
         {
-            throw new System.NotSupportedException("This reader does not implement clone()");
+            throw new NotSupportedException("This reader does not implement clone()");
         }
 
         /// <summary> Clones the IndexReader and optionally changes readOnly.  A readOnly
         /// reader cannot open a writeable reader.
         /// </summary>
         /// <throws>  CorruptIndexException if the index is corrupt </throws>
-        /// <exception cref="System.IO.IOException">If there is a low-level IO error</exception>
+        /// <exception cref="IOException">If there is a low-level IO error</exception>
         public virtual IndexReader Clone(bool openReadOnly)
         {
             lock (this)
             {
-                throw new System.NotSupportedException("This reader does not implement clone()");
+                throw new NotSupportedException("This reader does not implement clone()");
             }
         }
 
@@ -496,7 +497,7 @@ namespace Lucene.Net.Index
         /// UnsupportedOperationException if one was not specified.
         /// </summary>
         /// <throws>  UnsupportedOperationException if no directory </throws>
-        public virtual Directory Directory()
+        public virtual Store.Directory Directory()
         {
             EnsureOpen();
             throw new NotSupportedException("This reader does not support this method.");
@@ -507,8 +508,8 @@ namespace Lucene.Net.Index
         /// <see cref="IsCurrent()" /> instead.
         /// </summary>
         /// <throws>  CorruptIndexException if the index is corrupt </throws>
-        /// <exception cref="System.IO.IOException">If there is a low-level IO error</exception>
-        public static long LastModified(Directory directory2)
+        /// <exception cref="IOException">If there is a low-level IO error</exception>
+        public static long LastModified(Store.Directory directory2)
         {
             return (long)((System.Int64)new AnonymousClassFindSegmentsFile(directory2, directory2).Run());
         }
@@ -523,8 +524,8 @@ namespace Lucene.Net.Index
         /// <returns> version number.
         /// </returns>
         /// <throws>  CorruptIndexException if the index is corrupt </throws>
-        /// <exception cref="System.IO.IOException">If there is a low-level IO error</exception>
-        public static long GetCurrentVersion(Directory directory)
+        /// <exception cref="IOException">If there is a low-level IO error</exception>
+        public static long GetCurrentVersion(Store.Directory directory)
         {
             return SegmentInfos.ReadCurrentVersion(directory);
         }
@@ -540,12 +541,12 @@ namespace Lucene.Net.Index
 		/// <returns> commit userData.
 		/// </returns>
 		/// <throws>  CorruptIndexException if the index is corrupt </throws>
-		/// <exception cref="System.IO.IOException">If there is a low-level IO error</exception>
+		/// <exception cref="IOException">If there is a low-level IO error</exception>
 		/// <summary>
 		/// </summary>
 		/// <seealso cref="GetCommitUserData(Store.Directory)">
 		/// </seealso>
-        public static System.Collections.Generic.IDictionary<string, string> GetCommitUserData(Directory directory)
+        public static System.Collections.Generic.IDictionary<string, string> GetCommitUserData(Store.Directory directory)
         {
             return SegmentInfos.ReadCurrentUserData(directory);
         }
@@ -578,7 +579,7 @@ namespace Lucene.Net.Index
         /// </summary>
         public virtual long Version
         {
-            get { throw new System.NotSupportedException("This reader does not support this method."); }
+            get { throw new NotSupportedException("This reader does not support this method."); }
         }
 
         /// <summary> Retrieve the String userData optionally passed to
@@ -591,7 +592,7 @@ namespace Lucene.Net.Index
         /// </seealso>
         public virtual IDictionary<string, string> CommitUserData
         {
-            get { throw new System.NotSupportedException("This reader does not support this method."); }
+            get { throw new NotSupportedException("This reader does not support this method."); }
         }
 
         /// <summary> Check whether any new changes have occurred to the index since this
@@ -622,7 +623,7 @@ namespace Lucene.Net.Index
         ///
         /// </summary>
         /// <throws>  CorruptIndexException if the index is corrupt </throws>
-        /// <exception cref="System.IO.IOException">If there is a low-level IO error</exception>
+        /// <exception cref="IOException">If there is a low-level IO error</exception>
         /// <throws>  UnsupportedOperationException unless overridden in subclass </throws>
         public virtual bool IsCurrent()
         {
@@ -707,7 +708,7 @@ namespace Lucene.Net.Index
         /// <returns> <c>true</c> if an index exists; <c>false</c> otherwise
         /// </returns>
         /// <throws>  IOException if there is a problem with accessing the index </throws>
-        public static bool IndexExists(Directory directory)
+        public static bool IndexExists(Store.Directory directory)
         {
             return SegmentInfos.GetCurrentSegmentGeneration(directory) != -1;
         }
@@ -739,7 +740,7 @@ namespace Lucene.Net.Index
         ///
         /// </summary>
         /// <throws>  CorruptIndexException if the index is corrupt </throws>
-        /// <exception cref="System.IO.IOException">If there is a low-level IO error</exception>
+        /// <exception cref="IOException">If there is a low-level IO error</exception>
         public virtual Document Document(int n)
         {
             EnsureOpen();
@@ -757,7 +758,7 @@ namespace Lucene.Net.Index
         ///
         /// </summary>
         /// <throws>  CorruptIndexException if the index is corrupt </throws>
-        /// <exception cref="System.IO.IOException">If there is a low-level IO error</exception>
+        /// <exception cref="IOException">If there is a low-level IO error</exception>
 	    public Document this[int doc]
         {
             get { return Document(doc); }
@@ -790,7 +791,7 @@ namespace Lucene.Net.Index
         /// <see cref="Lucene.Net.Documents.Document" /> at the nth position
         /// </returns>
         /// <throws>  CorruptIndexException if the index is corrupt </throws>
-        /// <exception cref="System.IO.IOException">If there is a low-level IO error</exception>
+        /// <exception cref="IOException">If there is a low-level IO error</exception>
         /// <seealso cref="IFieldable">
         /// </seealso>
         /// <seealso cref="Lucene.Net.Documents.FieldSelector">
@@ -850,7 +851,7 @@ namespace Lucene.Net.Index
         /// <exception cref="LockObtainFailedException">
         /// If another writer has this index open (<c>write.lock</c> could not be obtained)
         /// </exception>
-        /// <exception cref="System.IO.IOException">
+        /// <exception cref="IOException">
         /// If there is a low-level IO error
         /// </exception>
         public virtual void SetNorm(int doc, String field, byte value)
@@ -881,7 +882,7 @@ namespace Lucene.Net.Index
         /// <exception cref="LockObtainFailedException">
         /// If another writer has this index open (<c>write.lock</c> could not be obtained)
         /// </exception>
-        /// <exception cref="System.IO.IOException">
+        /// <exception cref="IOException">
         /// If there is a low-level IO error
         /// </exception>
         public virtual void SetNorm(int doc, string field, float value)
@@ -897,7 +898,7 @@ namespace Lucene.Net.Index
         /// on the resulting enumeration before calling other methods such as
         /// <see cref="TermEnum.Term" />.
         /// </summary>
-        /// <exception cref="System.IO.IOException">
+        /// <exception cref="IOException">
         /// If there is a low-level IO error
         /// </exception>
         public abstract TermEnum Terms();
@@ -908,13 +909,13 @@ namespace Lucene.Net.Index
         /// ordered by Term.compareTo(). Each term is greater than all that
         /// precede it in the enumeration.
         /// </summary>
-        /// <exception cref="System.IO.IOException">
+        /// <exception cref="IOException">
         /// If there is a low-level IO error
         /// </exception>
         public abstract TermEnum Terms(Term t);
 
         /// <summary>Returns the number of documents containing the term <c>t</c>.</summary>
-        /// <exception cref="System.IO.IOException">If there is a low-level IO error</exception>
+        /// <exception cref="IOException">If there is a low-level IO error</exception>
 		public abstract int DocFreq(Term t);
 
         /// <summary>Returns an enumeration of all the documents which contain
@@ -929,7 +930,7 @@ namespace Lucene.Net.Index
         /// <p/>The enumeration is ordered by document number.  Each document number
         /// is greater than all that precede it in the enumeration.
         /// </summary>
-        /// <exception cref="System.IO.IOException">If there is a low-level IO error</exception>
+        /// <exception cref="IOException">If there is a low-level IO error</exception>
         public virtual TermDocs TermDocs(Term term)
         {
             EnsureOpen();
@@ -939,7 +940,7 @@ namespace Lucene.Net.Index
         }
 
         /// <summary>Returns an unpositioned <see cref="Lucene.Net.Index.TermDocs" /> enumerator.</summary>
-        /// <exception cref="System.IO.IOException">If there is a low-level IO error</exception>
+        /// <exception cref="IOException">If there is a low-level IO error</exception>
 		public abstract TermDocs TermDocs();
 
         /// <summary>Returns an enumeration of all the documents which contain
@@ -958,7 +959,7 @@ namespace Lucene.Net.Index
         /// <p/>The enumeration is ordered by document number.  Each document number is
         /// greater than all that precede it in the enumeration.
         /// </summary>
-        /// <exception cref="System.IO.IOException">If there is a low-level IO error</exception>
+        /// <exception cref="IOException">If there is a low-level IO error</exception>
         public virtual TermPositions TermPositions(Term term)
         {
             EnsureOpen();
@@ -968,7 +969,7 @@ namespace Lucene.Net.Index
         }
 
         /// <summary>Returns an unpositioned <see cref="Lucene.Net.Index.TermPositions" /> enumerator.</summary>
-        /// <exception cref="System.IO.IOException">If there is a low-level IO error</exception>
+        /// <exception cref="IOException">If there is a low-level IO error</exception>
 		public abstract TermPositions TermPositions();
 
         /// <summary>
@@ -986,7 +987,7 @@ namespace Lucene.Net.Index
         /// <exception cref="LockObtainFailedException">
         /// If another writer has this index open (<c>write.lock</c> could not be obtained)
         /// </exception>
-        /// <exception cref="System.IO.IOException">If there is a low-level IO error</exception>
+        /// <exception cref="IOException">If there is a low-level IO error</exception>
         public virtual void DeleteDocument(int docNum)
         {
             lock (this)
@@ -1020,7 +1021,7 @@ namespace Lucene.Net.Index
         /// <exception cref="LockObtainFailedException">
         /// If another writer has this index open (<c>write.lock</c> could not be obtained)
         /// </exception>
-        /// <exception cref="System.IO.IOException">If there is a low-level IO error</exception>
+        /// <exception cref="IOException">If there is a low-level IO error</exception>
         public virtual int DeleteDocuments(Term term)
         {
             EnsureOpen();
@@ -1053,7 +1054,7 @@ namespace Lucene.Net.Index
         /// <exception cref="LockObtainFailedException">
         /// If another writer has this index open (<c>write.lock</c> could not be obtained)
         /// </exception>
-        /// <exception cref="System.IO.IOException">If there is a low-level IO error</exception>
+        /// <exception cref="IOException">If there is a low-level IO error</exception>
         public virtual void UndeleteAll()
         {
             lock (this)
@@ -1081,7 +1082,7 @@ namespace Lucene.Net.Index
         }
 
         /// <summary> </summary>
-        /// <exception cref="System.IO.IOException" />
+        /// <exception cref="IOException" />
         public void Flush()
         {
             lock (this)
@@ -1095,7 +1096,7 @@ namespace Lucene.Net.Index
         /// that's recorded into the segments file in the index,
         /// and retrievable by <see cref="IndexReader.GetCommitUserData" />
         /// </param>
-        /// <exception cref="System.IO.IOException" />
+        /// <exception cref="IOException" />
         public void Flush(IDictionary<string, string> commitUserData)
         {
             lock (this)
@@ -1112,7 +1113,7 @@ namespace Lucene.Net.Index
         /// changes will have been committed to the index
         /// (transactional semantics).
         /// </summary>
-        /// <exception cref="System.IO.IOException">If there is a low-level IO error</exception>
+        /// <exception cref="IOException">If there is a low-level IO error</exception>
         public /*protected internal*/ void Commit()
         {
             lock (this)
@@ -1128,7 +1129,7 @@ namespace Lucene.Net.Index
         /// changes will have been committed to the index
         /// (transactional semantics).
         /// </summary>
-        /// <exception cref="System.IO.IOException">If there is a low-level IO error</exception>
+        /// <exception cref="IOException">If there is a low-level IO error</exception>
         public void Commit(IDictionary<string, string> commitUserData)
         {
             lock (this)
@@ -1154,7 +1155,7 @@ namespace Lucene.Net.Index
         /// Also saves any new deletions to disk.
         /// No other methods should be called after this has been called.
         /// </summary>
-        /// <exception cref="System.IO.IOException">If there is a low-level IO error</exception>
+        /// <exception cref="IOException">If there is a low-level IO error</exception>
         public void Dispose()
         {
             Dispose(true);
@@ -1233,15 +1234,15 @@ namespace Lucene.Net.Index
                 return;
             }
 
-            Directory dir = null;
+            Store.Directory dir = null;
             CompoundFileReader cfr = null;
 
             try
             {
-                var file = new System.IO.FileInfo(filename);
-                string dirname = new System.IO.FileInfo(file.FullName).DirectoryName;
+                var file = new FileInfo(filename);
+                string dirname = new FileInfo(file.FullName).DirectoryName;
                 filename = file.Name;
-                dir = FSDirectory.Open(new System.IO.DirectoryInfo(dirname));
+                dir = FSDirectory.Open(new DirectoryInfo(dirname));
                 cfr = new CompoundFileReader(dir, filename);
 
                 string[] files = cfr.ListAll();
@@ -1256,7 +1257,7 @@ namespace Lucene.Net.Index
                         System.Console.Out.WriteLine("extract " + t + " with " + len + " bytes to local directory...");
                         IndexInput ii = cfr.OpenInput(t);
 
-                        var f = new System.IO.FileStream(t, System.IO.FileMode.Create);
+                        var f = new FileStream(t, FileMode.Create);
 
                         // read and write with a small buffer, which is more effectiv than reading byte by byte
                         var buffer = new byte[1024];
@@ -1276,7 +1277,7 @@ namespace Lucene.Net.Index
                         System.Console.Out.WriteLine(t + ": " + len + " bytes");
                 }
             }
-            catch (System.IO.IOException ioe)
+            catch (IOException ioe)
             {
                 System.Console.Error.WriteLine(ioe.StackTrace);
             }
@@ -1289,7 +1290,7 @@ namespace Lucene.Net.Index
                     if (cfr != null)
                         cfr.Close();
                 }
-                catch (System.IO.IOException ioe)
+                catch (IOException ioe)
                 {
                     System.Console.Error.WriteLine(ioe.StackTrace);
                 }
@@ -1304,12 +1305,12 @@ namespace Lucene.Net.Index
         /// Once you have a given commit, you can open a reader on
         /// it by calling <see cref="IndexReader.Open(IndexCommit,bool)" />
         /// There must be at least one commit in
-        /// the Directory, else this method throws <see cref="System.IO.IOException" />.
+        /// the Directory, else this method throws <see cref="IOException" />.
         /// Note that if a commit is in
         /// progress while this method is running, that commit
         /// may or may not be returned array.
         /// </summary>
-        public static System.Collections.Generic.ICollection<IndexCommit> ListCommits(Directory dir)
+        public static System.Collections.Generic.ICollection<IndexCommit> ListCommits(Store.Directory dir)
         {
             return DirectoryReader.ListCommits(dir);
         }
@@ -1366,7 +1367,7 @@ namespace Lucene.Net.Index
         /// </summary>
         public virtual long UniqueTermCount
         {
-            get { throw new System.NotSupportedException("this reader does not implement getUniqueTermCount()"); }
+            get { throw new NotSupportedException("this reader does not implement getUniqueTermCount()"); }
         }
 
         /// <summary>

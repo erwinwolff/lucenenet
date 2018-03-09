@@ -15,6 +15,8 @@
  * limitations under the License.
  */
 
+using System.IO;
+
 namespace Lucene.Net.Store
 {
     /// <summary>
@@ -22,7 +24,7 @@ namespace Lucene.Net.Store
     /// </summary>
     public class NIOFSDirectory : Lucene.Net.Store.FSDirectory
     {
-        public NIOFSDirectory(System.IO.DirectoryInfo dir, LockFactory lockFactory)
+        public NIOFSDirectory(DirectoryInfo dir, LockFactory lockFactory)
             : base(dir, lockFactory)
         {
             throw new System.NotImplementedException("Waiting for volunteers to implement this class");
@@ -74,7 +76,7 @@ namespace Lucene.Net.Store
 //        /// </param>
 //        /// <throws>  IOException </throws>
 //        [System.Obsolete("Use the constructor that takes a DirectoryInfo, this will be removed in the 3.0 release")]
-//        public NIOFSDirectory(System.IO.FileInfo path, LockFactory lockFactory):base(new System.IO.DirectoryInfo(path.FullName), lockFactory)
+//        public NIOFSDirectory(FileInfo path, LockFactory lockFactory):base(new DirectoryInfo(path.FullName), lockFactory)
 //        {
 //        }
 
@@ -86,7 +88,7 @@ namespace Lucene.Net.Store
 //        /// <param name="lockFactory">the lock factory to use, or null for the default.
 //        /// </param>
 //        /// <throws>  IOException </throws>
-//        public NIOFSDirectory(System.IO.DirectoryInfo path, LockFactory lockFactory) : base(path, lockFactory)
+//        public NIOFSDirectory(DirectoryInfo path, LockFactory lockFactory) : base(path, lockFactory)
 //        {
 //        }
 
@@ -97,7 +99,7 @@ namespace Lucene.Net.Store
 //        /// </param>
 //        /// <throws>  IOException </throws>
 //        [System.Obsolete("Use the constructor that takes a DirectoryInfo, this will be removed in the 3.0 release")]
-//        public NIOFSDirectory(System.IO.FileInfo path):base(new System.IO.DirectoryInfo(path.FullName), null)
+//        public NIOFSDirectory(FileInfo path):base(new DirectoryInfo(path.FullName), null)
 //        {
 //        }
 
@@ -107,7 +109,7 @@ namespace Lucene.Net.Store
 //        /// <param name="path">the path of the directory
 //        /// </param>
 //        /// <throws>  IOException </throws>
-//        public NIOFSDirectory(System.IO.DirectoryInfo path) : base(path, null)
+//        public NIOFSDirectory(DirectoryInfo path) : base(path, null)
 //        {
 //        }
 
@@ -123,35 +125,35 @@ namespace Lucene.Net.Store
 //        public override IndexInput OpenInput(string name, int bufferSize)
 //        {
 //            EnsureOpen();
-//            return new NIOFSIndexInput(new System.IO.FileInfo(System.IO.Path.Combine(GetFile().FullName, name)), bufferSize, GetReadChunkSize());
+//            return new NIOFSIndexInput(new FileInfo(Path.Combine(GetFile().FullName, name)), bufferSize, GetReadChunkSize());
 //        }
 
 //        /// <summary>Creates an IndexOutput for the file with the given name. </summary>
 //        public override IndexOutput CreateOutput(string name)
 //        {
 //            InitOutput(name);
-//            return new SimpleFSDirectory.SimpleFSIndexOutput(new System.IO.FileInfo(System.IO.Path.Combine(directory.FullName, name)));
+//            return new SimpleFSDirectory.SimpleFSIndexOutput(new FileInfo(Path.Combine(directory.FullName, name)));
 //        }
 
 //        public /*protected internal*/ class NIOFSIndexInput:SimpleFSDirectory.SimpleFSIndexInput
 //        {
-//            private System.IO.MemoryStream byteBuf; // wraps the buffer for NIO
+//            private MemoryStream byteBuf; // wraps the buffer for NIO
 
 //            private byte[] otherBuffer;
-//            private System.IO.MemoryStream otherByteBuf;
+//            private MemoryStream otherByteBuf;
 
-//            internal System.IO.BinaryReader channel;
+//            internal BinaryReader channel;
 
 //            /// <deprecated> Please use ctor taking chunkSize
 //            /// </deprecated>
 //            [Obsolete("Please use ctor taking chunkSize")]
-//            public NIOFSIndexInput(System.IO.FileInfo path, int bufferSize):this(path, bufferSize, FSDirectory.DEFAULT_READ_CHUNK_SIZE)
+//            public NIOFSIndexInput(FileInfo path, int bufferSize):this(path, bufferSize, FSDirectory.DEFAULT_READ_CHUNK_SIZE)
 //            {
 //            }
 
-//            public NIOFSIndexInput(System.IO.FileInfo path, int bufferSize, int chunkSize):base(path, bufferSize, chunkSize)
+//            public NIOFSIndexInput(FileInfo path, int bufferSize, int chunkSize):base(path, bufferSize, chunkSize)
 //            {
-//                channel = (System.IO.BinaryReader) file;
+//                channel = (BinaryReader) file;
 //            }
 
 //            protected internal override void  NewBuffer(byte[] newBuffer)
@@ -179,7 +181,7 @@ namespace Lucene.Net.Store
 
 //            public override void  ReadInternal(byte[] b, int offset, int len)
 //            {
-//                System.IO.MemoryStream bb;
+//                MemoryStream bb;
 
 //                // Determine the ByteBuffer we should use
 //                if (b == buffer && 0 == offset)
@@ -243,7 +245,7 @@ namespace Lucene.Net.Store
 //                        System.Diagnostics.Debug.Fail("Port issue:", "channel.Read(bb, pos, limit)"); // {{Aroush-2.9}}
 //                        if (i == - 1)
 //                        {
-//                            throw new System.IO.IOException("read past EOF");
+//                            throw new IOException("read past EOF");
 //                        }
 //                        pos += i;
 //                        readOffset += i;

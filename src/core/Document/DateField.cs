@@ -88,7 +88,7 @@ namespace Lucene.Net.Documents
         /// <throws>  RuntimeException if the date specified in the </throws>
         /// <summary> method argument is before 1970
         /// </summary>
-        public static string DateToString(System.DateTime date)
+        public static string DateToString(DateTime date)
         {
             TimeSpan ts = date.Subtract(new DateTime(1970, 1, 1));
             ts = ts.Subtract(TimeZone.CurrentTimeZone.GetUtcOffset(date));
@@ -128,10 +128,10 @@ namespace Lucene.Net.Documents
         }
 
         /// <summary>Converts a string-encoded date into a Date object. </summary>
-        public static System.DateTime StringToDate(string s)
+        public static DateTime StringToDate(string s)
         {
             long ticks = StringToTime(s) * TimeSpan.TicksPerMillisecond;
-            System.DateTime date = new System.DateTime(1970, 1, 1);
+            DateTime date = new DateTime(1970, 1, 1);
             date = date.AddTicks(ticks);
             date = date.Add(TimeZone.CurrentTimeZone.GetUtcOffset(date));
             return date;

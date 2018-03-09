@@ -18,6 +18,7 @@
 using Lucene.Net.Support;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using DefaultSimilarity = Lucene.Net.Search.DefaultSimilarity;
 using Directory = Lucene.Net.Store.Directory;
@@ -348,7 +349,7 @@ namespace Lucene.Net.Index
                                         newReaders[i].DecRef();
                                     }
                                 }
-                                catch (System.IO.IOException)
+                                catch (IOException)
                                 {
                                     // keep going - we want to clean up as much as possible
                                 }
@@ -559,7 +560,7 @@ namespace Lucene.Net.Index
                 else
                 {
                     if (internalDirectory != commit.Directory)
-                        throw new System.IO.IOException("the specified commit does not match the specified Directory");
+                        throw new IOException("the specified commit does not match the specified Directory");
                     if (segmentInfos != null && commit.SegmentsFileName.Equals(segmentInfos.GetCurrentSegmentFileName()))
                     {
                         if (readOnly != openReadOnly)
@@ -1027,7 +1028,7 @@ namespace Lucene.Net.Index
         {
             lock (this)
             {
-                System.IO.IOException ioe = null;
+                IOException ioe = null;
                 normsCache = null;
                 foreach (SegmentReader t in subReaders)
                 {
@@ -1036,7 +1037,7 @@ namespace Lucene.Net.Index
                     {
                         t.DecRef();
                     }
-                    catch (System.IO.IOException e)
+                    catch (IOException e)
                     {
                         if (ioe == null)
                             ioe = e;
@@ -1124,7 +1125,7 @@ namespace Lucene.Net.Index
                         // segments_N is corrupt
                         sis.Read(dir, fileName);
                     }
-                    catch (System.IO.FileNotFoundException)
+                    catch (FileNotFoundException)
                     {
                         // LUCENE-948: on NFS (and maybe others), if
                         // you have writers switching back and forth
@@ -1212,7 +1213,7 @@ namespace Lucene.Net.Index
 
             public override void Delete()
             {
-                throw new System.NotSupportedException("This IndexCommit does not support deletions");
+                throw new NotSupportedException("This IndexCommit does not support deletions");
             }
         }
 

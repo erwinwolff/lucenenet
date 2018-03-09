@@ -16,6 +16,7 @@
  */
 
 using System;
+using System.IO;
 
 namespace Lucene.Net.Store
 {
@@ -42,7 +43,7 @@ namespace Lucene.Net.Store
             length = file.length;
             if (length / BUFFER_SIZE >= System.Int32.MaxValue)
             {
-                throw new System.IO.IOException("Too large RAMFile! " + length);
+                throw new IOException("Too large RAMFile! " + length);
             }
 
             // make sure that we switch to the
@@ -96,7 +97,7 @@ namespace Lucene.Net.Store
             {
                 // end of file reached, no more buffers left
                 if (enforceEOF)
-                    throw new System.IO.IOException("Read past EOF");
+                    throw new IOException("Read past EOF");
                 else
                 {
                     // Force EOF if a read takes place at this position

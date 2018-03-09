@@ -16,7 +16,7 @@
  */
 
 using System;
-
+using System.IO;
 using BufferedIndexInput = Lucene.Net.Store.BufferedIndexInput;
 using Directory = Lucene.Net.Store.Directory;
 using IndexInput = Lucene.Net.Store.IndexInput;
@@ -247,13 +247,13 @@ namespace Lucene.Net.Index
             {
                 // make all effort to close up. Keep the first exception
                 // and throw it as a new one.
-                System.IO.IOException keep = null;
+                IOException keep = null;
                 if (tvx != null)
                     try
                     {
                         tvx.Close();
                     }
-                    catch (System.IO.IOException e)
+                    catch (IOException e)
                     {
                         if (keep == null)
                             keep = e;
@@ -263,7 +263,7 @@ namespace Lucene.Net.Index
                     {
                         tvd.Close();
                     }
-                    catch (System.IO.IOException e)
+                    catch (IOException e)
                     {
                         if (keep == null)
                             keep = e;
@@ -273,14 +273,14 @@ namespace Lucene.Net.Index
                     {
                         tvf.Close();
                     }
-                    catch (System.IO.IOException e)
+                    catch (IOException e)
                     {
                         if (keep == null)
                             keep = e;
                     }
                 if (keep != null)
                 {
-                    throw new System.IO.IOException(keep.StackTrace);
+                    throw new IOException(keep.StackTrace);
                 }
             }
 

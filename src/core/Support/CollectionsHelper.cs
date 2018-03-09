@@ -232,7 +232,7 @@ namespace Lucene.Net.Support
         public static void Sort(System.Collections.IList list, System.Collections.IComparer Comparator)
         {
             if (((System.Collections.ArrayList)list).IsReadOnly)
-                throw new System.NotSupportedException();
+                throw new NotSupportedException();
 
             if ((Comparator == null) || (Comparator is System.Collections.Comparer))
             {

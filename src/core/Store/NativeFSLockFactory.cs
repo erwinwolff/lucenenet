@@ -16,6 +16,7 @@
  */
 
 using System.Collections.Generic;
+using System.IO;
 
 namespace Lucene.Net.Store
 {
@@ -57,7 +58,7 @@ namespace Lucene.Net.Store
         /// directory itsself. Be sure to create one instance for each directory
         /// your create!
         /// </summary>
-        public NativeFSLockFactory() : this((System.IO.DirectoryInfo)null)
+        public NativeFSLockFactory() : this((DirectoryInfo)null)
         {
         }
 
@@ -67,7 +68,7 @@ namespace Lucene.Net.Store
         /// </summary>
         /// <param name="lockDirName">where lock files are created.
         /// </param>
-        public NativeFSLockFactory(string lockDirName) : this(new System.IO.DirectoryInfo(lockDirName))
+        public NativeFSLockFactory(string lockDirName) : this(new DirectoryInfo(lockDirName))
         {
         }
 
@@ -77,7 +78,7 @@ namespace Lucene.Net.Store
         /// </summary>
         /// <param name="lockDir">where lock files are created.
         /// </param>
-        public NativeFSLockFactory(System.IO.DirectoryInfo lockDir)
+        public NativeFSLockFactory(DirectoryInfo lockDir)
         {
             LockDir = lockDir;
         }
@@ -99,7 +100,7 @@ namespace Lucene.Net.Store
             // they are locked, but, still do this in case people
             // really want to see the files go away:
             bool tmpBool;
-            if (System.IO.File.Exists(internalLockDir.FullName))
+            if (File.Exists(internalLockDir.FullName))
                 tmpBool = true;
             else
                 tmpBool = System.IO.Directory.Exists(internalLockDir.FullName);
@@ -109,16 +110,16 @@ namespace Lucene.Net.Store
                 {
                     lockName = internalLockPrefix + "-" + lockName;
                 }
-                System.IO.FileInfo lockFile = new System.IO.FileInfo(System.IO.Path.Combine(internalLockDir.FullName, lockName));
+                FileInfo lockFile = new FileInfo(Path.Combine(internalLockDir.FullName, lockName));
                 bool tmpBool2;
-                if (System.IO.File.Exists(lockFile.FullName))
+                if (File.Exists(lockFile.FullName))
                     tmpBool2 = true;
                 else
                     tmpBool2 = System.IO.Directory.Exists(lockFile.FullName);
                 bool tmpBool3;
-                if (System.IO.File.Exists(lockFile.FullName))
+                if (File.Exists(lockFile.FullName))
                 {
-                    System.IO.File.Delete(lockFile.FullName);
+                    File.Delete(lockFile.FullName);
                     tmpBool3 = true;
                 }
                 else if (System.IO.Directory.Exists(lockFile.FullName))
@@ -130,7 +131,7 @@ namespace Lucene.Net.Store
                     tmpBool3 = false;
                 if (tmpBool2 && !tmpBool3)
                 {
-                    throw new System.IO.IOException("Cannot delete " + lockFile);
+                    throw new IOException("Cannot delete " + lockFile);
                 }
             }
         }
@@ -138,11 +139,11 @@ namespace Lucene.Net.Store
 
     internal class NativeFSLock : Lock
     {
-        private System.IO.FileStream f;
-        private System.IO.FileStream channel;
+        private FileStream f;
+        private FileStream channel;
         private bool lock_Renamed;
-        private System.IO.FileInfo path;
-        private System.IO.DirectoryInfo lockDir;
+        private FileInfo path;
+        private DirectoryInfo lockDir;
 
         /*
         * The javadocs for FileChannel state that you should have
@@ -156,10 +157,10 @@ namespace Lucene.Net.Store
         */
         private static HashSet<string> LOCK_HELD = new HashSet<string>();
 
-        public NativeFSLock(System.IO.DirectoryInfo lockDir, string lockFileName)
+        public NativeFSLock(DirectoryInfo lockDir, string lockFileName)
         {
             this.lockDir = lockDir;
-            path = new System.IO.FileInfo(System.IO.Path.Combine(lockDir.FullName, lockFileName));
+            path = new FileInfo(Path.Combine(lockDir.FullName, lockFileName));
         }
 
         private bool LockExists()
@@ -182,7 +183,7 @@ namespace Lucene.Net.Store
 
                 // Ensure that lockDir exists and is a directory.
                 bool tmpBool;
-                if (System.IO.File.Exists(lockDir.FullName))
+                if (File.Exists(lockDir.FullName))
                     tmpBool = true;
                 else
                     tmpBool = System.IO.Directory.Exists(lockDir.FullName);
@@ -194,12 +195,12 @@ namespace Lucene.Net.Store
                     }
                     catch
                     {
-                        throw new System.IO.IOException("Cannot create directory: " + lockDir.FullName);
+                        throw new IOException("Cannot create directory: " + lockDir.FullName);
                     }
                 }
                 else if (!System.IO.Directory.Exists(lockDir.FullName))
                 {
-                    throw new System.IO.IOException("Found regular file where directory expected: " + lockDir.FullName);
+                    throw new IOException("Found regular file where directory expected: " + lockDir.FullName);
                 }
 
                 string canonicalPath = path.FullName;
@@ -231,9 +232,9 @@ namespace Lucene.Net.Store
 
                     try
                     {
-                        f = new System.IO.FileStream(path.FullName, System.IO.FileMode.OpenOrCreate, System.IO.FileAccess.ReadWrite);
+                        f = new FileStream(path.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite);
                     }
-                    catch (System.IO.IOException e)
+                    catch (IOException e)
                     {
                         // On Windows, we can get intermittent "Access
                         // Denied" here.  So, we treat this as failure to
@@ -264,7 +265,7 @@ namespace Lucene.Net.Store
                                 channel.Lock(0, channel.Length);
                                 lock_Renamed = true;
                             }
-                            catch (System.IO.IOException e)
+                            catch (IOException e)
                             {
                                 // At least on OS X, we will sometimes get an
                                 // intermittent "Permission Denied" IOException,
@@ -374,9 +375,9 @@ namespace Lucene.Net.Store
                         }
                     }
                     bool tmpBool;
-                    if (System.IO.File.Exists(path.FullName))
+                    if (File.Exists(path.FullName))
                     {
-                        System.IO.File.Delete(path.FullName);
+                        File.Delete(path.FullName);
                         tmpBool = true;
                     }
                     else if (System.IO.Directory.Exists(path.FullName))
@@ -404,7 +405,7 @@ namespace Lucene.Net.Store
 
                 // Look if lock file is present; if not, there can definitely be no lock!
                 bool tmpBool;
-                if (System.IO.File.Exists(path.FullName))
+                if (File.Exists(path.FullName))
                     tmpBool = true;
                 else
                     tmpBool = System.IO.Directory.Exists(path.FullName);
@@ -419,7 +420,7 @@ namespace Lucene.Net.Store
                         Release();
                     return !obtained;
                 }
-                catch (System.IO.IOException)
+                catch (IOException)
                 {
                     return false;
                 }

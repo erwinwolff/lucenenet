@@ -147,7 +147,7 @@ namespace Lucene.Net.Documents
         /// </summary>
         public override TextReader ReaderValue
         {
-            get { return fieldsData is System.IO.TextReader ? (System.IO.TextReader)fieldsData : null; }
+            get { return fieldsData is TextReader ? (TextReader)fieldsData : null; }
         }
 
         /// <summary>The TokesStream for this field to be used when indexing, or null.  If null, the Reader value
@@ -180,7 +180,7 @@ namespace Lucene.Net.Documents
         }
 
         /// <summary>Expert: change the value of this field.  See <a href="#setValue(java.lang.String)">setValue(String)</a>. </summary>
-        public void SetValue(System.IO.TextReader value)
+        public void SetValue(TextReader value)
         {
             if (internalIsBinary)
             {
@@ -346,7 +346,7 @@ namespace Lucene.Net.Documents
         /// <param name="reader">The reader with the content
         /// </param>
         /// <throws>  NullPointerException if name or reader is <c>null</c> </throws>
-        public Field(string name, System.IO.TextReader reader) : this(name, reader, TermVector.NO)
+        public Field(string name, TextReader reader) : this(name, reader, TermVector.NO)
         {
         }
 
@@ -363,7 +363,7 @@ namespace Lucene.Net.Documents
         /// <param name="termVector">Whether term vector should be stored
         /// </param>
         /// <throws>  NullPointerException if name or reader is <c>null</c> </throws>
-        public Field(string name, System.IO.TextReader reader, TermVector termVector)
+        public Field(string name, TextReader reader, TermVector termVector)
         {
             if (name == null)
                 throw new System.NullReferenceException("name cannot be null");

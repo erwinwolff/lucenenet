@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Directory = Lucene.Net.Store.Directory;
 
 namespace Lucene.Net.Index
@@ -224,7 +225,7 @@ namespace Lucene.Net.Index
         }
 
         [Serializable]
-        public class MergeAbortedException : System.IO.IOException
+        public class MergeAbortedException : IOException
         {
             public MergeAbortedException() : base("merge is aborted")
             {

@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-using Directory = Lucene.Net.Store.Directory;
+using Lucene.Net.Store;
 using Document = Lucene.Net.Documents.Document;
 using FieldSelector = Lucene.Net.Documents.FieldSelector;
 

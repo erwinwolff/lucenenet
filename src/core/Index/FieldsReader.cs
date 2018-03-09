@@ -549,7 +549,7 @@ namespace Lucene.Net.Index
                                 }
                             }
                         }
-                        catch (System.IO.IOException e)
+                        catch (IOException e)
                         {
                             throw new FieldReaderException(e);
                         }
