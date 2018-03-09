@@ -57,7 +57,7 @@ namespace Lucene.Net.Search
         }
 
         //@Override
-        public override bool Equals(System.Object o)
+        public override bool Equals(object o)
         {
             if (o == this)
                 return true;

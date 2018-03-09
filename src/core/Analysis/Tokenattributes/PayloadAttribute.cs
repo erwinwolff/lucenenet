@@ -50,7 +50,7 @@ namespace Lucene.Net.Analysis.Tokenattributes
             payload = null;
         }
 
-        public override System.Object Clone()
+        public override object Clone()
         {
             var clone = (PayloadAttribute)base.Clone();
             if (payload != null)
@@ -64,7 +64,7 @@ namespace Lucene.Net.Analysis.Tokenattributes
             //return impl;
         }
 
-        public override bool Equals(System.Object other)
+        public override bool Equals(object other)
         {
             if (other == this)
             {

@@ -238,7 +238,7 @@ namespace Lucene.Net.Search
             return sb.Append(minInclusive ? '[' : '{').Append((min == null) ? "*" : min.ToString()).Append(" TO ").Append((max == null) ? "*" : max.ToString()).Append(maxInclusive ? ']' : '}').Append(ToStringUtils.Boost(Boost)).ToString();
         }
 
-        public override bool Equals(System.Object o)
+        public override bool Equals(object o)
         {
             if (o == this)
                 return true;
@@ -247,7 +247,7 @@ namespace Lucene.Net.Search
             if (o is NumericRangeQuery<T>)
             {
                 NumericRangeQuery<T> q = (NumericRangeQuery<T>)o;
-                return ((System.Object)field == (System.Object)q.field && (q.min == null ? min == null : q.min.Equals(min)) && (q.max == null ? max == null : q.max.Equals(max)) && minInclusive == q.minInclusive && maxInclusive == q.maxInclusive && precisionStep == q.precisionStep);
+                return ((object)field == (object)q.field && (q.min == null ? min == null : q.min.Equals(min)) && (q.max == null ? max == null : q.max.Equals(max)) && minInclusive == q.minInclusive && maxInclusive == q.maxInclusive && precisionStep == q.precisionStep);
             }
             return false;
         }
@@ -437,8 +437,8 @@ namespace Lucene.Net.Search
                     case 32:
                         {
                             // lower
-                            int minBound = System.Int32.MinValue;
-                            if (rangeType == typeof(System.Int32))
+                            int minBound = int.MinValue;
+                            if (rangeType == typeof(int))
                             {
                                 if (Enclosing_Instance.min != null)
                                     minBound = System.Convert.ToInt32(Enclosing_Instance.min);
@@ -450,14 +450,14 @@ namespace Lucene.Net.Search
                             }
                             if (!Enclosing_Instance.minInclusive && Enclosing_Instance.min != null)
                             {
-                                if (minBound == System.Int32.MaxValue)
+                                if (minBound == int.MaxValue)
                                     break;
                                 minBound++;
                             }
 
                             // upper
-                            int maxBound = System.Int32.MaxValue;
-                            if (rangeType == typeof(System.Int32))
+                            int maxBound = int.MaxValue;
+                            if (rangeType == typeof(int))
                             {
                                 if (Enclosing_Instance.max != null)
                                     maxBound = System.Convert.ToInt32(Enclosing_Instance.max);
@@ -469,7 +469,7 @@ namespace Lucene.Net.Search
                             }
                             if (!Enclosing_Instance.maxInclusive && Enclosing_Instance.max != null)
                             {
-                                if (maxBound == System.Int32.MinValue)
+                                if (maxBound == int.MinValue)
                                     break;
                                 maxBound--;
                             }

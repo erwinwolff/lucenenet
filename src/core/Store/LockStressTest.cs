@@ -41,7 +41,7 @@ namespace Lucene.Net.Store
                 System.Environment.Exit(1);
             }
 
-            int myID = System.Int32.Parse(args[0]);
+            int myID = int.Parse(args[0]);
 
             if (myID < 0 || myID > 255)
             {
@@ -50,10 +50,10 @@ namespace Lucene.Net.Store
             }
 
             string verifierHost = args[1];
-            int verifierPort = System.Int32.Parse(args[2]);
+            int verifierPort = int.Parse(args[2]);
             string lockFactoryClassName = args[3];
             string lockDirName = args[4];
-            int sleepTimeMS = System.Int32.Parse(args[5]);
+            int sleepTimeMS = int.Parse(args[5]);
 
             System.Type c;
             try

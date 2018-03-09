@@ -80,7 +80,7 @@ namespace Lucene.Net.Search.Function
 
         /*(non-Javadoc) <see cref="java.lang.Object.equals(java.lang.Object) */
 
-        public override bool Equals(System.Object o)
+        public override bool Equals(object o)
         {
             if (!(o is FieldCacheSource))
             {

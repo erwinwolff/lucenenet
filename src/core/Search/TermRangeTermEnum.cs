@@ -109,7 +109,7 @@ namespace Lucene.Net.Search
             {
                 // Use Unicode code point ordering
                 bool checkLower = !includeLower;
-                if (term != null && (System.Object)term.Field == (System.Object)field)
+                if (term != null && (object)term.Field == (object)field)
                 {
                     // interned comparison
                     if (!checkLower || null == lowerTermText || String.CompareOrdinal(term.Text, lowerTermText) > 0)
@@ -141,7 +141,7 @@ namespace Lucene.Net.Search
             }
             else
             {
-                if (term != null && (System.Object)term.Field == (System.Object)field)
+                if (term != null && (object)term.Field == (object)field)
                 {
                     // interned comparison
                     if ((lowerTermText == null || (includeLower ? collator.Compare(term.Text.ToString(), lowerTermText.ToString()) >= 0 : collator.Compare(term.Text.ToString(), lowerTermText.ToString()) > 0)) && (upperTermText == null || (includeUpper ? collator.Compare(term.Text.ToString(), upperTermText.ToString()) <= 0 : collator.Compare(term.Text.ToString(), upperTermText.ToString()) < 0)))

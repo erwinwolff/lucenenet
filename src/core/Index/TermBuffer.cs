@@ -34,7 +34,7 @@ namespace Lucene.Net.Index
 
         public int CompareTo(TermBuffer other)
         {
-            if ((System.Object)field == (System.Object)other.field)
+            if ((object)field == (object)other.field)
                 // fields are interned
                 return CompareChars(text.result, text.length, other.text.result, other.text.length);
             else
@@ -142,7 +142,7 @@ namespace Lucene.Net.Index
             return term;
         }
 
-        public System.Object Clone()
+        public object Clone()
         {
             TermBuffer clone = null;
             try

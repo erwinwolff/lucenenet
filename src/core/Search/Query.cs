@@ -213,7 +213,7 @@ namespace Lucene.Net.Search
         }
 
         /// <summary>Returns a clone of this query. </summary>
-        public virtual System.Object Clone()
+        public virtual object Clone()
         {
             try
             {
@@ -233,7 +233,7 @@ namespace Lucene.Net.Search
             return result;
         }
 
-        public override bool Equals(System.Object obj)
+        public override bool Equals(object obj)
         {
             if (this == obj)
                 return true;

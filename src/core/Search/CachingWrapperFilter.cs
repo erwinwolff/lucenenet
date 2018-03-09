@@ -263,7 +263,7 @@ namespace Lucene.Net.Search
             return "CachingWrapperFilter(" + filter + ")";
         }
 
-        public override bool Equals(System.Object o)
+        public override bool Equals(object o)
         {
             if (!(o is CachingWrapperFilter))
                 return false;

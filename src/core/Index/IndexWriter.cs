@@ -216,7 +216,7 @@ namespace Lucene.Net.Index
         private const int MERGE_READ_BUFFER_SIZE = 4096;
 
         // Used for printing messages
-        private static System.Object MESSAGE_ID_LOCK = new System.Object();
+        private static object MESSAGE_ID_LOCK = new object();
 
         private static int MESSAGE_ID = 0;
         private int messageID = -1;
@@ -5782,7 +5782,7 @@ namespace Lucene.Net.Index
             }
 
             /// <summary>Sets the maximum field length to <see cref="int.MaxValue" />. </summary>
-            public static readonly MaxFieldLength UNLIMITED = new MaxFieldLength("UNLIMITED", System.Int32.MaxValue);
+            public static readonly MaxFieldLength UNLIMITED = new MaxFieldLength("UNLIMITED", int.MaxValue);
 
             /// <summary>  Sets the maximum field length to
             /// <see cref="DEFAULT_MAX_FIELD_LENGTH" />

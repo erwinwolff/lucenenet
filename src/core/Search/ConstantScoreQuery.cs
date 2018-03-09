@@ -210,7 +210,7 @@ namespace Lucene.Net.Search
         }
 
         /// <summary>Returns true if <c>o</c> is equal to this. </summary>
-        public override bool Equals(System.Object o)
+        public override bool Equals(object o)
         {
             if (this == o)
                 return true;
@@ -227,7 +227,7 @@ namespace Lucene.Net.Search
             return internalFilter.GetHashCode() + BitConverter.ToInt32(BitConverter.GetBytes(Boost), 0);
         }
 
-        override public System.Object Clone()
+        override public object Clone()
         {
             // {{Aroush-1.9}} is this all that we need to clone?!
             ConstantScoreQuery clone = (ConstantScoreQuery)base.Clone();

@@ -165,7 +165,7 @@ namespace Lucene.Net.Search
         }
 
         /// <summary>Returns true if <c>o</c> is equal to this. </summary>
-        public override bool Equals(System.Object o)
+        public override bool Equals(object o)
         {
             if (this == o)
                 return true;

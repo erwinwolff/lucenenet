@@ -100,7 +100,7 @@ namespace Lucene.Net.Util
 
         private static int Parse(char[] chars, int offset, int len, int radix, bool negative)
         {
-            int max = System.Int32.MinValue / radix;
+            int max = int.MinValue / radix;
             int result = 0;
             for (int i = 0; i < len; i++)
             {

@@ -130,7 +130,7 @@ namespace Lucene.Net.Index
         /// readers is increased to ensure that the subreaders remain open
         /// until the last referring reader is closed.
         /// </summary>
-        public override System.Object Clone()
+        public override object Clone()
         {
             try
             {

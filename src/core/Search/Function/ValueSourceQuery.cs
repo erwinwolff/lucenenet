@@ -218,7 +218,7 @@ namespace Lucene.Net.Search.Function
         }
 
         /// <summary>Returns true if <c>o</c> is equal to this. </summary>
-        public override bool Equals(System.Object o)
+        public override bool Equals(object o)
         {
             if (GetType() != o.GetType())
             {
@@ -234,7 +234,7 @@ namespace Lucene.Net.Search.Function
             return (GetType().GetHashCode() + valSrc.GetHashCode()) ^ BitConverter.ToInt32(BitConverter.GetBytes(Boost), 0);
         }
 
-        override public System.Object Clone()
+        override public object Clone()
         {
             return this.MemberwiseClone();
         }

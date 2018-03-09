@@ -255,7 +255,7 @@ namespace Lucene.Net.Store
         /// different points in the input from each other and from the stream they
         /// were cloned from.
         /// </summary>
-        public virtual System.Object Clone()
+        public virtual object Clone()
         {
             IndexInput clone = null;
             try

@@ -42,7 +42,7 @@ namespace Lucene.Net.Messages
             /// Performs the priviliged action.
             /// </summary>
             /// <returns>A value that may represent the result of the action.</returns>
-            System.Object Run();
+            object Run();
         }
 
         private class AnonymousClassPrivilegedAction : IPriviligedAction
@@ -59,7 +59,7 @@ namespace Lucene.Net.Messages
 
             private System.Reflection.FieldInfo field;
 
-            public virtual System.Object Run()
+            public virtual object Run()
             {
                 // field.setAccessible(true); // {{Aroush-2.9}} java.lang.reflect.AccessibleObject.setAccessible
                 return null;
@@ -80,7 +80,7 @@ namespace Lucene.Net.Messages
 
         public static string GetLocalizedMessage(string key, System.Globalization.CultureInfo locale)
         {
-            System.Object message = GetResourceBundleObject(key, locale);
+            object message = GetResourceBundleObject(key, locale);
             if (message == null)
             {
                 return "Message with key:" + key + " and locale: " + locale + " not found.";
@@ -88,7 +88,7 @@ namespace Lucene.Net.Messages
             return message.ToString();
         }
 
-        public static string GetLocalizedMessage(string key, System.Globalization.CultureInfo locale, params System.Object[] args)
+        public static string GetLocalizedMessage(string key, System.Globalization.CultureInfo locale, params object[] args)
         {
             string str = GetLocalizedMessage(key, locale);
 
@@ -100,7 +100,7 @@ namespace Lucene.Net.Messages
             return str;
         }
 
-        public static string GetLocalizedMessage(string key, params System.Object[] args)
+        public static string GetLocalizedMessage(string key, params object[] args)
         {
             return GetLocalizedMessage(key, System.Threading.Thread.CurrentThread.CurrentCulture, args);
         }
@@ -129,7 +129,7 @@ namespace Lucene.Net.Messages
             }
         }
 
-        private static System.Object GetResourceBundleObject(string messageKey, System.Globalization.CultureInfo locale)
+        private static object GetResourceBundleObject(string messageKey, System.Globalization.CultureInfo locale)
         {
             // slow resource checking
             // need to loop thru all registered resource bundles
@@ -142,7 +142,7 @@ namespace Lucene.Net.Messages
                 {
                     try
                     {
-                        System.Object obj = resourceBundle.GetObject(messageKey);
+                        object obj = resourceBundle.GetObject(messageKey);
                         if (obj != null)
                             return obj;
                     }
@@ -217,7 +217,7 @@ namespace Lucene.Net.Messages
                 System.Resources.ResourceManager resourceBundle = System.Resources.ResourceManager.CreateFileBasedResourceManager(clazz.FullName, "", null);
                 if (resourceBundle != null)
                 {
-                    System.Object obj = resourceBundle.GetObject(key);
+                    object obj = resourceBundle.GetObject(key);
                     if (obj == null)
                     {
                         System.Console.Error.WriteLine("WARN: Message with key:" + key + " and locale: " + System.Threading.Thread.CurrentThread.CurrentCulture + " not found.");

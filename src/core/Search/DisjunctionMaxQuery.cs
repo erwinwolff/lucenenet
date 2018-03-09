@@ -270,7 +270,7 @@ namespace Lucene.Net.Search
         /// <summary>Create a shallow copy of us -- used in rewriting if necessary</summary>
         /// <returns> a copy of us (but reuse, don't copy, our subqueries)
         /// </returns>
-        public override System.Object Clone()
+        public override object Clone()
         {
             DisjunctionMaxQuery clone = (DisjunctionMaxQuery)base.Clone();
             clone.disjuncts = (EquatableList<Query>)this.disjuncts.Clone();
@@ -330,7 +330,7 @@ namespace Lucene.Net.Search
         /// </param>
         /// <returns> true iff o is a DisjunctionMaxQuery with the same boost and the same subqueries, in the same order, as us
         /// </returns>
-        public override bool Equals(System.Object o)
+        public override bool Equals(object o)
         {
             if (!(o is DisjunctionMaxQuery))
                 return false;

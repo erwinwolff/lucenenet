@@ -88,7 +88,7 @@ namespace Lucene.Net.Search
         {
             if (terms.Count == 0)
                 field = term.Field;
-            else if ((System.Object)term.Field != (System.Object)field)
+            else if ((object)term.Field != (object)field)
             {
                 throw new System.ArgumentException("All phrase terms must be in the same field: " + term);
             }
@@ -353,7 +353,7 @@ namespace Lucene.Net.Search
         }
 
         /// <summary>Returns true iff <c>o</c> is equal to this. </summary>
-        public override bool Equals(System.Object o)
+        public override bool Equals(object o)
         {
             if (!(o is PhraseQuery))
                 return false;

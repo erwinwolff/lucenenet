@@ -145,7 +145,7 @@ namespace Lucene.Net.Index
             if (numSkipped[level] > docCount)
             {
                 // this skip list is exhausted
-                skipDoc[level] = System.Int32.MaxValue;
+                skipDoc[level] = int.MaxValue;
                 if (numberOfSkipLevels > level)
                     numberOfSkipLevels = level;
                 return false;
@@ -203,9 +203,9 @@ namespace Lucene.Net.Index
         {
             this.skipPointer[0] = skipPointer;
             this.docCount = df;
-            System.Array.Clear(skipDoc, 0, skipDoc.Length);
-            System.Array.Clear(numSkipped, 0, numSkipped.Length);
-            System.Array.Clear(childPointer, 0, childPointer.Length);
+            Array.Clear(skipDoc, 0, skipDoc.Length);
+            Array.Clear(numSkipped, 0, numSkipped.Length);
+            Array.Clear(childPointer, 0, childPointer.Length);
 
             haveSkipped = false;
             for (int i = 1; i < numberOfSkipLevels; i++)
@@ -327,7 +327,7 @@ namespace Lucene.Net.Index
                 this.pos = (int)(pos - pointer);
             }
 
-            override public System.Object Clone()
+            override public object Clone()
             {
                 System.Diagnostics.Debug.Fail("Port issue:", "Lets see if we need this FilterIndexReader.Clone()"); // {{Aroush-2.9}}
                 return null;

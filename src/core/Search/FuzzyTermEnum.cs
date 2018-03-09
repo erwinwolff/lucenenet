@@ -135,7 +135,7 @@ namespace Lucene.Net.Search
         /// </summary>
         protected internal override bool TermCompare(Term term)
         {
-            if ((System.Object)field == (System.Object)term.Field && term.Text.StartsWith(prefix))
+            if ((object)field == (object)term.Field && term.Text.StartsWith(prefix))
             {
                 string target = term.Text.Substring(prefix.Length);
                 this.similarity = Similarity(target);

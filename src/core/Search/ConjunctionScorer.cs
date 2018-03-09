@@ -15,6 +15,7 @@
  * limitations under the License.
  */
 
+using System;
 using System.Linq;
 
 namespace Lucene.Net.Search
@@ -52,7 +53,7 @@ namespace Lucene.Net.Search
             // it will already start off sorted (all scorers on same doc).
 
             // note that this comparator is not consistent with equals!
-            System.Array.Sort(scorers, (a, b) => a.DocID() - b.DocID());
+            Array.Sort(scorers, (a, b) => a.DocID() - b.DocID());
 
             // NOTE: doNext() must be called before the re-sorting of the array later on.
             // The reason is this: assume there are 5 scorers, whose first docs are 1,

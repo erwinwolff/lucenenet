@@ -308,7 +308,7 @@ namespace Lucene.Net.Util
             internal /*private*/ Attribute attribute;
             internal /*private*/ State next;
 
-            public System.Object Clone()
+            public object Clone()
             {
                 State clone = new State();
                 clone.attribute = (Attribute)attribute.Clone();
@@ -408,7 +408,7 @@ namespace Lucene.Net.Util
             return code;
         }
 
-        public override bool Equals(System.Object obj)
+        public override bool Equals(object obj)
         {
             if (obj == this)
             {

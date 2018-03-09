@@ -53,7 +53,7 @@ namespace Lucene.Net.Documents
                 iter = Enclosing_Instance.fields.GetEnumerator();
             }
 
-            private System.Object tempAuxObj;
+            private object tempAuxObj;
 
             public bool MoveNext()
             {
@@ -70,7 +70,7 @@ namespace Lucene.Net.Documents
                 tempAuxObj = null;
             }
 
-            public System.Object Current
+            public object Current
             {
                 get
                 {
@@ -95,7 +95,7 @@ namespace Lucene.Net.Documents
                 return iter.MoveNext();
             }
 
-            public System.Object NextElement()
+            public object NextElement()
             {
                 return iter.Current;
             }

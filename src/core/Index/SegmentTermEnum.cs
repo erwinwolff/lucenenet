@@ -56,7 +56,7 @@ namespace Lucene.Net.Index
 
                 // back-compatible settings
                 indexInterval = 128;
-                skipInterval = System.Int32.MaxValue; // switch off skipTo optimization
+                skipInterval = int.MaxValue; // switch off skipTo optimization
             }
             else
             {
@@ -78,7 +78,7 @@ namespace Lucene.Net.Index
                     }
                     // switch off skipTo optimization for file format prior to 1.4rc2 in order to avoid a bug in
                     // skipTo implementation of these versions
-                    skipInterval = System.Int32.MaxValue;
+                    skipInterval = int.MaxValue;
                 }
                 else
                 {
@@ -101,7 +101,7 @@ namespace Lucene.Net.Index
             }
         }
 
-        public System.Object Clone()
+        public object Clone()
         {
             SegmentTermEnum clone = null;
             try

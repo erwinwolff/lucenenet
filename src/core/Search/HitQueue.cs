@@ -77,7 +77,7 @@ namespace Lucene.Net.Search
                 // Always set the doc Id to MAX_VALUE so that it won't be favored by
                 // lessThan. This generally should not happen since if score is not NEG_INF,
                 // TopScoreDocCollector will always add the object to the queue.
-                return !prePopulate ? null : new ScoreDoc(System.Int32.MaxValue, System.Single.NegativeInfinity);
+                return !prePopulate ? null : new ScoreDoc(int.MaxValue, System.Single.NegativeInfinity);
             }
         }
 

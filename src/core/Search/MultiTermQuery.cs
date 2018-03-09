@@ -68,7 +68,7 @@ namespace Lucene.Net.Search
             }
 
             // Make sure we are still a singleton even after deserializing
-            protected internal virtual System.Object ReadResolve()
+            protected internal virtual object ReadResolve()
             {
                 return Lucene.Net.Search.MultiTermQuery.CONSTANT_SCORE_AUTO_REWRITE_DEFAULT;
             }
@@ -90,7 +90,7 @@ namespace Lucene.Net.Search
             }
 
             // Make sure we are still a singleton even after deserializing
-            internal System.Object ReadResolve()
+            internal object ReadResolve()
             {
                 return Lucene.Net.Search.MultiTermQuery.CONSTANT_SCORE_FILTER_REWRITE;
             }
@@ -144,7 +144,7 @@ namespace Lucene.Net.Search
             }
 
             // Make sure we are still a singleton even after deserializing
-            protected internal virtual System.Object ReadResolve()
+            protected internal virtual object ReadResolve()
             {
                 return Lucene.Net.Search.MultiTermQuery.SCORING_BOOLEAN_QUERY_REWRITE;
             }
@@ -179,7 +179,7 @@ namespace Lucene.Net.Search
             }
 
             // Make sure we are still a singleton even after deserializing
-            protected internal override System.Object ReadResolve()
+            protected internal override object ReadResolve()
             {
                 return Lucene.Net.Search.MultiTermQuery.CONSTANT_SCORE_BOOLEAN_QUERY_REWRITE;
             }
@@ -320,7 +320,7 @@ namespace Lucene.Net.Search
                 return (int)(prime * termCountCutoff + BitConverter.DoubleToInt64Bits(docCountPercent));
             }
 
-            public override bool Equals(System.Object obj)
+            public override bool Equals(object obj)
             {
                 if (this == obj)
                     return true;
@@ -431,7 +431,7 @@ namespace Lucene.Net.Search
         }
 
         //@Override
-        public override bool Equals(System.Object obj)
+        public override bool Equals(object obj)
         {
             if (this == obj)
                 return true;

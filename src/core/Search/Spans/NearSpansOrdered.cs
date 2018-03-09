@@ -15,6 +15,7 @@
  * limitations under the License.
  */
 
+using System;
 using System.Collections.Generic;
 using IndexReader = Lucene.Net.Index.IndexReader;
 
@@ -66,7 +67,7 @@ namespace Lucene.Net.Search.Spans
                 }
             }
 
-            public virtual int Compare(System.Object o1, System.Object o2)
+            public virtual int Compare(object o1, object o2)
             {
                 return ((Spans)o1).Doc() - ((Spans)o2).Doc();
             }
@@ -239,7 +240,7 @@ namespace Lucene.Net.Search.Spans
         /// <summary>Advance the subSpans to the same document </summary>
         private bool ToSameDoc()
         {
-            System.Array.Sort(subSpansByDoc, spanDocComparator);
+            Array.Sort(subSpansByDoc, spanDocComparator);
             int firstIndex = 0;
             int maxDoc = subSpansByDoc[subSpansByDoc.Length - 1].Doc();
             while (subSpansByDoc[firstIndex].Doc() != maxDoc)

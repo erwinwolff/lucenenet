@@ -27,7 +27,7 @@ namespace Lucene.Net.Util.Cache
         /// </summary>
         internal class SynchronizedCache_Renamed_Class : Cache<TKey, TValue>
         {
-            internal System.Object mutex;
+            internal object mutex;
             internal Cache<TKey, TValue> cache;
 
             internal SynchronizedCache_Renamed_Class(Cache<TKey, TValue> cache)
@@ -36,7 +36,7 @@ namespace Lucene.Net.Util.Cache
                 this.mutex = this;
             }
 
-            internal SynchronizedCache_Renamed_Class(Cache<TKey, TValue> cache, System.Object mutex)
+            internal SynchronizedCache_Renamed_Class(Cache<TKey, TValue> cache, object mutex)
             {
                 this.cache = cache;
                 this.mutex = mutex;
@@ -50,7 +50,7 @@ namespace Lucene.Net.Util.Cache
                 }
             }
 
-            public override TValue Get(System.Object key)
+            public override TValue Get(object key)
             {
                 lock (mutex)
                 {
@@ -58,7 +58,7 @@ namespace Lucene.Net.Util.Cache
                 }
             }
 
-            public override bool ContainsKey(System.Object key)
+            public override bool ContainsKey(object key)
             {
                 lock (mutex)
                 {
@@ -104,10 +104,10 @@ namespace Lucene.Net.Util.Cache
         public abstract void Put(TKey key, TValue value_Renamed);
 
         /// <summary> Returns the value for the given key. </summary>
-        public abstract TValue Get(System.Object key);
+        public abstract TValue Get(object key);
 
         /// <summary> Returns whether the given key is in this cache. </summary>
-        public abstract bool ContainsKey(System.Object key);
+        public abstract bool ContainsKey(object key);
 
         /// <summary> Closes the cache.</summary>
         [Obsolete("Use Dispose() instead")]

@@ -92,7 +92,7 @@ namespace Lucene.Net.Search
 
             for (int i = 0; i < terms.Length; i++)
             {
-                if ((System.Object)terms[i].Field != (System.Object)field)
+                if ((object)terms[i].Field != (object)field)
                 {
                     throw new System.ArgumentException("All phrase terms must be in the same field (" + field + "): " + terms[i]);
                 }
@@ -366,7 +366,7 @@ namespace Lucene.Net.Search
         }
 
         /// <summary>Returns true if <c>o</c> is equal to this. </summary>
-        public override bool Equals(System.Object o)
+        public override bool Equals(object o)
         {
             if (!(o is MultiPhraseQuery))
                 return false;
@@ -468,7 +468,7 @@ namespace Lucene.Net.Search
             return true;
         }
 
-        public static bool TermEquals(System.Array array1, System.Array array2)
+        public static bool TermEquals(Array array1, Array array2)
         {
             bool result = false;
             if ((array1 == null) && (array2 == null))

@@ -30,14 +30,14 @@ namespace Lucene.Net.Messages
 
         private string key;
 
-        private System.Object[] arguments = new System.Object[0];
+        private object[] arguments = new object[0];
 
         public MessageImpl(string key)
         {
             this.key = key;
         }
 
-        public MessageImpl(string key, params System.Object[] args) : this(key)
+        public MessageImpl(string key, params object[] args) : this(key)
         {
             this.arguments = args;
         }
@@ -64,7 +64,7 @@ namespace Lucene.Net.Messages
 
         public override string ToString()
         {
-            System.Object[] args = GetArguments();
+            object[] args = GetArguments();
             StringBuilder argsString = new StringBuilder();
             if (args != null)
             {

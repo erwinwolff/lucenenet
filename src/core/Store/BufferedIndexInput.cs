@@ -224,7 +224,7 @@ namespace Lucene.Net.Store
         /// </seealso>
         public abstract void SeekInternal(long pos);
 
-        public override System.Object Clone()
+        public override object Clone()
         {
             BufferedIndexInput clone = (BufferedIndexInput)base.Clone();
 

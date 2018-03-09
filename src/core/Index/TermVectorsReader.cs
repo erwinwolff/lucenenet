@@ -640,7 +640,7 @@ namespace Lucene.Net.Index
             }
         }
 
-        public virtual System.Object Clone()
+        public virtual object Clone()
         {
             TermVectorsReader clone = (TermVectorsReader)base.MemberwiseClone();
 

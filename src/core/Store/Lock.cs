@@ -128,7 +128,7 @@ namespace Lucene.Net.Store
             }
 
             /// <summary>Code to execute with exclusive access. </summary>
-            protected internal abstract System.Object DoBody();
+            protected internal abstract object DoBody();
 
             /// <summary>Calls <see cref="DoBody" /> while <i>lock</i> is obtained.  Blocks if lock
             /// cannot be obtained immediately.  Retries to obtain lock once per second
@@ -139,7 +139,7 @@ namespace Lucene.Net.Store
             /// <summary> be obtained
             /// </summary>
             /// <throws>  IOException if <see cref="Lock.Obtain(long)" /> throws IOException </throws>
-            public virtual System.Object run()
+            public virtual object run()
             {
                 bool locked = false;
                 try

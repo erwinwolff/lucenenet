@@ -48,7 +48,7 @@ namespace Lucene.Net.Analysis.Tokenattributes
             flags = 0;
         }
 
-        public override bool Equals(System.Object other)
+        public override bool Equals(object other)
         {
             if (this == other)
             {
@@ -74,7 +74,7 @@ namespace Lucene.Net.Analysis.Tokenattributes
             t.Flags = flags;
         }
 
-        override public System.Object Clone()
+        override public object Clone()
         {
             FlagsAttribute impl = new FlagsAttribute();
             impl.flags = this.flags;

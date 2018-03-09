@@ -47,7 +47,7 @@ namespace Lucene.Net.Store
                 System.Environment.Exit(1);
             }
 
-            int port = System.Int32.Parse(args[0]);
+            int port = int.Parse(args[0]);
 
             System.Net.Sockets.TcpListener temp_tcpListener;
             temp_tcpListener = new System.Net.Sockets.TcpListener(System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName()).AddressList[0], port);

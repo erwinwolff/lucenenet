@@ -94,7 +94,7 @@ namespace Lucene.Net.Search
             return "QueryWrapperFilter(" + query + ")";
         }
 
-        public override bool Equals(System.Object o)
+        public override bool Equals(object o)
         {
             if (!(o is QueryWrapperFilter))
                 return false;

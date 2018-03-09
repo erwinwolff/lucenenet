@@ -508,7 +508,7 @@ namespace Lucene.Net.Search
             }
         }
 
-        public override System.Object Clone()
+        public override object Clone()
         {
             BooleanQuery clone = (BooleanQuery)base.Clone();
             clone.clauses = (EquatableList<BooleanClause>)this.clauses.Clone();
@@ -577,7 +577,7 @@ namespace Lucene.Net.Search
         }
 
         /// <summary>Returns true iff <c>o</c> is equal to this. </summary>
-        public override bool Equals(System.Object o)
+        public override bool Equals(object o)
         {
             if (!(o is BooleanQuery))
                 return false;

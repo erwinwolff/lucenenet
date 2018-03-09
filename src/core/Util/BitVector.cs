@@ -53,7 +53,7 @@ namespace Lucene.Net.Util
             count = -1;
         }
 
-        public System.Object Clone()
+        public object Clone()
         {
             byte[] copyBits = new byte[bits.Length];
             Array.Copy(bits, 0, copyBits, 0, bits.Length);

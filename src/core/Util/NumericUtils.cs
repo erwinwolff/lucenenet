@@ -369,7 +369,7 @@ namespace Lucene.Net.Util
         }
 
         /// <summary>This helper does the splitting for both 32 and 64 bit. </summary>
-        private static void SplitRange(System.Object builder, int valSize, int precisionStep, long minBound, long maxBound)
+        private static void SplitRange(object builder, int valSize, int precisionStep, long minBound, long maxBound)
         {
             if (precisionStep < 1)
                 throw new System.ArgumentException("precisionStep must be >=1");
@@ -407,7 +407,7 @@ namespace Lucene.Net.Util
         }
 
         /// <summary>Helper that delegates to correct range builder </summary>
-        private static void AddRange(System.Object builder, int valSize, long minBound, long maxBound, int shift)
+        private static void AddRange(object builder, int valSize, long minBound, long maxBound, int shift)
         {
             // for the max bound set all lower bits (that were shifted away):
             // this is important for testing or other usages of the splitted range

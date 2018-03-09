@@ -161,7 +161,7 @@ namespace Lucene.Net.Search.Spans
             }
         }
 
-        public override System.Object Clone()
+        public override object Clone()
         {
             int sz = clauses.Count;
             SpanQuery[] newClauses = new SpanQuery[sz];
@@ -177,7 +177,7 @@ namespace Lucene.Net.Search.Spans
         }
 
         /// <summary>Returns true iff <c>o</c> is equal to this. </summary>
-        public override bool Equals(System.Object o)
+        public override bool Equals(object o)
         {
             if (this == o)
                 return true;

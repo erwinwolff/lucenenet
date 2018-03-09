@@ -41,7 +41,7 @@ namespace Lucene.Net.Store
         {
             file = f;
             length = file.length;
-            if (length / BUFFER_SIZE >= System.Int32.MaxValue)
+            if (length / BUFFER_SIZE >= int.MaxValue)
             {
                 throw new IOException("Too large RAMFile! " + length);
             }

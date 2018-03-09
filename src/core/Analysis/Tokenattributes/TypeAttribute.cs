@@ -48,7 +48,7 @@ namespace Lucene.Net.Analysis.Tokenattributes
             type = DEFAULT_TYPE;
         }
 
-        public override bool Equals(System.Object other)
+        public override bool Equals(object other)
         {
             if (other == this)
             {
@@ -74,7 +74,7 @@ namespace Lucene.Net.Analysis.Tokenattributes
             t.Type = type;
         }
 
-        override public System.Object Clone()
+        override public object Clone()
         {
             TypeAttribute impl = new TypeAttribute();
             impl.type = type;

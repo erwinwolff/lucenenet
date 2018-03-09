@@ -70,7 +70,7 @@ namespace Lucene.Net.Index
         public abstract bool IsOptimized { get; }
 
         /// <summary> Two IndexCommits are equal if both their Directory and versions are equal.</summary>
-        public override bool Equals(System.Object other)
+        public override bool Equals(object other)
         {
             if (other is IndexCommit)
             {

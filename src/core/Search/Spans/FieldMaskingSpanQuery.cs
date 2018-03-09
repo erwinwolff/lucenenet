@@ -141,7 +141,7 @@ namespace Lucene.Net.Search.Spans
             return buffer.ToString();
         }
 
-        public override bool Equals(System.Object o)
+        public override bool Equals(object o)
         {
             if (!(o is FieldMaskingSpanQuery))
                 return false;

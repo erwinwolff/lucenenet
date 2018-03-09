@@ -118,7 +118,7 @@ namespace Lucene.Net.Search.Function
 
         /*(non-Javadoc) <see cref="Lucene.Net.Search.Query.clone() */
 
-        public override System.Object Clone()
+        public override object Clone()
         {
             CustomScoreQuery clone = (CustomScoreQuery)base.Clone();
             clone.subQuery = (Query)subQuery.Clone();
@@ -146,7 +146,7 @@ namespace Lucene.Net.Search.Function
         }
 
         /// <summary>Returns true if <c>o</c> is equal to this. </summary>
-        public override bool Equals(System.Object o)
+        public override bool Equals(object o)
         {
             if (GetType() != o.GetType())
             {

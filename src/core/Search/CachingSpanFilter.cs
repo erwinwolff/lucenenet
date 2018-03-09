@@ -105,7 +105,7 @@ namespace Lucene.Net.Search
             return "CachingSpanFilter(" + filter + ")";
         }
 
-        public override bool Equals(System.Object o)
+        public override bool Equals(object o)
         {
             if (!(o is CachingSpanFilter))
                 return false;

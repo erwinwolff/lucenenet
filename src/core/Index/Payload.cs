@@ -159,7 +159,7 @@ namespace Lucene.Net.Index
         /// <summary> Clones this payload by creating a copy of the underlying
         /// byte array.
         /// </summary>
-        public virtual System.Object Clone()
+        public virtual object Clone()
         {
             try
             {
@@ -186,7 +186,7 @@ namespace Lucene.Net.Index
             }
         }
 
-        public override bool Equals(System.Object obj)
+        public override bool Equals(object obj)
         {
             if (obj == this)
                 return true;

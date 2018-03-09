@@ -56,7 +56,7 @@ namespace Lucene.Net.Search
 
         protected internal override bool TermCompare(Term term)
         {
-            if ((System.Object)term.Field == (System.Object)prefix.Field && term.Text.StartsWith(prefix.Text))
+            if ((object)term.Field == (object)prefix.Field && term.Text.StartsWith(prefix.Text))
             {
                 return true;
             }

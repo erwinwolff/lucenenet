@@ -198,7 +198,7 @@ namespace Lucene.Net.Search.Spans
             return buffer.ToString();
         }
 
-        public override System.Object Clone()
+        public override object Clone()
         {
             SpanNotQuery spanNotQuery = new SpanNotQuery((SpanQuery)include.Clone(), (SpanQuery)exclude.Clone());
             spanNotQuery.Boost = Boost;
@@ -239,7 +239,7 @@ namespace Lucene.Net.Search.Spans
         }
 
         /// <summary>Returns true iff <c>o</c> is equal to this. </summary>
-        public override bool Equals(System.Object o)
+        public override bool Equals(object o)
         {
             if (this == o)
                 return true;

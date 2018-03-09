@@ -119,13 +119,13 @@ namespace Lucene.Net.Search
 
         private sealed class CacheEntryImpl : CacheEntry
         {
-            private System.Object readerKey;
+            private object readerKey;
             private string fieldName;
             private System.Type cacheType;
-            private System.Object custom;
-            private System.Object value;
+            private object custom;
+            private object value;
 
-            internal CacheEntryImpl(System.Object readerKey, string fieldName, System.Type cacheType, System.Object custom, System.Object value)
+            internal CacheEntryImpl(object readerKey, string fieldName, System.Type cacheType, object custom, object value)
             {
                 this.readerKey = readerKey;
                 this.fieldName = fieldName;
@@ -191,7 +191,7 @@ namespace Lucene.Net.Search
 
             internal IDictionary<object, IDictionary<Entry, object>> readerCache = new WeakDictionary<object, IDictionary<Entry, object>>();
 
-            protected internal abstract System.Object CreateValue(IndexReader reader, Entry key);
+            protected internal abstract object CreateValue(IndexReader reader, Entry key);
 
             /* Remove this reader from the cache, if present. */
 
@@ -204,11 +204,11 @@ namespace Lucene.Net.Search
                 }
             }
 
-            public virtual System.Object Get(IndexReader reader, Entry key)
+            public virtual object Get(IndexReader reader, Entry key)
             {
                 IDictionary<Entry, object> innerCache;
-                System.Object value;
-                System.Object readerKey = reader.FieldCacheKey;
+                object value;
+                object readerKey = reader.FieldCacheKey;
                 lock (readerCache)
                 {
                     innerCache = readerCache[readerKey];
@@ -259,7 +259,7 @@ namespace Lucene.Net.Search
                 return value;
             }
 
-            private void PrintNewInsanity(StreamWriter infoStream, System.Object value_Renamed)
+            private void PrintNewInsanity(StreamWriter infoStream, object value_Renamed)
             {
                 FieldCacheSanityChecker.Insanity[] insanities = FieldCacheSanityChecker.CheckSanity(wrapper);
                 for (int i = 0; i < insanities.Length; i++)
@@ -285,17 +285,17 @@ namespace Lucene.Net.Search
         protected internal class Entry
         {
             internal string field; // which Fieldable
-            internal System.Object custom; // which custom comparator or parser
+            internal object custom; // which custom comparator or parser
 
             /// <summary>Creates one of these objects for a custom comparator/parser. </summary>
-            internal Entry(string field, System.Object custom)
+            internal Entry(string field, object custom)
             {
                 this.field = StringHelper.Intern(field);
                 this.custom = custom;
             }
 
             /// <summary>Two of these are equal iff they reference the same field and type. </summary>
-            public override bool Equals(System.Object o)
+            public override bool Equals(object o)
             {
                 if (o is Entry)
                 {
@@ -341,7 +341,7 @@ namespace Lucene.Net.Search
             {
             }
 
-            protected internal override System.Object CreateValue(IndexReader reader, Entry entryKey)
+            protected internal override object CreateValue(IndexReader reader, Entry entryKey)
             {
                 Entry entry = entryKey;
                 string field = entry.field;
@@ -358,7 +358,7 @@ namespace Lucene.Net.Search
                     do
                     {
                         Term term = termEnum.Term;
-                        if (term == null || (System.Object)term.Field != (System.Object)field)
+                        if (term == null || (object)term.Field != (object)field)
                             break;
                         sbyte termval = parser.ParseByte(term.Text);
                         termDocs.Seek(termEnum);
@@ -399,7 +399,7 @@ namespace Lucene.Net.Search
             {
             }
 
-            protected internal override System.Object CreateValue(IndexReader reader, Entry entryKey)
+            protected internal override object CreateValue(IndexReader reader, Entry entryKey)
             {
                 Entry entry = entryKey;
                 string field = entry.field;
@@ -416,7 +416,7 @@ namespace Lucene.Net.Search
                     do
                     {
                         Term term = termEnum.Term;
-                        if (term == null || (System.Object)term.Field != (System.Object)field)
+                        if (term == null || (object)term.Field != (object)field)
                             break;
                         short termval = parser.ParseShort(term.Text);
                         termDocs.Seek(termEnum);
@@ -457,7 +457,7 @@ namespace Lucene.Net.Search
             {
             }
 
-            protected internal override System.Object CreateValue(IndexReader reader, Entry entryKey)
+            protected internal override object CreateValue(IndexReader reader, Entry entryKey)
             {
                 Entry entry = entryKey;
                 string field = entry.field;
@@ -481,7 +481,7 @@ namespace Lucene.Net.Search
                     do
                     {
                         Term term = termEnum.Term;
-                        if (term == null || (System.Object)term.Field != (System.Object)field)
+                        if (term == null || (object)term.Field != (object)field)
                             break;
                         int termval = parser.ParseInt(term.Text);
                         if (retArray == null)
@@ -528,7 +528,7 @@ namespace Lucene.Net.Search
             {
             }
 
-            protected internal override System.Object CreateValue(IndexReader reader, Entry entryKey)
+            protected internal override object CreateValue(IndexReader reader, Entry entryKey)
             {
                 Entry entry = entryKey;
                 string field = entry.field;
@@ -552,7 +552,7 @@ namespace Lucene.Net.Search
                     do
                     {
                         Term term = termEnum.Term;
-                        if (term == null || (System.Object)term.Field != (System.Object)field)
+                        if (term == null || (object)term.Field != (object)field)
                             break;
                         float termval = parser.ParseFloat(term.Text);
                         if (retArray == null)
@@ -598,7 +598,7 @@ namespace Lucene.Net.Search
             {
             }
 
-            protected internal override System.Object CreateValue(IndexReader reader, Entry entryKey)
+            protected internal override object CreateValue(IndexReader reader, Entry entryKey)
             {
                 Entry entry = entryKey;
                 string field = entry.field;
@@ -622,7 +622,7 @@ namespace Lucene.Net.Search
                     do
                     {
                         Term term = termEnum.Term;
-                        if (term == null || (System.Object)term.Field != (System.Object)field)
+                        if (term == null || (object)term.Field != (object)field)
                             break;
                         long termval = parser.ParseLong(term.Text);
                         if (retArray == null)
@@ -669,7 +669,7 @@ namespace Lucene.Net.Search
             {
             }
 
-            protected internal override System.Object CreateValue(IndexReader reader, Entry entryKey)
+            protected internal override object CreateValue(IndexReader reader, Entry entryKey)
             {
                 Entry entry = entryKey;
                 string field = entry.field;
@@ -693,7 +693,7 @@ namespace Lucene.Net.Search
                     do
                     {
                         Term term = termEnum.Term;
-                        if (term == null || (System.Object)term.Field != (System.Object)field)
+                        if (term == null || (object)term.Field != (object)field)
                             break;
                         double termval = parser.ParseDouble(term.Text);
                         if (retArray == null)
@@ -734,7 +734,7 @@ namespace Lucene.Net.Search
             {
             }
 
-            protected internal override System.Object CreateValue(IndexReader reader, Entry entryKey)
+            protected internal override object CreateValue(IndexReader reader, Entry entryKey)
             {
                 string field = StringHelper.Intern(entryKey.field);
                 string[] retArray = new string[reader.MaxDoc];
@@ -745,7 +745,7 @@ namespace Lucene.Net.Search
                     do
                     {
                         Term term = termEnum.Term;
-                        if (term == null || (System.Object)term.Field != (System.Object)field)
+                        if (term == null || (object)term.Field != (object)field)
                             break;
                         string termval = term.Text;
                         termDocs.Seek(termEnum);
@@ -777,7 +777,7 @@ namespace Lucene.Net.Search
             {
             }
 
-            protected internal override System.Object CreateValue(IndexReader reader, Entry entryKey)
+            protected internal override object CreateValue(IndexReader reader, Entry entryKey)
             {
                 string field = StringHelper.Intern(entryKey.field);
                 int[] retArray = new int[reader.MaxDoc];

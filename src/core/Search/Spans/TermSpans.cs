@@ -111,7 +111,7 @@ namespace Lucene.Net.Search.Spans
 
         public override string ToString()
         {
-            return "spans(" + term.ToString() + ")@" + (internalDoc == -1 ? "START" : ((internalDoc == System.Int32.MaxValue) ? "END" : internalDoc + "-" + position));
+            return "spans(" + term.ToString() + ")@" + (internalDoc == -1 ? "START" : ((internalDoc == int.MaxValue) ? "END" : internalDoc + "-" + position));
         }
 
         public virtual TermPositions Positions

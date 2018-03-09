@@ -65,7 +65,7 @@ namespace Lucene.Net.Index
         /// clones are called (eg, currently SegmentReader manages
         /// this logic).
         /// </summary>
-        public System.Object Clone()
+        public object Clone()
         {
             EnsureOpen();
             return new FieldsReader(fieldInfos, numTotalDocs, size, format, formatSize, docStoreOffset, cloneableFieldsStream, cloneableIndexStream);

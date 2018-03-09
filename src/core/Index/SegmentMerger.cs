@@ -745,7 +745,7 @@ namespace Lucene.Net.Index
                     top = queue.Top();
                 }
 
-                if ((System.Object)currentField != (System.Object)term.Field)
+                if ((object)currentField != (object)term.Field)
                 {
                     currentField = term.Field;
                     if (termsConsumer != null)

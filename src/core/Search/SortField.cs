@@ -379,14 +379,14 @@ namespace Lucene.Net.Search
         /// was provided, it must properly
         /// implement equals (unless a singleton is always used).
         /// </summary>
-        public override bool Equals(System.Object o)
+        public override bool Equals(object o)
         {
             if (this == o)
                 return true;
             if (!(o is SortField))
                 return false;
             SortField other = (SortField)o;
-            return ((System.Object)other.field == (System.Object)this.field && other.type == this.type &&
+            return ((object)other.field == (object)this.field && other.type == this.type &&
                     other.reverse == this.reverse &&
                     (other.locale == null ? this.locale == null : other.locale.Equals(this.locale)) &&
                     (other.comparatorSource == null

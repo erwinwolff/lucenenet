@@ -18,6 +18,7 @@
 using Lucene.Net.Analysis.Tokenattributes;
 using Lucene.Net.Index;
 using Lucene.Net.Support;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -82,7 +83,7 @@ namespace Lucene.Net.Search
         {
             if (queryTerms != null)
             {
-                System.Array.Sort(queryTerms);
+                Array.Sort(queryTerms);
                 IDictionary<string, int> tmpSet = new HashMap<string, int>(queryTerms.Length);
                 //filter out duplicates
                 IList<string> tmpList = new List<string>(queryTerms.Length);
@@ -146,7 +147,7 @@ namespace Lucene.Net.Search
 
         public virtual int IndexOf(string term)
         {
-            int res = System.Array.BinarySearch(terms, term);
+            int res = Array.BinarySearch(terms, term);
             return res >= 0 ? res : -1;
         }
 

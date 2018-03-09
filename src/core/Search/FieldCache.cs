@@ -41,7 +41,7 @@ namespace Lucene.Net.Search
     /// </seealso>
     public sealed class CreationPlaceholder
     {
-        internal System.Object value_Renamed;
+        internal object value_Renamed;
     }
 
     /// <summary>Expert: Stores term text values and document ordering data. </summary>
@@ -214,7 +214,7 @@ namespace Lucene.Net.Search
             return System.SByte.Parse(value_Renamed);
         }
 
-        protected internal virtual System.Object ReadResolve()
+        protected internal virtual object ReadResolve()
         {
             return Lucene.Net.Search.FieldCache_Fields.DEFAULT_BYTE_PARSER;
         }
@@ -233,7 +233,7 @@ namespace Lucene.Net.Search
             return System.Int16.Parse(value_Renamed);
         }
 
-        protected internal virtual System.Object ReadResolve()
+        protected internal virtual object ReadResolve()
         {
             return Lucene.Net.Search.FieldCache_Fields.DEFAULT_SHORT_PARSER;
         }
@@ -249,10 +249,10 @@ namespace Lucene.Net.Search
     {
         public virtual int ParseInt(string value_Renamed)
         {
-            return System.Int32.Parse(value_Renamed);
+            return int.Parse(value_Renamed);
         }
 
-        protected internal virtual System.Object ReadResolve()
+        protected internal virtual object ReadResolve()
         {
             return Lucene.Net.Search.FieldCache_Fields.DEFAULT_INT_PARSER;
         }
@@ -278,7 +278,7 @@ namespace Lucene.Net.Search
             }
         }
 
-        protected internal virtual System.Object ReadResolve()
+        protected internal virtual object ReadResolve()
         {
             return Lucene.Net.Search.FieldCache_Fields.DEFAULT_FLOAT_PARSER;
         }
@@ -297,7 +297,7 @@ namespace Lucene.Net.Search
             return System.Int64.Parse(value_Renamed);
         }
 
-        protected internal virtual System.Object ReadResolve()
+        protected internal virtual object ReadResolve()
         {
             return Lucene.Net.Search.FieldCache_Fields.DEFAULT_LONG_PARSER;
         }
@@ -316,7 +316,7 @@ namespace Lucene.Net.Search
             return Double.Parse(value_Renamed);
         }
 
-        protected internal virtual System.Object ReadResolve()
+        protected internal virtual object ReadResolve()
         {
             return Lucene.Net.Search.FieldCache_Fields.DEFAULT_DOUBLE_PARSER;
         }
@@ -338,7 +338,7 @@ namespace Lucene.Net.Search
             return NumericUtils.PrefixCodedToInt(val);
         }
 
-        protected internal virtual System.Object ReadResolve()
+        protected internal virtual object ReadResolve()
         {
             return Lucene.Net.Search.FieldCache_Fields.NUMERIC_UTILS_INT_PARSER;
         }
@@ -360,7 +360,7 @@ namespace Lucene.Net.Search
             return NumericUtils.SortableIntToFloat(NumericUtils.PrefixCodedToInt(val));
         }
 
-        protected internal virtual System.Object ReadResolve()
+        protected internal virtual object ReadResolve()
         {
             return Lucene.Net.Search.FieldCache_Fields.NUMERIC_UTILS_FLOAT_PARSER;
         }
@@ -382,7 +382,7 @@ namespace Lucene.Net.Search
             return NumericUtils.PrefixCodedToLong(val);
         }
 
-        protected internal virtual System.Object ReadResolve()
+        protected internal virtual object ReadResolve()
         {
             return Lucene.Net.Search.FieldCache_Fields.NUMERIC_UTILS_LONG_PARSER;
         }
@@ -404,7 +404,7 @@ namespace Lucene.Net.Search
             return NumericUtils.SortableLongToDouble(NumericUtils.PrefixCodedToLong(val));
         }
 
-        protected internal virtual System.Object ReadResolve()
+        protected internal virtual object ReadResolve()
         {
             return Lucene.Net.Search.FieldCache_Fields.NUMERIC_UTILS_DOUBLE_PARSER;
         }

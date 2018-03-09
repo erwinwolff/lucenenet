@@ -124,7 +124,7 @@ namespace Lucene.Net.Index
                 {
                     // Default to slightly higher priority than our
                     // calling thread
-                    mergeThreadPriority = 1 + (System.Int32)ThreadClass.Current().Priority;
+                    mergeThreadPriority = 1 + (int)ThreadClass.Current().Priority;
                     if (mergeThreadPriority > (int)System.Threading.ThreadPriority.Highest)
                         mergeThreadPriority = (int)System.Threading.ThreadPriority.Highest;
                 }

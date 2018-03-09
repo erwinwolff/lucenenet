@@ -705,7 +705,7 @@ namespace Lucene.Net.Util
             return -1;
         }
 
-        public virtual System.Object Clone()
+        public virtual object Clone()
         {
             try
             {
@@ -864,7 +864,7 @@ namespace Lucene.Net.Util
         }
 
         /// <summary>returns true if both sets have the same bits set </summary>
-        public override bool Equals(System.Object o)
+        public override bool Equals(object o)
         {
             if (this == o)
                 return true;

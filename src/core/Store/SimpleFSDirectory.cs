@@ -217,7 +217,7 @@ namespace Lucene.Net.Store
                 return file.length;
             }
 
-            public override System.Object Clone()
+            public override object Clone()
             {
                 SimpleFSIndexInput clone = (SimpleFSIndexInput)base.Clone();
                 clone.isClone = true;

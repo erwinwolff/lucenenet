@@ -156,7 +156,7 @@ namespace Lucene.Net.Search
                 int lchild = (i << 1) + 1;
                 Scorer lscorer = subScorers[lchild];
                 int ldoc = lscorer.DocID();
-                int rdoc = System.Int32.MaxValue, rchild = (i << 1) + 2;
+                int rdoc = int.MaxValue, rchild = (i << 1) + 2;
                 Scorer rscorer = null;
                 if (rchild < numScorers)
                 {

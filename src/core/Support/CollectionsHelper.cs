@@ -30,12 +30,12 @@ namespace Lucene.Net.Support
     /// </summary>
     public class CollectionsHelper
     {
-        public static void Add(System.Collections.Hashtable hashtable, System.Object item)
+        public static void Add(System.Collections.Hashtable hashtable, object item)
         {
             hashtable.Add(item, item);
         }
 
-        public static void AddIfNotContains(System.Collections.Hashtable hashtable, System.Object item)
+        public static void AddIfNotContains(System.Collections.Hashtable hashtable, object item)
         {
             // Added lock around check.  Even though the collection should already have
             // a synchronized wrapper around it, it doesn't prevent this test from having
@@ -52,7 +52,7 @@ namespace Lucene.Net.Support
             }
         }
 
-        public static void AddIfNotContains(System.Collections.ArrayList hashtable, System.Object item)
+        public static void AddIfNotContains(System.Collections.ArrayList hashtable, object item)
         {
             // see AddIfNotContains(Hashtable, object) for information about the lock
             lock (hashtable)
@@ -67,7 +67,7 @@ namespace Lucene.Net.Support
         public static void AddAll(System.Collections.Hashtable hashtable, System.Collections.ICollection items)
         {
             System.Collections.IEnumerator iter = items.GetEnumerator();
-            System.Object item;
+            object item;
             while (iter.MoveNext())
             {
                 item = iter.Current;
@@ -77,7 +77,7 @@ namespace Lucene.Net.Support
 
         public static void AddAllIfNotContains(System.Collections.Hashtable hashtable, System.Collections.IList items)
         {
-            System.Object item;
+            object item;
             for (int i = 0; i < items.Count; i++)
             {
                 item = items[i];
@@ -91,7 +91,7 @@ namespace Lucene.Net.Support
         public static void AddAllIfNotContains(System.Collections.Hashtable hashtable, System.Collections.ICollection items)
         {
             System.Collections.IEnumerator iter = items.GetEnumerator();
-            System.Object item;
+            object item;
             while (iter.MoveNext())
             {
                 item = iter.Current;
@@ -127,7 +127,7 @@ namespace Lucene.Net.Support
             return false;
         }
 
-        public static bool Contains(System.Collections.ICollection col, System.Object item)
+        public static bool Contains(System.Collections.ICollection col, object item)
         {
             System.Collections.IEnumerator iter = col.GetEnumerator();
             while (iter.MoveNext())
@@ -265,9 +265,9 @@ namespace Lucene.Net.Support
         /// <param name="fromindex">The first index to be filled.</param>
         /// <param name="toindex">The last index to be filled.</param>
         /// <param name="val">The value to fill the array with.</param>
-        public static void Fill(System.Array array, System.Int32 fromindex, System.Int32 toindex, System.Object val)
+        public static void Fill(Array array, int fromindex, int toindex, object val)
         {
-            System.Object Temp_Object = val;
+            object Temp_Object = val;
             System.Type elementtype = array.GetType().GetElementType();
             if (elementtype != val.GetType())
                 Temp_Object = Convert.ChangeType(val, elementtype);
@@ -275,7 +275,7 @@ namespace Lucene.Net.Support
                 throw (new System.NullReferenceException());
             if (fromindex > toindex)
                 throw (new System.ArgumentException());
-            if ((fromindex < 0) || ((System.Array)array).Length < toindex)
+            if ((fromindex < 0) || ((Array)array).Length < toindex)
                 throw (new System.IndexOutOfRangeException());
             for (int index = (fromindex > 0) ? fromindex-- : fromindex; index < toindex; index++)
                 array.SetValue(Temp_Object, index);
@@ -286,7 +286,7 @@ namespace Lucene.Net.Support
         /// </summary>
         /// <param name="array">The array to be filled.</param>
         /// <param name="val">The value to fill the array with.</param>
-        public static void Fill(System.Array array, System.Object val)
+        public static void Fill(Array array, object val)
         {
             Fill(array, 0, array.Length, val);
         }
@@ -304,7 +304,7 @@ namespace Lucene.Net.Support
         /// words, the two arrays are equal if they contain the same elements in
         /// the same order. Also, two array references are considered equal if
         /// both are null.</returns>
-        public static bool Equals(System.Array array1, System.Array array2)
+        public static bool Equals(Array array1, Array array2)
         {
             bool result = false;
             if ((array1 == null) && (array2 == null))
@@ -317,8 +317,8 @@ namespace Lucene.Net.Support
                     result = true;
                     for (int index = 0; index < length; index++)
                     {
-                        System.Object o1 = array1.GetValue(index);
-                        System.Object o2 = array2.GetValue(index);
+                        object o1 = array1.GetValue(index);
+                        object o2 = array2.GetValue(index);
                         if (o1 == null && o2 == null)
                             continue;   // they match
                         else if (o1 == null || !o1.Equals(o2))

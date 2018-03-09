@@ -58,7 +58,7 @@ namespace Lucene.Net.Util
                     if (f.IsStatic)
                         continue;
                     //f.setAccessible(true);   // {{Aroush-2.9}} java.lang.reflect.AccessibleObject.setAccessible
-                    System.Object value_Renamed = f.GetValue(this);
+                    object value_Renamed = f.GetValue(this);
                     if (buffer.Length > 0)
                     {
                         buffer.Append(',');
@@ -102,7 +102,7 @@ namespace Lucene.Net.Util
         ///
         /// see also <see cref="Object.Equals(Object)" />
         /// </summary>
-        abstract public override bool Equals(System.Object other);
+        abstract public override bool Equals(object other);
 
         /// <summary> Copies the values from this Attribute into the passed-in
         /// target attribute. The target implementation must support all the
@@ -113,9 +113,9 @@ namespace Lucene.Net.Util
         /// <summary> Shallow clone. Subclasses must override this if they
         /// need to clone any members deeply,
         /// </summary>
-        public virtual System.Object Clone()
+        public virtual object Clone()
         {
-            System.Object clone = null;
+            object clone = null;
             try
             {
                 clone = base.MemberwiseClone();

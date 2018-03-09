@@ -130,7 +130,7 @@ namespace Lucene.Net.Search
                 if (upperPoint == 0)
                 {
                     System.Diagnostics.Debug.Assert(upperVal == null);
-                    inclusiveUpperPoint = System.Int32.MaxValue;
+                    inclusiveUpperPoint = int.MaxValue;
                 }
                 else if (includeUpper && upperPoint > 0)
                 {
@@ -785,7 +785,7 @@ namespace Lucene.Net.Search
             return sb.Append(includeLower ? '[' : '{').Append((lowerVal == null) ? "*" : lowerVal.ToString()).Append(" TO ").Append((upperVal == null) ? "*" : upperVal.ToString()).Append(includeUpper ? ']' : '}').ToString();
         }
 
-        public override bool Equals(System.Object o)
+        public override bool Equals(object o)
         {
             if (this == o)
                 return true;

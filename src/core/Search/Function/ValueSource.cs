@@ -58,7 +58,7 @@ namespace Lucene.Net.Search.Function
         /// <summary> Needed for possible caching of query results - used by <see cref="ValueSourceQuery.Equals(Object)" />.</summary>
         /// <seealso cref="Object.Equals(Object)">
         /// </seealso>
-        abstract public override bool Equals(System.Object o);
+        abstract public override bool Equals(object o);
 
         /// <summary> Needed for possible caching of query results - used by <see cref="ValueSourceQuery.GetHashCode()" />.</summary>
         /// <seealso cref="Object.GetHashCode()">

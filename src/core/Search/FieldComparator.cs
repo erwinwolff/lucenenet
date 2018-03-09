@@ -63,7 +63,7 @@ namespace Lucene.Net.Search
     /// comparator, for example retrieving new values from
     /// the <see cref="FieldCache" />.</item>
     ///
-    /// <item> <see cref="P:Lucene.Net.Search.FieldComparator.Item(System.Int32)" /> Return the sort value stored in
+    /// <item> <see cref="P:Lucene.Net.Search.FieldComparator.Item(int)" /> Return the sort value stored in
     /// the specified slot.  This is only called at the end
     /// of the search, in order to populate <see cref="FieldDoc.fields" />
     /// when returning the top results.</item>
@@ -255,7 +255,7 @@ namespace Lucene.Net.Search
 
             public override IComparable this[int slot]
             {
-                get { return (System.Int32)docIDs[slot]; }
+                get { return (int)docIDs[slot]; }
             }
         }
 
@@ -489,7 +489,7 @@ namespace Lucene.Net.Search
 
             public override IComparable this[int slot]
             {
-                get { return (System.Int32)values[slot]; }
+                get { return (int)values[slot]; }
             }
         }
 

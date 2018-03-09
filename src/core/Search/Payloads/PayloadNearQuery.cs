@@ -62,7 +62,7 @@ namespace Lucene.Net.Search.Payloads
             return new PayloadNearSpanWeight(this, this, searcher);
         }
 
-        public override System.Object Clone()
+        public override object Clone()
         {
             int sz = clauses.Count;
             SpanQuery[] newClauses = new SpanQuery[sz];
@@ -110,7 +110,7 @@ namespace Lucene.Net.Search.Payloads
         }
 
         // @Override
-        public override bool Equals(System.Object obj)
+        public override bool Equals(object obj)
         {
             if (this == obj)
                 return true;

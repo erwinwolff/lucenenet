@@ -69,7 +69,7 @@ namespace Lucene.Net.Index
         ///// </param>
         ///// <returns> true if both <see cref="GetStartOffset()" /> and <see cref="GetEndOffset()" /> are the same for both objects.
         ///// </returns>
-        //public  override bool Equals(System.Object o)
+        //public  override bool Equals(object o)
         //{
         //    if (this == o)
         //        return true;

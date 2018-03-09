@@ -53,12 +53,12 @@ namespace Lucene.Net.Analysis.Standard
             int bufferLength = termAtt.TermLength();
             string type = typeAtt.Type;
 
-            if ((System.Object)type == (System.Object)APOSTROPHE_TYPE && bufferLength >= 2 && buffer[bufferLength - 2] == '\'' && (buffer[bufferLength - 1] == 's' || buffer[bufferLength - 1] == 'S'))
+            if ((object)type == (object)APOSTROPHE_TYPE && bufferLength >= 2 && buffer[bufferLength - 2] == '\'' && (buffer[bufferLength - 1] == 's' || buffer[bufferLength - 1] == 'S'))
             {
                 // Strip last 2 characters off
                 termAtt.SetTermLength(bufferLength - 2);
             }
-            else if ((System.Object)type == (System.Object)ACRONYM_TYPE)
+            else if ((object)type == (object)ACRONYM_TYPE)
             {
                 // remove dots
                 int upto = 0;

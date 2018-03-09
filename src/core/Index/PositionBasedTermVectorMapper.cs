@@ -64,7 +64,7 @@ namespace Lucene.Net.Index
         {
             for (int i = 0; i < positions.Length; i++)
             {
-                System.Int32 posVal = positions[i];
+                int posVal = positions[i];
                 TVPositionInfo pos = currentPositions[posVal];
                 if (pos == null)
                 {

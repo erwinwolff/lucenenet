@@ -85,21 +85,21 @@ namespace Lucene.Net.Util
             this.classSize = memoryModel.ClassSize;
         }
 
-        public long EstimateRamUsage(System.Object obj)
+        public long EstimateRamUsage(object obj)
         {
             long size = Size(obj);
             seen.Clear();
             return size;
         }
 
-        private long Size(System.Object obj)
+        private long Size(object obj)
         {
             if (obj == null)
             {
                 return 0;
             }
             // interned not part of this object
-            if (checkInterned && obj is string && obj == (System.Object)String.Intern(((string)obj)))
+            if (checkInterned && obj is string && obj == (object)String.Intern(((string)obj)))
             {
                 // interned string will be eligible
                 // for GC on
@@ -145,7 +145,7 @@ namespace Lucene.Net.Util
                         fields[i].GetType();
                         try
                         {
-                            System.Object value_Renamed = fields[i].GetValue(obj);
+                            object value_Renamed = fields[i].GetValue(obj);
                             if (value_Renamed != null)
                             {
                                 size += Size(value_Renamed);
@@ -163,9 +163,9 @@ namespace Lucene.Net.Util
             return size;
         }
 
-        private long SizeOfArray(System.Object obj)
+        private long SizeOfArray(object obj)
         {
-            int len = ((System.Array)obj).Length;
+            int len = ((Array)obj).Length;
             if (len == 0)
             {
                 return 0;
@@ -180,7 +180,7 @@ namespace Lucene.Net.Util
             {
                 for (int i = 0; i < len; i++)
                 {
-                    size += refSize + Size(((System.Array)obj).GetValue(i));
+                    size += refSize + Size(((Array)obj).GetValue(i));
                 }
             }
 

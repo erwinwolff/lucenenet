@@ -70,6 +70,6 @@ namespace Lucene.Net.Search.Payloads
 
         abstract public override int GetHashCode();
 
-        abstract public override bool Equals(System.Object o);
+        abstract public override bool Equals(object o);
     }
 }

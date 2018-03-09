@@ -251,7 +251,7 @@ namespace Lucene.Net.Index
                 this.length = length;
             }
 
-            public override System.Object Clone()
+            public override object Clone()
             {
                 var clone = (CSIndexInput)base.Clone();
                 clone.base_Renamed = (IndexInput)base_Renamed.Clone();

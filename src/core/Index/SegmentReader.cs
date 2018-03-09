@@ -674,7 +674,7 @@ namespace Lucene.Net.Index
 
             // Returns a copy of this Norm instance that shares
             // IndexInput & bytes with the original one
-            public System.Object Clone()
+            public object Clone()
             {
                 lock (this) //LUCENENET-375
                 {
@@ -863,7 +863,7 @@ namespace Lucene.Net.Index
             return (BitVector)bv.Clone();
         }
 
-        public override System.Object Clone()
+        public override object Clone()
         {
             lock (this)
             {

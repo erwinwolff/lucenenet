@@ -129,7 +129,7 @@ namespace Lucene.Net.Index
             decrefOnClose.Add(incRefReaders);
         }
 
-        public override System.Object Clone()
+        public override object Clone()
         {
             try
             {
@@ -591,7 +591,7 @@ namespace Lucene.Net.Index
                     return false;
 
                 // another term in this field?
-                if (termEnum.Next() && (System.Object)termEnum.Term.Field == (System.Object)field)
+                if (termEnum.Next() && (object)termEnum.Term.Field == (object)field)
                     return true; // yes, keep going
 
                 termEnum.Close(); // close old termEnum
@@ -614,7 +614,7 @@ namespace Lucene.Net.Index
                     field = fieldIterator.Current;
                     termEnum = Enclosing_Instance.fieldToReader[field].Terms(new Term(field));
                     Term term = termEnum.Term;
-                    if (term != null && (System.Object)term.Field == (System.Object)field)
+                    if (term != null && (object)term.Field == (object)field)
                         return true;
                     else
                         termEnum.Close();

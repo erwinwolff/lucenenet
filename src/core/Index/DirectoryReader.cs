@@ -52,7 +52,7 @@ namespace Lucene.Net.Index
                 InitBlock(readOnly, deletionPolicy, termInfosIndexDivisor);
             }
 
-            public /*protected internal*/ override System.Object DoBody(string segmentFileName)
+            public /*protected internal*/ override object DoBody(string segmentFileName)
             {
                 var infos = new SegmentInfos();
                 infos.Read(directory, segmentFileName);
@@ -87,7 +87,7 @@ namespace Lucene.Net.Index
                 InitBlock(openReadOnly, enclosingInstance);
             }
 
-            public /*protected internal*/ override System.Object DoBody(string segmentFileName)
+            public /*protected internal*/ override object DoBody(string segmentFileName)
             {
                 var infos = new SegmentInfos();
                 infos.Read(directory, segmentFileName);

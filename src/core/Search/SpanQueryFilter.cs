@@ -93,7 +93,7 @@ namespace Lucene.Net.Search
             return "SpanQueryFilter(" + internalQuery + ")";
         }
 
-        public override bool Equals(System.Object o)
+        public override bool Equals(object o)
         {
             return o is SpanQueryFilter && this.internalQuery.Equals(((SpanQueryFilter)o).internalQuery);
         }

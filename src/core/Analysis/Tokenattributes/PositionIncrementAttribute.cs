@@ -69,7 +69,7 @@ namespace Lucene.Net.Analysis.Tokenattributes
             this.positionIncrement = 1;
         }
 
-        public override bool Equals(System.Object other)
+        public override bool Equals(object other)
         {
             if (other == this)
             {
@@ -95,7 +95,7 @@ namespace Lucene.Net.Analysis.Tokenattributes
             t.PositionIncrement = positionIncrement;
         }
 
-        override public System.Object Clone()
+        override public object Clone()
         {
             PositionIncrementAttribute impl = new PositionIncrementAttribute();
             impl.positionIncrement = positionIncrement;

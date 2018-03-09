@@ -155,7 +155,7 @@ namespace Lucene.Net.Search.Spans
             return buffer.ToString();
         }
 
-        public override System.Object Clone()
+        public override object Clone()
         {
             SpanFirstQuery spanFirstQuery = new SpanFirstQuery((SpanQuery)match.Clone(), end);
             spanFirstQuery.Boost = Boost;
@@ -193,7 +193,7 @@ namespace Lucene.Net.Search.Spans
             }
         }
 
-        public override bool Equals(System.Object o)
+        public override bool Equals(object o)
         {
             if (this == o)
                 return true;

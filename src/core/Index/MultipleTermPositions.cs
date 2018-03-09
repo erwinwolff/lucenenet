@@ -81,7 +81,7 @@ namespace Lucene.Net.Index
 
             internal void sort()
             {
-                System.Array.Sort(_array, _index, _lastIndex - _index);
+                Array.Sort(_array, _index, _lastIndex - _index);
             }
 
             internal void clear()

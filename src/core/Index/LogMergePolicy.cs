@@ -55,7 +55,7 @@ namespace Lucene.Net.Index
         /// <summary>Default maximum segment size.  A segment of this size</summary>
         /// <seealso cref="MaxMergeDocs">
         /// </seealso>
-        public static readonly int DEFAULT_MAX_MERGE_DOCS = System.Int32.MaxValue;
+        public static readonly int DEFAULT_MAX_MERGE_DOCS = int.MaxValue;
 
         /// <summary> Default noCFSRatio.  If a merge's size is >= 10% of
         ///  the index, then we disable compound file for it.

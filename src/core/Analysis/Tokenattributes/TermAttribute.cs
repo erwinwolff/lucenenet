@@ -210,7 +210,7 @@ namespace Lucene.Net.Analysis.Tokenattributes
             termLength = 0;
         }
 
-        public override System.Object Clone()
+        public override object Clone()
         {
             TermAttribute t = (TermAttribute)base.Clone();
             // Do a deep clone
@@ -222,7 +222,7 @@ namespace Lucene.Net.Analysis.Tokenattributes
             return t;
         }
 
-        public override bool Equals(System.Object other)
+        public override bool Equals(object other)
         {
             if (other == this)
             {

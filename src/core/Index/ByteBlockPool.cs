@@ -79,10 +79,10 @@ namespace Lucene.Net.Index
 
                 for (int i = 0; i < bufferUpto; i++)
                     // Fully zero fill buffers that we fully used
-                    System.Array.Clear(buffers[i], 0, buffers[i].Length);
+                    Array.Clear(buffers[i], 0, buffers[i].Length);
 
                 // Partial zero fill the final buffer
-                System.Array.Clear(buffers[bufferUpto], 0, byteUpto);
+                Array.Clear(buffers[bufferUpto], 0, byteUpto);
 
                 if (bufferUpto > 0)
                     // Recycle all but the first buffer

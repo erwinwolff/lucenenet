@@ -529,7 +529,7 @@ namespace Lucene.Net.Analysis
             type = DEFAULT_TYPE;
         }
 
-        public override System.Object Clone()
+        public override object Clone()
         {
             var t = (Token)base.Clone();
             // Do a deep clone
@@ -584,7 +584,7 @@ namespace Lucene.Net.Analysis
             return false;
         }
 
-        private bool SubEqual(System.Object o1, System.Object o2)
+        private bool SubEqual(object o1, object o2)
         {
             if (o1 == null)
                 return o2 == null;

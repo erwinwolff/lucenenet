@@ -90,7 +90,7 @@ namespace Lucene.Net.Index
                 postingsHashHalfSize = newSize / 2;
                 postingsHashMask = newSize - 1;
             }
-            System.Array.Clear(postingsHash, 0, postingsHash.Length);
+            Array.Clear(postingsHash, 0, postingsHash.Length);
         }
 
         public void Reset()

@@ -63,7 +63,7 @@ namespace Lucene.Net.Search
 
         public override void Score(Collector c)
         {
-            Score(c, System.Int32.MaxValue, NextDoc());
+            Score(c, int.MaxValue, NextDoc());
         }
 
         // firstDocID is ignored since nextDoc() sets 'doc'
@@ -85,7 +85,7 @@ namespace Lucene.Net.Search
                     else
                     {
                         termDocs.Close(); // close stream
-                        doc = System.Int32.MaxValue; // set to sentinel value
+                        doc = int.MaxValue; // set to sentinel value
                         return false;
                     }
                 }

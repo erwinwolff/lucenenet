@@ -42,7 +42,7 @@ namespace Lucene.Net.Search
             if (!tp.Next())
             {
                 tp.Close(); // close stream
-                doc = System.Int32.MaxValue; // sentinel value
+                doc = int.MaxValue; // sentinel value
                 return false;
             }
             doc = tp.Doc;
@@ -55,7 +55,7 @@ namespace Lucene.Net.Search
             if (!tp.SkipTo(target))
             {
                 tp.Close(); // close stream
-                doc = System.Int32.MaxValue; // sentinel value
+                doc = int.MaxValue; // sentinel value
                 return false;
             }
             doc = tp.Doc;

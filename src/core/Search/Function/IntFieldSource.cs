@@ -142,7 +142,7 @@ namespace Lucene.Net.Search.Function
 
         public override int CachedFieldSourceHashCode()
         {
-            return parser == null ? typeof(System.Int32).GetHashCode() : parser.GetType().GetHashCode();
+            return parser == null ? typeof(int).GetHashCode() : parser.GetType().GetHashCode();
         }
     }
 }

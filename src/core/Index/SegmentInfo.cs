@@ -355,7 +355,7 @@ namespace Lucene.Net.Index
             ClearFiles();
         }
 
-        public System.Object Clone()
+        public object Clone()
         {
             SegmentInfo si = new SegmentInfo(name, docCount, dir);
             si.isCompoundFile = isCompoundFile;
@@ -856,7 +856,7 @@ namespace Lucene.Net.Index
         /// <summary>We consider another SegmentInfo instance equal if it
         /// has the same dir and same name.
         /// </summary>
-        public override bool Equals(System.Object obj)
+        public override bool Equals(object obj)
         {
             if (this == obj) return true;
 

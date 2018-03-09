@@ -78,7 +78,7 @@ namespace Lucene.Net.Index
                 InitBlock(directory2);
             }
 
-            public override System.Object DoBody(string segmentFileName)
+            public override object DoBody(string segmentFileName)
             {
                 return (long)directory2.FileModified(segmentFileName);
             }
@@ -473,7 +473,7 @@ namespace Lucene.Net.Index
         /// </summary>
         /// <throws>  CorruptIndexException if the index is corrupt </throws>
         /// <exception cref="IOException">If there is a low-level IO error</exception>
-        public virtual System.Object Clone()
+        public virtual object Clone()
         {
             throw new NotSupportedException("This reader does not implement clone()");
         }
@@ -1246,7 +1246,7 @@ namespace Lucene.Net.Index
                 cfr = new CompoundFileReader(dir, filename);
 
                 string[] files = cfr.ListAll();
-                System.Array.Sort(files); // sort the array of filename so that the output is more readable
+                Array.Sort(files); // sort the array of filename so that the output is more readable
 
                 foreach (string t in files)
                 {

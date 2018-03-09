@@ -90,7 +90,7 @@ namespace Lucene.Net.Index
         }
 
         //@Override
-        public override bool Equals(System.Object obj)
+        public override bool Equals(object obj)
         {
             if (this == obj)
                 return true;
@@ -133,7 +133,7 @@ namespace Lucene.Net.Index
         /// </summary>
         public int CompareTo(Term other)
         {
-            if ((System.Object)field == (System.Object)other.field)
+            if ((object)field == (object)other.field)
                 // fields are interned
                 return String.CompareOrdinal(text, other.text);
             else

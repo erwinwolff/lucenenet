@@ -208,7 +208,7 @@ namespace Lucene.Net.Search.Spans
             }
         }
 
-        public override System.Object Clone()
+        public override object Clone()
         {
             int sz = clauses.Count;
             SpanQuery[] newClauses = new SpanQuery[sz];
@@ -268,7 +268,7 @@ namespace Lucene.Net.Search.Spans
             return buffer.ToString();
         }
 
-        public override bool Equals(System.Object o)
+        public override bool Equals(object o)
         {
             if (this == o)
                 return true;

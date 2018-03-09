@@ -59,7 +59,7 @@ namespace Lucene.Net.Index
                 InitBlock(enclosingInstance);
             }
 
-            public /*protected internal*/ override System.Object DoBody(string segmentFileName)
+            public /*protected internal*/ override object DoBody(string segmentFileName)
             {
                 Enclosing_Instance.Read(directory, segmentFileName);
                 return null;
@@ -437,7 +437,7 @@ namespace Lucene.Net.Index
         /// SegmentInfo.
         /// </summary>
 
-        public System.Object Clone()
+        public object Clone()
         {
             SegmentInfos sis = new SegmentInfos();
             for (int i = 0; i < this.Count; i++)
@@ -571,12 +571,12 @@ namespace Lucene.Net.Index
                 this.directory = directory;
             }
 
-            public System.Object Run()
+            public object Run()
             {
                 return Run(null);
             }
 
-            public System.Object Run(IndexCommit commit)
+            public object Run(IndexCommit commit)
             {
                 if (commit != null)
                 {
@@ -744,7 +744,7 @@ namespace Lucene.Net.Index
 
                     try
                     {
-                        System.Object v = DoBody(segmentFileName);
+                        object v = DoBody(segmentFileName);
                         Lucene.Net.Index.SegmentInfos.Message("success on " + segmentFileName);
 
                         return v;
@@ -776,7 +776,7 @@ namespace Lucene.Net.Index
                                 Lucene.Net.Index.SegmentInfos.Message("fallback to prior segment file '" + prevSegmentFileName + "'");
                                 try
                                 {
-                                    System.Object v = DoBody(prevSegmentFileName);
+                                    object v = DoBody(prevSegmentFileName);
                                     if (exc != null)
                                     {
                                         Lucene.Net.Index.SegmentInfos.Message("success on fallback " + prevSegmentFileName);
@@ -798,7 +798,7 @@ namespace Lucene.Net.Index
             /// during the processing that could have been caused by
             /// a writer committing.
             /// </summary>
-            public /*internal*/ abstract System.Object DoBody(string segmentFileName);
+            public /*internal*/ abstract object DoBody(string segmentFileName);
         }
 
         /// <summary> Returns a new SegmentInfos containg the SegmentInfo

@@ -84,16 +84,16 @@ namespace Lucene.Net.Store
                 }
             }
 
-            public virtual System.Object Run()
+            public virtual object Run()
             {
                 // {{Aroush-2.9
                 /*
 				System.Reflection.MethodInfo getCleanerMethod = buffer.GetType().GetMethod("cleaner", (Lucene.Net.Store.MMapDirectory.NO_PARAM_TYPES == null)?new System.Type[0]:(System.Type[]) Lucene.Net.Store.MMapDirectory.NO_PARAM_TYPES);
                 getCleanerMethod.SetAccessible(true);
-				System.Object cleaner = getCleanerMethod.Invoke(buffer, (System.Object[]) Lucene.Net.Store.MMapDirectory.NO_PARAMS);
+				object cleaner = getCleanerMethod.Invoke(buffer, (object[]) Lucene.Net.Store.MMapDirectory.NO_PARAMS);
 				if (cleaner != null)
 				{
-					cleaner.GetType().GetMethod("clean", (Lucene.Net.Store.MMapDirectory.NO_PARAM_TYPES == null)?new System.Type[0]:(System.Type[]) Lucene.Net.Store.MMapDirectory.NO_PARAM_TYPES).Invoke(cleaner, (System.Object[]) Lucene.Net.Store.MMapDirectory.NO_PARAMS);
+					cleaner.GetType().GetMethod("clean", (Lucene.Net.Store.MMapDirectory.NO_PARAM_TYPES == null)?new System.Type[0]:(System.Type[]) Lucene.Net.Store.MMapDirectory.NO_PARAM_TYPES).Invoke(cleaner, (object[]) Lucene.Net.Store.MMapDirectory.NO_PARAMS);
 				}
                 */
                 //System.Diagnostics.Debug.Fail("Port issue:", "sun.misc.Cleaner()"); // {{Aroush-2.9}}
@@ -105,7 +105,7 @@ namespace Lucene.Net.Store
 
         private void InitBlock()
         {
-            maxBBuf = Constants.JRE_IS_64BIT ? System.Int32.MaxValue : (256 * 1024 * 1024);
+            maxBBuf = Constants.JRE_IS_64BIT ? int.MaxValue : (256 * 1024 * 1024);
         }
 
         /// <summary>Create a new MMapDirectory for the named location.
@@ -281,7 +281,7 @@ namespace Lucene.Net.Store
                 return length;
             }
 
-            public override System.Object Clone()
+            public override object Clone()
             {
                 if (buffer == null)
                     throw new AlreadyClosedException("MMapIndexInput already closed");
@@ -358,7 +358,7 @@ namespace Lucene.Net.Store
                 if (maxBufSize <= 0)
                     throw new System.ArgumentException("Non positive maxBufSize: " + maxBufSize);
 
-                if ((length / maxBufSize) > System.Int32.MaxValue)
+                if ((length / maxBufSize) > int.MaxValue)
                 {
                     throw new System.ArgumentException("RandomAccessFile too big for maximum buffer size: " + raf.ToString());
                 }
@@ -439,7 +439,7 @@ namespace Lucene.Net.Store
                 return length;
             }
 
-            public override System.Object Clone()
+            public override object Clone()
             {
                 MultiMMapIndexInput clone = (MultiMMapIndexInput)base.Clone();
                 clone.isClone = true;

@@ -226,7 +226,7 @@ namespace Lucene.Net.Search.Payloads
             return result;
         }
 
-        public override bool Equals(System.Object obj)
+        public override bool Equals(object obj)
         {
             if (this == obj)
                 return true;

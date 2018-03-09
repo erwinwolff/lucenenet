@@ -385,7 +385,7 @@ namespace Lucene.Net.Search
 
         public override void Score(Collector collector)
         {
-            Score(collector, System.Int32.MaxValue, NextDoc());
+            Score(collector, int.MaxValue, NextDoc());
         }
 
         public override string ToString()

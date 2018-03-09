@@ -37,7 +37,7 @@ namespace Lucene.Net.Util.Cache
             this.map = map;
         }
 
-        public override TValue Get(System.Object key)
+        public override TValue Get(object key)
         {
             return map[(TKey)key];
         }
@@ -47,7 +47,7 @@ namespace Lucene.Net.Util.Cache
             map[key] = value_Renamed;
         }
 
-        public override bool ContainsKey(System.Object key)
+        public override bool ContainsKey(object key)
         {
             return map.ContainsKey((TKey)key);
         }
@@ -71,7 +71,7 @@ namespace Lucene.Net.Util.Cache
         // Why does does this use both inheritance and composition?
         private class SynchronizedSimpleMapCache : SimpleMapCache<TKey, TValue>
         {
-            private System.Object mutex;
+            private object mutex;
             private SimpleMapCache<TKey, TValue> cache;
 
             private bool isDisposed;
@@ -90,7 +90,7 @@ namespace Lucene.Net.Util.Cache
                 }
             }
 
-            public override TValue Get(System.Object key)
+            public override TValue Get(object key)
             {
                 lock (mutex)
                 {
@@ -98,7 +98,7 @@ namespace Lucene.Net.Util.Cache
                 }
             }
 
-            public override bool ContainsKey(System.Object key)
+            public override bool ContainsKey(object key)
             {
                 lock (mutex)
                 {

@@ -62,7 +62,7 @@ namespace Lucene.Net.Analysis.Tokenattributes
             endOffset = 0;
         }
 
-        public override bool Equals(System.Object other)
+        public override bool Equals(object other)
         {
             if (other == this)
             {
@@ -91,7 +91,7 @@ namespace Lucene.Net.Analysis.Tokenattributes
             t.SetOffset(startOffset, endOffset);
         }
 
-        override public System.Object Clone()
+        override public object Clone()
         {
             OffsetAttribute impl = new OffsetAttribute();
             impl.endOffset = endOffset;

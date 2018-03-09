@@ -354,7 +354,7 @@ namespace Lucene.Net.Index
             return in_Renamed.GetSequentialSubReaders();
         }
 
-        override public System.Object Clone()
+        override public object Clone()
         {
             System.Diagnostics.Debug.Fail("Port issue:", "Lets see if we need this FilterIndexReader.Clone()"); // {{Aroush-2.9}}
             return null;

@@ -799,7 +799,7 @@ namespace Lucene.Net.Index
                         SegmentInfo si = new SegmentInfo(flushState.segmentName, flushState.numDocs, directory);
                         long newSegmentSize = si.SizeInBytes();
                         string message = string.Format(nf, "  oldRAMSize={0:d} newFlushedSize={1:d} docs/MB={2:f} new/old={3:%}",
-                            new System.Object[] { numBytesUsed, newSegmentSize, (numDocsInRAM / (newSegmentSize / 1024.0 / 1024.0)), (100.0 * newSegmentSize / numBytesUsed) });
+                            new object[] { numBytesUsed, newSegmentSize, (numDocsInRAM / (newSegmentSize / 1024.0 / 1024.0)), (100.0 * newSegmentSize / numBytesUsed) });
                         Message(message);
                     }
 
@@ -1769,7 +1769,7 @@ namespace Lucene.Net.Index
 
         internal string ToMB(long v)
         {
-            return string.Format(nf, "{0:f}", new System.Object[] { (v / 1024F / 1024F) });
+            return string.Format(nf, "{0:f}", new object[] { (v / 1024F / 1024F) });
         }
 
         /* We have four pools of RAM: Postings, byte blocks
@@ -1881,7 +1881,7 @@ namespace Lucene.Net.Index
 
                 if (infoStream != null)
                     Message(string.Format(nf, "    after free: freedMB={0:f} usedMB={1:f} allocMB={2:f}",
-                        new System.Object[] { ((startBytesAlloc - numBytesAlloc) / 1024.0 / 1024.0), (numBytesUsed / 1024.0 / 1024.0), (numBytesAlloc / 1024.0 / 1024.0) }));
+                        new object[] { ((startBytesAlloc - numBytesAlloc) / 1024.0 / 1024.0), (numBytesUsed / 1024.0 / 1024.0), (numBytesAlloc / 1024.0 / 1024.0) }));
             }
             else
             {

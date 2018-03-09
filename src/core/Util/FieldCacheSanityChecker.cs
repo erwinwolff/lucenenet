@@ -124,14 +124,14 @@ namespace Lucene.Net.Util
             for (int i = 0; i < cacheEntries.Length; i++)
             {
                 CacheEntry item = cacheEntries[i];
-                System.Object val = item.Value;
+                object val = item.Value;
 
                 if (val is Lucene.Net.Search.CreationPlaceholder)
                     continue;
 
                 ReaderField rf = new ReaderField(item.ReaderKey, item.FieldName);
 
-                System.Int32 valId = val.GetHashCode();
+                int valId = val.GetHashCode();
 
                 // indirect mapping, so the MapOfSet will dedup identical valIds for us
                 valIdToItems.Put(valId, item);
@@ -268,13 +268,13 @@ namespace Lucene.Net.Util
         /// the hierarchy of subReaders building up a list of the objects
         /// returned by obj.getFieldCacheKey()
         /// </summary>
-        private System.Collections.IList GetAllDecendentReaderKeys(System.Object seed)
+        private System.Collections.IList GetAllDecendentReaderKeys(object seed)
         {
             List<object> all = new List<object>(17); // will grow as we iter
             all.Add(seed);
             for (int i = 0; i < all.Count; i++)
             {
-                System.Object obj = all[i];
+                object obj = all[i];
                 if (obj is IndexReader)
                 {
                     IndexReader[] subs = ((IndexReader)obj).GetSequentialSubReaders();
@@ -291,10 +291,10 @@ namespace Lucene.Net.Util
         /// <summary> Simple pair object for using "readerKey + fieldName" a Map key</summary>
         private sealed class ReaderField
         {
-            public System.Object readerKey;
+            public object readerKey;
             public string fieldName;
 
-            public ReaderField(System.Object readerKey, string fieldName)
+            public ReaderField(object readerKey, string fieldName)
             {
                 this.readerKey = readerKey;
                 this.fieldName = fieldName;
@@ -305,7 +305,7 @@ namespace Lucene.Net.Util
                 return readerKey.GetHashCode() * fieldName.GetHashCode();
             }
 
-            public override bool Equals(System.Object that)
+            public override bool Equals(object that)
             {
                 if (!(that is ReaderField))
                     return false;

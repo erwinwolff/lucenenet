@@ -469,7 +469,7 @@ namespace Lucene.Net.Index
                     segInfoStat.hasProx = info.HasProx;
                     Msg("    numFiles=" + info.Files().Count);
                     segInfoStat.numFiles = info.Files().Count;
-                    Msg(string.Format(nf, "    size (MB)={0:f}", new System.Object[] { (info.SizeInBytes() / (1024.0 * 1024.0)) }));
+                    Msg(string.Format(nf, "    size (MB)={0:f}", new object[] { (info.SizeInBytes() / (1024.0 * 1024.0)) }));
                     segInfoStat.sizeMB = info.SizeInBytes() / (1024.0 * 1024.0);
                     IDictionary<string, string> diagnostics = info.Diagnostics;
                     segInfoStat.diagnostics = diagnostics;

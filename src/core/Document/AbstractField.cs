@@ -45,7 +45,7 @@ namespace Lucene.Net.Documents
         protected internal float internalBoost = 1.0f;
 
         // the data object for all different kind of field values
-        protected internal System.Object fieldsData = null;
+        protected internal object fieldsData = null;
 
         // pre-analyzed tokenStream for indexed fields
         protected internal TokenStream tokenStream;
